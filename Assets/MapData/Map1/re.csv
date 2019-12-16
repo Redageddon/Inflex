@@ -1,0 +1,9 @@
+Lives,10
+Song,lazerflame.ogg
+Enemy,W,0,200,75,0,5.4
+Enemy,A,0,-200,75,0,6.1
+Enemy,D,100,-200,75,0,6.4
+Enemy,W,200,0,75,0,7.1
+Enemy,S,300,0,75,0,7.5
+Enemy,D,75,200,75,0,8.2
+Enemy,A,100,100,75,0,8.9
