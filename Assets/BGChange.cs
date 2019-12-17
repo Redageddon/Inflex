@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine.UI;
 
-public class bgchange : MonoBehaviour
+public class BGChange : MonoBehaviour
 {
     public Image img;
     private static string MainPath { get; } = @"%AppData%\CircleRhythm\Maps\";
