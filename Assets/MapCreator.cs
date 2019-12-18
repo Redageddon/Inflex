@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapData : MonoBehaviour
+public class MapCreator : MonoBehaviour
 {
-    private static string MainPath { get; } = @"%AppData%\CircleRhythm\Maps\";
-    
     void Start()
     {
         
     }
 
-    
+    public static void LoadButtonPath(string path)
+    {
+        print(path);
+    }
+
     void Update()
     {
         

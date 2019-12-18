@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using UnityEngine;
 
 public class PathData : MonoBehaviour
 {
-    private static string MainPath { get; } = @"%AppData%\CircleRhythm\Maps\";
-    public static string[] MapNames = Directory.GetDirectories(Environment.ExpandEnvironmentVariables(MainPath));
-    protected static string FileName { get; set; }
-    void Start()
-    {
-    }
+    private static readonly string MainPath = @"%AppData%\CircleRhythm\Maps\";
+    public static readonly string[] MapNames = Directory.GetDirectories(System.Environment.ExpandEnvironmentVariables(MainPath));
 }

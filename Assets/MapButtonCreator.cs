@@ -1,22 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.IO;
 using UnityEngine;
 
 public class MapButtonCreator : MonoBehaviour
 {
-    [SerializeField] private GameObject MapButton;
-    private List<int> intList;
+    [SerializeField] private GameObject mapButtonTemp;
     void Start()
     {
-        foreach (var map in PathData.MapNames)
+        foreach(string map in PathData.MapNames)
         {
-            GameObject button = Instantiate(MapButton);
+            GameObject button = Instantiate(mapButtonTemp, mapButtonTemp.transform.parent, false);
+            button.SetActive(true);
+            button.GetComponent<MapButton>().SetText(Path.GetFileName(map));
+            MapButton mapBtn = button.GetComponent<MapButton>();
+            mapBtn.buttonInstancePath = map;
         }
-    }
-
-    
-    void Update()
-    {
-        
     }
 }
