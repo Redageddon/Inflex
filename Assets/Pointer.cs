@@ -2,13 +2,13 @@
 
 public class Pointer : MonoBehaviour
 {
-    private Vector2 XY;
+    private Vector2 _xy;
 
     float MakeRotation()
     {
-        XY.x = Input.mousePosition.x - Screen.width / 2;
-        XY.y = Input.mousePosition.y - Screen.height / 2;
-        float rotation = (Mathf.Atan2(XY.y, XY.x) * Mathf.Rad2Deg) - 90;
+        _xy.x = Input.mousePosition.x - Screen.width / 2;
+        _xy.y = Input.mousePosition.y - Screen.height / 2;
+        float rotation = (Mathf.Atan2(_xy.y, _xy.x) * Mathf.Rad2Deg) - 90;
         if (rotation >= 0)
         {
             return rotation;

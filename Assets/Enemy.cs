@@ -1,20 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public float speed = 5;
     private Rigidbody2D _rigidbody;
     private float lerpTime = 10;
-    private float _currentLerpTime = 0;
+    private float _currentLerpTime;
     private Vector2 _spawnLocation;
     private Vector2 _origin = new Vector2(0,0);
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _spawnLocation = new Vector2(_rigidbody.position.x, _rigidbody.position.y);
+        var position = _rigidbody.position;
+        _spawnLocation = new Vector2(position.x, position.y);
     }
 
     void Update()
