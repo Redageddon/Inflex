@@ -173,7 +173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 2094433101}
-  buttonInstancePath: 
 --- !u!114 &46046911
 MonoBehaviour:
   m_ObjectHideFlags: 0

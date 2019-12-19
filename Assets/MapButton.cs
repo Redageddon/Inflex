@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class MapButton : MonoBehaviour
 {
     [SerializeField] private Text text;
-    public string buttonInstancePath = "";
+    internal string ButtonInstancePath = "";
     
     public void SetText(string textString)
     {
@@ -13,6 +13,6 @@ public class MapButton : MonoBehaviour
 
     public void OnClick()
     {
-        print(buttonInstancePath);
+        MapCreator.LoadPath(ButtonInstancePath);
     }    
 }

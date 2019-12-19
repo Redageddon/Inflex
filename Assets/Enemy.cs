@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float speed = 5;
     private Rigidbody2D _rigidbody;
     private float lerpTime = 10;

@@ -12,7 +12,7 @@ public class MapButtonCreator : MonoBehaviour
             button.SetActive(true);
             button.GetComponent<MapButton>().SetText(Path.GetFileName(map));
             MapButton mapBtn = button.GetComponent<MapButton>();
-            mapBtn.buttonInstancePath = map;
+            mapBtn.ButtonInstancePath = map;
         }
     }
 }

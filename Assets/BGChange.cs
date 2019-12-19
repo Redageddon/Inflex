@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 
@@ -34,3 +35,4 @@ public class BGChange : MonoBehaviour
         }
     }
 }
+*/
