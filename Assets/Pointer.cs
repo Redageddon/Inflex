@@ -13,10 +13,7 @@ public class Pointer : MonoBehaviour
         {
             return rotation;
         }
-        else
-        {
-            return rotation + 360;
-        }
+        return rotation + 360;
     }
 
 
