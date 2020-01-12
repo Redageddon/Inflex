@@ -1,85 +1,30 @@
-﻿public class LivesO
-{
-    private string Name { get; set; }
-    private int Lives { get; set; }
+﻿using System.Collections.Generic;
 
-    public LivesO(string name, int lives)
-    {
-        Name = name;
-        Lives = lives;
-    }
+public class Map
+{
+    public string Name { get; set; }
+    public int Lives { get; set; }
+    public string Song { get; set; }
+    public int EnemyCount { get; set; }
+    public string Background { get; set; }
+    public double EndTime { get; set; }
+    public List<Enemy> Enemies { get; set; }
+    public List<Screen> ScreenEvents { get; set; }
+    public double EarlyEnd { get; set; }
 }
 
-public class SongO
+public class Enemy
 {
-    private string Name { get; set; }
-    private string Song { get; set; }
-
-    public SongO(string name, string song)
-    {
-        Name = name;
-        Song = song;
-    }
+    public string KillKey { get; set; }
+    public double XLocation { get; set; }
+    public double YLocation { get; set; }
+    public double Rotation { get; set; }
+    public double SpawnTime { get; set; }
 }
 
-public class EnemyO
+public class Screen
 {
-    private string Name { get; set; }
-    private string KillKey { get; set; }
-    private double Xloc { get; set; }
-    private double YLoc { get; set; }
-    private double IRot { get; set; }
-    private double SpawnTime { get; set; }
-
-    public EnemyO(string name, string killKey, double xloc, double yLoc, double iRot, double spawnTime)
-    {
-        Name = name;
-        KillKey = killKey;
-        Xloc = xloc;
-        YLoc = yLoc;
-        IRot = iRot;
-        SpawnTime = spawnTime;
-    }
-}
-
-public class ScreenO
-{
-    private string Name { get; set; }
-    private int RSpeed { get; set; }
-    private int Zoom { get; set; }
-    private double SpawnTime { get; set; }
-
-    public ScreenO(string name, int rSpeed, int zoom, double spawnTime)
-    {
-        Name = name;
-        RSpeed = rSpeed;
-        Zoom = zoom;
-        SpawnTime = spawnTime;
-    }
-}
-
-public class BackgroundO
-{
-    private string Name { get; set; }
-    private string Image { get; set; }
-    private double SpawnTime { get; set; }
-
-    public BackgroundO(string name, string image, double spawnTime)
-    {
-        Name = name;
-        Image = image;
-        SpawnTime = spawnTime;
-    }
-}
-
-public class EndO
-{
-    private string Name { get; set; }
-    private double SpawnTime { get; set; }
-
-    public EndO(string name, double spawnTime)
-    {
-        Name = name;
-        SpawnTime = spawnTime;
-    }
+    public int RotationSpeed { get; set; }
+    public int Zoom { get; set; }
+    public double SpawnTime { get; set; }
 }

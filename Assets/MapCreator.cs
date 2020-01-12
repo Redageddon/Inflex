@@ -12,7 +12,6 @@ public class MapCreator : MonoBehaviour
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
         _csvPath = GetFiles(path,@"*.csv").First();
         //Parse(File.ReadAllLines(_csvPath, Encoding.ASCII));
-        Parse();
     }
     /*
     private static void Parse(string[] file)
@@ -22,9 +21,6 @@ public class MapCreator : MonoBehaviour
            
         }
     }*/
-    private static void Parse()
-    {
-        EnemyO enemy1 = new EnemyO("Enemy", "W", 200, 200, 0, 1.1);
-    }
+    
 
 }
