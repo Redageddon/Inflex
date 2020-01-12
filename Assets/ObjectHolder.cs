@@ -8,12 +8,12 @@ public class Map
     public int EnemyCount { get; set; }
     public string Background { get; set; }
     public double EndTime { get; set; }
-    public List<Enemy> Enemies { get; set; }
-    public List<Screen> ScreenEvents { get; set; }
+    public List<MapEnemy> Enemies { get; set; }
+    public List<MapScreen> ScreenEvents { get; set; }
     public double EarlyEnd { get; set; }
 }
 
-public class Enemy
+public class MapEnemy
 {
     public string KillKey { get; set; }
     public double XLocation { get; set; }
@@ -22,7 +22,7 @@ public class Enemy
     public double SpawnTime { get; set; }
 }
 
-public class Screen
+public class MapScreen
 {
     public int RotationSpeed { get; set; }
     public int Zoom { get; set; }

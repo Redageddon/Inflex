@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿/*using System.IO;
 using UnityEngine;
 
 public class MapButtonCreator : MonoBehaviour
@@ -16,3 +16,4 @@ public class MapButtonCreator : MonoBehaviour
         }
     }
 }
+*/
