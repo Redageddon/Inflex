@@ -1,19 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+[Serializable] 
 public class Map
 {
-    public string Name { get; set; }
     public int Lives { get; set; }
     public string Song { get; set; }
-    public int EnemyCount { get; set; }
     public string Background { get; set; }
     public double EndTime { get; set; }
-    public List<MapEnemy> Enemies { get; set; }
+    public MapMetaData MetaData { get; set; }
+    public List<Enemy> Enemies { get; set; }
     public List<MapScreen> ScreenEvents { get; set; }
-    public double EarlyEnd { get; set; }
 }
 
-public class MapEnemy
+[Serializable]
+public class MapMetaData
+{
+    public string Title { get; set; }
+    public string Artist { get; set; }
+    public string Creator { get; set; }
+}
+
+[Serializable]
+public class Enemy
 {
     public string KillKey { get; set; }
     public double XLocation { get; set; }
@@ -22,6 +31,7 @@ public class MapEnemy
     public double SpawnTime { get; set; }
 }
 
+[Serializable]
 public class MapScreen
 {
     public int RotationSpeed { get; set; }
