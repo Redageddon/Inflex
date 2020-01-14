@@ -4,13 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
-using static System.IO.Directory;
 
 public class MapCreator : MonoBehaviour
 {
     private readonly string[] _mapNames =
-        GetDirectories(System.Environment.ExpandEnvironmentVariables(@"%AppData%\CircleRhythm\Maps\"));
+       Directory.GetDirectories(System.Environment.ExpandEnvironmentVariables(@"%AppData%\CircleRhythm\Maps\"));
     private readonly string _path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), @"CircleRhythm\");
 
     [SerializeField] private GameObject mapButtonTemp;
@@ -20,16 +18,17 @@ public class MapCreator : MonoBehaviour
 
         Map mapTest = new Map()
         {
-            Background = "",
-            Lives = 3,
-            Song = "Ghost",
-            EndTime = 10,
             MetaData = new MapMetaData()
             {
                 Artist = "camellia",
                 Title = "mapTest",
-                Creator = "Rubik"
+                Creator = "Rubik",
+                Icon = "img.jpg"
             },
+            Background = "img.jpg",
+            Lives = 3,
+            Song = "Ghost",
+            EndTime = 10,
             Enemies = new List<Enemy>()
             {
                 new Enemy()
@@ -86,6 +85,6 @@ public class MapCreator : MonoBehaviour
     public static void LoadPath(string path)
     {
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
-        _csvPath = GetFiles(path, @"*.csv").First();
+        _csvPath = Directory.GetFiles(path, @"*.csv").First();
     }
 }
