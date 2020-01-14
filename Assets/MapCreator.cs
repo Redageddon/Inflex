@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using Newtonsoft.Json;
-
+using Newtonsoft.Json.Bson;
 using static System.IO.Directory;
 
 public class MapCreator : MonoBehaviour
 {
     private readonly string[] _mapNames =
         GetDirectories(System.Environment.ExpandEnvironmentVariables(@"%AppData%\CircleRhythm\Maps\"));
+    private readonly string _path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), @"CircleRhythm\");
 
     [SerializeField] private GameObject mapButtonTemp;
 
@@ -64,8 +65,11 @@ public class MapCreator : MonoBehaviour
                 }
             }
         };
+        
         string json = JsonConvert.SerializeObject(mapTest, (Formatting) 1);
-        File.WriteAllText(@"C:\Users\Rubiksmaster02\AppData\Roaming\CircleRhythm\Maps\json.json",json);
+        
+        
+        File.WriteAllText(_path + @"Maps\test.json",json);
 
         foreach (string map in _mapNames)
         {

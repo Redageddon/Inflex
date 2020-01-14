@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-[Serializable] 
 public class Map
 {
     public int Lives { get; set; }
@@ -13,7 +12,6 @@ public class Map
     public List<MapScreen> ScreenEvents { get; set; }
 }
 
-[Serializable]
 public class MapMetaData
 {
     public string Title { get; set; }
@@ -21,7 +19,6 @@ public class MapMetaData
     public string Creator { get; set; }
 }
 
-[Serializable]
 public class Enemy
 {
     public string KillKey { get; set; }
@@ -31,7 +28,6 @@ public class Enemy
     public double SpawnTime { get; set; }
 }
 
-[Serializable]
 public class MapScreen
 {
     public int RotationSpeed { get; set; }
