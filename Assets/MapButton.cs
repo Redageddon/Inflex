@@ -13,6 +13,6 @@ public class MapButton : MonoBehaviour
 
     public void OnClick()
     {
-        MapCreator.LoadPath(ButtonInstancePath);
+        LoadMap.LoadPath(ButtonInstancePath);
     }    
 }

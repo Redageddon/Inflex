@@ -1,21 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using System.IO;
-using Newtonsoft.Json;
 
-public class MapCreator : MonoBehaviour
+public class ButtonCreator : MonoBehaviour
 {
     private readonly string[] _mapNames =
        Directory.GetDirectories(System.Environment.ExpandEnvironmentVariables(@"%AppData%\CircleRhythm\Maps\"));
-    private readonly string _path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), @"CircleRhythm\");
 
-    [SerializeField] private GameObject mapButtonTemp;
+    [SerializeField] 
+    private GameObject mapButtonTemp;
 
     void Start()
     {
-
+        /*
         Map mapTest = new Map()
         {
             MetaData = new MapMetaData()
@@ -64,27 +60,15 @@ public class MapCreator : MonoBehaviour
                 }
             }
         };
-        
         string json = JsonConvert.SerializeObject(mapTest, (Formatting) 1);
-        
-        
-        File.WriteAllText(_path + @"Maps\test.json",json);
+        File.WriteAllText(_path + @"Maps\test.json",json);*/
 
         foreach (string map in _mapNames)
         {
             GameObject button = Instantiate(mapButtonTemp, mapButtonTemp.transform.parent, false);
             button.SetActive(true);
             button.GetComponent<MapButton>().SetText(Path.GetFileName(map));
-            MapButton mapBtn = button.GetComponent<MapButton>();
-            mapBtn.ButtonInstancePath = map;
+            button.GetComponent<MapButton>().ButtonInstancePath = map;
         }
-    }
-
-    private static string _csvPath;
-
-    public static void LoadPath(string path)
-    {
-        SceneManager.LoadScene("Game", LoadSceneMode.Single);
-        _csvPath = Directory.GetFiles(path, @"*.csv").First();
     }
 }
