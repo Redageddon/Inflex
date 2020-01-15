@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
 
+
 public class ButtonCreator : MonoBehaviour
 {
     private readonly string[] _mapNames =
@@ -25,7 +26,7 @@ public class ButtonCreator : MonoBehaviour
             Lives = 3,
             Song = "Ghost",
             EndTime = 10,
-            Enemies = new List<Enemy>()
+            Enemies = new System.Collections.Generic.List<Enemy>()
             {
                 new Enemy()
                 {
@@ -44,7 +45,7 @@ public class ButtonCreator : MonoBehaviour
                     YLocation = 200
                 },
             },
-            ScreenEvents = new List<MapScreen>()
+            ScreenEvents = new System.Collections.Generic.List<MapScreen>()
             {
                 new MapScreen()
                 {
@@ -60,8 +61,9 @@ public class ButtonCreator : MonoBehaviour
                 }
             }
         };
-        string json = JsonConvert.SerializeObject(mapTest, (Formatting) 1);
-        File.WriteAllText(_path + @"Maps\test.json",json);*/
+        string json = Newtonsoft.Json.JsonConvert.SerializeObject(mapTest, (Newtonsoft.Json.Formatting) 1);
+        File.WriteAllText(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData),
+            @"CircleRhythm\Maps\test.json"),json);*/
 
         foreach (string map in _mapNames)
         {

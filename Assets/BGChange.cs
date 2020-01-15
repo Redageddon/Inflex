@@ -1,9 +1,9 @@
-﻿/*
+﻿
 using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 
-public class BGChange : MonoBehaviour
+public class BgChange : MonoBehaviour
 {
     public Image img;
     private static string MainPath { get; } = @"%AppData%\CircleRhythm\Maps\";
@@ -13,13 +13,10 @@ public class BGChange : MonoBehaviour
 
     private static Texture2D LoadTexture(string filePath)
     {
-        if (File.Exists(filePath))
-        {
-            byte[] fileData = File.ReadAllBytes(filePath);
-            Texture2D tex2D = new Texture2D(2, 2);
-            if (tex2D.LoadImage(fileData)) { return tex2D; }
-        }
-        return null;
+        if (!File.Exists(filePath)) return null;
+        byte[] fileData = File.ReadAllBytes(filePath);
+        Texture2D tex2D = new Texture2D(2, 2);
+        return tex2D.LoadImage(fileData) ? tex2D : null;
     }
 
     private void Start()
@@ -35,4 +32,3 @@ public class BGChange : MonoBehaviour
         }
     }
 }
-*/
