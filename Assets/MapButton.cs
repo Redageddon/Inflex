@@ -1,23 +1,24 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MapButton : MonoBehaviour
 {
     [SerializeField] private Text text;
-    internal string ButtonInstancePath = "";
-    internal Map map;
+    private Map _map;
     
     public void SetText(string textString)
     {
         text.text = textString;
     }
 
-    public void SetMap()
+    public void SetMap(Map map)
     {
+        _map = map;
     }
 
     public void OnClick()
     {
-        LoadMap.LoadPath(ButtonInstancePath);
+        SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }    
 }
