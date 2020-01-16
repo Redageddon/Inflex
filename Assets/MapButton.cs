@@ -1,24 +1,41 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MapButton : MonoBehaviour
 {
-    [SerializeField] private Text text;
-    private Map _map;
-    
-    public void SetText(string textString)
+    [SerializeField] private Text mapName;
+    [SerializeField] private Text enemyCount;
+    [SerializeField] private Text difficulty;
+    [SerializeField] private Text creator;
+    public Map map;
+
+    private void Start()
     {
-        text.text = textString;
+        mapName.text = map.MetaData.Title;
+        enemyCount.text = "Enemy Count: " + map.Enemies.Count;
+        difficulty.text = "00"; //not implemented yet
+        creator.text = map.MetaData.Creator;
     }
 
-    public void SetMap(Map map)
+    public void OnMouseOver()
     {
-        _map = map;
+        //print("over");
+    }
+    public void OnSelect()
+    {
+        print("selected");
+    }
+    public void OnDeselect()
+    {
+        print("deselected");
     }
 
     public void OnClick()
     {
-        SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        // check selected
+        //SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }    
 }

@@ -69,8 +69,7 @@ public class ButtonCreator : MonoBehaviour
         {
             GameObject button = Instantiate(mapButtonTemp, mapButtonTemp.transform.parent, false);
             button.SetActive(true);
-            button.GetComponent<MapButton>().SetText(Path.GetFileName(map));
-            button.GetComponent<MapButton>().SetMap(LoadMap.LoadPath(map));
+            button.GetComponent<MapButton>().map = LoadMap.LoadPath(map);
         }
     }
 }
