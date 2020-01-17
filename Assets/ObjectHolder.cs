@@ -2,6 +2,7 @@
 
 public class Map
 {
+    public string Path { get; set; }
     public int Lives { get; set; }
     public string Song { get; set; }
     public string Background { get; set; }
