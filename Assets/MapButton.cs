@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -10,7 +8,9 @@ public class MapButton : MonoBehaviour
     [SerializeField] private Text enemyCount;
     [SerializeField] private Text difficulty;
     [SerializeField] private Text creator;
+    private bool _selected;
     public Map map;
+    
 
     private void Start()
     {
@@ -19,23 +19,15 @@ public class MapButton : MonoBehaviour
         difficulty.text = "00"; //not implemented yet
         creator.text = map.MetaData.Creator;
     }
-
-    public void OnMouseOver()
+    public void Select()
     {
-        //print("over");
+        _selected = true;
     }
-    public void OnSelect()
-    {
-        print("selected");
-    }
-    public void OnDeselect()
-    {
-        print("deselected");
-    }
-
     public void OnClick()
     {
-        // check selected
-        //SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        if (!_selected || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return))
+            SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        else
+            _selected = false;
     }    
 }
