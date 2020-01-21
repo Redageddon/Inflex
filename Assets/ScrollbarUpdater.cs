@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ValueChanger : MonoBehaviour
+public class ScrollbarUpdater : MonoBehaviour
 {
     [SerializeField] private Scrollbar scrollbar;
 
