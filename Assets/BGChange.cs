@@ -1,30 +1,25 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 
 public class BgChange : MonoBehaviour
 {
     public Image img;
-    private static string MainPath { get; } = @"%AppData%\CircleRhythm\Maps\";
-    static string MapName { get; set; }
-    static string FileName { get; set; }
-
 
     private static Texture2D LoadTexture(string filePath)
     {
         if (!File.Exists(filePath)) return null;
         byte[] fileData = File.ReadAllBytes(filePath);
-        Texture2D tex2D = new Texture2D(2, 2);
+        Texture2D tex2D = new Texture2D(0, 0);
         return tex2D.LoadImage(fileData) ? tex2D : null;
     }
 
     private void Start()
     {
-        MapName = @"Map1\";
-        FileName = "bg1.png";
-        string fullPath = System.Environment.ExpandEnvironmentVariables(MainPath + MapName + FileName);
-        print(fullPath);
+        string path = MapButton.Map.Path;
+        string image = MapButton.Map.Background;
+        string fullPath = System.Environment.ExpandEnvironmentVariables(path + image);
+        //print(fullPath);
         if (LoadTexture(fullPath) != null)
         {
             img.sprite = Sprite.Create(LoadTexture(fullPath),

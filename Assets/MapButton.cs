@@ -14,6 +14,7 @@ public class MapButton : MonoBehaviour
     [SerializeField] private Text creator;
     private bool _selected;
     public Map map;
+    public static Map Map;
 
 
     private void Start()
@@ -42,7 +43,11 @@ public class MapButton : MonoBehaviour
     public void OnClick()
     {
         if (!_selected || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Mouse0))
+        {
             SceneManager.LoadScene("Game", LoadSceneMode.Single);
+            Map = map;
+        }
+        
         else
             _selected = false;
     }    

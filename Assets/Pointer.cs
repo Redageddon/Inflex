@@ -1,29 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 public class Pointer : MonoBehaviour
 {
-    private Vector2 _xy;
-
-    float MakeRotation()
-    {
-        
-        _xy.x = Input.mousePosition.x - Screen.width / 2;
-        _xy.y = Input.mousePosition.y - Screen.height / 2;
-        float rotation = (Mathf.Atan2(_xy.y, _xy.x) * Mathf.Rad2Deg) - 90;
-        if (rotation >= 0) return rotation;
-        return rotation + 360;
-    }
-
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         print("aaaa");
     }
-    
 
-
-    void Update()
+    private void Start()
     {
-        transform.localRotation = Quaternion.Euler(0, 0, MakeRotation());
+        IEnumerator coroutine = Loop();
+        StartCoroutine(coroutine);
+    }
+
+    private double SetZRotation()
+    {
+        var x = Screen.width/2 - Input.mousePosition.x;
+        var y = Screen.height/2 - Input.mousePosition.y;
+        return 180 * Math.Atan2(y, x) / Math.PI + 90;
+    }
+
+    private IEnumerator Loop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0);
+            transform.localRotation = Quaternion.Euler(0, 0, (float) SetZRotation());
+        }
     }
 }
