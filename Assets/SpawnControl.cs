@@ -4,14 +4,13 @@ public class SpawnControl : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
     private int _currentEnemy;
-    private float timer;
+    private float _timer;
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        print(timer);
+        _timer += Time.deltaTime;
         if(MapButton.Map.Enemies.Count == _currentEnemy) return;
-        if (timer > MapButton.Map.Enemies[_currentEnemy].SpawnTime)
+        if (_timer > MapButton.Map.Enemies[_currentEnemy].SpawnTime)
         {
             GameObject enemyInstance = Instantiate(enemy, enemy.transform.parent , false);
             enemyInstance.transform.localPosition = new Vector2(MapButton.Map.Enemies[_currentEnemy].XLocation,MapButton.Map.Enemies[_currentEnemy].YLocation);

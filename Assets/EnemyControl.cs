@@ -9,7 +9,7 @@ public class EnemyControl : MonoBehaviour
 
     private void Start()
     {
-        
+        key.text = MapButton.Map.Enemies[CurrentEnemy].KillKey;
     }
 
     private void Update()
