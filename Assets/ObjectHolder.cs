@@ -23,15 +23,15 @@ public class MapMetaData
 public class Enemy
 {
     public string KillKey { get; set; }
-    public double XLocation { get; set; }
-    public double YLocation { get; set; }
-    public double Rotation { get; set; }
-    public double SpawnTime { get; set; }
+    public float XLocation { get; set; }
+    public float YLocation { get; set; }
+    public float Rotation { get; set; }
+    public float SpawnTime { get; set; }
 }
 
 public class MapScreen
 {
     public int RotationSpeed { get; set; }
     public int Zoom { get; set; }
-    public double SpawnTime { get; set; }
+    public float SpawnTime { get; set; }
 }

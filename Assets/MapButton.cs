@@ -13,7 +13,7 @@ public class MapButton : MonoBehaviour
     [SerializeField] private Text difficulty;
     [SerializeField] private Text creator;
     private bool _selected;
-    public Map map;
+    internal Map map;
     public static Map Map;
 
 
@@ -44,11 +44,10 @@ public class MapButton : MonoBehaviour
     {
         if (!_selected || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Mouse0))
         {
-            SceneManager.LoadScene("Game", LoadSceneMode.Single);
             Map = map;
+            SceneManager.LoadScene("Game", LoadSceneMode.Single);
         }
         
-        else
-            _selected = false;
+        else _selected = false;
     }    
 }

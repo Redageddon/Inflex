@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class Pointer : MonoBehaviour
@@ -11,8 +12,7 @@ public class Pointer : MonoBehaviour
 
     private void Start()
     {
-        IEnumerator coroutine = Loop();
-        StartCoroutine(coroutine);
+        StartCoroutine(Loop());
     }
 
     private double SetZRotation()
@@ -26,6 +26,7 @@ public class Pointer : MonoBehaviour
     {
         while (true)
         {
+            
             yield return new WaitForSeconds(0);
             transform.localRotation = Quaternion.Euler(0, 0, (float) SetZRotation());
         }

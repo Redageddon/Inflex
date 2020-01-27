@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine.UI;
 
-public class BgChange : MonoBehaviour
+public class BGChange : MonoBehaviour
 {
     public Image img;
 
@@ -18,8 +18,7 @@ public class BgChange : MonoBehaviour
     {
         string path = MapButton.Map.Path;
         string image = MapButton.Map.Background;
-        string fullPath = System.Environment.ExpandEnvironmentVariables(path + image);
-        //print(fullPath);
+        string fullPath = Path.Combine(path, image);
         if (LoadTexture(fullPath) != null)
         {
             img.sprite = Sprite.Create(LoadTexture(fullPath),
