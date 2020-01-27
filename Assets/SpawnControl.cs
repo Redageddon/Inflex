@@ -3,6 +3,7 @@
 public class SpawnControl : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
+    [SerializeField] private AudioSource audioSource;
     private int _currentEnemy;
     private float _timer;
 

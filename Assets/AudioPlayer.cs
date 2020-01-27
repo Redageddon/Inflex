@@ -1,45 +1,24 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
+using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class AudioPlayer : MonoBehaviour
 {
-    public const string aduioName = "mario.wav";
-
-    [Header("Audio Header")] public AudioSource audioSource;
-    public AudioClip audioClip;
-    public string soundPath;
+    [SerializeField] private AudioSource audioSource;
 
     private void Awake()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
-        soundPath = "file://" + Application.streamingAssetsPath + "/";
         StartCoroutine(LoadAudio());
     }
 
     private IEnumerator LoadAudio()
     {
-        WWW request = GetAudioFromFile(soundPath, aduioName);
-        yield return request;
-
-        audioClip = request.GetAudioClip();
-        audioClip.name = aduioName;
-        PlayAudioFile();
+        using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(Path.Combine(MapButton.Map.Path, MapButton.Map.SongFile), AudioType.UNKNOWN))
+        {
+            yield return request.SendWebRequest();
+            audioSource.clip = DownloadHandlerAudioClip.GetContent(request);
+            audioSource.Play();
+        }
     }
-
-    private void PlayAudioFile()
-    {
-        audioSource.clip = audioClip;
-        audioSource.Play();
-    }
-
-    private WWW GetAudioFromFile(string path, string fileName)
-    {
-        string audioToLoad = string.Format(path + fileName);
-        WWW request = new WWW(audioToLoad);
-        return request;
-    }
-
-
 }

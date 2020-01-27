@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine.UI;
 
-public class BGChange : MonoBehaviour
+public class BgChange : MonoBehaviour
 {
     public Image img;
 
