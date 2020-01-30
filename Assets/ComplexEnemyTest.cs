@@ -5,49 +5,52 @@ public class ComplexEnemyTest : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private RectTransform viewport;
+    private double _topLeft;
+    private float _movementOverTime;
+    private float _currentX, _currentY;
     private float _timeAtStart;
-    private const int Speed = 100;
+    private float _lifetime;
     private float _x, _y;
+    float a = 0;
+    private const int Speed = 100;
+    private int _sign;
 
     private void Start()
     {
         _x = transform.localPosition.x;
         _y = transform.localPosition.y;
         _timeAtStart = audioSource.time;
+        _topLeft = 180 / Math.PI * Math.Atan2(_y, _x) + 90;
     }
 
     private void Update()
     {
-        float currentX, currentY;
-        float lifetime = audioSource.time - _timeAtStart;
-        if (180 / Math.PI * Math.Atan2(_y, _x) + 90 > 45 && 180 / Math.PI * Math.Atan2(_y, _x) + 90 < 225)
+        // handling location
+        _lifetime = audioSource.time - _timeAtStart;
+        _sign = _topLeft > 45 && _topLeft < 225 ? -1 : 1;
+        _movementOverTime = _sign * _lifetime * Speed;
+
+        if (Math.Abs(_x) > Math.Abs(_y))
         {
-            if (Math.Abs(_x) > Math.Abs(_y))
-            {
-                currentX = _x - lifetime * Speed;
-                currentY = _y - lifetime * (Speed * (_y / _x));
-            }
-            else
-            {
-                currentX = _x - lifetime * (Speed * _x / _y);
-                currentY = _y - lifetime * Speed;
-            }
+            _currentX = _x + _movementOverTime;
+            _currentY = _y + _movementOverTime * _y / _x;
         }
         else
         {
-            if (Math.Abs(_x) > Math.Abs(_y))
-            {
-                currentX = _x + lifetime * Speed;
-                currentY = _y + lifetime * (Speed * (_y / _x));
-            }
-            else
-            {
-                currentX = _x + lifetime * (Speed * _x / _y);
-                currentY = _y + lifetime * Speed;
-            }
+            _currentX = _x + _movementOverTime * _x / _y;
+            _currentY = _y + _movementOverTime;
         }
         
-        print(currentX);
-        transform.localPosition = new Vector2(currentX, currentY);
+        // handling rotation
+        
+        _currentX += (float)(Math.Abs(_currentX) * Math.Sin(a));
+        _currentY += (float)(Math.Abs(_currentY) * Math.Cos(a));
+        
+        a += 0.1f;
+        
+        
+        print(_currentX);
+        // updating position
+        transform.localPosition = new Vector2(_currentX, _currentY);
     }
 }
