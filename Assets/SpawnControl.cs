@@ -14,7 +14,7 @@ public class SpawnControl : MonoBehaviour
         _viewportSize = GetComponent<RectTransform>().rect;
     }
 
-    /*private void Update()
+    private void Update()
     {
         if (_map.Enemies.Count != _currentEnemy && audioSource.time > _map.Enemies[_currentEnemy].SpawnTime)
         {
@@ -41,8 +41,8 @@ public class SpawnControl : MonoBehaviour
 
             enemyInstance.transform.localPosition = spawnPoint;
             enemyInstance.SetActive(true);
-            enemyInstance.GetComponent<EnemyControl>().CurrentEnemy = _currentEnemy;
+            enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = _currentEnemy;
             _currentEnemy++;
         }
-    }*/
+    }
 }

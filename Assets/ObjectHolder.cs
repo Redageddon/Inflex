@@ -27,6 +27,7 @@ public class Enemy
     public float XLocation { get; set; }
     public float YLocation { get; set; }
     public float Rotation { get; set; }
+    public float Speed { get; set; }
     public float SpawnTime { get; set; }
 }
 
