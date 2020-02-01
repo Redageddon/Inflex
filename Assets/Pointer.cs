@@ -22,6 +22,7 @@ public class Pointer : MonoBehaviour
 
     private void SetZRotation()
     {
+        if(GameControl.GamePaused) return;
         transform.localRotation = Quaternion.Euler(0, 0, (float) GetZ());
     }
 }
