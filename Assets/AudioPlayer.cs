@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class AudioPlayer : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private float time;
 
     private void Awake()
     {
@@ -22,5 +23,10 @@ public class AudioPlayer : MonoBehaviour
             audioSource.clip = DownloadHandlerAudioClip.GetContent(request);
             audioSource.Play();
         }
+    }
+
+    private void Update()
+    {
+        audioSource.time = time;
     }
 }

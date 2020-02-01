@@ -5,6 +5,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private float time;
     public static bool GamePaused = false;
     private Rect _viewportSize;
     private int _currentEnemy;
@@ -31,9 +32,11 @@ public class GameControl : MonoBehaviour
     {
         if(GamePaused) return;
         if (_map.Enemies.Count == _currentEnemy || !(audioSource.time > _map.Enemies[_currentEnemy].SpawnTime)) return;
+        
         var enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
         enemyInstance.SetActive(true);
         enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = _currentEnemy;
+        
         _currentEnemy++;
     }
 }
