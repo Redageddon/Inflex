@@ -25,7 +25,14 @@ public class GameControl : MonoBehaviour
             GamePaused = !GamePaused;
             pauseScreen.SetActive(GamePaused);
         }
-        
+        if (!GamePaused)
+        {
+            audioSource.UnPause();
+        }
+        else
+        {
+            audioSource.Pause();
+        }
     }
 
     private void FastUpdate()

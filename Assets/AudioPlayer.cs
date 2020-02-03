@@ -27,6 +27,6 @@ public class AudioPlayer : MonoBehaviour
 
     private void Update()
     {
-        audioSource.time = time;
+        //audioSource.time = time;
     }
 }

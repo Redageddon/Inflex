@@ -20,7 +20,7 @@ public class ComplexEnemy : MonoBehaviour
     private void Start()
     {
         self = MapButton.Map.Enemies[CurrentEnemy];
-        
+
         _rotationSpeed = self.Rotation;
         _speed = self.Speed;
         text.text = self.KillKey;
@@ -29,30 +29,19 @@ public class ComplexEnemy : MonoBehaviour
 
         transform.localPosition = new Vector2(_x, _y);
 
-
         _rotation = 180d / Math.PI * Math.Atan2(_y, _x) + 90d;
         _distance = Math.Sqrt(_x * _x + _y * _y);
         gameObject.SetActive(false);
-        InvokeRepeating(nameof(EnableDisable), 0 ,0.00002f);
+        InvokeRepeating(nameof(ContainTobounds), 0, 0.00002f);
     }
 
-    private void EnableDisable()
+    private void ContainTobounds()
     {
-        if (audioSource.time > self.SpawnTime)
-        {
-            gameObject.SetActive(true);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(_distance - (audioSource.time - self.SpawnTime) * _speed > 0 && audioSource.time > self.SpawnTime);
     }
 
     private void Update()
     {
-        if(GameControl.GamePaused) audioSource.Pause();
-        else audioSource.UnPause();
-
         _lifetime = audioSource.time - self.SpawnTime;
         _movementOverTime = _lifetime * _speed;
         _rotationOverTime = _lifetime * _rotationSpeed;
