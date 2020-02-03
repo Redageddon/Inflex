@@ -5,17 +5,17 @@ public class GameControl : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject pauseScreen;
-    [SerializeField] private float time;
-    public static bool GamePaused = false;
-    private Rect _viewportSize;
-    private int _currentEnemy;
-    private Map _map;
+    public static bool GamePaused;
 
     private void Start()
     {
-        _map = MapButton.Map;
-        _viewportSize = GetComponent<RectTransform>().rect;
-        InvokeRepeating(nameof(FastUpdate), 0, 0.00002f);
+        for (var i = 0; i < MapButton.Map.Enemies.Count; i++)
+        {
+            var enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
+            enemyInstance.SetActive(true);
+            enemyInstance.name = "Enemy" + i;
+            enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = i;
+        }
     }
 
     private void Update()
@@ -33,17 +33,5 @@ public class GameControl : MonoBehaviour
         {
             audioSource.Pause();
         }
-    }
-
-    private void FastUpdate()
-    {
-        if(GamePaused) return;
-        if (_map.Enemies.Count == _currentEnemy || !(audioSource.time > _map.Enemies[_currentEnemy].SpawnTime)) return;
-        
-        var enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
-        enemyInstance.SetActive(true);
-        enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = _currentEnemy;
-        
-        _currentEnemy++;
     }
 }

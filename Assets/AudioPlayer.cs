@@ -7,6 +7,7 @@ public class AudioPlayer : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private float time;
+    [SerializeField] private bool constrainAudio;
 
     private void Awake()
     {
@@ -27,6 +28,6 @@ public class AudioPlayer : MonoBehaviour
 
     private void Update()
     {
-        //audioSource.time = time;
+        if(constrainAudio) audioSource.time = time;
     }
 }
