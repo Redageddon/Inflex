@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameControl : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private GameObject pauseScreen;
     public static readonly List<Action> ContainmentList = new List<Action>();
     public static bool GamePaused;
+    [SerializeField] private Text lives;
 
     private void Start()
     {
@@ -39,5 +41,7 @@ public class GameControl : MonoBehaviour
         {
             audioSource.Pause();
         }
+
+        lives.text = "Lives: " + MapButton.Map.Lives;
     }
 }

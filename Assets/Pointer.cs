@@ -5,24 +5,25 @@ public class Pointer : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print("aaaa");
-    }
-
-    private void Start()
-    {
-        InvokeRepeating(nameof(SetZRotation), 0, 0.00002f);
+        print(other);
     }
 
     private double GetZ()
     {
-        var x = Screen.width/2 - Input.mousePosition.x;
-        var y = Screen.height/2 - Input.mousePosition.y;
+        var x = Screen.width/2d - Input.mousePosition.x;
+        var y = Screen.height/2d - Input.mousePosition.y;
         return 180 * Math.Atan2(y, x) / Math.PI + 90;
     }
 
-    private void SetZRotation()
+    private void Update()
     {
         if(GameControl.GamePaused) return;
         transform.localRotation = Quaternion.Euler(0, 0, (float) GetZ());
+        foreach (KeyCode kcode in Settings.Keys)
+        {
+            if (Input.GetKeyDown(kcode))
+            {print("yes");
+            }
+        }
     }
 }
