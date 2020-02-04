@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,17 +30,27 @@ public class ComplexEnemy : MonoBehaviour
 
         _rotation = 180d / Math.PI * Math.Atan2(_y, _x) + 90d;
         _distance = Math.Sqrt(_x * _x + _y * _y);
-        gameObject.SetActive(false);
-        InvokeRepeating(nameof(ContainTobounds), 0, 0.00002f);
+        if (gameObject.name == "Enemy0" || gameObject.name == "Enemy" + (MapButton.Map.Enemies.Count - 1))
+        {
+            InvokeRepeating(nameof(ContainToBounds), 0, 0.00002f);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
-    private void ContainTobounds()
+    public void ContainToBounds()
     {
         gameObject.SetActive(_distance - (audioSource.time - self.SpawnTime) * _speed > 0 && audioSource.time > self.SpawnTime);
     }
 
     private void Update()
     {
+        if(gameObject.activeSelf) ContainToBounds();
+        if(MapButton.Map.Enemies.Count > CurrentEnemy + 1) GameControl.ContainmentList[CurrentEnemy + 1].Invoke();
+        if(CurrentEnemy - 1 > 0) GameControl.ContainmentList[CurrentEnemy - 1].Invoke();
+        
         _lifetime = audioSource.time - self.SpawnTime;
         _movementOverTime = _lifetime * _speed;
         _rotationOverTime = _lifetime * _rotationSpeed;

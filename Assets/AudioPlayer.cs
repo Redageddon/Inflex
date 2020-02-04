@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -28,6 +29,6 @@ public class AudioPlayer : MonoBehaviour
 
     private void Update()
     {
-        if(constrainAudio) audioSource.time = time;
+        if(constrainAudio) audioSource.time = Mathf.Clamp(time, 0 , Single.PositiveInfinity);
     }
 }
