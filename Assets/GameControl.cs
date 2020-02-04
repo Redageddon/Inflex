@@ -8,7 +8,8 @@ public class GameControl : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject pauseScreen;
-    public static readonly List<Action> ContainmentList = new List<Action>();
+    private static readonly List<Action> ContainmentList = new List<Action>();
+
     public static bool GamePaused;
     [SerializeField] private Text lives;
 
@@ -21,9 +22,9 @@ public class GameControl : MonoBehaviour
             enemyInstance.name = "Enemy" + i;
             enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = i;
             
-            Action methodDelegate = enemyInstance.GetComponent<ComplexEnemy>().ContainToBounds;
-            ContainmentList.Add(methodDelegate);
+            ContainmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().Contain);
         }
+        lives.text = "Lives: " + MapButton.Map.Lives;
     }
 
     private void Update()
@@ -42,6 +43,12 @@ public class GameControl : MonoBehaviour
             audioSource.Pause();
         }
 
-        lives.text = "Lives: " + MapButton.Map.Lives;
+        for (int i = 0; i < ContainmentList.Count; i++)
+        {
+            if (audioSource.time - MapButton.Map.Enemies[i].SpawnTime > -1 || audioSource.time - MapButton.Map.Enemies[i].SpawnTime < 20)
+            {
+                ContainmentList[i].Invoke();
+            }
+        }
     }
 }
