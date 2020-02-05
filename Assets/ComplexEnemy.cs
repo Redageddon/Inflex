@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class ComplexEnemy : MonoBehaviour
 {
     public int CurrentEnemy { private get; set; }
-    private Enemy self;
+    public Enemy self;
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private Text text;
+    [SerializeField] public Text text;
     private double _distance, _rotation;
     private double _handler;
     private float _movementOverTime, _rotationOverTime;
@@ -23,7 +23,11 @@ public class ComplexEnemy : MonoBehaviour
 
         _rotationSpeed = self.Rotation;
         _speed = self.Speed;
-        text.text = self.KillKey;
+        
+        // this is what determines what will the center text be...V
+        text.text = Settings.Keys[self.KillKey].ToString();
+        // this is what determines what will the center text be...^
+        
         _x = self.XLocation;
         _y = self.YLocation;
 

@@ -1,16 +1,25 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Audio;
 
 public class Settings : MonoBehaviour
 {
     public static KeyCode[] Keys = {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D};
-
-    void Start()
+    public static float Volume;
+    
+    public void SetVolume(float volume)
     {
-        
+        Volume = volume;
     }
 
-    void Update()
+    public void SetKeyCode0()
     {
-        
+        foreach (KeyCode keyCode in )
+        {
+            if (Input.GetKeyDown(keyCode))
+            {
+                
+            }
+        }
     }
 }

@@ -24,6 +24,7 @@ public class AudioPlayer : MonoBehaviour
             yield return request.SendWebRequest();
             audioSource.clip = DownloadHandlerAudioClip.GetContent(request);
             audioSource.Play();
+            audioSource.volume = Settings.Volume;
         }
     }
 

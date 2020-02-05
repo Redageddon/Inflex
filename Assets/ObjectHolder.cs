@@ -23,7 +23,7 @@ public class MapMetaData
 
 public class Enemy
 {
-    public string KillKey { get; set; }
+    public int KillKey { get; set; }
     public float XLocation { get; set; }
     public float YLocation { get; set; }
     public float Rotation { get; set; }

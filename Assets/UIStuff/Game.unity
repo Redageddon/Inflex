@@ -1290,6 +1290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5dbad3cbb2a184fa89e3677a6559b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  key: {fileID: 1796392182}
 --- !u!68 &1157047962
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -1721,6 +1722,7 @@ MonoBehaviour:
   enemy: {fileID: 450424518}
   audioSource: {fileID: 724442712}
   pauseScreen: {fileID: 1884283171}
+  key: {fileID: 1796392182}
   lives: {fileID: 1265145617}
 --- !u!1 &1796392180
 GameObject:

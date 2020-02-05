@@ -1,11 +1,17 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pointer : MonoBehaviour
 {
+    [SerializeField] private Text key;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print(other);
+        if (key.text == other.GetComponent<ComplexEnemy>().text.text)
+        {
+            GameControl.ContainmentList.Remove(other.GetComponent<ComplexEnemy>().Contain);
+            other.gameObject.SetActive(false);
+        }
     }
 
     private double GetZ()
@@ -19,12 +25,5 @@ public class Pointer : MonoBehaviour
     {
         if(GameControl.GamePaused) return;
         transform.localRotation = Quaternion.Euler(0, 0, (float) GetZ());
-        foreach (KeyCode kcode in Settings.Keys)
-        {
-            if (Input.GetKeyDown(kcode))
-            {
-                print("yes");
-            }
-        }
     }
 }
