@@ -29,6 +29,12 @@ public class GameControl : MonoBehaviour
 
     private void Update()
     {
+        UpdatePause();
+        UpdateEnemy();
+    }
+
+    private void UpdatePause()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             GamePaused = !GamePaused;
@@ -42,10 +48,13 @@ public class GameControl : MonoBehaviour
         {
             audioSource.Pause();
         }
+    }
 
+    private void UpdateEnemy()
+    {
         for (int i = 0; i < ContainmentList.Count; i++)
         {
-            if (audioSource.time - MapButton.Map.Enemies[i].SpawnTime > -1 || audioSource.time - MapButton.Map.Enemies[i].SpawnTime < 20)
+            if (audioSource.time - MapButton.Map.Enemies[i].SpawnTime > -1 || audioSource.time - MapButton.Map.Enemies[i].SpawnTime < 1)
             {
                 ContainmentList[i].Invoke();
             }

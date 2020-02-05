@@ -41,6 +41,7 @@ public class ComplexEnemy : MonoBehaviour
 
     private void Update()
     {
+        Contain();
         _lifetime = audioSource.time - self.SpawnTime;
         _movementOverTime = _lifetime * _speed;
         _rotationOverTime = _lifetime * _rotationSpeed;

@@ -22,7 +22,8 @@ public class Pointer : MonoBehaviour
         foreach (KeyCode kcode in Settings.Keys)
         {
             if (Input.GetKeyDown(kcode))
-            {print("yes");
+            {
+                print("yes");
             }
         }
     }
