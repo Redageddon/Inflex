@@ -42,5 +42,7 @@ public class MapScreen
 public class SavedSettings
 {
     public float Volume { get; set; }
-    public List<KeyCode> Mapping { get; set; }
+    public List<KeyCode> Keys { get; set; }
+    public Resolution Resolution { get; set; }
+    public FullScreenMode ScreenMode { get; set; }
 }

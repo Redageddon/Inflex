@@ -25,7 +25,7 @@ public class ComplexEnemy : MonoBehaviour
         _speed = self.Speed;
         
         // this is what determines what will the center text be...V
-        text.text = Settings.Keys[self.KillKey].ToString();
+        text.text = Settings.GlobalSettings.Keys[self.KillKey].ToString();
         // this is what determines what will the center text be...^
         
         _x = self.XLocation;

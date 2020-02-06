@@ -37,7 +37,7 @@ public class GameControl : MonoBehaviour
 
     private void UpdateKey()
     {
-        foreach (KeyCode keyCode in Settings.Keys)
+        foreach (KeyCode keyCode in Settings.GlobalSettings.Keys)
         {
             if (Input.GetKeyDown(keyCode))
             {
