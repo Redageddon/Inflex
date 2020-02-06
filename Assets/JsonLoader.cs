@@ -23,4 +23,11 @@ public class JsonLoader : MonoBehaviour
         SavedSettings settings = JsonConvert.DeserializeObject<SavedSettings>(json);
         return settings;
     }
+
+    public static void SaveSettings(SavedSettings settings)
+    {
+        string json = JsonConvert.SerializeObject(settings, (Formatting) 1);
+        File.WriteAllText("Assets/Settings.json", json);
+    }
+
 }
