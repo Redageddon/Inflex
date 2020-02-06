@@ -1,25 +1,52 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    public static KeyCode[] Keys = {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D};
+    private SavedSettings settings;
+    public static List<KeyCode> Keys;
     public static float Volume;
-    
+
+    private void Start()
+    {
+        settings = JsonLoader.LoadSettings();
+        Keys = settings.Mapping;
+        
+    }
+
     public void SetVolume(float volume)
     {
         Volume = volume;
     }
 
-    public void SetKeyCode0()
+    private GameObject CurrentKey;
+
+    private void OnGUI()
     {
-        foreach (KeyCode keyCode in )
+        if (CurrentKey == null) return;
+        Event e = Event.current;
+        if (!e.isKey) return;
+        switch (CurrentKey.name)
         {
-            if (Input.GetKeyDown(keyCode))
-            {
-                
-            }
+            case "KeyPreset1":
+                Keys[0] = e.keyCode;
+                break;
+            case "KeyPreset2":
+                Keys[1] = e.keyCode;
+                break;
+            case "KeyPreset3":
+                Keys[2] = e.keyCode;
+                break;
+            case "KeyPreset4":
+                Keys[3] = e.keyCode;
+                break;
         }
+        CurrentKey.GetComponentInChildren<Text>().text = e.keyCode.ToString();
+        CurrentKey = null;
+    }
+    public void SetKeyCode(GameObject clicked)
+    {
+        CurrentKey = clicked;
     }
 }

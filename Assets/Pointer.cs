@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class Pointer : MonoBehaviour
 {
     [SerializeField] private Text key;
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (key.text == other.GetComponent<ComplexEnemy>().text.text)
         {

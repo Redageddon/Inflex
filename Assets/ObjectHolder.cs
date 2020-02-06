@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Map
 {
@@ -36,4 +37,10 @@ public class MapScreen
     public int RotationSpeed { get; set; }
     public int Zoom { get; set; }
     public float SpawnTime { get; set; }
+}
+
+public class SavedSettings
+{
+    public float Volume { get; set; }
+    public List<KeyCode> Mapping { get; set; }
 }
