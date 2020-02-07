@@ -2,13 +2,13 @@
 using System.IO;
 using UnityEngine.UI;
 
-public class BGChange : MonoBehaviour
+public class BgChange : MonoBehaviour
 {
     public Image img;
 
     private void Start()
     {
-        SetBackground();
+        SetBackground(img, Path.Combine(MapButton.Map.Path, MapButton.Map.Background));
     }
     
     private static Texture2D LoadTexture(string filePath)
@@ -18,18 +18,7 @@ public class BGChange : MonoBehaviour
         Texture2D tex2D = new Texture2D(0, 0);
         return tex2D.LoadImage(fileData) ? tex2D : null;
     }
-
-    private void SetBackground()
-    {
-        string path = MapButton.Map.Path;
-        string background = MapButton.Map.Background;
-        string fullPath = Path.Combine(path, background);
-        if (LoadTexture(fullPath) != null)
-        {
-            img.sprite = Sprite.Create(LoadTexture(fullPath),
-                new Rect(0, 0, LoadTexture(fullPath).width, LoadTexture(fullPath).height), new Vector2(0, 0));
-        }
-    }
+    
     public static void SetBackground(Image image, string path)
     {
         if (LoadTexture(path) != null)
