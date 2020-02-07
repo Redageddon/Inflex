@@ -9,6 +9,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private Text key;
+    public static SavedSettings GlobalSettings = JsonLoader.LoadSettings();
     public static readonly List<Action> ContainmentList = new List<Action>();
 
     public static bool GamePaused;
@@ -37,7 +38,7 @@ public class GameControl : MonoBehaviour
 
     private void UpdateKey()
     {
-        foreach (KeyCode keyCode in Settings.GlobalSettings.Keys)
+        foreach (KeyCode keyCode in GlobalSettings.Keys)
         {
             if (Input.GetKeyDown(keyCode))
             {

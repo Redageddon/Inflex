@@ -2,12 +2,14 @@
   "Volume": 1.0,
   "Keys": [
     119,
-    119,
-    119,
-    119
+    97,
+    115,
+    100
   ],
-  "Height": 1080,
-  "Width": 1920,
-  "Fps": 60,
+  "Resolution": {
+    "width": 1920,
+    "height": 1080,
+    "refreshRate": 60
+  },
   "ScreenMode": 3
 }

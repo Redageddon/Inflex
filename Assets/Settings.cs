@@ -11,6 +11,7 @@ public class Settings : MonoBehaviour
     [SerializeField] private Dropdown dropDownScreenMode;
     [SerializeField] private InputField fps;
     public static SavedSettings GlobalSettings;
+    private SavedSettings _savedSettings;
     private Resolution _resolution;
     private GameObject _currentKey;
     private List<KeyCode> _keys;
@@ -19,11 +20,11 @@ public class Settings : MonoBehaviour
 
     private void Start()
     {
-        GlobalSettings = JsonLoader.LoadSettings();
-        _keys = GlobalSettings.Keys;
-        fps.text = GlobalSettings.Resolution.refreshRate.ToString();
-        volume.value = GlobalSettings.Volume;
-        _resolution = GlobalSettings.Resolution;
+        _savedSettings = JsonLoader.LoadSettings();
+        _keys = _savedSettings.Keys;
+        fps.text = _savedSettings.Resolution.refreshRate.ToString();
+        volume.value = _savedSettings.Volume;
+        _resolution = _savedSettings.Resolution;
         
         for (int i = 0; i < 4; i++)
         {
@@ -56,19 +57,19 @@ public class Settings : MonoBehaviour
         {
             case "KeyPreset1":
                 _keys[0] = e.keyCode;
-                GlobalSettings.Keys[0] = e.keyCode;
+                _savedSettings.Keys[0] = e.keyCode;
                 break;
             case "KeyPreset2":
                 _keys[1] = e.keyCode;
-                GlobalSettings.Keys[1] = e.keyCode;
+                _savedSettings.Keys[1] = e.keyCode;
                 break;
             case "KeyPreset3":
                 _keys[2] = e.keyCode;
-                GlobalSettings.Keys[2] = e.keyCode;
+                _savedSettings.Keys[2] = e.keyCode;
                 break;
             case "KeyPreset4":
                 _keys[3] = e.keyCode;
-                GlobalSettings.Keys[3] = e.keyCode;
+                _savedSettings.Keys[3] = e.keyCode;
                 break;
         }
 
@@ -84,27 +85,30 @@ public class Settings : MonoBehaviour
     public void SetVolume(float value)
     {
         volume.value = value;
-        GlobalSettings.Volume = value;
+        _savedSettings.Volume = value;
     }
 
     public void SetResolution()
     {
         _resolution.height = Screen.resolutions[dropDownRes.value].height;
         _resolution.width = Screen.resolutions[dropDownRes.value].width;
+        _savedSettings.Resolution = _resolution;
     }
 
     public void SetFps()
     {
         _resolution.refreshRate = int.Parse(fps.text);
+        _savedSettings.Resolution = _resolution;
     }
 
     public void SetScreenMode()
     {
-        GlobalSettings.ScreenMode = (FullScreenMode)dropDownScreenMode.value;
+        _savedSettings.ScreenMode = (FullScreenMode)dropDownScreenMode.value;
     }
     
     public void SaveSettings()
     {
-        JsonLoader.SaveSettings(GlobalSettings);
+        JsonLoader.SaveSettings(_savedSettings);
+        GlobalSettings = _savedSettings;
     }
 }

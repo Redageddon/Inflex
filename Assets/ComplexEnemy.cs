@@ -9,6 +9,7 @@ public class ComplexEnemy : MonoBehaviour
     public Enemy self;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] public Text text;
+    private SavedSettings _settings;
     private double _distance, _rotation;
     private double _handler;
     private float _movementOverTime, _rotationOverTime;
@@ -19,13 +20,14 @@ public class ComplexEnemy : MonoBehaviour
 
     private void Start()
     {
+        _settings = GameControl.GlobalSettings;
         self = MapButton.Map.Enemies[CurrentEnemy];
 
         _rotationSpeed = self.Rotation;
         _speed = self.Speed;
         
         // this is what determines what will the center text be...V
-        text.text = Settings.GlobalSettings.Keys[self.KillKey].ToString();
+        text.text = _settings.Keys[self.KillKey].ToString();
         // this is what determines what will the center text be...^
         
         _x = self.XLocation;
