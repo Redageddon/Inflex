@@ -46,6 +46,8 @@ public class ComplexEnemy : MonoBehaviour
     private void Update()
     {
         Contain();
+        // Audio influences rotation time- sounds really odd. I would try not to couple the two.
+        // It makes sense that rotation time happens to be like audioSource.Time, but don't couple the two.
         _lifetime = audioSource.time - self.SpawnTime;
         _movementOverTime = _lifetime * _speed;
         _rotationOverTime = _lifetime * _rotationSpeed;
