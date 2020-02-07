@@ -11,10 +11,8 @@ public class ComplexEnemy : MonoBehaviour
     [SerializeField] public Text text;
     private SavedSettings _settings;
     private double _distance, _rotation;
-    private double _handler;
+    private double _rotation;
     private float _movementOverTime, _rotationOverTime;
-    private float _currentX, _currentY;
-    private float _x, _y;
     private float _speed, _rotationSpeed;
     private float _lifetime;
 
@@ -30,8 +28,8 @@ public class ComplexEnemy : MonoBehaviour
         text.text = _settings.Keys[self.KillKey].ToString();
         // this is what determines what will the center text be...^
         
-        _x = self.XLocation;
-        _y = self.YLocation;
+        var startX = self.XLocation;
+        var startY = self.YLocation;
 
         transform.localPosition = new Vector2(_x, _y);
 
@@ -52,10 +50,10 @@ public class ComplexEnemy : MonoBehaviour
         _movementOverTime = _lifetime * _speed;
         _rotationOverTime = _lifetime * _rotationSpeed;
 
-        _handler = Math.PI * (-1 * ((_rotation + _rotationOverTime) / 180d) - 1);
-        _currentX = (float) ((_distance - _movementOverTime) * Math.Sin(_handler));
-        _currentY = (float) ((_distance - _movementOverTime) * Math.Cos(_handler));
+        _rotation = Math.PI * (-1 * ((_rotation + _rotationOverTime) / 180d) - 1);
+        var currentX = (float) ((_distance - _movementOverTime) * Math.Sin(_rotation));
+        var currentY = (float) ((_distance - _movementOverTime) * Math.Cos(_rotation));
 
-        transform.localPosition = new Vector2(_currentX, _currentY);
+        transform.localPosition = new Vector2(currentX, currentY);
     }
 }
