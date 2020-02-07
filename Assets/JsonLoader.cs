@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
@@ -29,5 +28,4 @@ public class JsonLoader : MonoBehaviour
         string json = JsonConvert.SerializeObject(settings, (Formatting) 1);
         File.WriteAllText("Assets/Settings.json", json);
     }
-
 }

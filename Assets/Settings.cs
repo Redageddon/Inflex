@@ -10,12 +10,11 @@ public class Settings : MonoBehaviour
     [SerializeField] private Dropdown dropDownRes;
     [SerializeField] private Dropdown dropDownScreenMode;
     [SerializeField] private InputField fps;
-    private SavedSettings _savedSettings;
     private Resolution _resolution;
+    private SavedSettings _savedSettings;
     private GameObject _currentKey;
     private List<KeyCode> _keys;
     private bool _screenRes;
-
 
     private void Start()
     {
@@ -61,6 +60,7 @@ public class Settings : MonoBehaviour
             keyPresets[i].text = _keys[i].ToString();
         }
     }
+    
 
     private void SetVariables()
     {
@@ -75,10 +75,12 @@ public class Settings : MonoBehaviour
     {
         for (int i = 0; i < Screen.resolutions.Length; i++)
         {
-            Dropdown.OptionData option = new Dropdown.OptionData();
-            option.text = Screen.resolutions[i].width + " x " + Screen.resolutions[i].height;
+            Dropdown.OptionData option = new Dropdown.OptionData {text = Screen.resolutions[i].width + " x " + Screen.resolutions[i].height};
             dropDownRes.options.Add(option);
-            dropDownRes.value = i;
+            if (_savedSettings.Resolution.height == Screen.resolutions[i].height && _savedSettings.Resolution.width == Screen.resolutions[i].width)
+            {
+                dropDownRes.value = i;
+            }
         }
     }
 
@@ -86,10 +88,12 @@ public class Settings : MonoBehaviour
     {
         for (int i = 0; i < Enum.GetValues(typeof(FullScreenMode)).Length; i++)
         {
-            Dropdown.OptionData option = new Dropdown.OptionData();
-            option.text = Enum.GetValues(typeof(FullScreenMode)).GetValue(i).ToString();
+            Dropdown.OptionData option = new Dropdown.OptionData {text = Enum.GetValues(typeof(FullScreenMode)).GetValue(i).ToString()};
             dropDownScreenMode.options.Add(option);
-            dropDownScreenMode.value = i;
+            if ((FullScreenMode) i == _savedSettings.ScreenMode)
+            {
+                dropDownScreenMode.value = i;
+            }
         }
     }
 

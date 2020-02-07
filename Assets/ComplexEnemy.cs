@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,11 +40,11 @@ public class ComplexEnemy : MonoBehaviour
     }
     private void Update()
     {
-        Contain();
+        DespawnOutOfBounds();
         SetLocation();
     }
     
-    public void Contain()
+    public void DespawnOutOfBounds()
     {
         gameObject.SetActive(_distance - (audioSource.time - self.SpawnTime) * _speed > 0 && audioSource.time > self.SpawnTime);
     }
