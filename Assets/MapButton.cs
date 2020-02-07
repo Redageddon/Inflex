@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MapButton : MonoBehaviour
 {
-    [SerializeField] private RawImage background;
+    [SerializeField] private Image background;
     [SerializeField] private Text mapName;
     [SerializeField] private Text artist;
     [SerializeField] private Text enemyCount;
@@ -29,7 +29,7 @@ public class MapButton : MonoBehaviour
     public void Select()
     {
         _selected = true;
-        DisplayBackground.Display(background, Path.Combine(map.Path, map.MetaData.Icon));
+        BGChange.SetBackground(background,Path.Combine(map.Path, map.MetaData.Icon));
     }
 
     public void OnClick()
