@@ -9,6 +9,8 @@ public class GameControl : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private Text key;
+    // make this a singleton
+    // refactor global settings to indexer
     public static SavedSettings GlobalSettings = JsonLoader.LoadSettings();
     public static readonly List<Action> ContainmentList = new List<Action>();
 
