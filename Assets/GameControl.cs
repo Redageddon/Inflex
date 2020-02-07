@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,15 +18,7 @@ public class GameControl : MonoBehaviour
 
     private void Start()
     {
-        for (var i = 0; i < MapButton.Map.Enemies.Count; i++)
-        {
-            var enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
-            enemyInstance.SetActive(true);
-            enemyInstance.name = "Enemy" + i;
-            enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = i;
-
-            ContainmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().Contain);
-        }
+        CreateEnemies();
         lives.text = "Lives: " + MapButton.Map.Lives;
     }
 
@@ -38,12 +31,9 @@ public class GameControl : MonoBehaviour
 
     private void UpdateKey()
     {
-        foreach (KeyCode keyCode in GlobalSettings.Keys)
+        foreach (var keyCode in GlobalSettings.Keys.Where(Input.GetKeyDown))
         {
-            if (Input.GetKeyDown(keyCode))
-            {
-                key.text = keyCode.ToString();
-            }
+            key.text = keyCode.ToString();
         }
     }
 
@@ -61,6 +51,19 @@ public class GameControl : MonoBehaviour
         else
         {
             audioSource.Pause();
+        }
+    }
+    
+    private void CreateEnemies()
+    {
+        for (var i = 0; i < MapButton.Map.Enemies.Count; i++)
+        {
+            var enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
+            enemyInstance.SetActive(true);
+            enemyInstance.name = "Enemy" + i;
+            enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = i;
+
+            ContainmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().Contain);
         }
     }
 

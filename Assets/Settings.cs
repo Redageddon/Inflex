@@ -10,7 +10,6 @@ public class Settings : MonoBehaviour
     [SerializeField] private Dropdown dropDownRes;
     [SerializeField] private Dropdown dropDownScreenMode;
     [SerializeField] private InputField fps;
-    public static SavedSettings GlobalSettings;
     private SavedSettings _savedSettings;
     private Resolution _resolution;
     private GameObject _currentKey;
@@ -20,32 +19,10 @@ public class Settings : MonoBehaviour
 
     private void Start()
     {
-        _savedSettings = JsonLoader.LoadSettings();
-        _keys = _savedSettings.Keys;
-        fps.text = _savedSettings.Resolution.refreshRate.ToString();
-        volume.value = _savedSettings.Volume;
-        _resolution = _savedSettings.Resolution;
-        
-        for (int i = 0; i < 4; i++)
-        {
-            keyPresets[i].text = _keys[i].ToString();
-        }
-        
-        for (int i = 0; i < Screen.resolutions.Length; i++)
-        {
-            Dropdown.OptionData option = new Dropdown.OptionData();
-            option.text = Screen.resolutions[i].width + " x " + Screen.resolutions[i].height;
-            dropDownRes.options.Add(option);
-            dropDownRes.value = i;
-        }
-
-        for (int i = 0; i < Enum.GetValues(typeof(FullScreenMode)).Length; i++)
-        {
-            Dropdown.OptionData option = new Dropdown.OptionData();
-            option.text = Enum.GetValues(typeof(FullScreenMode)).GetValue(i).ToString();
-            dropDownScreenMode.options.Add(option);
-            dropDownScreenMode.value = i;
-        }
+        SetVariables();
+        SetLoadedKeys();
+        AddScreenResolutions();
+        AddScreenModes();
     }
 
     private void OnGUI()
@@ -77,6 +54,45 @@ public class Settings : MonoBehaviour
         _currentKey = null;
     }
 
+    private void SetLoadedKeys()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            keyPresets[i].text = _keys[i].ToString();
+        }
+    }
+
+    private void SetVariables()
+    {
+        _savedSettings = JsonLoader.LoadSettings();
+        _keys = _savedSettings.Keys;
+        fps.text = _savedSettings.Resolution.refreshRate.ToString();
+        volume.value = _savedSettings.Volume;
+        _resolution = _savedSettings.Resolution;
+    }
+
+    private void AddScreenResolutions()
+    {
+        for (int i = 0; i < Screen.resolutions.Length; i++)
+        {
+            Dropdown.OptionData option = new Dropdown.OptionData();
+            option.text = Screen.resolutions[i].width + " x " + Screen.resolutions[i].height;
+            dropDownRes.options.Add(option);
+            dropDownRes.value = i;
+        }
+    }
+
+    private void AddScreenModes()
+    {
+        for (int i = 0; i < Enum.GetValues(typeof(FullScreenMode)).Length; i++)
+        {
+            Dropdown.OptionData option = new Dropdown.OptionData();
+            option.text = Enum.GetValues(typeof(FullScreenMode)).GetValue(i).ToString();
+            dropDownScreenMode.options.Add(option);
+            dropDownScreenMode.value = i;
+        }
+    }
+
     public void SetKeyCode(GameObject clicked)
     {
         _currentKey = clicked;
@@ -103,12 +119,11 @@ public class Settings : MonoBehaviour
 
     public void SetScreenMode()
     {
-        _savedSettings.ScreenMode = (FullScreenMode)dropDownScreenMode.value;
+        _savedSettings.ScreenMode = (FullScreenMode) dropDownScreenMode.value;
     }
-    
+
     public void SaveSettings()
     {
         JsonLoader.SaveSettings(_savedSettings);
-        GlobalSettings = _savedSettings;
     }
 }

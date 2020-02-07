@@ -19,19 +19,11 @@ public class MapButton : MonoBehaviour
 
     private void Start()
     {
-        try
-        {
-            mapName.text = map.MetaData.Title;
-            enemyCount.text = "Enemy Count: " + map.Enemies.Count;
-            difficulty.text = "00"; //not implemented yet
-            creator.text = map.MetaData.Creator;
-            artist.text = map.MetaData.Artist;
-        }
-        catch (Exception e)
-        {
-            print(e);
-            gameObject.SetActive(false);
-        }
+        mapName.text = map.MetaData.Title;
+        enemyCount.text = "Enemy Count: " + map.Enemies.Count;
+        difficulty.text = "00"; //not implemented yet
+        creator.text = map.MetaData.Creator;
+        artist.text = map.MetaData.Artist;
     }
 
     public void Select()
@@ -39,7 +31,7 @@ public class MapButton : MonoBehaviour
         _selected = true;
         DisplayBackground.Display(background, Path.Combine(map.Path, map.MetaData.Icon));
     }
-    
+
     public void OnClick()
     {
         if (!_selected || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Mouse0))
@@ -47,7 +39,7 @@ public class MapButton : MonoBehaviour
             Map = map;
             SceneManager.LoadScene("Game", LoadSceneMode.Single);
         }
-        
+
         else _selected = false;
-    }    
+    }
 }

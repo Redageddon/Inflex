@@ -39,15 +39,19 @@ public class ComplexEnemy : MonoBehaviour
         _distance = Math.Sqrt(_x * _x + _y * _y);
         gameObject.SetActive(false);
     }
+    private void Update()
+    {
+        Contain();
+        SetLocation();
+    }
     
     public void Contain()
     {
         gameObject.SetActive(_distance - (audioSource.time - self.SpawnTime) * _speed > 0 && audioSource.time > self.SpawnTime);
     }
 
-    private void Update()
+    private void SetLocation()
     {
-        Contain();
         _lifetime = audioSource.time - self.SpawnTime;
         _movementOverTime = _lifetime * _speed;
         _rotationOverTime = _lifetime * _rotationSpeed;
