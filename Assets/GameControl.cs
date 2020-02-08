@@ -63,7 +63,8 @@ public class GameControl : MonoBehaviour
             enemyInstance.name = "Enemy" + i;
             enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = i;
 
-            ContainmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().DespawnOutOfBounds);
+            ContainmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().IsInBounds);
+            //ContainmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().DespawnOutOfBounds);
         }
     }
 

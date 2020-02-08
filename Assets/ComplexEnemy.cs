@@ -2,63 +2,71 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+public class EnemyRotationManager
+{
+    private double _distance;
+    private double _rotation;
+    private float _speed;
+    private float _rotationSpeed;
+    private float _spawnTime;
+
+    public EnemyRotationManager(Enemy self)
+    {
+        _rotationSpeed = self.Rotation;
+        _speed = self.Speed;
+        _spawnTime = self.SpawnTime;
+
+        var x = self.XLocation;
+        var y = self.YLocation;
+        _rotation = 180d / Math.PI * Math.Atan2(y, x) + 90d;
+        _distance = Math.Sqrt(x * x + y * y);
+    }
+    
+    public bool DespawnOutOfBounds(float audioSourceTime)
+    {
+        return _distance - (audioSourceTime - _spawnTime) * _speed > 0 && audioSourceTime > _spawnTime;
+    }
+
+    public Vector2 GetLocation(float audioSourceTime)
+    {
+        var lifetime = audioSourceTime - _spawnTime;
+        var movementOverTime = lifetime * _speed;
+        var rotationOverTime = lifetime * _rotationSpeed;
+
+        var handler = Math.PI * (-1 * ((_rotation + rotationOverTime) / 180d) - 1);
+        var x = (float)((_distance - movementOverTime) * Math.Sin(handler));
+        var y = (float)((_distance - movementOverTime) * Math.Cos(handler));
+
+        return new Vector2(x, y);
+    }
+}
+
 public class ComplexEnemy : MonoBehaviour
 {
     public int CurrentEnemy { private get; set; }
     public Enemy self;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] public AudioSource audioSource;
     [SerializeField] public Text text;
-    private SavedSettings _settings;
-    private double _distance, _rotation;
-    private double _handler;
-    private float _movementOverTime, _rotationOverTime;
-    private float _currentX, _currentY;
-    private float _x, _y;
-    private float _speed, _rotationSpeed;
-    private float _lifetime;
+    private EnemyRotationManager _rotationManager;
 
     private void Start()
     {
-        _settings = GameControl.GlobalSettings;
         self = MapButton.Map.Enemies[CurrentEnemy];
+        _rotationManager = new EnemyRotationManager(self);
 
-        _rotationSpeed = self.Rotation;
-        _speed = self.Speed;
-        
-        // this is what determines what will the center text be...V
-        text.text = _settings.Keys[self.KillKey].ToString();
-        // this is what determines what will the center text be...^
-        
-        _x = self.XLocation;
-        _y = self.YLocation;
-
-        transform.localPosition = new Vector2(_x, _y);
-
-        _rotation = 180d / Math.PI * Math.Atan2(_y, _x) + 90d;
-        _distance = Math.Sqrt(_x * _x + _y * _y);
+        text.text = GameControl.GlobalSettings.Keys[self.KillKey].ToString();
+        transform.localPosition = new Vector2(self.XLocation, self.YLocation);
         gameObject.SetActive(false);
     }
+    
     private void Update()
     {
-        DespawnOutOfBounds();
-        SetLocation();
+        IsInBounds();
+        transform.localPosition = _rotationManager.GetLocation(audioSource.time);
     }
     
-    public void DespawnOutOfBounds()
+    public void IsInBounds()
     {
-        gameObject.SetActive(_distance - (audioSource.time - self.SpawnTime) * _speed > 0 && audioSource.time > self.SpawnTime);
-    }
-
-    private void SetLocation()
-    {
-        _lifetime = audioSource.time - self.SpawnTime;
-        _movementOverTime = _lifetime * _speed;
-        _rotationOverTime = _lifetime * _rotationSpeed;
-
-        _handler = Math.PI * (-1 * ((_rotation + _rotationOverTime) / 180d) - 1);
-        _currentX = (float) ((_distance - _movementOverTime) * Math.Sin(_handler));
-        _currentY = (float) ((_distance - _movementOverTime) * Math.Cos(_handler));
-
-        transform.localPosition = new Vector2(_currentX, _currentY);
+        gameObject.SetActive(_rotationManager.DespawnOutOfBounds(audioSource.time));
     }
 }

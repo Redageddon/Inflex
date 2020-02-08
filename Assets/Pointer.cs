@@ -10,7 +10,8 @@ public class Pointer : MonoBehaviour
     {
         if (key.text == other.GetComponent<ComplexEnemy>().text.text)
         {
-            GameControl.ContainmentList.Remove(other.GetComponent<ComplexEnemy>().DespawnOutOfBounds);
+            GameControl.ContainmentList.Remove(other.GetComponent<ComplexEnemy>().IsInBounds);
+            //GameControl.ContainmentList.Remove(other.GetComponent<ComplexEnemy>().DespawnOutOfBounds);
             other.gameObject.SetActive(false);
         }
     }

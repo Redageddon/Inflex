@@ -28,7 +28,7 @@ public class MapButton : MonoBehaviour
     public void Select()
     {
         _selected = true;
-        BgChange.SetBackground(background,Path.Combine(map.Path, map.MetaData.Icon));
+        BGChange.SetBackground(background,Path.Combine(map.Path, map.MetaData.Icon));
     }
 
     public void OnClick()
