@@ -5,10 +5,8 @@ public class Map
 {
     public string Path { get; set; }
     public int Lives { get; set; }
-    public string Song { get; set; }
     public string SongFile { get; set; }
     public string Background { get; set; }
-    public double EndTime { get; set; }
     public MapMetaData MetaData { get; set; }
     public List<Enemy> Enemies { get; set; }
     public List<MapScreen> ScreenEvents { get; set; }

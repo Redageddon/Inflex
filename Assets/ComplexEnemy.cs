@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 public class EnemyRotationManager
 {
-    private double _distance;
-    private double _rotation;
-    private float _speed;
-    private float _rotationSpeed;
-    private float _spawnTime;
+    private readonly double _distance;
+    private readonly double _rotation;
+    private readonly float _speed;
+    private readonly float _rotationSpeed;
+    private readonly float _spawnTime;
 
     public EnemyRotationManager(Enemy self)
     {
