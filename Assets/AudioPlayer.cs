@@ -9,7 +9,6 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private float time;
     [SerializeField] private bool constrainAudio;
-    private SavedSettings _settings;
     
     private void Awake()
     {
@@ -18,7 +17,6 @@ public class AudioPlayer : MonoBehaviour
 
     private IEnumerator LoadAudio()
     {
-        _settings = GameControl.GlobalSettings;
         using (UnityWebRequest request =
             UnityWebRequestMultimedia.GetAudioClip(Path.Combine(MapButton.Map.Path, MapButton.Map.SongFile),
                 AudioType.UNKNOWN))
@@ -26,7 +24,8 @@ public class AudioPlayer : MonoBehaviour
             yield return request.SendWebRequest();
             audioSource.clip = DownloadHandlerAudioClip.GetContent(request);
             audioSource.Play();
-            audioSource.volume = _settings.Volume;
+            audioSource.volume = GameControl.GlobalSettings.Volume;
+            audioSource.name = MapButton.Map.SongFile;
         }
     }
 

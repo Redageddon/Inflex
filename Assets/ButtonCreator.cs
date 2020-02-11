@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
 
-
 public class ButtonCreator : MonoBehaviour
 {
     [SerializeField] private GameObject mapButtonTemp;

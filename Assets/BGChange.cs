@@ -24,7 +24,7 @@ public class BGChange : MonoBehaviour
         if (LoadTexture(path) != null)
         {
             image.sprite = Sprite.Create(LoadTexture(path),
-                new Rect(0, 0, LoadTexture(path).width, LoadTexture(path).height), new Vector2(0, 0));
+                new Rect(0, 0, LoadTexture(path).width, LoadTexture(path).height), Vector2.zero);
         }
     }
 }
