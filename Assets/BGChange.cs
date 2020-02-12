@@ -2,15 +2,8 @@
 using System.IO;
 using UnityEngine.UI;
 
-public class BGChange : MonoBehaviour
+public class BGChange
 {
-    public Image img;
-
-    private void Start()
-    {
-        SetBackground(img, Path.Combine(MapButton.Map.Path, MapButton.Map.Background));
-    }
-    
     private static Texture2D LoadTexture(string filePath)
     {
         if (!File.Exists(filePath)) return null;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private Text key;
-    public static SavedSettings GlobalSettings = JsonLoader.LoadSettings();
+    [SerializeField] private Image img;
     public static readonly List<Action> ContainmentList = new List<Action>();
 
     public static bool GamePaused;
@@ -19,6 +20,7 @@ public class GameControl : MonoBehaviour
     private void Start()
     {
         CreateEnemies();
+        BGChange.SetBackground(img, Path.Combine(MapButton.Map.Path, MapButton.Map.Background));
         lives.text = "Lives: " + MapButton.Map.Lives;
     }
 
@@ -31,7 +33,8 @@ public class GameControl : MonoBehaviour
 
     private void UpdateKey()
     {
-        foreach (var keyCode in GlobalSettings.Keys.Where(Input.GetKeyDown))
+        
+        foreach (var keyCode in GlobalSettings.Settings.Keys.Where(Input.GetKeyDown))
         {
             key.text = keyCode.ToString();
         }

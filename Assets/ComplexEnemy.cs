@@ -11,10 +11,11 @@ public class ComplexEnemy : MonoBehaviour
 
     private void Start()
     {
+        
         self = MapButton.Map.Enemies[CurrentEnemy];
         _rotationManager = new EnemyLocationManager(self);
 
-        text.text = GameControl.GlobalSettings.Keys[self.KillKey].ToString();
+        text.text = GlobalSettings.Settings.Keys[self.KillKey].ToString();
         transform.localPosition = new Vector2(self.XLocation, self.YLocation);
         gameObject.SetActive(false);
     }

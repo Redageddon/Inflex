@@ -18,7 +18,8 @@ public class JsonLoader : MonoBehaviour
 
     public static SavedSettings LoadSettings()
     {
-        string json = File.ReadAllText("Assets/Settings.json");
+        
+        string json = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Settings.json"));
         SavedSettings settings = JsonConvert.DeserializeObject<SavedSettings>(json);
         return settings;
     }
@@ -26,6 +27,6 @@ public class JsonLoader : MonoBehaviour
     public static void SaveSettings(SavedSettings settings)
     {
         string json = JsonConvert.SerializeObject(settings, (Formatting) 1);
-        File.WriteAllText("Assets/Settings.json", json);
+        File.WriteAllText(Path.Combine(Application.streamingAssetsPath, "Settings.json"), json);
     }
 }

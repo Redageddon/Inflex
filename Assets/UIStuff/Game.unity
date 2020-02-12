@@ -206,7 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10feb0cef2d044943b2e4097bdb844a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 67188183}
 --- !u!1 &450424518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,6 +1722,7 @@ MonoBehaviour:
   audioSource: {fileID: 724442712}
   pauseScreen: {fileID: 1884283171}
   key: {fileID: 1796392182}
+  img: {fileID: 67188183}
   lives: {fileID: 1265145617}
 --- !u!1 &1796392180
 GameObject:

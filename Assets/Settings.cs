@@ -64,7 +64,7 @@ public class Settings : MonoBehaviour
 
     private void SetVariables()
     {
-        _savedSettings = JsonLoader.LoadSettings();
+        _savedSettings = GlobalSettings.Settings;
         _keys = _savedSettings.Keys;
         fps.text = _savedSettings.Resolution.refreshRate.ToString();
         volume.value = _savedSettings.Volume;
@@ -75,8 +75,12 @@ public class Settings : MonoBehaviour
     {
         for (int i = 0; i < Screen.resolutions.Length; i++)
         {
+            Debug.Log(Screen.resolutions[i]);
             Dropdown.OptionData option = new Dropdown.OptionData {text = Screen.resolutions[i].width + " x " + Screen.resolutions[i].height};
-            dropDownRes.options.Add(option);
+            if (Screen.resolutions[i].refreshRate == 60)
+            {
+                dropDownRes.options.Add(option);
+            }
             if (_savedSettings.Resolution.height == Screen.resolutions[i].height && _savedSettings.Resolution.width == Screen.resolutions[i].width)
             {
                 dropDownRes.value = i;
@@ -113,21 +117,30 @@ public class Settings : MonoBehaviour
         _resolution.height = Screen.resolutions[dropDownRes.value].height;
         _resolution.width = Screen.resolutions[dropDownRes.value].width;
         _savedSettings.Resolution = _resolution;
+        UpdateResolution();
     }
 
     public void SetFps()
     {
         _resolution.refreshRate = int.Parse(fps.text);
         _savedSettings.Resolution = _resolution;
+        UpdateResolution();
     }
 
     public void SetScreenMode()
     {
         _savedSettings.ScreenMode = (FullScreenMode) dropDownScreenMode.value;
+        UpdateResolution();
+    }
+
+    private void UpdateResolution()
+    {
+        Screen.SetResolution(_savedSettings.Resolution.width,_savedSettings.Resolution.height, _savedSettings.ScreenMode, _savedSettings.Resolution.refreshRate);
     }
 
     public void SaveSettings()
     {
         JsonLoader.SaveSettings(_savedSettings);
+        GlobalSettings.Settings = _savedSettings;
     }
 }

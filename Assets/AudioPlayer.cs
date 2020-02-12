@@ -17,6 +17,7 @@ public class AudioPlayer : MonoBehaviour
 
     private IEnumerator LoadAudio()
     {
+        
         using (UnityWebRequest request =
             UnityWebRequestMultimedia.GetAudioClip(Path.Combine(MapButton.Map.Path, MapButton.Map.SongFile),
                 AudioType.UNKNOWN))
@@ -24,7 +25,7 @@ public class AudioPlayer : MonoBehaviour
             yield return request.SendWebRequest();
             audioSource.clip = DownloadHandlerAudioClip.GetContent(request);
             audioSource.Play();
-            audioSource.volume = GameControl.GlobalSettings.Volume;
+            audioSource.volume = GlobalSettings.Settings.Volume;
             audioSource.name = MapButton.Map.SongFile;
         }
     }

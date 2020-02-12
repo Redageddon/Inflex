@@ -7,9 +7,9 @@
     100
   ],
   "Resolution": {
-    "width": 1768,
-    "height": 992,
-    "refreshRate": 60
+    "width": 1920,
+    "height": 1080,
+    "refreshRate": 59
   },
   "ScreenMode": 3
 }
