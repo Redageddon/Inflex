@@ -11,7 +11,6 @@ public class ComplexEnemy : MonoBehaviour
 
     private void Start()
     {
-        
         self = MapButton.Map.Enemies[CurrentEnemy];
         _rotationManager = new EnemyLocationManager(self);
 

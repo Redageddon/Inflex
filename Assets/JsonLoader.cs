@@ -3,7 +3,7 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 
-public class JsonLoader : MonoBehaviour
+public static class JsonLoader
 {
     private static string _path;
 

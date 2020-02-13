@@ -8,11 +8,9 @@ public class Pointer : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (key.text == other.GetComponent<ComplexEnemy>().text.text)
-        {
-            GameControl.ContainmentList.Remove(other.GetComponent<ComplexEnemy>().IsInBounds);
-            other.gameObject.SetActive(false);
-        }
+        if (key.text != other.GetComponent<ComplexEnemy>().text.text) return;
+        GameControl.ContainmentList.Remove(other.GetComponent<ComplexEnemy>().IsInBounds);
+        other.gameObject.SetActive(false);
     }
 
     private double GetZ()

@@ -1,22 +1,12 @@
 ﻿using UnityEngine;
-using System.IO;
 
-public class ButtonCreator : MonoBehaviour
+public class ButtonCreator : Object
 {
-    [SerializeField] private GameObject mapButtonTemp;
-    private readonly string[] _mapNames =
-       Directory.GetDirectories(System.Environment.ExpandEnvironmentVariables(@"%AppData%\CircleRhythm\Maps\"));
-
-    private void Start()
+    public static void CreateMapButtons(string[] mapNames, GameObject mapButton)
     {
-        CreateMapButtons();
-    }
-
-    private void CreateMapButtons()
-    {
-        foreach (string map in _mapNames)
+        foreach (string map in mapNames)
         {
-            GameObject button = Instantiate(mapButtonTemp, mapButtonTemp.transform.parent, false);
+            GameObject button = Instantiate(mapButton, mapButton.transform.parent, false);
             button.SetActive(true);
             button.GetComponent<MapButton>().map = JsonLoader.LoadMap(map);
         }

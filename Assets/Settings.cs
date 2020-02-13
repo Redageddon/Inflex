@@ -75,9 +75,8 @@ public class Settings : MonoBehaviour
     {
         for (int i = 0; i < Screen.resolutions.Length; i++)
         {
-            Debug.Log(Screen.resolutions[i]);
             Dropdown.OptionData option = new Dropdown.OptionData {text = Screen.resolutions[i].width + " x " + Screen.resolutions[i].height};
-            if (Screen.resolutions[i].refreshRate == 60)
+            if (Screen.resolutions[i].refreshRate == 60 || Screen.resolutions[i].refreshRate == 75)
             {
                 dropDownRes.options.Add(option);
             }
