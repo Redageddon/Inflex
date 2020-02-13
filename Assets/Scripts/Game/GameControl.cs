@@ -20,7 +20,7 @@ public class GameControl : MonoBehaviour
     private void Start()
     {
         CreateEnemies();
-        BGChange.SetBackground(img, Path.Combine(MapButton.Map.Path, MapButton.Map.Background));
+        BackgroundChanger.SetBackground(img, Path.Combine(MapButton.Map.Path, MapButton.Map.Background));
         lives.text = "Lives: " + MapButton.Map.Lives;
     }
 

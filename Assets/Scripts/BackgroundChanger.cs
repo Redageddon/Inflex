@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine.UI;
 
-public class BGChange
+public static class BackgroundChanger
 {
     private static Texture2D LoadTexture(string filePath)
     {
@@ -14,10 +14,10 @@ public class BGChange
     
     public static void SetBackground(Image image, string path)
     {
-        if (LoadTexture(path) != null)
+        Texture2D texture = LoadTexture(path);
+        if (texture != null)
         {
-            image.sprite = Sprite.Create(LoadTexture(path),
-                new Rect(0, 0, LoadTexture(path).width, LoadTexture(path).height), Vector2.zero);
+            image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
         }
     }
 }

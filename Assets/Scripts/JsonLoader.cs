@@ -15,6 +15,7 @@ public static class JsonLoader
         currentMap.Path = path;
         return currentMap;
     }
+    //TODO: create auto map downloader if blank
 
     public static SavedSettings LoadSettings()
     {
