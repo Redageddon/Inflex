@@ -503,7 +503,6 @@ GameObject:
   - component: {fileID: 894904108}
   - component: {fileID: 894904111}
   - component: {fileID: 894904109}
-  - component: {fileID: 894904112}
   - component: {fileID: 894904110}
   m_Layer: 5
   m_Name: Scrollbar
@@ -574,7 +573,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 894904110}
   m_HandleRect: {fileID: 1869301539}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -613,19 +612,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894904107}
   m_CullTransparentMesh: 0
---- !u!114 &894904112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894904107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac993b1dfb25979498b75bbd19b9d435, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollbar: {fileID: 894904109}
 --- !u!1 &924679723
 GameObject:
   m_ObjectHideFlags: 0

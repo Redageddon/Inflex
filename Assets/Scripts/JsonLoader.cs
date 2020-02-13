@@ -1,21 +1,19 @@
 ﻿using System.Linq;
 using UnityEngine;
 using System.IO;
+using System.IO.Compression;
 using Newtonsoft.Json;
 
 public static class JsonLoader
 {
-    private static string _path;
-
     public static Map LoadMap(string path)
     {
-        _path = Directory.GetFiles(path, @"*.json").First();
-        string json = File.ReadAllText(_path);
-        Map currentMap = JsonConvert.DeserializeObject<Map>(json);
+        var json = Directory.GetFiles(path, @"*.json").First();
+        var data = File.ReadAllText(json);
+        Map currentMap = JsonConvert.DeserializeObject<Map>(data);
         currentMap.Path = path;
         return currentMap;
     }
-    //TODO: create auto map downloader if blank
 
     public static SavedSettings LoadSettings()
     {
