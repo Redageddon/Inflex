@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
 using System.IO;
-using System.IO.Compression;
 using Newtonsoft.Json;
 
 public static class JsonLoader

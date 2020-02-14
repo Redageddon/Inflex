@@ -15,7 +15,6 @@ public class MapButton : MonoBehaviour
     internal Map map;
     public static Map Map;
 
-
     private void Start()
     {
         mapName.text = map.MetaData.Title;

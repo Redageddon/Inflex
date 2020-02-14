@@ -26,30 +26,14 @@ public class Settings : MonoBehaviour
 
     private void OnGUI()
     {
-        if (_currentKey == null) return;
         Event e = Event.current;
-        if (!e.isKey) return;
-        switch (_currentKey.name)
-        {
-            case "KeyPreset1":
-                _keys[0] = e.keyCode;
-                _savedSettings.Keys[0] = e.keyCode;
-                break;
-            case "KeyPreset2":
-                _keys[1] = e.keyCode;
-                _savedSettings.Keys[1] = e.keyCode;
-                break;
-            case "KeyPreset3":
-                _keys[2] = e.keyCode;
-                _savedSettings.Keys[2] = e.keyCode;
-                break;
-            case "KeyPreset4":
-                _keys[3] = e.keyCode;
-                _savedSettings.Keys[3] = e.keyCode;
-                break;
-        }
-
+        if (!e.isKey || _currentKey == null) return;
+        int macroPressed = int.Parse(_currentKey.name);
+        
+        _keys[macroPressed] = e.keyCode;
+        _savedSettings.Keys[macroPressed] = e.keyCode;
         _currentKey.GetComponentInChildren<Text>().text = e.keyCode.ToString();
+        
         _currentKey = null;
     }
 
