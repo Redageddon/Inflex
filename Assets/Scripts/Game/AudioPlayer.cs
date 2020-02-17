@@ -9,7 +9,7 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private float time;
     [SerializeField] private bool constrainAudio;
-    
+
     private void Awake()
     {
         StartCoroutine(LoadAudio());
@@ -17,21 +17,20 @@ public class AudioPlayer : MonoBehaviour
 
     private IEnumerator LoadAudio()
     {
-        
-        using (UnityWebRequest request =
-            UnityWebRequestMultimedia.GetAudioClip(Path.Combine(MapButton.Map.Path, MapButton.Map.SongFile),
-                AudioType.UNKNOWN))
+        string url = Path.Combine(MapButton.Map.Path, MapButton.Map.SongFile);
+        using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN))
         {
             yield return request.SendWebRequest();
-            audioSource.clip = DownloadHandlerAudioClip.GetContent(request);
+            audioSource.clip = Path.GetExtension(url) == ".mp3" ? NAudioPlayer.FromMp3Data(request.downloadHandler.data) : DownloadHandlerAudioClip.GetContent(request);
             audioSource.Play();
             audioSource.volume = GlobalSettings.Settings.Volume;
             audioSource.name = MapButton.Map.SongFile;
+            request.Dispose();
         }
     }
 
     private void Update()
     {
-        if(constrainAudio) audioSource.time = Mathf.Clamp(time, 0 , Single.PositiveInfinity);
+        if (constrainAudio) audioSource.time = Mathf.Clamp(time, 0, Single.PositiveInfinity);
     }
 }
