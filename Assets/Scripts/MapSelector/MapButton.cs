@@ -13,9 +13,7 @@ public class MapButton : MonoBehaviour
     [SerializeField] private Text creator;
     internal string MapName;
     private bool _selected;
-    
     private Map map;
-    public static Map Map;
 
     private void Start()
     {
@@ -37,8 +35,8 @@ public class MapButton : MonoBehaviour
     {
         if (!_selected || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Mouse0))
         {
-            Map = map;
             SceneManager.LoadScene("Game", LoadSceneMode.Single);
+            GameControl.MapName = map.Path;
         }
 
         else _selected = false;

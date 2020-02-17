@@ -14,24 +14,25 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Text key;
     [SerializeField] private Image img;
     [SerializeField] private Text lives;
-    public static readonly List<Action> ContainmentList = new List<Action>();
+    public static Map Map;
+    public static string MapName;
+    private readonly List<Action> containmentList = new List<Action>();
 
     public static bool GamePaused;
-    
 
-    private void Start()
+    private void Awake()
     {
-        ContainmentList.Clear();
+        Map = JsonLoader.LoadMap(MapName);
         CreateEnemies();
-        BackgroundChanger.SetBackground(img, Path.Combine(MapButton.Map.Path, MapButton.Map.Background));
-        lives.text = "Lives: " + MapButton.Map.Lives;
+        BackgroundChanger.SetBackground(img, Path.Combine(Map.Path, Map.Background));
     }
 
     private void Update()
     {
         UpdatePause();
         UpdateEnemy();
-        UpdateKey();
+        UpdateUi();
+        UpdateDeath();
     }
 
     private void OnGUI()
@@ -39,7 +40,6 @@ public class GameControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene("Game", LoadSceneMode.Single);
-            MapButton.Map = JsonLoader.LoadMap(MapButton.Map.Path);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -47,12 +47,20 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    private void UpdateKey()
+    private void UpdateUi()
     {
-        
         foreach (var keyCode in GlobalSettings.Settings.Keys.Where(Input.GetKeyDown))
         {
             key.text = keyCode.ToString();
+        }
+        lives.text = "Lives: " + Map.Lives;
+    }
+
+    private void UpdateDeath()
+    {
+        if (Map.Lives <= 0)
+        {
+            SceneManager.LoadScene("MapSelection", LoadSceneMode.Single);
         }
     }
 
@@ -75,24 +83,23 @@ public class GameControl : MonoBehaviour
     
     private void CreateEnemies()
     {
-        for (var i = 0; i < MapButton.Map.Enemies.Count; i++)
+        for (var i = 0; i < Map.Enemies.Count; i++)
         {
             var enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
             enemyInstance.SetActive(true);
             enemyInstance.name = "Enemy" + i;
             enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = i;
-
-            ContainmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().IsInBounds);
+            containmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().IsInBounds);
         }
     }
 
     private void UpdateEnemy()
     {
-        for (int i = 0; i < ContainmentList.Count; i++)
+        for (int i = 0; i < containmentList.Count; i++)
         {
-            if (audioSource.time - MapButton.Map.Enemies[i].SpawnTime > -1 || audioSource.time - MapButton.Map.Enemies[i].SpawnTime < 1)
+            if (audioSource.time - Map.Enemies[i].SpawnTime > -1 || audioSource.time - Map.Enemies[i].SpawnTime < 1)
             {
-                ContainmentList[i].Invoke();
+                containmentList[i].Invoke();
             }
         }
     }

@@ -11,5 +11,6 @@
     "height": 1080,
     "refreshRate": 59
   },
-  "ScreenMode": 3
+  "ScreenMode": 3,
+  "CenterSize": 71.45801
 }

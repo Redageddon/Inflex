@@ -8,6 +8,7 @@ public class EnemyLocationManager
     private readonly float _speed;
     private readonly float _rotationSpeed;
     private readonly float _spawnTime;
+    public float HitTime = float.PositiveInfinity;
 
     public EnemyLocationManager(Enemy self)
     {
@@ -20,22 +21,22 @@ public class EnemyLocationManager
         _rotation = 180d / Math.PI * Math.Atan2(y, x) + 90d;
         _distance = Math.Sqrt(x * x + y * y);
     }
-    
+
     public bool DespawnOutOfBounds(float audioSourceTime)
     {
-        return _distance - (audioSourceTime - _spawnTime) * _speed > 0 && audioSourceTime > _spawnTime;
+        return _distance - (audioSourceTime - _spawnTime) * _speed > 0 && audioSourceTime > _spawnTime && audioSourceTime < HitTime;
     }
 
-    public Vector2 GetLocation(float audioSourceTime)
+    public Vector3 GetLocation(float audioSourceTime)
     {
         var lifetime = audioSourceTime - _spawnTime;
         var movementOverTime = lifetime * _speed;
         var rotationOverTime = lifetime * _rotationSpeed;
 
         var handler = Math.PI * (-1 * ((_rotation + rotationOverTime) / 180d) - 1);
-        var x = (float)((_distance - movementOverTime) * Math.Sin(handler));
-        var y = (float)((_distance - movementOverTime) * Math.Cos(handler));
+        var x = (float) ((_distance - movementOverTime) * Math.Sin(handler));
+        var y = (float) ((_distance - movementOverTime) * Math.Cos(handler));
 
-        return new Vector2(x, y);
+        return new Vector3(x, y, -1);
     }
 }

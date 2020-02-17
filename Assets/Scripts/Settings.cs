@@ -7,6 +7,7 @@ public class Settings : MonoBehaviour
 {
     [SerializeField] private Text[] keyPresets;
     [SerializeField] private Slider volume;
+    [SerializeField] private Slider centerSize;
     [SerializeField] private Dropdown dropDownRes;
     [SerializeField] private Dropdown dropDownScreenMode;
     [SerializeField] private InputField fps;
@@ -52,6 +53,7 @@ public class Settings : MonoBehaviour
         _keys = _savedSettings.Keys;
         fps.text = _savedSettings.Resolution.refreshRate.ToString();
         volume.value = _savedSettings.Volume;
+        centerSize.value = _savedSettings.CenterSize;
         _resolution = _savedSettings.Resolution;
     }
 
@@ -93,6 +95,11 @@ public class Settings : MonoBehaviour
     {
         volume.value = value;
         _savedSettings.Volume = value;
+    }
+    public void SetCenterSize(float value)
+    {
+        centerSize.value = value;
+        _savedSettings.CenterSize = value;
     }
 
     public void SetResolution()

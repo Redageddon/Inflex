@@ -16,7 +16,6 @@ public static class JsonLoader
 
     public static SavedSettings LoadSettings()
     {
-        
         string json = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Settings.json"));
         SavedSettings settings = JsonConvert.DeserializeObject<SavedSettings>(json);
         return settings;

@@ -43,4 +43,5 @@ public class SavedSettings
     public List<KeyCode> Keys { get; set; }
     public Resolution Resolution { get; set; }
     public FullScreenMode ScreenMode { get; set; }
+    public float CenterSize { get; set; }
 }

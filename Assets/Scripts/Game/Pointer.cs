@@ -8,11 +8,11 @@ public class Pointer : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (key.text != other.GetComponent<ComplexEnemy>().text.text) return;
-        GameControl.ContainmentList.Remove(other.GetComponent<ComplexEnemy>().IsInBounds);
+        if (key.text != other.GetComponent<ComplexEnemy>().text.text) GameControl.Map.Lives -= 1;
+        other.GetComponent<ComplexEnemy>().SetHitTime();
         other.gameObject.SetActive(false);
     }
-
+    
     private double GetZ()
     {
         var x = Screen.width/2d - Input.mousePosition.x;

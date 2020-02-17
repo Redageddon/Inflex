@@ -10,21 +10,21 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private float time;
     [SerializeField] private bool constrainAudio;
 
-    private void Awake()
+    private void Start()
     {
         StartCoroutine(LoadAudio());
     }
 
     private IEnumerator LoadAudio()
     {
-        string url = Path.Combine(MapButton.Map.Path, MapButton.Map.SongFile);
+        string url = Path.Combine(GameControl.Map.Path, GameControl.Map.SongFile);
         using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN))
         {
             yield return request.SendWebRequest();
             audioSource.clip = Path.GetExtension(url) == ".mp3" ? NAudioPlayer.FromMp3Data(request.downloadHandler.data) : DownloadHandlerAudioClip.GetContent(request);
             audioSource.Play();
             audioSource.volume = GlobalSettings.Settings.Volume;
-            audioSource.name = MapButton.Map.SongFile;
+            audioSource.name = GameControl.Map.SongFile;
             request.Dispose();
         }
     }
