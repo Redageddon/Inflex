@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameControl : MonoBehaviour
@@ -19,6 +20,7 @@ public class GameControl : MonoBehaviour
 
     private void Start()
     {
+        ContainmentList.Clear();
         CreateEnemies();
         BackgroundChanger.SetBackground(img, Path.Combine(MapButton.Map.Path, MapButton.Map.Background));
         lives.text = "Lives: " + MapButton.Map.Lives;
@@ -29,6 +31,18 @@ public class GameControl : MonoBehaviour
         UpdatePause();
         UpdateEnemy();
         UpdateKey();
+    }
+
+    private void OnGUI()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene("MapSelection", LoadSceneMode.Single);
+        }
     }
 
     private void UpdateKey()

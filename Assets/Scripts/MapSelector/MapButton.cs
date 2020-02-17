@@ -6,18 +6,21 @@ using UnityEngine.UI;
 public class MapButton : MonoBehaviour
 {
     [SerializeField] private Image background;
-    [SerializeField] private Text mapName;
+    [SerializeField] private Text mapNameText;
     [SerializeField] private Text artist;
     [SerializeField] private Text enemyCount;
     [SerializeField] private Text difficulty;
     [SerializeField] private Text creator;
+    internal string MapName;
     private bool _selected;
-    internal Map map;
+    
+    private Map map;
     public static Map Map;
 
     private void Start()
     {
-        mapName.text = map.MetaData.Title;
+        map = JsonLoader.LoadMap(MapName);
+        mapNameText.text = map.MetaData.Title;
         enemyCount.text = "Enemy Count: " + map.Enemies.Count;
         difficulty.text = "00"; //not implemented yet
         creator.text = map.MetaData.Creator;

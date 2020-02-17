@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 1285310249}
-  mapName: {fileID: 2094433101}
+  mapNameText: {fileID: 2094433101}
   artist: {fileID: 1693781604}
   enemyCount: {fileID: 924679725}
   difficulty: {fileID: 583064123}
