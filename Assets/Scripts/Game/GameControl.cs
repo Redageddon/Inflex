@@ -13,10 +13,11 @@ public class GameControl : MonoBehaviour
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private Text key;
     [SerializeField] private Image img;
+    [SerializeField] private Text lives;
     public static readonly List<Action> ContainmentList = new List<Action>();
 
     public static bool GamePaused;
-    [SerializeField] private Text lives;
+    
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class GameControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene("Game", LoadSceneMode.Single);
+            MapButton.Map = JsonLoader.LoadMap(MapButton.Map.Path);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
