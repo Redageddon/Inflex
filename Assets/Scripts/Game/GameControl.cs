@@ -15,7 +15,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Image img;
     [SerializeField] private Text lives;
     public static Map Map;
-    public static string MapName;
+    public static string MapName = Environment.ExpandEnvironmentVariables(@"%AppData%\CircleRhythm\Maps\DefaultMap");
     private readonly List<Action> containmentList = new List<Action>();
 
     public static bool GamePaused;
