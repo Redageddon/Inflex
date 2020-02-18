@@ -16,7 +16,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Text lives;
     public static Map Map;
     public static string MapName = Environment.ExpandEnvironmentVariables(@"%AppData%\CircleRhythm\Maps\DefaultMap");
-    private readonly List<Action> containmentList = new List<Action>();
+    private readonly List<Action> _containmentList = new List<Action>();
 
     public static bool GamePaused;
 
@@ -89,17 +89,17 @@ public class GameControl : MonoBehaviour
             enemyInstance.SetActive(true);
             enemyInstance.name = "Enemy" + i;
             enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = i;
-            containmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().IsInBounds);
+            _containmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().IsInBounds);
         }
     }
 
     private void UpdateEnemy()
     {
-        for (int i = 0; i < containmentList.Count; i++)
+        for (int i = 0; i < _containmentList.Count; i++)
         {
             if (audioSource.time - Map.Enemies[i].SpawnTime > -1 || audioSource.time - Map.Enemies[i].SpawnTime < 1)
             {
-                containmentList[i].Invoke();
+                _containmentList[i].Invoke();
             }
         }
     }

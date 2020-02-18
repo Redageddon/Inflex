@@ -8,7 +8,7 @@ public class ButtonCreator : Object
         {
             GameObject button = Instantiate(mapButton, mapButton.transform.parent, false);
             button.SetActive(true);
-            button.GetComponent<MapButton>().MapName = map;
+            button.GetComponent<MapButton>().Map = JsonLoader.LoadMap(map);
         }
     }
 }
