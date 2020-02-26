@@ -15,7 +15,6 @@ public class ComplexEnemy : MonoBehaviour
     {
         self = GameControl.Map.Enemies[CurrentEnemy];
         _locationManager = new EnemyLocationManager(self);
-
         gameObject.GetComponent<Transform>().localScale = new Vector3(GlobalSettings.Settings.CenterSize, GlobalSettings.Settings.CenterSize);
         text.text = GlobalSettings.Settings.Keys[self.KillKey].ToString();
         transform.localPosition = new Vector3(self.XLocation, self.YLocation, -1);

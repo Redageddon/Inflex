@@ -1,68 +1,20 @@
 ﻿using UnityEngine;
-using System.IO;
-using System;
-using NAudio.Wave;
-
-public static class NAudioPlayer
-{
-    public static AudioClip FromMp3Data(byte[] data)
-    {
-        // Load the data into a stream
-        MemoryStream mp3Stream = new MemoryStream(data);
-        // Convert the data in the stream to WAV format
-        Mp3FileReader mp3Audio = new Mp3FileReader(mp3Stream);
-        WaveStream waveStream = WaveFormatConversionStream.CreatePcmStream(mp3Audio);
-        // Convert to WAV data
-        Wav wav = new Wav(AudioMemStream(waveStream).ToArray());
-
-        AudioClip audioClip;
-        if (wav.ChannelCount == 2)
-        {
-            audioClip = AudioClip.Create("Audio File Name", wav.SampleCount, 2, wav.Frequency, false);
-            audioClip.SetData(wav.StereoChannel, 0);
-        }
-        else
-        {
-            audioClip = AudioClip.Create("Audio File Name", wav.SampleCount, 1, wav.Frequency, false);
-            audioClip.SetData(wav.LeftChannel, 0);
-        }
-
-        // Now return the clip
-        return audioClip;
-    }
-
-    private static MemoryStream AudioMemStream(WaveStream waveStream)
-    {
-        MemoryStream outputStream = new MemoryStream();
-        using (WaveFileWriter waveFileWriter = new WaveFileWriter(outputStream, waveStream.WaveFormat))
-        {
-            byte[] bytes = new byte[waveStream.Length];
-            waveStream.Position = 0;
-            waveStream.Read(bytes, 0, Convert.ToInt32(waveStream.Length));
-            waveFileWriter.Write(bytes, 0, bytes.Length);
-            waveFileWriter.Flush();
-        }
-
-        return outputStream;
-    }
-}
-
 
 public class Wav
 {
     // convert two bytes to one float in the range -1 to 1
-    static float BytesToFloat(byte firstByte, byte secondByte)
+    private static float BytesToFloat(byte firstByte, byte secondByte)
     {
         // convert two bytes to one short (little endian)
-        short s = (short) ((secondByte << 8) | firstByte);
+        var s = (short) ((secondByte << 8) | firstByte);
         // convert to range from -1 to (just below) 1
         return s / 32768.0F;
     }
 
-    static int BytesToInt(byte[] bytes, int offset = 0)
+    private static int BytesToInt(byte[] bytes, int offset = 0)
     {
-        int value = 0;
-        for (int i = 0; i < 4; i++)
+        var value = 0;
+        for (var i = 0; i < 4; i++)
         {
             value |= bytes[offset + i] << (i * 8);
         }
@@ -87,7 +39,7 @@ public class Wav
         Frequency = BytesToInt(wav, 24);
 
         // Get past all the other sub chunks to get to the data subchunk:
-        int pos = 12; // First Subchunk ID from 12 to 16
+        var pos = 12; // First Subchunk ID from 12 to 16
 
         // Keep iterating until we find the data chunk (i.e. 64 61 74 61 ...... (i.e. 100 97 116 97 in decimal))
         while (!(wav[pos] == 100 && wav[pos + 1] == 97 && wav[pos + 2] == 116 && wav[pos + 3] == 97))
@@ -108,7 +60,7 @@ public class Wav
         RightChannel = ChannelCount == 2 ? new float[SampleCount] : null;
 
         // Write to double array/s:
-        int i = 0;
+        var i = 0;
         while (pos < wav.Length)
         {
             LeftChannel[i] = BytesToFloat(wav[pos], wav[pos + 1]);
@@ -127,11 +79,11 @@ public class Wav
         {
             StereoChannel = new float[SampleCount * 2];
             //Current position in our left and right channels
-            int channelPos = 0;
+            var channelPos = 0;
             //After we've changed two values for our Stereochannel, we want to increase our channelPos
             short posChange = 0;
 
-            for (int index = 0; index < (SampleCount * 2); index++)
+            for (var index = 0; index < (SampleCount * 2); index++)
             {
                 if (index % 2 == 0)
                 {
@@ -160,7 +112,6 @@ public class Wav
 
     public override string ToString()
     {
-        return string.Format("[WAV: LeftChannel={0}, RightChannel={1}, ChannelCount={2}, SampleCount={3}, Frequency={4}]", LeftChannel, RightChannel,
-            ChannelCount, SampleCount, Frequency);
+        return string.Format($"[WAV: LeftChannel={LeftChannel}, RightChannel={RightChannel}, ChannelCount={ChannelCount}, SampleCount={SampleCount}, Frequency={ Frequency}]");
     }
 }

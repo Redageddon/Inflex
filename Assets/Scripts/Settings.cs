@@ -27,9 +27,9 @@ public class Settings : MonoBehaviour
 
     private void OnGUI()
     {
-        Event e = Event.current;
+        var e = Event.current;
         if (!e.isKey || _currentKey == null) return;
-        int macroPressed = int.Parse(_currentKey.name);
+        var macroPressed = int.Parse(_currentKey.name);
         
         _keys[macroPressed] = e.keyCode;
         _savedSettings.Keys[macroPressed] = e.keyCode;
@@ -40,7 +40,7 @@ public class Settings : MonoBehaviour
 
     private void SetLoadedKeys()
     {
-        for (int i = 0; i < 4; i++)
+        for (var i = 0; i < 4; i++)
         {
             keyPresets[i].text = _keys[i].ToString();
         }
@@ -59,9 +59,9 @@ public class Settings : MonoBehaviour
 
     private void AddScreenResolutions()
     {
-        for (int i = 0; i < Screen.resolutions.Length; i++)
+        for (var i = 0; i < Screen.resolutions.Length; i++)
         {
-            Dropdown.OptionData option = new Dropdown.OptionData {text = Screen.resolutions[i].width + " x " + Screen.resolutions[i].height};
+            var option = new Dropdown.OptionData {text = Screen.resolutions[i].width + " x " + Screen.resolutions[i].height};
             if (Screen.resolutions[i].refreshRate == 60 || Screen.resolutions[i].refreshRate == 75)
             {
                 dropDownRes.options.Add(option);
@@ -75,9 +75,9 @@ public class Settings : MonoBehaviour
 
     private void AddScreenModes()
     {
-        for (int i = 0; i < Enum.GetValues(typeof(FullScreenMode)).Length; i++)
+        for (var i = 0; i < Enum.GetValues(typeof(FullScreenMode)).Length; i++)
         {
-            Dropdown.OptionData option = new Dropdown.OptionData {text = Enum.GetValues(typeof(FullScreenMode)).GetValue(i).ToString()};
+            var option = new Dropdown.OptionData {text = Enum.GetValues(typeof(FullScreenMode)).GetValue(i).ToString()};
             dropDownScreenMode.options.Add(option);
             if ((FullScreenMode) i == _savedSettings.ScreenMode)
             {

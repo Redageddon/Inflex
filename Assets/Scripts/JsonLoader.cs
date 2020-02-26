@@ -9,21 +9,21 @@ public static class JsonLoader
     {
         var json = Directory.GetFiles(path, @"*.json").First();
         var data = File.ReadAllText(json);
-        Map currentMap = JsonConvert.DeserializeObject<Map>(data);
+        var currentMap = JsonConvert.DeserializeObject<Map>(data);
         currentMap.Path = path;
         return currentMap;
     }
 
     public static SavedSettings LoadSettings()
     {
-        string json = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Settings.json"));
-        SavedSettings settings = JsonConvert.DeserializeObject<SavedSettings>(json);
+        var json = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Settings.json"));
+        var settings = JsonConvert.DeserializeObject<SavedSettings>(json);
         return settings;
     }
 
     public static void SaveSettings(SavedSettings settings)
     {
-        string json = JsonConvert.SerializeObject(settings, (Formatting) 1);
+        var json = JsonConvert.SerializeObject(settings, (Formatting) 1);
         File.WriteAllText(Path.Combine(Application.streamingAssetsPath, "Settings.json"), json);
     }
 }

@@ -56,7 +56,7 @@ public class GameControl : MonoBehaviour
         lives.text = "Lives: " + Map.Lives;
     }
 
-    private void UpdateDeath()
+    private static void UpdateDeath()
     {
         if (Map.Lives <= 0)
         {
@@ -95,7 +95,7 @@ public class GameControl : MonoBehaviour
 
     private void UpdateEnemy()
     {
-        for (int i = 0; i < _containmentList.Count; i++)
+        for (var i = 0; i < _containmentList.Count; i++)
         {
             if (audioSource.time - Map.Enemies[i].SpawnTime > -1 || audioSource.time - Map.Enemies[i].SpawnTime < 1)
             {

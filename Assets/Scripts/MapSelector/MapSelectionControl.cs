@@ -17,8 +17,8 @@ public class MapSelectionControl : MonoBehaviour
 
     private static string[] DownloadDefaultMap()
     {
-        string fileName = MapsLocation + "DefaultMap";
-        WebClient defaultMap = new WebClient();
+        var fileName = MapsLocation + "DefaultMap";
+        var defaultMap = new WebClient();
         defaultMap.DownloadFile("https://raw.githubusercontent.com/rubiksmaster02/CircleRhythmDB/master/Map1.zip", fileName + ".zip");
         ZipFile.ExtractToDirectory(fileName + ".zip", fileName);
         File.Delete(fileName + ".zip");

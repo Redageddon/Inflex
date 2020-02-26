@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -17,7 +16,7 @@ public class AudioPlayer : MonoBehaviour
 
     private IEnumerator LoadAudio()
     {
-        string url = Path.Combine(GameControl.Map.Path, GameControl.Map.SongFile);
+        var url = Path.Combine(GameControl.Map.Path, GameControl.Map.SongFile);
         using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN))
         {
             yield return request.SendWebRequest();
@@ -31,6 +30,6 @@ public class AudioPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (constrainAudio) audioSource.time = Mathf.Clamp(time, 0, Single.PositiveInfinity);
+        if (constrainAudio) audioSource.time = Mathf.Clamp(time, 0, float.PositiveInfinity);
     }
 }

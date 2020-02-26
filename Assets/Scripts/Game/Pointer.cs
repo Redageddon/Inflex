@@ -13,7 +13,7 @@ public class Pointer : MonoBehaviour
         other.gameObject.SetActive(false);
     }
     
-    private double GetZ()
+    private static double GetZ()
     {
         var x = Screen.width/2d - Input.mousePosition.x;
         var y = Screen.height/2d - Input.mousePosition.y;
