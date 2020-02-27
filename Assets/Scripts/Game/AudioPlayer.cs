@@ -20,7 +20,7 @@ public class AudioPlayer : MonoBehaviour
         using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN))
         {
             yield return request.SendWebRequest();
-            audioSource.clip = Path.GetExtension(url) == ".mp3" ? NAudioPlayer.FromMp3Data(request.downloadHandler.data) : DownloadHandlerAudioClip.GetContent(request);
+            audioSource.clip = Path.GetExtension(url) == ".mp3" ? Mp3Player.AudioClipFromMp3(request.downloadHandler.data) : DownloadHandlerAudioClip.GetContent(request);
             audioSource.Play();
             audioSource.volume = GlobalSettings.Settings.Volume;
             audioSource.name = GameControl.Map.SongFile;
