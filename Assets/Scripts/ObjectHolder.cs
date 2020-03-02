@@ -23,9 +23,9 @@ public class MapMetaData
 public class Enemy
 {
     public int KillKey { get; set; }
-    public float XLocation { get; set; }
-    public float YLocation { get; set; }
-    public float Rotation { get; set; }
+    public float SpawnDegrees { get; set; }
+    public float Distance { get; set; }
+    public float RotationSpeed { get; set; }
     public float Speed { get; set; }
     public float SpawnTime { get; set; }
 }

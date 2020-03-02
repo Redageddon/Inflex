@@ -17,7 +17,7 @@ public class ComplexEnemy : MonoBehaviour
         _locationManager = new EnemyLocationManager(self);
         gameObject.GetComponent<Transform>().localScale = new Vector3(GlobalSettings.Settings.CenterSize, GlobalSettings.Settings.CenterSize);
         text.text = GlobalSettings.Settings.Keys[self.KillKey].ToString();
-        transform.localPosition = new Vector3(self.XLocation, self.YLocation, -1);
+        transform.localPosition = new Vector3(5000, 0, -1);
         gameObject.SetActive(false);
     }
 
@@ -35,5 +35,6 @@ public class ComplexEnemy : MonoBehaviour
     public void SetHitTime()
     {
         _locationManager.HitTime = audioSource.time;
+        print(audioSource.time);
     }
 }

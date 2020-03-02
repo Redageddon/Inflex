@@ -12,14 +12,14 @@ public class EnemyLocationManager
 
     public EnemyLocationManager(Enemy self)
     {
-        _rotationSpeed = self.Rotation;
+        _rotationSpeed = self.RotationSpeed;
         _speed = self.Speed;
-        _spawnTime = self.SpawnTime;
+        _rotation = self.SpawnDegrees;
+        _distance = self.Distance;
 
-        var x = self.XLocation;
-        var y = self.YLocation;
-        _rotation = 180d / Math.PI * Math.Atan2(y, x) + 90d;
-        _distance = Math.Sqrt(x * x + y * y);
+        var diff = 2.52f;
+        _spawnTime = (float)(self.SpawnTime - (_distance / (_speed + _distance / diff) - GlobalSettings.Settings.CenterSize / (_speed + _distance / diff)));
+        //_spawnTime = self.SpawnTime;
     }
 
     public bool DespawnOutOfBounds(float audioSourceTime)
@@ -34,6 +34,7 @@ public class EnemyLocationManager
         var rotationOverTime = lifetime * _rotationSpeed;
 
         var handler = Math.PI * (-1 * ((_rotation + rotationOverTime) / 180d) - 1);
+        
         var x = (float) ((_distance - movementOverTime) * Math.Sin(handler));
         var y = (float) ((_distance - movementOverTime) * Math.Cos(handler));
 

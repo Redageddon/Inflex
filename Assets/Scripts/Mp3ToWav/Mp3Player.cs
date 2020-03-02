@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.IO;
 using NAudio.Wave;
+using Newtonsoft.Json;
 
 public static class Mp3Player
 {
@@ -38,7 +40,9 @@ public static class Mp3Player
         var mp3Stream = new MemoryStream(bytes);
         var mp3Audio = new Mp3FileReader(mp3Stream);
         var waveStream = WaveFormatConversionStream.CreatePcmStream(mp3Audio);
-        return ByteArrayToAudioClip(AudioMemStream(waveStream).ToArray());
+
+        var audioClip = ByteArrayToAudioClip(AudioMemStream(waveStream).ToArray());
+        return audioClip;
     }
 
     private static MemoryStream AudioMemStream(WaveStream waveStream)

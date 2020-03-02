@@ -97,10 +97,17 @@ public class GameControl : MonoBehaviour
     {
         for (var i = 0; i < _containmentList.Count; i++)
         {
-            if (audioSource.time - Map.Enemies[i].SpawnTime > -1 || audioSource.time - Map.Enemies[i].SpawnTime < 1)
+            var diff = 2.52f;
+            var asd = Map.Enemies[i].SpawnTime - (Map.Enemies[i].Distance /(Map.Enemies[i].Speed + Map.Enemies[i].Distance / diff) - GlobalSettings.Settings.CenterSize / (Map.Enemies[i].Speed + Map.Enemies[i].Distance / diff));
+            if (Math.Abs(audioSource.time - asd) < 0.05 && Math.Abs(audioSource.time - asd) > -0.05)
             {
                 _containmentList[i].Invoke();
             }
+
+            /*if (Math.Abs(audioSource.time - Map.Enemies[i].SpawnTime) < 0.05 && Math.Abs(audioSource.time - Map.Enemies[i].SpawnTime) > -0.05)
+            {
+                _containmentList[i].Invoke();
+            }*/
         }
     }
 }
