@@ -92,22 +92,16 @@ public class GameControl : MonoBehaviour
             _containmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().IsInBounds);
         }
     }
-
+    
     private void UpdateEnemy()
     {
         for (var i = 0; i < _containmentList.Count; i++)
         {
-            var diff = 2.52f;
-            var asd = Map.Enemies[i].SpawnTime - (Map.Enemies[i].Distance /(Map.Enemies[i].Speed + Map.Enemies[i].Distance / diff) - GlobalSettings.Settings.CenterSize / (Map.Enemies[i].Speed + Map.Enemies[i].Distance / diff));
-            if (Math.Abs(audioSource.time - asd) < 0.05 && Math.Abs(audioSource.time - asd) > -0.05)
+            //var asd = Map.Enemies[i].SpawnTime - (Map.Enemies[i].Distance - GlobalSettings.Settings.CenterSize) / Map.Enemies[i].Speed;
+            //if (Math.Abs(audioSource.time - asd) < 20.05 && Math.Abs(audioSource.time - asd) > -20.05)
             {
                 _containmentList[i].Invoke();
             }
-
-            /*if (Math.Abs(audioSource.time - Map.Enemies[i].SpawnTime) < 0.05 && Math.Abs(audioSource.time - Map.Enemies[i].SpawnTime) > -0.05)
-            {
-                _containmentList[i].Invoke();
-            }*/
         }
     }
 }
