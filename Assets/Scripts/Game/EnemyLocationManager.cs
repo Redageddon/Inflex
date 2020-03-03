@@ -17,6 +17,9 @@ public class EnemyLocationManager
         _speed = self.Speed;
         _rotation = self.SpawnDegrees;
         _distance = self.Distance;
+        
+        CalculateDistance(_rotation);
+        
         _spawnTime = self.SpawnTime;
         _deathTime = (float) (_spawnTime - (_distance - GlobalSettings.Settings.CenterSize * 2.565) / _speed);
     }
@@ -25,7 +28,44 @@ public class EnemyLocationManager
     {
         return audioSourceTime > _deathTime && audioSourceTime < HitTime;
     }
-    
+
+    private void CalculateDistance(double rotation)
+    {
+        float shortenAmount = 0;
+        
+        var h = Screen.height / 2;
+        var w = Screen.width / 2;
+        
+        var z = (float)Math.Sqrt(w * w + h * h);
+        
+        var x = (float)Math.Sin(rotation) * z;
+        var y = (float)-Math.Cos(rotation) * z;
+        
+        if (x > w)
+        {
+            shortenAmount = w / x;
+        }
+        else if (x < -w)
+        {
+            shortenAmount = -w / x;
+        }
+        else if (y > h)
+        {
+            shortenAmount = h / y;
+        }
+        else if (y < -h)
+        {
+            shortenAmount = -h / y;
+        }
+        
+        x *= shortenAmount;
+        y *= shortenAmount;
+        x += w;
+        y += h;
+
+        Debug.Log($"{x}::{y}");
+    }
+
     public Vector3 GetLocation(float audioSourceTime)
     {
         var lifetime = audioSourceTime - _deathTime;
