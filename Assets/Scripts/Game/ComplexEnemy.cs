@@ -29,12 +29,14 @@ public class ComplexEnemy : MonoBehaviour
 
     public void IsInBounds()
     {
-        gameObject.SetActive(_locationManager.DespawnOutOfBounds(audioSource.time));
+        if (!_locationManager.DespawnOutOfBounds(audioSource.time)) return;
+        if (GameControl.Map.Enemies.Count <= CurrentEnemy + 1) return;
+        GameControl.EnemyToBeUpdated = CurrentEnemy + 1;
+        gameObject.SetActive(true);
     }
 
     public void SetHitTime()
     {
         _locationManager.HitTime = audioSource.time;
-        print(audioSource.time);
     }
 }

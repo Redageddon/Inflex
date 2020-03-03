@@ -16,7 +16,8 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Text lives;
     public static Map Map;
     public static string MapName = Environment.ExpandEnvironmentVariables(@"%AppData%\CircleRhythm\Maps\DefaultMap");
-    private readonly List<Action> _containmentList = new List<Action>();
+    private readonly List<Action> containmentList = new List<Action>();
+    public static int EnemyToBeUpdated;
 
     public static bool GamePaused;
 
@@ -26,15 +27,7 @@ public class GameControl : MonoBehaviour
         CreateEnemies();
         BackgroundChanger.SetBackground(img, Path.Combine(Map.Path, Map.Background));
     }
-
-    private void Update()
-    {
-        UpdatePause();
-        UpdateEnemy();
-        UpdateUi();
-        UpdateDeath();
-    }
-
+    
     private void OnGUI()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -45,6 +38,36 @@ public class GameControl : MonoBehaviour
         {
             SceneManager.LoadScene("MapSelection", LoadSceneMode.Single);
         }
+    }
+    
+    private void Update()
+    {
+        UpdatePause();
+        UpdateEnemy();
+        UpdateUi();
+        UpdateDeath();
+    }
+    
+    private void UpdatePause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GamePaused = !GamePaused;
+            pauseScreen.SetActive(GamePaused);
+        }
+        if (!GamePaused)
+        {
+            audioSource.UnPause();
+        }
+        else
+        {
+            audioSource.Pause();
+        }
+    }
+    
+    private void UpdateEnemy()
+    {
+        containmentList[EnemyToBeUpdated].Invoke();
     }
 
     private void UpdateUi()
@@ -64,23 +87,6 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    private void UpdatePause()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            GamePaused = !GamePaused;
-            pauseScreen.SetActive(GamePaused);
-        }
-        if (!GamePaused)
-        {
-            audioSource.UnPause();
-        }
-        else
-        {
-            audioSource.Pause();
-        }
-    }
-    
     private void CreateEnemies()
     {
         for (var i = 0; i < Map.Enemies.Count; i++)
@@ -89,19 +95,7 @@ public class GameControl : MonoBehaviour
             enemyInstance.SetActive(true);
             enemyInstance.name = "Enemy" + i;
             enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = i;
-            _containmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().IsInBounds);
-        }
-    }
-    
-    private void UpdateEnemy()
-    {
-        for (var i = 0; i < _containmentList.Count; i++)
-        {
-            //var asd = Map.Enemies[i].SpawnTime - (Map.Enemies[i].Distance - GlobalSettings.Settings.CenterSize) / Map.Enemies[i].Speed;
-            //if (Math.Abs(audioSource.time - asd) < 20.05 && Math.Abs(audioSource.time - asd) > -20.05)
-            {
-                _containmentList[i].Invoke();
-            }
+            containmentList.Add(enemyInstance.GetComponent<ComplexEnemy>().IsInBounds);
         }
     }
 }
