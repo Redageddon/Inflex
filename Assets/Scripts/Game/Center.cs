@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Center : MonoBehaviour
 {
@@ -10,7 +9,8 @@ public class Center : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        GameControl.Map.Lives -= 1;
-        other.GetComponent<ComplexEnemy>().SetHitTime();
+        //GameControl.Map.Lives -= 1;
+        other.GetComponent<ComplexEnemy>().TellTime();
+        other.gameObject.SetActive(false);
     }
 }

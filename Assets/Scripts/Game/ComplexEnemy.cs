@@ -7,36 +7,36 @@ public class ComplexEnemy : MonoBehaviour
     public Enemy self;
     [SerializeField] public AudioSource audioSource;
     [SerializeField] public Text text;
-
+    
     private EnemyLocationManager _locationManager;
     
-
     private void Start()
     {
         self = GameControl.Map.Enemies[CurrentEnemy];
-        _locationManager = new EnemyLocationManager(self);
+        _locationManager = new EnemyLocationManager(self, gameObject.GetComponent<RectTransform>().parent.GetComponent<RectTransform>().rect);
         gameObject.GetComponent<Transform>().localScale = new Vector3(GlobalSettings.Settings.CenterSize, GlobalSettings.Settings.CenterSize);
         text.text = GlobalSettings.Settings.Keys[self.KillKey].ToString();
-        transform.localPosition = new Vector3(5000, 0, -1);
+        transform.localPosition = _locationManager.GetLocation(audioSource.time);
         gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        IsInBounds();
         transform.localPosition = _locationManager.GetLocation(audioSource.time);
     }
 
     public void IsInBounds()
     {
-        if (!_locationManager.DespawnOutOfBounds(audioSource.time)) return;
         if (GameControl.Map.Enemies.Count <= CurrentEnemy + 1) return;
-        GameControl.EnemyToBeUpdated = CurrentEnemy + 1;
-        gameObject.SetActive(true);
+        if (_locationManager.TimeToSpawn(audioSource.time))
+        {
+            GameControl.EnemyToBeUpdated = CurrentEnemy + 1;
+            gameObject.SetActive(true);
+        }
     }
 
-    public void SetHitTime()
+    public void TellTime()
     {
-        _locationManager.HitTime = audioSource.time;
+        print(audioSource.time);
     }
 }

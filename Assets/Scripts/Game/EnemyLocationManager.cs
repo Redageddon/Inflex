@@ -7,39 +7,32 @@ public class EnemyLocationManager
     private readonly double _rotation;
     private readonly float _speed;
     private readonly float _rotationSpeed;
-    private readonly float _spawnTime;
     private readonly float _deathTime;
-    public float HitTime = float.PositiveInfinity;
 
-    public EnemyLocationManager(Enemy self)
+    public EnemyLocationManager(Enemy self, Rect bounds)
     {
         _rotationSpeed = self.RotationSpeed;
         _speed = self.Speed;
         _rotation = self.SpawnDegrees;
-        _distance = self.Distance;
-        
-        CalculateDistance(_rotation);
-        
-        _spawnTime = self.SpawnTime;
-        _deathTime = (float) (_spawnTime - (_distance - GlobalSettings.Settings.CenterSize * 2.565) / _speed);
+        _distance = (float) CalculateDistance(_rotation, bounds);
+        _deathTime = (float) (self.SpawnTime - (_distance - GlobalSettings.Settings.CenterSize * 1.71) / _speed);
     }
 
-    public bool DespawnOutOfBounds(float audioSourceTime)
+    public bool TimeToSpawn(float audioSourceTime)
     {
-        return audioSourceTime > _deathTime && audioSourceTime < HitTime;
+        return audioSourceTime > _deathTime;
     }
 
-    private void CalculateDistance(double rotation)
+    private double CalculateDistance(double rotation, Rect bounds)
     {
-        float shortenAmount = 0;
+        double shortenAmount = 0;
         
-        var h = Screen.height / 2;
-        var w = Screen.width / 2;
+        var h = bounds.height / 2;
+        var w = bounds.width / 2;
         
-        var z = (float)Math.Sqrt(w * w + h * h);
-        
-        var x = (float)Math.Sin(rotation) * z;
-        var y = (float)-Math.Cos(rotation) * z;
+        var z = Math.Sqrt(w * w + h * h);
+        var x = Math.Sin(Math.PI / 180 * rotation) * z;
+        var y = -Math.Cos(Math.PI / 180 * rotation) * z;
         
         if (x > w)
         {
@@ -60,10 +53,8 @@ public class EnemyLocationManager
         
         x *= shortenAmount;
         y *= shortenAmount;
-        x += w;
-        y += h;
 
-        Debug.Log($"{x}::{y}");
+        return Math.Sqrt(x * x + y * y);
     }
 
     public Vector3 GetLocation(float audioSourceTime)
@@ -73,7 +64,7 @@ public class EnemyLocationManager
         var rotationOverTime = lifetime * _rotationSpeed;
 
         var handler = Math.PI * (-1 * ((_rotation + rotationOverTime) / 180d) - 1);
-
+        
         var x = (float) ((_distance - movementOverTime) * Math.Sin(handler));
         var y = (float) ((_distance - movementOverTime) * Math.Cos(handler));
         

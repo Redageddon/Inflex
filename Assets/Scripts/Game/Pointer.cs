@@ -9,7 +9,6 @@ public class Pointer : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         if (key.text != other.GetComponent<ComplexEnemy>().text.text) GameControl.Map.Lives -= 1;
-        other.GetComponent<ComplexEnemy>().SetHitTime();
         other.gameObject.SetActive(false);
     }
     
