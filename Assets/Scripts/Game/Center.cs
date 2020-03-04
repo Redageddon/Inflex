@@ -11,5 +11,6 @@ public class Center : MonoBehaviour
     {
         GameControl.Map.Lives -= 1;
         other.gameObject.SetActive(false);
+        other.GetComponent<ComplexEnemy>().Death();
     }
 }

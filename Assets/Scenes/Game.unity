@@ -650,7 +650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 724442712}
   time: 0
-  constrainAudio: 1
+  constrainAudio: 0
 --- !u!4 &724442711
 Transform:
   m_ObjectHideFlags: 0

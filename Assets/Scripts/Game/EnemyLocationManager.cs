@@ -3,22 +3,20 @@ using UnityEngine;
 
 public class EnemyLocationManager
 {
-    private readonly double _distance;
     private readonly double _rotation;
     private readonly float _speed;
     private readonly float _rotationSpeed;
     private readonly float _deathTime;
-    private readonly float _delay;
+    private readonly float _spawnTime;
 
-    public EnemyLocationManager(Enemy self, Rect bounds, float delay)
+    public EnemyLocationManager(Enemy self)
     {
-        _delay = delay;
+        
         _rotationSpeed = self.RotationSpeed;
         _speed = self.Speed;
         _rotation = self.SpawnDegrees;
-        //_distance = (float) CalculateDistance(_rotation, bounds);
-        _distance = 1100;
-        _deathTime = (float) (self.SpawnTime - (_distance - GlobalSettings.Settings.CenterSize * 1.71) / _speed);
+        _spawnTime = self.SpawnTime;
+        _deathTime = (float) (self.SpawnTime - (1100 - GlobalSettings.Settings.CenterSize * 1.71) / _speed);
     }
 
     public bool TimeToSpawn(float audioSourceTime)
@@ -61,14 +59,14 @@ public class EnemyLocationManager
 
     public Vector3 GetLocation(float audioSourceTime)
     {
-        var lifetime = audioSourceTime + _delay - _deathTime;
-        var movementOverTime = lifetime * _speed;
+        /*var lifetime = audioSourceTime - _deathTime;
         var rotationOverTime = lifetime * _rotationSpeed;
-
-        var handler = Math.PI + (_rotation + rotationOverTime) * -Math.PI / 180;
-
-        var x = (float) ((_distance - movementOverTime) * Math.Sin(handler));
-        var y = (float) ((_distance - movementOverTime) * Math.Cos(handler));
+        var handler = Math.PI + (_rotation + rotationOverTime) * -Math.PI / 180;*/
+        var movementOverTime = _speed * (-audioSourceTime + _spawnTime) + 1.71 * GlobalSettings.Settings.CenterSize;
+        var radians = _rotation * Mathf.Deg2Rad;
+        
+        var x = (float) (movementOverTime * Math.Sin(radians));
+        var y = (float) (movementOverTime * -Math.Cos(radians));
 
         return new Vector3(x, y, -1);
     }
