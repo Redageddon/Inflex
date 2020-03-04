@@ -9,8 +9,7 @@ public class Center : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //GameControl.Map.Lives -= 1;
-        other.GetComponent<ComplexEnemy>().TellTime();
+        GameControl.Map.Lives -= 1;
         other.gameObject.SetActive(false);
     }
 }

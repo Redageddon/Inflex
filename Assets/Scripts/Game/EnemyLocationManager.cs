@@ -14,7 +14,8 @@ public class EnemyLocationManager
         _rotationSpeed = self.RotationSpeed;
         _speed = self.Speed;
         _rotation = self.SpawnDegrees;
-        _distance = (float) CalculateDistance(_rotation, bounds);
+        //_distance = (float) CalculateDistance(_rotation, bounds);
+        _distance = Math.Sqrt(bounds.height / 2 * bounds.height / 2 + bounds.width / 2 * bounds.width / 2);
         _deathTime = (float) (self.SpawnTime - (_distance - GlobalSettings.Settings.CenterSize * 1.71) / _speed);
     }
 
@@ -25,36 +26,35 @@ public class EnemyLocationManager
 
     private double CalculateDistance(double rotation, Rect bounds)
     {
-        double shortenAmount = 0;
-        
+        // https://www.desmos.com/calculator/ctqpudpztm -- this is a visual representation
+        var distance = 0d;
         var h = bounds.height / 2;
         var w = bounds.width / 2;
-        
-        var z = Math.Sqrt(w * w + h * h);
-        var x = Math.Sin(Math.PI / 180 * rotation) * z;
-        var y = -Math.Cos(Math.PI / 180 * rotation) * z;
-        
-        if (x > w)
-        {
-            shortenAmount = w / x;
-        }
-        else if (x < -w)
-        {
-            shortenAmount = -w / x;
-        }
-        else if (y > h)
-        {
-            shortenAmount = h / y;
-        }
-        else if (y < -h)
-        {
-            shortenAmount = -h / y;
-        }
-        
-        x *= shortenAmount;
-        y *= shortenAmount;
+        var z = Math.Sqrt(h * h + w * w);
 
-        return Math.Sqrt(x * x + y * y);
+        if (rotation > 180)
+        {
+            rotation -= 180;
+        }
+
+        if (0 <= rotation && rotation <= 45)
+        {
+            distance = (z - h) * rotation / 45 + h;
+        }
+        else if (45 <= rotation && rotation <= 90)
+        {
+            distance = (w - z) * (rotation - 45) / 45 + z;
+        }
+        else if (90 <= rotation && rotation <= 135)
+        {
+            distance = (z - w) * (rotation - 90) / 45 + w;
+        }
+        else if (135 <= rotation && rotation <= 180)
+        {
+            distance = (h - z) * (rotation - 135) / 45 + z;
+        }
+
+        return distance;
     }
 
     public Vector3 GetLocation(float audioSourceTime)
@@ -63,11 +63,11 @@ public class EnemyLocationManager
         var movementOverTime = lifetime * _speed;
         var rotationOverTime = lifetime * _rotationSpeed;
 
-        var handler = Math.PI * (-1 * ((_rotation + rotationOverTime) / 180d) - 1);
-        
+        var handler = Math.PI + (_rotation + rotationOverTime) * -Math.PI / 180;
+
         var x = (float) ((_distance - movementOverTime) * Math.Sin(handler));
         var y = (float) ((_distance - movementOverTime) * Math.Cos(handler));
-        
+
         return new Vector3(x, y, -1);
     }
 }

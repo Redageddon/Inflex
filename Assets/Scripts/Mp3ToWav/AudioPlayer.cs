@@ -21,10 +21,9 @@ public class AudioPlayer : MonoBehaviour
         {
             yield return request.SendWebRequest();
             audioSource.clip = Path.GetExtension(url) == ".mp3" ? Mp3Player.AudioClipFromMp3(request.downloadHandler.data) : DownloadHandlerAudioClip.GetContent(request);
-            audioSource.Play();
             audioSource.volume = GlobalSettings.Settings.Volume;
             audioSource.name = GameControl.Map.SongFile;
-            request.Dispose();
+            audioSource.Play();
         }
     }
 

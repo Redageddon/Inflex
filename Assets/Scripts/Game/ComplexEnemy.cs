@@ -34,9 +34,4 @@ public class ComplexEnemy : MonoBehaviour
             gameObject.SetActive(true);
         }
     }
-
-    public void TellTime()
-    {
-        print(audioSource.time);
-    }
 }
