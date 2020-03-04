@@ -13,7 +13,11 @@ public class ComplexEnemy : MonoBehaviour
     private void Start()
     {
         self = GameControl.Map.Enemies[CurrentEnemy];
-        _locationManager = new EnemyLocationManager(self, gameObject.GetComponent<RectTransform>().parent.GetComponent<RectTransform>().rect);
+        
+        var globalDelay = GameControl.Map.Enemies[0].SpawnTime - (1100 - GlobalSettings.Settings.CenterSize * 1.71) /
+                          GameControl.Map.Enemies[0].Speed;
+        
+        _locationManager = new EnemyLocationManager(self, gameObject.GetComponent<RectTransform>().parent.GetComponent<RectTransform>().rect, (float)globalDelay);
         gameObject.GetComponent<Transform>().localScale = new Vector3(GlobalSettings.Settings.CenterSize, GlobalSettings.Settings.CenterSize);
         text.text = GlobalSettings.Settings.Keys[self.KillKey].ToString();
         transform.localPosition = _locationManager.GetLocation(audioSource.time);
