@@ -10,33 +10,22 @@ public class ComplexEnemy : MonoBehaviour
     
     private EnemyLocationManager _locationManager;
     
-    private void Start()
+    private void Awake()
     {
         self = GameControl.Map.Enemies[CurrentEnemy];
         _locationManager = new EnemyLocationManager(self);
         gameObject.GetComponent<Transform>().localScale = new Vector3(GlobalSettings.Settings.CenterSize, GlobalSettings.Settings.CenterSize);
         text.text = GlobalSettings.Settings.Keys[self.KillKey].ToString();
         transform.localPosition = _locationManager.GetLocation(audioSource.time);
-        gameObject.SetActive(false);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.localPosition = _locationManager.GetLocation(audioSource.time);
-    }
-
-    public void IsInBounds()
-    {
-        if (GameControl.Map.Enemies.Count <= CurrentEnemy + 1) return;
-        if (_locationManager.TimeToSpawn(audioSource.time))
+        if (audioSource.time > self.SpawnTime)
         {
-            GameControl.EnemyToBeUpdated = CurrentEnemy + 1;
-            gameObject.SetActive(true);
+            gameObject.SetActive(false);
+            GameControl.Map.Lives -= 1;
         }
-    }
-
-    public void Death()
-    {
-        print(audioSource.time);
+        transform.localPosition = _locationManager.GetLocation(audioSource.time);
     }
 }
