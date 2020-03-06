@@ -4,11 +4,9 @@ using UnityEngine.UI;
 
 public class Pointer : MonoBehaviour
 {
-    [SerializeField] private Text key;
-
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (key.text != other.GetComponent<ComplexEnemy>().text.text) GameControl.Map.Lives -= 1;
+        if (other.GetComponent<HitObject>().self.KillKey != GameControl.CurrentKey) GameControl.Map.Lives -= 1;
         other.gameObject.SetActive(false);
     }
     

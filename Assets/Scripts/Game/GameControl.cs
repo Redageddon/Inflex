@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,21 +7,20 @@ using UnityEngine.UI;
 public class GameControl : MonoBehaviour
 {
     public static string MapName = Environment.ExpandEnvironmentVariables(@"%AppData%\CircleRhythm\Maps\DefaultMap");
+    public static int CurrentKey;
+    public static bool GamePaused;
     public static Map Map;
-    private readonly List<GameObject> _hitObjectsInGame = new List<GameObject>();
     [SerializeField] private GameObject enemy;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private Text key;
     [SerializeField] private Image img;
     [SerializeField] private Text lives;
-
-    public static bool GamePaused;
+    private int offset;
 
     private void Awake()
     {
         Map = JsonLoader.LoadMap(MapName);
-        CreateEnemies();
         BackgroundChanger.SetBackground(img, Path.Combine(Map.Path, Map.Background));
     }
 
@@ -42,20 +39,23 @@ public class GameControl : MonoBehaviour
 
     private void Update()
     {
-        EnableEnemy();
         UpdatePause();
         UpdateUi();
         UpdateDeath();
     }
 
+    private void FixedUpdate()
+    {
+        EnableEnemy();
+    }
+
     private void EnableEnemy()
     {
-        for (var i = 0; i < Map.Enemies.Count; i++)
+        for (var i = offset; i < Map.Enemies.Count; i++)
         {
-            if (Map.Enemies[i].Speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 2.565 * GlobalSettings.Settings.CenterSize < 1100)
-            {
-                _hitObjectsInGame[i].SetActive(true);
-            }
+            if (Map.Enemies[i].Speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 2.565 * GlobalSettings.Settings.CenterSize > 1100) return;
+            CreateEnemy(i);
+            offset += 1;
         }
     }
 
@@ -79,12 +79,14 @@ public class GameControl : MonoBehaviour
 
     private void UpdateUi()
     {
-        foreach (var keyCode in GlobalSettings.Settings.Keys.Where(Input.GetKeyDown))
+        for (int i = 0; i < 4; i++)
         {
-            key.text = keyCode.ToString();
+            if (!Input.GetKeyDown(GlobalSettings.Settings.Keys[i])) continue;
+            key.text = GlobalSettings.Settings.Keys[i].ToString();
+            CurrentKey = i;
         }
-
-        lives.text = "Lives: " + Map.Lives;
+        
+        lives.text = " Lives: " + Map.Lives;
     }
 
     private static void UpdateDeath()
@@ -95,14 +97,11 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    private void CreateEnemies()
+    private void CreateEnemy(int i)
     {
-        for (var i = 0; i < Map.Enemies.Count; i++)
-        {
-            var enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
-            _hitObjectsInGame.Add(enemyInstance);
-            enemyInstance.name = "Enemy" + i;
-            enemyInstance.GetComponent<ComplexEnemy>().CurrentEnemy = i;
-        }
+        var enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
+        enemyInstance.name = "Enemy" + i;
+        enemyInstance.GetComponent<HitObject>().CurrentEnemy = i;
+        enemyInstance.SetActive(true);
     }
 }

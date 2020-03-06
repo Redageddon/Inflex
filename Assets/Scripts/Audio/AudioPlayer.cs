@@ -23,7 +23,7 @@ public class AudioPlayer : MonoBehaviour
             audioSource.clip = Path.GetExtension(url) == ".mp3" ? Mp3Player.AudioClipFromMp3(request.downloadHandler.data) : DownloadHandlerAudioClip.GetContent(request);
             audioSource.volume = GlobalSettings.Settings.Volume;
             audioSource.name = GameControl.Map.SongFile;
-            audioSource.Play();
+            audioSource.PlayDelayed(0.5f);
         }
     }
 

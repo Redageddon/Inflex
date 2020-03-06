@@ -2,24 +2,23 @@
 using UnityEngine;
 using System.IO;
 using NAudio.Wave;
-using Newtonsoft.Json;
 
 public static class Mp3Player
 {
     private static AudioClip ByteArrayToAudioClip(byte[] wavFile, string name = "", bool stream = false)
     {
-        if (System.BitConverter.ToInt16(wavFile, 20) != 1) return null;
-        int numChannels = System.BitConverter.ToInt16(wavFile, 22);
-        int bitsPerSample = System.BitConverter.ToInt16(wavFile, 34);
-        var sampleRate = System.BitConverter.ToInt32(wavFile, 24);
-        var dataIndex = 20 + System.BitConverter.ToInt32(wavFile, 16);
+        if (BitConverter.ToInt16(wavFile, 20) != 1) return null;
+        int numChannels = BitConverter.ToInt16(wavFile, 22);
+        int bitsPerSample = BitConverter.ToInt16(wavFile, 34);
+        var sampleRate = BitConverter.ToInt32(wavFile, 24);
+        var dataIndex = 20 + BitConverter.ToInt32(wavFile, 16);
         
         for (; dataIndex < wavFile.Length; dataIndex++)
         {
             if (wavFile[dataIndex - 4] == 'd' && wavFile[dataIndex - 3] == 'a' && wavFile[dataIndex - 2] == 't' && wavFile[dataIndex - 1] == 'a') break;
         }
         
-        var subChunk2Size = System.BitConverter.ToInt32(wavFile, dataIndex); 
+        var subChunk2Size = BitConverter.ToInt32(wavFile, dataIndex); 
         int sampleSize = bitsPerSample / 8; 
         int sampleCount = subChunk2Size / sampleSize;
         var audioBuffer = new float[sampleCount];
@@ -27,7 +26,7 @@ public static class Mp3Player
         for (var i = 0; i < sampleCount; i++)
         {
             int sampleIndex = dataIndex + 4 + i * sampleSize;
-            audioBuffer[i] = System.BitConverter.ToInt16(wavFile, sampleIndex) / 32768.0f;
+            audioBuffer[i] = BitConverter.ToInt16(wavFile, sampleIndex) / 32768.0f;
         }
         
         var audioClip = AudioClip.Create(name, sampleCount, numChannels, sampleRate, stream);
