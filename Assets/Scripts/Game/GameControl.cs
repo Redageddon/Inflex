@@ -36,18 +36,15 @@ public class GameControl : MonoBehaviour
             SceneManager.LoadScene("MapSelection", LoadSceneMode.Single);
         }
     }
-
+    
     private void Update()
     {
+        EnableEnemy();
         UpdatePause();
         UpdateUi();
         UpdateDeath();
     }
-
-    private void FixedUpdate()
-    {
-        EnableEnemy();
-    }
+    
 
     private void EnableEnemy()
     {

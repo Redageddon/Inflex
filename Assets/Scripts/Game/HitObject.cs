@@ -8,7 +8,7 @@ public class HitObject : MonoBehaviour
     [SerializeField] public AudioSource audioSource;
     [SerializeField] private Sprite[] sprites;
     
-    private EnemyLocationManager _locationManager;
+    public EnemyLocationManager _locationManager;
     
     private void Awake()
     {
@@ -19,17 +19,15 @@ public class HitObject : MonoBehaviour
         transform.localPosition = _locationManager.GetLocation(audioSource.time);
     }
 
-    private float dt;
-    private void Update()
-    {
-        dt += Time.deltaTime * 0.001f;
-    }
 
-    private void FixedUpdate()
+    
+    private void Update()
     {
         if (audioSource.time >= self.SpawnTime)
         {
-            Debug.Log($"{audioSource.time}:{dt}");
+            //2.565 is miss 3.7 is max
+            var asd = Math.Round(_locationManager.Distance / GlobalSettings.Settings.CenterSize * 100) / 100 - 2.565;
+            print(asd / 3.7);
             gameObject.SetActive(false);
             GameControl.Map.Lives -= 1;
         }
