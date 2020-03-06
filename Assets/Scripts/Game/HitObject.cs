@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
+using UnityEngine;
 
 public class HitObject : MonoBehaviour
 {
@@ -19,10 +19,17 @@ public class HitObject : MonoBehaviour
         transform.localPosition = _locationManager.GetLocation(audioSource.time);
     }
 
+    private float dt;
+    private void Update()
+    {
+        dt += Time.deltaTime * 0.001f;
+    }
+
     private void FixedUpdate()
     {
-        if (audioSource.time > self.SpawnTime)
+        if (audioSource.time >= self.SpawnTime)
         {
+            Debug.Log($"{audioSource.time}:{dt}");
             gameObject.SetActive(false);
             GameControl.Map.Lives -= 1;
         }

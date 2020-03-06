@@ -66,7 +66,6 @@ public class GameControl : MonoBehaviour
             GamePaused = !GamePaused;
             pauseScreen.SetActive(GamePaused);
         }
-
         if (!GamePaused)
         {
             audioSource.UnPause();
