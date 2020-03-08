@@ -11,6 +11,7 @@ public class GameControl : MonoBehaviour
     public static bool GamePaused;
     public static Map Map;
     [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject judgement;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private Text key;
@@ -100,4 +101,44 @@ public class GameControl : MonoBehaviour
         enemyInstance.GetComponent<HitObject>().CurrentEnemy = i;
         enemyInstance.SetActive(true);
     }
+    
+    public void GradeAccuracy(double hitLocation)
+    {
+        var accuracy = Math.Truncate((hitLocation - 2.565) / (3.7 - 2.565) * 100);
+        var newJudgement = Instantiate(judgement, judgement.transform.parent, false);
+        if (accuracy < 15)
+        {
+            newJudgement.GetComponent<Text>().color = Color.red;
+            newJudgement.GetComponent<Text>().text = "0";
+        }
+        else if (accuracy >= 15 && accuracy < 40)
+        {
+            newJudgement.GetComponent<Text>().color = Color.grey;
+            newJudgement.GetComponent<Text>().text = "50";
+        }
+        else if (accuracy >= 40 && accuracy < 85)
+        {
+            newJudgement.GetComponent<Text>().color = Color.green;
+            newJudgement.GetComponent<Text>().text = "150";
+        }
+        else if (accuracy >= 85 && accuracy < 95)
+        {
+            newJudgement.GetComponent<Text>().color = Color.blue;
+            newJudgement.GetComponent<Text>().text = "300";
+        }
+        else if (accuracy >= 95 && accuracy < 99)
+        {
+            newJudgement.GetComponent<Text>().color = Color.magenta;
+            newJudgement.GetComponent<Text>().text = "500";
+        }
+        else if (accuracy >= 99)
+        {
+            newJudgement.GetComponent<Text>().color = Color.yellow;
+            newJudgement.GetComponent<Text>().text = "600";
+        }
+        newJudgement.SetActive(true);
+        Destroy(newJudgement, 0.15f);
+    }
+
+    
 }

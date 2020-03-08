@@ -20,12 +20,12 @@ public class EnemyLocationManager
     public float Distance;
     public Vector3 GetLocation(float audioSourceTime)
     {
-        var distance = _speed * (-audioSourceTime + _spawnTime) + 2.565 * GlobalSettings.Settings.CenterSize;
-        Distance = (float)distance;
+        //min speed 100, max 700
+        Distance = (float)(_speed * (-audioSourceTime + _spawnTime) + 2.565 * GlobalSettings.Settings.CenterSize);
         var radians = _rotation * Mathf.Deg2Rad;
         
-        var x = (float) (distance * Math.Sin(radians));
-        var y = (float) (distance * -Math.Cos(radians));
+        var x = (float) (Distance * Math.Sin(radians));
+        var y = (float) (Distance * -Math.Cos(radians));
 
         return new Vector3(x, y, -1);
     }

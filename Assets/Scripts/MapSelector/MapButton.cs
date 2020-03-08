@@ -12,7 +12,7 @@ public class MapButton : MonoBehaviour
     [SerializeField] private Text difficulty;
     [SerializeField] private Text creator;
     internal Map Map;
-    private bool _selected;
+    
 
     private void Start()
     {
@@ -28,6 +28,7 @@ public class MapButton : MonoBehaviour
         artist.text = Map.MetaData.Artist;
     }
 
+    private bool _selected;
     public void Select()
     {
         _selected = true;

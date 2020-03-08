@@ -6,8 +6,7 @@ public class Pointer : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.GetComponent<HitObject>().self.KillKey != GameControl.CurrentKey) GameControl.Map.Lives -= 1;
-        var asd = Math.Round(other.GetComponent<HitObject>()._locationManager.Distance / GlobalSettings.Settings.CenterSize * 100) / 100 - 2.565;
-        print(asd / 3.7);
+        other.GetComponent<HitObject>().Hit();
         other.gameObject.SetActive(false);
     }
     
