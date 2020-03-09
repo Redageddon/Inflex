@@ -10,8 +10,8 @@ public class GameControl : MonoBehaviour
     public static int CurrentKey;
     public static bool GamePaused;
     public static Map Map;
-    public static float Speed;
     public int currentSpeed;
+    private float _speed;
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject judgement;
     [SerializeField] private AudioSource audioSource;
@@ -43,7 +43,7 @@ public class GameControl : MonoBehaviour
     private void Update()
     {
         UpdateSpeed();
-        EnableEnemy();
+        EnableHandler();
         UpdatePause();
         UpdateUi();
         UpdateDeath();
@@ -51,24 +51,23 @@ public class GameControl : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        print(Speed);
-        if (Map.Speeds == null || Map.Speeds[0].SpawnTime > 0) Speed = 100;
+        if (Map.Speeds == null) _speed = 100;
         else
         {
-            Speed = Map.Speeds[currentSpeed].Speed;
+            _speed = Map.Speeds[currentSpeed].Speed;
         }
-        if (audioSource.time + AudioPlayer.Difference > Map.Speeds[currentSpeed].SpawnTime && currentSpeed > Map.Speeds.Count)
+        while (audioSource.time + AudioPlayer.Difference > Map.Speeds[currentSpeed].SpawnTime)
         {
+            if(currentSpeed + 1 >= Map.Speeds.Count) return;
             currentSpeed++;
         }
-        
     }
 
-    private void EnableEnemy()
+    private void EnableHandler()
     {
         for (var i = offset; i < Map.Enemies.Count; i++)
         {
-            if (Speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 2.565 * GlobalSettings.Settings.CenterSize > 1100) return;
+            if (_speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 2.565 * GlobalSettings.Settings.CenterSize > 1100) return;
             CreateEnemy(i);
             offset += 1;
         }
@@ -116,6 +115,7 @@ public class GameControl : MonoBehaviour
         var enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
         enemyInstance.name = "Enemy" + i;
         enemyInstance.GetComponent<HitObject>().CurrentEnemy = i;
+        enemyInstance.GetComponent<HitObject>().Speed = _speed;
         enemyInstance.SetActive(true);
     }
     
