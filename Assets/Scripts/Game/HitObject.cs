@@ -16,7 +16,7 @@ public class HitObject : MonoBehaviour
         locationManager = new EnemyLocationManager(self);
         gameObject.GetComponent<Transform>().localScale = new Vector3(GlobalSettings.Settings.CenterSize, GlobalSettings.Settings.CenterSize);
         gameObject.GetComponent<SpriteRenderer>().sprite = sprites[self.KillKey];
-        transform.localPosition = locationManager.GetLocation(audioSource.time);
+        transform.localPosition = locationManager.GetLocation(audioSource.time + AudioPlayer.Difference, GameControl.Speed);
     }
 
     public void Hit()
@@ -27,13 +27,13 @@ public class HitObject : MonoBehaviour
 
     private void Update()
     {
-        if (audioSource.time >= self.SpawnTime)
+        if (audioSource.time + AudioPlayer.Difference >= self.SpawnTime)
         {
             Hit();
             gameObject.SetActive(false);
             GameControl.Map.Lives -= 1;
         }
 
-        transform.localPosition = locationManager.GetLocation(audioSource.time);
+        transform.localPosition = locationManager.GetLocation(audioSource.time + AudioPlayer.Difference, GameControl.Speed);
     }
 }

@@ -9,7 +9,8 @@ public class Map
     public string Background { get; set; }
     public MapMetaData MetaData { get; set; }
     public List<Enemy> Enemies { get; set; }
-    public List<MapScreen> ScreenEvents { get; set; }
+    public List<SpeedEvent> Speeds { get; set; }
+    public List<ScreenEvent> ScreenEvents { get; set; }
 }
 
 public class MapMetaData
@@ -25,11 +26,16 @@ public class Enemy
     public int KillKey { get; set; }
     public float SpawnDegrees { get; set; }
     public float RotationSpeed { get; set; }
+    public float SpawnTime { get; set; }
+}
+
+public class SpeedEvent
+{
     public float Speed { get; set; }
     public float SpawnTime { get; set; }
 }
 
-public class MapScreen
+public class ScreenEvent
 {
     public int RotationSpeed { get; set; }
     public int Zoom { get; set; }

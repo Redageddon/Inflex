@@ -10,6 +10,8 @@ public class GameControl : MonoBehaviour
     public static int CurrentKey;
     public static bool GamePaused;
     public static Map Map;
+    public static float Speed;
+    public int currentSpeed;
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject judgement;
     [SerializeField] private AudioSource audioSource;
@@ -40,18 +42,33 @@ public class GameControl : MonoBehaviour
     
     private void Update()
     {
+        UpdateSpeed();
         EnableEnemy();
         UpdatePause();
         UpdateUi();
         UpdateDeath();
     }
-    
+
+    private void UpdateSpeed()
+    {
+        print(Speed);
+        if (Map.Speeds == null || Map.Speeds[0].SpawnTime > 0) Speed = 100;
+        else
+        {
+            Speed = Map.Speeds[currentSpeed].Speed;
+        }
+        if (audioSource.time + AudioPlayer.Difference > Map.Speeds[currentSpeed].SpawnTime && currentSpeed > Map.Speeds.Count)
+        {
+            currentSpeed++;
+        }
+        
+    }
 
     private void EnableEnemy()
     {
         for (var i = offset; i < Map.Enemies.Count; i++)
         {
-            if (Map.Enemies[i].Speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 2.565 * GlobalSettings.Settings.CenterSize > 1100) return;
+            if (Speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 2.565 * GlobalSettings.Settings.CenterSize > 1100) return;
             CreateEnemy(i);
             offset += 1;
         }

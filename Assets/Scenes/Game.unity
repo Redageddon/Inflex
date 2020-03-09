@@ -649,6 +649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 724442712}
+  blank: {fileID: 8300000, guid: ebf3713d3196c6a4d8c02ffe94a18184, type: 3}
   time: 0
   constrainAudio: 0
 --- !u!4 &724442711
@@ -676,7 +677,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
