@@ -7,19 +7,19 @@ public class Pointer : MonoBehaviour
     {
         if (other.GetComponent<HitObject>().self.KillKey != GameControl.CurrentKey) GameControl.Map.Lives -= 1;
         other.GetComponent<HitObject>().Hit();
-        other.gameObject.SetActive(false);
     }
     
-    private static double GetZ()
+    public static double GetZ()
     {
         var x = Screen.width/2d - Input.mousePosition.x;
         var y = Screen.height/2d - Input.mousePosition.y;
-        return 180 * Math.Atan2(y, x) / Math.PI + 90;
+        return Math.Atan2(x, -y) * Mathf.Rad2Deg + 180;
     }
 
     private void Update()
     {
         if(GameControl.GamePaused) return;
-        transform.localRotation = Quaternion.Euler(0, 0, (float) GetZ());
+        print(GetZ());
+        transform.localRotation = Quaternion.Euler(0, 0, (float) (GetZ() - 180));
     }
 }

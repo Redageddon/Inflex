@@ -67,7 +67,7 @@ public class GameControl : MonoBehaviour
     {
         for (var i = offset; i < Map.Enemies.Count; i++)
         {
-            if (_speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 2.565 * GlobalSettings.Settings.CenterSize > 1100) return;
+            if (_speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 3.42 * GlobalSettings.Settings.CenterSize > 1100) return;
             CreateEnemy(i);
             offset += 1;
         }
@@ -119,10 +119,12 @@ public class GameControl : MonoBehaviour
         enemyInstance.SetActive(true);
     }
     
-    public void GradeAccuracy(double hitLocation)
+    public void GradeAccuracy(double hitObjectRotation)
     {
-        var accuracy = Math.Truncate((hitLocation - 2.565) / (3.7 - 2.565) * 100);
-        var newJudgement = Instantiate(judgement, judgement.transform.parent, false);
+        //9.6
+        
+
+        /*var newJudgement = Instantiate(judgement, judgement.transform.parent, false);
         if (accuracy < 15)
         {
             newJudgement.GetComponent<Text>().color = Color.red;
@@ -154,7 +156,7 @@ public class GameControl : MonoBehaviour
             newJudgement.GetComponent<Text>().text = "600";
         }
         newJudgement.SetActive(true);
-        Destroy(newJudgement, 0.15f);
+        Destroy(newJudgement, 0.15f);*/
     }
 
     

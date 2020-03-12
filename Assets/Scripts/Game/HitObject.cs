@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using UnityEngine;
 
 public class HitObject : MonoBehaviour
@@ -22,19 +23,20 @@ public class HitObject : MonoBehaviour
 
     public void Hit()
     {
-        var hitLocation = Math.Round(locationManager.Distance / GlobalSettings.Settings.CenterSize * 100) / 100;
-        transform.parent.GetComponent<GameControl>().GradeAccuracy(hitLocation);
+        transform.parent.GetComponent<GameControl>().GradeAccuracy(locationManager.Rotation);
+        gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        if (audioSource.time + AudioPlayer.Difference >= self.SpawnTime)
+        var currentTime = audioSource.time + AudioPlayer.Difference;
+        if (currentTime >= self.SpawnTime + 0.75)
         {
             Hit();
-            gameObject.SetActive(false);
-            GameControl.Map.Lives -= 1;
+            //GameControl.Map.Lives -= 1;
         }
-
-        transform.localPosition = locationManager.GetLocation(audioSource.time + AudioPlayer.Difference, Speed);
+        
+        transform.localPosition = locationManager.GetLocation(currentTime, Speed);
     }
+    
 }
