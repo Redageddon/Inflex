@@ -3,6 +3,8 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class GameControl : MonoBehaviour
 {
@@ -121,8 +123,14 @@ public class GameControl : MonoBehaviour
     
     public void GradeAccuracy(double hitObjectRotation)
     {
-        //9.6
-        
+        var pointerRotation = Pointer.GetZ();
+        if (Pointer.GetZ() + 9.6 >= 360)
+        {
+            pointerRotation = 0;
+        }
+
+        var acc = hitObjectRotation - pointerRotation;
+        print($"{acc}");
 
         /*var newJudgement = Instantiate(judgement, judgement.transform.parent, false);
         if (accuracy < 15)
