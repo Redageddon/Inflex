@@ -14,12 +14,10 @@ public class EnemyLocationManager
         Rotation = self.SpawnDegrees;
         _spawnTime = self.SpawnTime;
     }
-
     
     public Vector3 GetLocation(float audioSourceTime, float speed)
     {
-        //min speed 100, max 300?
-        var distance = (float)(speed * (-audioSourceTime + _spawnTime) + 3.66667 * GlobalSettings.Settings.CenterSize);
+        var distance = (float)(speed * (-audioSourceTime + _spawnTime) + 3.591 * GlobalSettings.Settings.CenterSize);
         var radians = Rotation * Mathf.Deg2Rad;
         
         var x = (float) (distance * Math.Sin(radians));

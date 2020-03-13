@@ -6,4 +6,10 @@ public class Center : MonoBehaviour
     {
         gameObject.GetComponent<Transform>().localScale = new Vector3(GlobalSettings.Settings.CenterSize, GlobalSettings.Settings.CenterSize);
     }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        
+        GameControl.Map.Lives -= 1;
+        other.GetComponent<HitObject>().Hit();
+    }
 }

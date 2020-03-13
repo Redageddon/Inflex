@@ -21,7 +21,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Text key;
     [SerializeField] private Image img;
     [SerializeField] private Text lives;
-    private int offset;
+    private int _offset;
 
     private void Awake()
     {
@@ -67,11 +67,11 @@ public class GameControl : MonoBehaviour
 
     private void EnableHandler()
     {
-        for (var i = offset; i < Map.Enemies.Count; i++)
+        for (var i = _offset; i < Map.Enemies.Count; i++)
         {
-            if (_speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 3.42 * GlobalSettings.Settings.CenterSize > 1100) return;
+            if (_speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 2.565 * GlobalSettings.Settings.CenterSize > 1100) return;
             CreateEnemy(i);
-            offset += 1;
+            _offset += 1;
         }
     }
 
@@ -94,7 +94,7 @@ public class GameControl : MonoBehaviour
 
     private void UpdateUi()
     {
-        for (int i = 0; i < 4; i++)
+        for (var i = 0; i < 4; i++)
         {
             if (!Input.GetKeyDown(GlobalSettings.Settings.Keys[i])) continue;
             key.text = GlobalSettings.Settings.Keys[i].ToString();
@@ -123,48 +123,25 @@ public class GameControl : MonoBehaviour
     
     public void GradeAccuracy(double hitObjectRotation)
     {
+        var accuracy = 0d;
+        const int grader = 15;
+        
         var pointerRotation = Pointer.GetZ();
-        if (Pointer.GetZ() + 9.6 >= 360)
+        if (pointerRotation - hitObjectRotation > 100)
         {
-            pointerRotation = 0;
+            pointerRotation -= 360;
+        }
+        
+        if (Math.Abs(pointerRotation - hitObjectRotation) < grader)
+        {
+            accuracy = Math.Round(100 * (Math.Abs(pointerRotation - hitObjectRotation) - grader) / -grader);
         }
 
-        var acc = hitObjectRotation - pointerRotation;
-        print($"{acc}");
-
-        /*var newJudgement = Instantiate(judgement, judgement.transform.parent, false);
-        if (accuracy < 15)
-        {
-            newJudgement.GetComponent<Text>().color = Color.red;
-            newJudgement.GetComponent<Text>().text = "0";
-        }
-        else if (accuracy >= 15 && accuracy < 40)
-        {
-            newJudgement.GetComponent<Text>().color = Color.grey;
-            newJudgement.GetComponent<Text>().text = "50";
-        }
-        else if (accuracy >= 40 && accuracy < 85)
-        {
-            newJudgement.GetComponent<Text>().color = Color.green;
-            newJudgement.GetComponent<Text>().text = "150";
-        }
-        else if (accuracy >= 85 && accuracy < 95)
-        {
-            newJudgement.GetComponent<Text>().color = Color.blue;
-            newJudgement.GetComponent<Text>().text = "300";
-        }
-        else if (accuracy >= 95 && accuracy < 99)
-        {
-            newJudgement.GetComponent<Text>().color = Color.magenta;
-            newJudgement.GetComponent<Text>().text = "500";
-        }
-        else if (accuracy >= 99)
-        {
-            newJudgement.GetComponent<Text>().color = Color.yellow;
-            newJudgement.GetComponent<Text>().text = "600";
-        }
+        var newJudgement = Instantiate(judgement, judgement.transform.parent, false);
+        newJudgement.GetComponent<Text>().color = Color.HSVToRGB((float)accuracy/100,1,1, true);
+        newJudgement.GetComponent<Text>().text = accuracy.ToString();
         newJudgement.SetActive(true);
-        Destroy(newJudgement, 0.15f);*/
+        Destroy(newJudgement, 0.15f);
     }
 
     

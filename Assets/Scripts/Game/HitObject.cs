@@ -1,6 +1,4 @@
-﻿using System;
-using System.Timers;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HitObject : MonoBehaviour
 {
@@ -30,13 +28,6 @@ public class HitObject : MonoBehaviour
     private void Update()
     {
         var currentTime = audioSource.time + AudioPlayer.Difference;
-        if (currentTime >= self.SpawnTime + 0.75)
-        {
-            Hit();
-            //GameControl.Map.Lives -= 1;
-        }
-        
         transform.localPosition = locationManager.GetLocation(currentTime, Speed);
     }
-    
 }
