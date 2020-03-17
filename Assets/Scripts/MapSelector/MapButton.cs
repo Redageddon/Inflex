@@ -7,10 +7,7 @@ public class MapButton : MonoBehaviour
 {
     [SerializeField] private Image background;
     [SerializeField] private Text mapNameText;
-    [SerializeField] private Text artist;
-    [SerializeField] private Text enemyCount;
     [SerializeField] private Text difficulty;
-    [SerializeField] private Text creator;
     internal Map Map;
     
 
@@ -22,10 +19,7 @@ public class MapButton : MonoBehaviour
     private void SetButtonData()
     {
         mapNameText.text = Map.MetaData.Title;
-        enemyCount.text = "Enemy Count: " + Map.Enemies.Count;
         difficulty.text = "00"; //not implemented yet
-        creator.text = Map.MetaData.Creator;
-        artist.text = Map.MetaData.Artist;
     }
 
     private bool _selected;
