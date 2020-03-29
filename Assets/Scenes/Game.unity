@@ -1036,6 +1036,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 88026a3918fefdd40bd579f54740a65f, type: 3}
   - {fileID: 21300000, guid: 9981e564ad1ae2b4998c5c4b7b6373d9, type: 3}
   - {fileID: 21300000, guid: c4fcbfe9d0e62504680fa7a543e2129c, type: 3}
+  judgement: {fileID: 1285181656}
 --- !u!222 &1217278162
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1552,6 +1553,8 @@ GameObject:
   - component: {fileID: 1707635680}
   - component: {fileID: 1707635679}
   - component: {fileID: 1707635678}
+  - component: {fileID: 1707635682}
+  - component: {fileID: 1707635681}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1655,14 +1658,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0576c7bb4213a141b54fa474880e50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeed: 0
   enemy: {fileID: 1217278160}
-  judgement: {fileID: 1285181656}
   audioSource: {fileID: 724442712}
-  pauseScreen: {fileID: 1884283171}
-  key: {fileID: 1796392182}
-  img: {fileID: 1707635679}
-  lives: {fileID: 1265145617}
 --- !u!114 &1707635679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1699,6 +1696,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707635673}
   m_CullTransparentMesh: 0
+--- !u!114 &1707635681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707635673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3fd6066a464b3281a6fec2f52cf1e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: {fileID: 1265145617}
+  currentKey: {fileID: 1796392182}
+  background: {fileID: 1707635679}
+--- !u!114 &1707635682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707635673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ad3cffbd7544b0902ccd4a42be0457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseScreen: {fileID: 1884283171}
+  audioSource: {fileID: 724442712}
 --- !u!1 &1796392180
 GameObject:
   m_ObjectHideFlags: 0

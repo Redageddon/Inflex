@@ -5,7 +5,7 @@ public class Pointer : MonoBehaviour
 {
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.GetComponent<HitObject>().self.KillKey != GameControl.CurrentKey) GameControl.Map.Lives -= 1;
+        if (other.GetComponent<HitObject>().self.KillKey != GameUi.CurrentKey) GameControl.Map.Lives -= 1;
         other.GetComponent<HitObject>().Hit();
     }
     
@@ -18,7 +18,7 @@ public class Pointer : MonoBehaviour
 
     private void Update()
     {
-        if(GameControl.GamePaused) return;
+        if(GameState.GamePaused) return;
         SetZRotation();
     }
 
