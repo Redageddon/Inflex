@@ -14,7 +14,7 @@ public class HitObject : MonoBehaviour
     {
         self = GameControl.Map.Enemies[CurrentEnemy];
         locationManager = new EnemyLocationManager(self);
-        gameObject.GetComponent<Transform>().localScale = new Vector3(GlobalSettings.Settings.CenterSize, GlobalSettings.Settings.CenterSize);
+        gameObject.GetComponent<Transform>().localScale = new Vector3(SettingsHandler.LoadSettings().CenterSize, SettingsHandler.LoadSettings().CenterSize);
         gameObject.GetComponent<SpriteRenderer>().sprite = sprites[self.KillKey];
         transform.localPosition = locationManager.GetLocation(audioSource.time + AudioPlayer.Difference, Speed);
     }

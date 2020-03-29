@@ -9,7 +9,6 @@ public class MapButton : MonoBehaviour
     [SerializeField] private Text mapNameText;
     [SerializeField] private Text difficulty;
     internal Map Map;
-    
 
     private void Start()
     {
@@ -19,24 +18,12 @@ public class MapButton : MonoBehaviour
     private void SetButtonData()
     {
         mapNameText.text = Map.MetaData.Title;
-        difficulty.text = "00"; //not implemented yet
     }
 
-    private bool _selected;
-    public void Select()
+    public void OnClicked()
     {
-        _selected = true;
         BackgroundChanger.SetBackground(background, Path.Combine(Map.Path, Map.MetaData.Icon));
-    }
-
-    public void OnClick()
-    {
-        if (!_selected || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Mouse0))
-        {
-            SceneManager.LoadScene("Game", LoadSceneMode.Single);
-            GameControl.MapName = Map.Path;
-        }
-
-        else _selected = false;
+        SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        GameControl.MapName = Map.Path;
     }
 }

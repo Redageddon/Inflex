@@ -3,12 +3,10 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Image = UnityEngine.UI.Image;
 
 public class GameControl : MonoBehaviour
 {
-    public static string MapName = Environment.ExpandEnvironmentVariables(@"%AppData%\CircleRhythm\Maps\DefaultMap");
+    public static string MapName;
     public static int CurrentKey;
     public static bool GamePaused;
     public static Map Map;
@@ -25,27 +23,14 @@ public class GameControl : MonoBehaviour
 
     private void Awake()
     {
-        Map = JsonLoader.LoadMap(MapName);
+        Map = MapHandler.LoadMap(MapName);
         BackgroundChanger.SetBackground(img, Path.Combine(Map.Path, Map.Background));
     }
 
-    private void OnGUI()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene("Game", LoadSceneMode.Single);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            SceneManager.LoadScene("MapSelection", LoadSceneMode.Single);
-        }
-    }
-    
     private void Update()
     {
         UpdateSpeed();
-        EnableHandler();
+        WaitToSpawnEnemy();
         UpdatePause();
         UpdateUi();
         UpdateDeath();
@@ -65,11 +50,11 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    private void EnableHandler()
+    private void WaitToSpawnEnemy()
     {
         for (var i = _offset; i < Map.Enemies.Count; i++)
         {
-            if (_speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 2.565 * GlobalSettings.Settings.CenterSize > 1100) return;
+            if (_speed * (-audioSource.time + Map.Enemies[i].SpawnTime) + 2.565 * SettingsHandler.LoadSettings().CenterSize > 1100) return;
             CreateEnemy(i);
             _offset += 1;
         }
@@ -96,8 +81,8 @@ public class GameControl : MonoBehaviour
     {
         for (var i = 0; i < 4; i++)
         {
-            if (!Input.GetKeyDown(GlobalSettings.Settings.Keys[i])) continue;
-            key.text = GlobalSettings.Settings.Keys[i].ToString();
+            if (!Input.GetKeyDown(SettingsHandler.LoadSettings().Keys[i])) continue;
+            key.text = SettingsHandler.LoadSettings().Keys[i].ToString();
             CurrentKey = i;
         }
         
@@ -126,7 +111,7 @@ public class GameControl : MonoBehaviour
         var accuracy = 0d;
         const int grader = 15;
         
-        var pointerRotation = Pointer.GetZ();
+        var pointerRotation = Pointer.GetZRotation();
         if (pointerRotation - hitObjectRotation > 100)
         {
             pointerRotation -= 360;

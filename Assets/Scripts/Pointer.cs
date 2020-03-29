@@ -9,7 +9,7 @@ public class Pointer : MonoBehaviour
         other.GetComponent<HitObject>().Hit();
     }
     
-    public static double GetZ()
+    public static double GetZRotation()
     {
         var x = Screen.width/2d - Input.mousePosition.x;
         var y = Screen.height/2d - Input.mousePosition.y;
@@ -19,6 +19,11 @@ public class Pointer : MonoBehaviour
     private void Update()
     {
         if(GameControl.GamePaused) return;
-        transform.localRotation = Quaternion.Euler(0, 0, (float) (GetZ() - 180));
+        SetZRotation();
+    }
+
+    private void SetZRotation()
+    {
+        transform.localRotation = Quaternion.Euler(0, 0, (float) (GetZRotation() - 180));
     }
 }

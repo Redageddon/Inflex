@@ -3,17 +3,8 @@ using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public static class JsonLoader
+public static class SettingsHandler
 {
-    public static Map LoadMap(string path)
-    {
-        var json = Directory.GetFiles(path, @"*.json").First();
-        var data = File.ReadAllText(json);
-        var currentMap = JsonConvert.DeserializeObject<Map>(data);
-        currentMap.Path = path;
-        return currentMap;
-    }
-
     public static SavedSettings LoadSettings()
     {
         var json = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Settings.json"));
@@ -25,5 +16,6 @@ public static class JsonLoader
     {
         var json = JsonConvert.SerializeObject(settings, (Formatting) 1);
         File.WriteAllText(Path.Combine(Application.streamingAssetsPath, "Settings.json"), json);
+        Debug.Log("asd");
     }
 }

@@ -49,7 +49,7 @@ public class Settings : MonoBehaviour
 
     private void SetVariables()
     {
-        _savedSettings = GlobalSettings.Settings;
+        _savedSettings = SettingsHandler.LoadSettings();
         _keys = _savedSettings.Keys;
         fps.text = _savedSettings.Resolution.refreshRate.ToString();
         volume.value = _savedSettings.Volume;
@@ -130,7 +130,6 @@ public class Settings : MonoBehaviour
 
     public void SaveSettings()
     {
-        JsonLoader.SaveSettings(_savedSettings);
-        GlobalSettings.Settings = _savedSettings;
+        SettingsHandler.SaveSettings(_savedSettings);
     }
 }

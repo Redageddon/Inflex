@@ -1,8 +1,6 @@
-﻿﻿using System.Collections;
+﻿using System.Collections;
 using System.IO;
- using System.Timers;
- using Newtonsoft.Json;
- using UnityEngine;
+using UnityEngine;
 using UnityEngine.Networking;
 
 public class AudioPlayer : MonoBehaviour
@@ -23,15 +21,17 @@ public class AudioPlayer : MonoBehaviour
         var url = Path.Combine(GameControl.Map.Path, GameControl.Map.SongFile);
         AudioClip song;
         audioSource.name = "song";
-        audioSource.volume = GlobalSettings.Settings.Volume;
+        audioSource.volume = SettingsHandler.LoadSettings().Volume;
         audioSource.name = GameControl.Map.SongFile;
 
         using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN))
         {
             yield return request.SendWebRequest();
-            song = Path.GetExtension(url) == ".mp3" ? Mp3Player.AudioClipFromMp3(request.downloadHandler.data) : DownloadHandlerAudioClip.GetContent(request);
-        }   
-            
+            song = Path.GetExtension(url) == ".mp3"
+                ? Mp3Player.AudioClipFromMp3(request.downloadHandler.data)
+                : DownloadHandlerAudioClip.GetContent(request);
+        }
+
         audioSource.clip = blank;
         audioSource.Play();
         yield return new WaitWhile(() => audioSource.isPlaying);
