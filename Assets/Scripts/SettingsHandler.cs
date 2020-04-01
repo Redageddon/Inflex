@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -16,6 +15,5 @@ public static class SettingsHandler
     {
         var json = JsonConvert.SerializeObject(settings, (Formatting) 1);
         File.WriteAllText(Path.Combine(Application.streamingAssetsPath, "Settings.json"), json);
-        Debug.Log("asd");
     }
 }

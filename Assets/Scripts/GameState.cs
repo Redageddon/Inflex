@@ -43,14 +43,14 @@ public class GameState : MonoBehaviour
     
     private void UpdateSpeed()
     {
-        if (GameControl.Map.Speeds == null) Speed = 100;
+        if (MapHandler.Map.Speeds == null) Speed = 100;
         else
         {
-            Speed = GameControl.Map.Speeds[currentSpeed].Speed;
+            Speed = MapHandler.Map.Speeds[currentSpeed].Speed;
         }
-        while (audioSource.time + AudioPlayer.Difference > GameControl.Map.Speeds[currentSpeed].SpawnTime)
+        while (audioSource.time + AudioPlayer.Difference > MapHandler.Map.Speeds[currentSpeed].SpawnTime)
         {
-            if(currentSpeed + 1 >= GameControl.Map.Speeds.Count) return;
+            if(currentSpeed + 1 >= MapHandler.Map.Speeds.Count) return;
             currentSpeed++;
         }
     }

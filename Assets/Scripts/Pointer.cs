@@ -5,7 +5,7 @@ public class Pointer : MonoBehaviour
 {
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.GetComponent<HitObject>().self.KillKey != GameUi.CurrentKey) GameControl.Map.Lives -= 1;
+        if (other.GetComponent<HitObject>().self.KillKey != GameUi.CurrentKey) Health.Lives -= 1;
         other.GetComponent<HitObject>().Hit();
     }
     

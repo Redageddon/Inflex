@@ -2,11 +2,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class JudgementCreator : UnityEngine.Object
+public class JudgementCreator : MonoBehaviour
 {
-    public static void Create(double hitObjectRotation, GameObject judgement)
+    public static void Create(double hitObjectRotation)
     {
         var accuracy = Grade(hitObjectRotation);
+
+        var judgement = GameObject.Find("Canvas").transform.Find("Judgement").gameObject;
         
         var newJudgement = Instantiate(judgement, judgement.transform.parent, false);
         newJudgement.GetComponent<Text>().color = Color.HSVToRGB((float)accuracy/100,1,1, true);

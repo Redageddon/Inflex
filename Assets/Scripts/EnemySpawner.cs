@@ -1,13 +1,30 @@
 ﻿using UnityEngine;
 
-public class EnemySpawner : Object
+public class EnemySpawner : MonoBehaviour
 {
-    public static void CreateEnemy(GameObject enemy, int enemyNumber, float speed)
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private GameObject enemy;
+    [SerializeField] private Sprite[] sprites;
+    private int _offset;
+    
+    private void Update() 
+    {
+        WaitToSpawnEnemy();
+    }
+
+    private void WaitToSpawnEnemy()
+    {
+        for (var i = _offset; i < MapHandler.Map.Enemies.Count; i++)
+        {
+            if (GameState.Speed * (-audioSource.time + MapHandler.Map.Enemies[i].SpawnTime) + 2.565 * SettingsHandler.LoadSettings().CenterSize > 1100) return;
+            CreateEnemy(MapHandler.Map.Enemies[i], GameState.Speed);
+            _offset += 1;
+        }
+    }
+
+    private void CreateEnemy(EnemyEvent self, float speed)
     {
         var enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
-        enemyInstance.name = "Enemy" + enemyNumber;
-        enemyInstance.GetComponent<HitObject>().CurrentEnemy = enemyNumber;
-        enemyInstance.GetComponent<HitObject>().Speed = speed;
-        enemyInstance.SetActive(true);
+        enemyInstance.AddComponent<HitObject>().SetVariables(self, audioSource, speed, sprites[0]);
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLocationManager
+public class HitObjectLocationManager
 {
     public readonly double Rotation;
     private readonly float _rotationSpeed;
     private readonly float _deathTime;
     private readonly float _spawnTime;
 
-    public EnemyLocationManager(Enemy self)
+    public HitObjectLocationManager(EnemyEvent self)
     {
         _rotationSpeed = self.RotationSpeed;
         Rotation = self.SpawnDegrees;

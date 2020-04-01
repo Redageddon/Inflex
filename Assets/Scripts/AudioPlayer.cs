@@ -18,11 +18,11 @@ public class AudioPlayer : MonoBehaviour
 
     private IEnumerator LoadAudio()
     {
-        var url = Path.Combine(GameControl.Map.Path, GameControl.Map.SongFile);
+        var url = Path.Combine(MapHandler.Map.Path, MapHandler.Map.SongFile);
         AudioClip song;
         audioSource.name = "song";
         audioSource.volume = SettingsHandler.LoadSettings().Volume;
-        audioSource.name = GameControl.Map.SongFile;
+        audioSource.name = MapHandler.Map.SongFile;
 
         using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN))
         {

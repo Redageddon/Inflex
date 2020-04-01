@@ -8,8 +8,8 @@ public class MapButton : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Text mapNameText;
     [SerializeField] private Text difficulty;
-    internal Map Map;
-
+    public LevelData levelData;
+    
     private void Start()
     {
         SetButtonData();
@@ -17,13 +17,13 @@ public class MapButton : MonoBehaviour
 
     private void SetButtonData()
     {
-        mapNameText.text = Map.MetaData.Title;
+        mapNameText.text = levelData.Title;
     }
 
     public void OnClicked()
     {
-        BackgroundChanger.SetBackground(background, Path.Combine(Map.Path, Map.MetaData.Icon));
+        BackgroundChanger.SetBackground(background, Path.Combine(levelData.Path, levelData.Icon));
+        MapHandler.UpdatePublicMap(levelData.Path);
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
-        GameControl.MapName = Map.Path;
     }
 }
