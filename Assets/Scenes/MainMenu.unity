@@ -292,7 +292,6 @@ GameObject:
   - component: {fileID: 568930853}
   - component: {fileID: 568930852}
   - component: {fileID: 568930851}
-  - component: {fileID: 568930850}
   m_Layer: 5
   m_Name: Editor
   m_TagString: Untagged
@@ -320,19 +319,6 @@ RectTransform:
   m_AnchoredPosition: {x: -331, y: -62.3}
   m_SizeDelta: {x: 158.3, y: 111.9}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &568930850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568930848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257750780b0a2524dab4fcccd1079c2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: MapSelection
 --- !u!114 &568930851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,9 +387,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 568930850}
-        m_MethodName: OnClicked
-        m_Mode: 1
+      - m_Target: {fileID: 999906044}
+        m_MethodName: OpenScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -432,7 +418,6 @@ GameObject:
   - component: {fileID: 756732517}
   - component: {fileID: 756732516}
   - component: {fileID: 756732515}
-  - component: {fileID: 756732518}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -528,15 +513,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 756732518}
+      - m_Target: {fileID: 999906044}
         m_MethodName: OpenScene
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MapSelection
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &756732517
@@ -547,19 +532,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756732513}
   m_CullTransparentMesh: 1
---- !u!114 &756732518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756732513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257750780b0a2524dab4fcccd1079c2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: MapSelection
 --- !u!1 &869147063
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +621,6 @@ GameObject:
   - component: {fileID: 884022597}
   - component: {fileID: 884022596}
   - component: {fileID: 884022595}
-  - component: {fileID: 884022594}
   m_Layer: 5
   m_Name: Multiplayer
   m_TagString: Untagged
@@ -677,19 +648,6 @@ RectTransform:
   m_AnchoredPosition: {x: 246, y: 292}
   m_SizeDelta: {x: 158.3, y: 107.6}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &884022594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884022592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257750780b0a2524dab4fcccd1079c2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: MapSelection
 --- !u!114 &884022595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,9 +716,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 884022594}
-        m_MethodName: OnClicked
-        m_Mode: 1
+      - m_Target: {fileID: 999906044}
+        m_MethodName: OpenScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -788,6 +746,7 @@ GameObject:
   - component: {fileID: 999906043}
   - component: {fileID: 999906042}
   - component: {fileID: 999906041}
+  - component: {fileID: 999906044}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -843,6 +802,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &999906044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999906040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257750780b0a2524dab4fcccd1079c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1200873892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,7 +1059,6 @@ GameObject:
   - component: {fileID: 1459660629}
   - component: {fileID: 1459660628}
   - component: {fileID: 1459660627}
-  - component: {fileID: 1459660626}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -1116,19 +1086,6 @@ RectTransform:
   m_AnchoredPosition: {x: 27, y: -329}
   m_SizeDelta: {x: 158.3, y: 140.7}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1459660626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1459660624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257750780b0a2524dab4fcccd1079c2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: MapSelection
 --- !u!114 &1459660627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1197,9 +1154,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1459660626}
-        m_MethodName: OnClicked
-        m_Mode: 1
+      - m_Target: {fileID: 999906044}
+        m_MethodName: OpenScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1228,7 +1185,6 @@ GameObject:
   - component: {fileID: 1693175077}
   - component: {fileID: 1693175076}
   - component: {fileID: 1693175075}
-  - component: {fileID: 1693175074}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -1256,19 +1212,6 @@ RectTransform:
   m_AnchoredPosition: {x: 352, y: -62.3}
   m_SizeDelta: {x: 158.3, y: 93.3}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1693175074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1693175072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257750780b0a2524dab4fcccd1079c2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: Settings
 --- !u!114 &1693175075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1337,9 +1280,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1693175074}
-        m_MethodName: OnClicked
-        m_Mode: 1
+      - m_Target: {fileID: 999906044}
+        m_MethodName: OpenScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

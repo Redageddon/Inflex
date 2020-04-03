@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,11 +50,11 @@ public class Settings : MonoBehaviour
 
     private void SetVariables()
     {
-        _savedSettings = SettingsHandler.LoadSettings();
+        _savedSettings = SettingsHandler.Instance.SavedSettings;
         _keys = _savedSettings.Keys;
         fps.text = _savedSettings.Resolution.refreshRate.ToString();
         volume.value = _savedSettings.Volume;
-        centerSize.value = _savedSettings.CenterSize;
+        centerSize.value = _savedSettings.ElementsSize;
         _resolution = _savedSettings.Resolution;
     }
 
@@ -99,7 +100,7 @@ public class Settings : MonoBehaviour
     public void SetCenterSize(float value)
     {
         centerSize.value = value;
-        _savedSettings.CenterSize = value;
+        _savedSettings.ElementsSize = value;
     }
 
     public void SetResolution()
@@ -130,6 +131,7 @@ public class Settings : MonoBehaviour
 
     public void SaveSettings()
     {
-        SettingsHandler.SaveSettings(_savedSettings);
+        SettingsHandler.Instance.SavedSettings = _savedSettings;
+        SettingsHandler.Instance.Save(Path.Combine(Application.streamingAssetsPath, "Settings.json"));
     }
 }

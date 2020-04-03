@@ -1,10 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 
-public class SceneController : MonoBehaviour
+public class SceneController : Singleton<SceneController>
 {
-    [SerializeField] private string scene;
-    public void OpenScene()
+    public void OpenScene(string scene)
     {
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }

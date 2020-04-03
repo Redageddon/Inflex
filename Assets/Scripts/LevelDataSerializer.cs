@@ -1,36 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using Newtonsoft.Json;
 using UnityEngine;
 
-public static class LevelDataSerializer
+public class LevelDataSerializer : Singleton<LevelDataSerializer>
 {
-    private static readonly string Path = Application.streamingAssetsPath + "/Levels.ds";
-    public static List<LevelData> GetAllLevelsData()
+    private readonly string path = Application.streamingAssetsPath + "/Levels.bin";
+    public List<LevelData> GetAllLevels()
     {
-        if (!File.Exists(Path)) return null;
-        using (var fs = File.OpenRead(Path))
-        using (var cs = new DeflateStream(fs, CompressionMode.Decompress))
-        using (var streamReader = new StreamReader(cs))
+        if (!File.Exists(path)) return null;
+        
+        using (var stream = File.Open(path, FileMode.Open))
         {
-            return JsonConvert.DeserializeObject<List<LevelData>>(streamReader.ReadToEnd());
+            var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            return (List<LevelData>)binaryFormatter.Deserialize(stream);
         }
     }
 
-    public static void RefreshAllLevelsData()
+    public void RefreshAllLevels()
     {
         var levelPaths = Directory.GetDirectories(Environment.ExpandEnvironmentVariables(@"%AppData%\Inflex\Maps\"));
         
-        var levels = levelPaths.Select(MapHandler.LoadMap).Select(x => new LevelData(x.Title, x.Path, x.Icon, 0)).ToList();
-        
-        using (var fs = File.Create(Path))
-        using (var cs = new DeflateStream(fs, System.IO.Compression.CompressionLevel.Fastest))
-        using (var writer = new StreamWriter(cs))
+        var levels = levelPaths.Select(MapHandler.Instance.Load).Select(x => new LevelData(x.Title, x.Path, x.Icon, 0)).ToList();
+
+        using (var stream = File.Create(path))
         {
-            writer.Write(JsonConvert.SerializeObject(levels));
+            var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            binaryFormatter.Serialize(stream, levels);
         }
     }
 }

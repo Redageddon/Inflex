@@ -1,17 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using System.IO;
+using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
     [SerializeField] private GameObject pauseScreen;
-    [SerializeField] private AudioSource audioSource;
     public static bool GamePaused;
-    public static float Speed;
     private int currentSpeed;
-
-    private void Awake()
-    {
-        UpdateSpeed();
-    }
 
     public void OnGUI()
     {
@@ -21,7 +16,6 @@ public class GameState : MonoBehaviour
     private void Update()
     {
         UpdatePause();
-        UpdateSpeed();
     }
 
     private void UpdatePause()
@@ -33,25 +27,24 @@ public class GameState : MonoBehaviour
         }
         if (!GamePaused)
         {
-            audioSource.UnPause();
+            AudioPlayer.Instance.audioSource.UnPause();
         }
         else
         {
-            audioSource.Pause();
+            AudioPlayer.Instance.audioSource.Pause();
         }
     }
     
-    private void UpdateSpeed()
+    public static float GetSpeed(int currentEnemy)
     {
-        if (MapHandler.Map.Speeds == null) Speed = 100;
-        else
+        for (var s = MapHandler.Instance.Map.Speeds.Count - 1; s >= 0; s--)
         {
-            Speed = MapHandler.Map.Speeds[currentSpeed].Speed;
+            if (MapHandler.Instance.Map.Enemies[currentEnemy].SpawnTime > MapHandler.Instance.Map.Speeds[s].SpawnTime)
+            {
+                return MapHandler.Instance.Map.Speeds[s].Speed;
+            }
         }
-        while (audioSource.time + AudioPlayer.Difference > MapHandler.Map.Speeds[currentSpeed].SpawnTime)
-        {
-            if(currentSpeed + 1 >= MapHandler.Map.Speeds.Count) return;
-            currentSpeed++;
-        }
+
+        return 100;
     }
 }

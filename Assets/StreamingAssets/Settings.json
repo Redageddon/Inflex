@@ -12,5 +12,6 @@
     "refreshRate": 59
   },
   "ScreenMode": 3,
-  "CenterSize": 70
+  "ElementsSize": 70,
+  "SkinName": "NewSkin"
 }

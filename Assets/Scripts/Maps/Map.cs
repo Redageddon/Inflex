@@ -13,6 +13,9 @@ public struct Map
         Creator = creator;
         Icon = icon;
         Enemies = enemies;
+        
+        if(speeds[0].Speed != 0) speeds.Insert(0, new SpeedEvent(100, 0));
+        
         Speeds = speeds;
         ScreenEvents = screenEvents;
     }

@@ -1,47 +1,40 @@
 ﻿using System.Collections;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class AudioPlayer : MonoBehaviour
+public class AudioPlayer : Singleton<AudioPlayer>
 {
-    public static float Difference = -5;
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip blank;
-    [SerializeField] private float time;
-    [SerializeField] private bool constrainAudio;
+    public AudioSource audioSource;
+    public AudioClip blank;
 
     private void Start()
     {
         StartCoroutine(LoadAudio());
     }
 
+    public float GetTrueAudioTime()
+    {
+        return audioSource.time + difference;
+    }
+
+    private float difference;
+
     private IEnumerator LoadAudio()
     {
-        var url = Path.Combine(MapHandler.Map.Path, MapHandler.Map.SongFile);
-        AudioClip song;
-        audioSource.name = "song";
-        audioSource.volume = SettingsHandler.LoadSettings().Volume;
-        audioSource.name = MapHandler.Map.SongFile;
-
-        using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN))
-        {
-            yield return request.SendWebRequest();
-            song = Path.GetExtension(url) == ".mp3"
-                ? Mp3Player.AudioClipFromMp3(request.downloadHandler.data)
-                : DownloadHandlerAudioClip.GetContent(request);
-        }
+        difference = CalculateFirstHitObject();
+        var url = Path.Combine(MapHandler.Instance.Map.Path, MapHandler.Instance.Map.SongFile);
+        audioSource.volume = SettingsHandler.Instance.SavedSettings.Volume;
 
         audioSource.clip = blank;
         audioSource.Play();
-        yield return new WaitWhile(() => audioSource.isPlaying);
-        Difference = 0;
-        audioSource.clip = song;
+        yield return new WaitUntil(() => audioSource.time >= -difference);
+        difference = 0;
+        audioSource.clip = AudioHandler.Instance.Load(url);
         audioSource.Play();
     }
 
-    private void Update()
+    private float CalculateFirstHitObject()
     {
-        if (constrainAudio) audioSource.time = Mathf.Clamp(time, 0, float.PositiveInfinity);
+        return -1 * ((960 - 3.591f * SettingsHandler.Instance.SavedSettings.ElementsSize) / GameState.GetSpeed(0) - MapHandler.Instance.Map.Enemies[0].SpawnTime);
     }
 }
