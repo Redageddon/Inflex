@@ -4,9 +4,7 @@ using UnityEngine.UI;
 public class GameUi : MonoBehaviour
 {
     [SerializeField] private Text lives;
-    [SerializeField] private Text currentKey;
-    public static int CurrentKey;
-    
+
     private void Awake()
     {
         Health.Lives = AssetLoader.Instance.Level.Lives;
@@ -25,12 +23,7 @@ public class GameUi : MonoBehaviour
     
     private void UpdateUi()
     {
-        for (var i = 0; i < 4; i++)
-        {
-            if (!Input.GetKeyDown(AssetLoader.Instance.SavedSettings.Keys[i])) continue;
-            currentKey.text = AssetLoader.Instance.SavedSettings.Keys[i].ToString();
-            CurrentKey = i;
-        }
+        
     }
 
     public void SetLives(int l)

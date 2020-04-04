@@ -131,6 +131,6 @@ public class Settings : MonoBehaviour
     public void SaveSettings()
     {
         AssetLoader.Instance.SavedSettings = _savedSettings;
-        AssetLoader.Instance.Save(GenericPaths.SettingsPath);
+        SavedSettingsLoader.Instance.Save(GenericPaths.SettingsPath);
     }
 }

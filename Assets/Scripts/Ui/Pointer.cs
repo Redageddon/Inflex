@@ -18,7 +18,7 @@ public class Pointer : VisibleElement
     
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.name != GameUi.CurrentKey.ToString()) Health.Lives -= 1;
+        if (other.name != CurrentKey.Key.ToString()) Health.Lives -= 1;
         other.GetComponent<HitObject>().Hit();
     }
     
