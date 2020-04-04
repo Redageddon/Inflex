@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static bool _mShuttingDown;
-    private static object _mLock = new object();
+    private static bool _shuttingDown;
+    private static object _lock = new object();
     private static T _mInstance;
     
     public static T Instance
     {
         get
         {
-            if (_mShuttingDown)
+            if (_shuttingDown)
             {
                 Debug.LogWarning("[Singleton] Instance '" + typeof(T) + "' already destroyed. Returning null.");
                 return null;
             }
  
-            lock (_mLock)
+            lock (_lock)
             {
                 if (_mInstance == null)
                 {
@@ -40,11 +40,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        _mShuttingDown = true;
+        _shuttingDown = true;
     }
 
     private void OnDestroy()
     {
-        _mShuttingDown = true;
+        _shuttingDown = true;
     }
 }

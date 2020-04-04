@@ -6,7 +6,7 @@ public class Pointer : VisibleElement
     [SerializeField] private EdgeCollider2D edgeCollider2D;
     private void Awake()
     {
-        var centerSize = SettingsHandler.Instance.SavedSettings.ElementsSize;
+        var centerSize = AssetLoader.Instance.SavedSettings.ElementsSize;
         rectTransform.sizeDelta = new Vector2( centerSize * 5.6f, centerSize * 5.6f);
         edgeCollider2D.points = new[]
         {

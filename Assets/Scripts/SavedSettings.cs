@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public struct SavedSettings
+public class SavedSettings
 {
     public float Volume { get; set; }
     public List<KeyCode> Keys { get; set; }

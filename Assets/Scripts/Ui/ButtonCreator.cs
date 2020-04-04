@@ -3,34 +3,34 @@ using UnityEngine.SceneManagement;
 
 public class ButtonCreator : MonoBehaviour
 {
-    [SerializeField] private GameObject mapButtonTemp;
+    [SerializeField] private GameObject levelButtonTemp;
 
     public void Start()
     {
-        var mapNames = LevelDataSerializer.Instance.GetAllLevels();
-        if(mapNames == null) return;
-        foreach (var mapName in mapNames)
+        var levelNames = LevelDataLoader.Instance.Load(GenericPaths.LevelsDataPath);
+        if(levelNames == null) return;
+        foreach (var level in levelNames)
         {
-            CreateMapButton(mapName);
+            CreateLevelButton(level);
         }
     }
     
     private void Update()
     {
-        CheckForMapsRefreshMacro();
+        CheckForLevelsRefreshMacro();
     }
 
-    private void CheckForMapsRefreshMacro()
+    private void CheckForLevelsRefreshMacro()
     {
         if (!Input.GetKey(KeyCode.LeftControl) || !Input.GetKeyDown(KeyCode.R)) return;
-        LevelDataSerializer.Instance.RefreshAllLevels();
-        SceneManager.LoadScene("MapSelection", LoadSceneMode.Single);
+        LevelDataLoader.Instance.Save(GenericPaths.LevelsDataPath);
+        SceneManager.LoadScene("LevelSelection", LoadSceneMode.Single);
     }
 
-    private void CreateMapButton(LevelData level)
+    private void CreateLevelButton(LevelData level)
     {
-        GameObject button = Instantiate(mapButtonTemp, mapButtonTemp.transform.parent, false);
+        GameObject button = Instantiate(levelButtonTemp, levelButtonTemp.transform.parent, false);
         button.SetActive(true);
-        button.GetComponent<MapButton>().levelData = level;
+        button.GetComponent<LevelButton>().levelData = level;
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class AudioHandler : Singleton<AudioHandler>, IHandlerBase<AudioClip>
+public class AudioClipLoader : Singleton<AudioClipLoader>, ILoader<AudioClip>
 {
     public AudioClip Load(string path)
     {

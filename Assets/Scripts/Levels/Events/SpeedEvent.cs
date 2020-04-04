@@ -1,4 +1,4 @@
-﻿public struct SpeedEvent
+﻿public class SpeedEvent
 {
     public SpeedEvent(float speed, float spawnTime)
     {

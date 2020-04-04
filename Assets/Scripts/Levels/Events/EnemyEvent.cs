@@ -1,4 +1,4 @@
-﻿public struct EnemyEvent
+public class EnemyEvent
 {
     public EnemyEvent(int killKey, float spawnDegrees, float rotationSpeed, float spawnTime)
     {

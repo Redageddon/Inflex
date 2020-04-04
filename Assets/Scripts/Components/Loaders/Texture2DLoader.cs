@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-public class TextureHandler : Singleton<TextureHandler>, IHandlerBase<Texture2D>
+public class Texture2DLoader : Singleton<Texture2DLoader>, ILoader<Texture2D>
 {
     public Texture2D Load(string path)
     {

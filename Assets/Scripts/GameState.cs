@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
@@ -37,14 +35,15 @@ public class GameState : MonoBehaviour
     
     public static float GetSpeed(int currentEnemy)
     {
-        for (var s = MapHandler.Instance.Map.Speeds.Count - 1; s >= 0; s--)
+        for (var s = AssetLoader.Instance.Level.Speeds.Count - 1; s >= 0; s--)
         {
-            if (MapHandler.Instance.Map.Enemies[currentEnemy].SpawnTime > MapHandler.Instance.Map.Speeds[s].SpawnTime)
+            if (AssetLoader.Instance.Level.Enemies[currentEnemy].SpawnTime > AssetLoader.Instance.Level.Speeds[s].SpawnTime)
             {
-                return MapHandler.Instance.Map.Speeds[s].Speed;
+                return AssetLoader.Instance.Level.Speeds[s].Speed;
             }
         }
 
+        
         return 100;
     }
 }

@@ -18,7 +18,7 @@ public class HitObjectLocationManager
     public float Distance;
     public Vector3 GetLocation(float audioSourceTime, float speed)
     {
-        Distance = (float)(speed * (-audioSourceTime + _spawnTime) + 5.6 * SettingsHandler.Instance.SavedSettings.ElementsSize);
+        Distance = (float)(speed * (-audioSourceTime + _spawnTime) + 5.6 * AssetLoader.Instance.SavedSettings.ElementsSize);
         var radians = Rotation * Mathf.Deg2Rad;
         
         var x = (float) (Distance * Math.Sin(radians));

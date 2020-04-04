@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-public struct Map
+public class Level
 {
-    public Map(string path, int lives, string songFile, string background, string title, string artist, string creator, string icon, List<EnemyEvent> enemies, List<SpeedEvent> speeds, List<ScreenEvent> screenEvents)
+    public Level(string path, int lives, string songFile, string background, string title, string artist, string creator, string icon, List<EnemyEvent> enemies, List<SpeedEvent> speeds, List<ScreenEvent> screenEvents)
     {
         Path = path;
         Lives = lives;

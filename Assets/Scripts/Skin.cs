@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public struct Skin
+public class Skin
 {
     public Texture2D Background { get; set; }
     public Texture2D Center { get; set; }

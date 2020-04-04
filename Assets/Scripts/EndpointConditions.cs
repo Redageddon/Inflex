@@ -5,11 +5,11 @@ public class EndpointConditions : MonoBehaviour
 {
     public static void GameWin()
     {
-        SceneManager.LoadScene("MapSelection", LoadSceneMode.Single);
+        SceneManager.LoadScene("LevelSelection", LoadSceneMode.Single);
     }
 
     public static void GameLose()
     {
-        SceneManager.LoadScene("MapSelection", LoadSceneMode.Single);
+        SceneManager.LoadScene("LevelSelection", LoadSceneMode.Single);
     }
 }

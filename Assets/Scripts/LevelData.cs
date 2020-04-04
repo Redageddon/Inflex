@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public struct LevelData
+public class LevelData
 {
     public LevelData(string title, string path, string icon, float difficulty)
     {

@@ -22,19 +22,20 @@ public class AudioPlayer : Singleton<AudioPlayer>
     private IEnumerator LoadAudio()
     {
         difference = CalculateFirstHitObject();
-        var url = Path.Combine(MapHandler.Instance.Map.Path, MapHandler.Instance.Map.SongFile);
-        audioSource.volume = SettingsHandler.Instance.SavedSettings.Volume;
+        var url = Path.Combine(AssetLoader.Instance.Level.Path, AssetLoader.Instance.Level.SongFile);
+        var clip = AudioClipLoader.Instance.Load(url);
+        audioSource.volume = AssetLoader.Instance.SavedSettings.Volume;
 
         audioSource.clip = blank;
         audioSource.Play();
         yield return new WaitUntil(() => audioSource.time >= -difference);
         difference = 0;
-        audioSource.clip = AudioHandler.Instance.Load(url);
+        audioSource.clip = clip;
         audioSource.Play();
     }
 
     private float CalculateFirstHitObject()
     {
-        return -1 * ((960 - 3.591f * SettingsHandler.Instance.SavedSettings.ElementsSize) / GameState.GetSpeed(0) - MapHandler.Instance.Map.Enemies[0].SpawnTime);
+        return -1 * ((960 - 3.591f * AssetLoader.Instance.SavedSettings.ElementsSize) / GameState.GetSpeed(0) - AssetLoader.Instance.Level.Enemies[0].SpawnTime);
     }
 }

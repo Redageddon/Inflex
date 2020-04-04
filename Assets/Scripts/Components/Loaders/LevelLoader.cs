@@ -3,22 +3,20 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-public class MapHandler : Singleton<MapHandler>, IHandlerBase<Map>
+public class LevelLoader : Singleton<LevelLoader>, ILoader<Level>
  {
-     public Map Map { get; set; }
- 
-     public Map Load(string path)
+     public Level Load(string path)
      {
          var json = Directory.GetFiles(path, @"*.json").First();
          var data = File.ReadAllText(json);
          JObject prePath = JObject.Parse(data);
          prePath.Add("Path", path);
-         return prePath.ToObject<Map>();
+         return prePath.ToObject<Level>();
      }
  
      public void Save(string path)
      {
-         var json = JsonConvert.SerializeObject(Map, (Formatting) 1);
+         var json = JsonConvert.SerializeObject(AssetLoader.Instance.Level, (Formatting) 1);
          File.WriteAllText(path, json);
      }
  }

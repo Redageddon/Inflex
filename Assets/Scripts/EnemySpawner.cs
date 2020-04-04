@@ -12,10 +12,10 @@ public class EnemySpawner : MonoBehaviour
     
     private void WaitToSpawnEnemy()
     {
-        for (var i = _offset; i < MapHandler.Instance.Map.Enemies.Count; i++)
+        for (var i = _offset; i < AssetLoader.Instance.Level.Enemies.Count; i++)
         {
-            if (GameState.GetSpeed(_offset) * (-AudioPlayer.Instance.GetTrueAudioTime() + MapHandler.Instance.Map.Enemies[i].SpawnTime) + 5.6 * SettingsHandler.Instance.SavedSettings.ElementsSize > 1100) return;
-            CreateEnemy(MapHandler.Instance.Map.Enemies[i], GameState.GetSpeed(_offset));
+            if (GameState.GetSpeed(_offset) * (-AudioPlayer.Instance.GetTrueAudioTime() + AssetLoader.Instance.Level.Enemies[i].SpawnTime) + 5.6 * AssetLoader.Instance.SavedSettings.ElementsSize > 1100) return;
+            CreateEnemy(AssetLoader.Instance.Level.Enemies[i], GameState.GetSpeed(_offset));
             _offset ++;
         }
     }

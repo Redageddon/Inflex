@@ -3,6 +3,6 @@ using UnityEngine.UI;
 
 public class VisibleElement : MonoBehaviour
 {
-    public Image images;
+    public Image image;
     public RectTransform rectTransform;
 }

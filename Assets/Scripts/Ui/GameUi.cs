@@ -9,7 +9,7 @@ public class GameUi : MonoBehaviour
     
     private void Awake()
     {
-        Health.Lives = MapHandler.Instance.Map.Lives;
+        Health.Lives = AssetLoader.Instance.Level.Lives;
     }
 
     private void Update()
@@ -27,8 +27,8 @@ public class GameUi : MonoBehaviour
     {
         for (var i = 0; i < 4; i++)
         {
-            if (!Input.GetKeyDown(SettingsHandler.Instance.SavedSettings.Keys[i])) continue;
-            currentKey.text = SettingsHandler.Instance.SavedSettings.Keys[i].ToString();
+            if (!Input.GetKeyDown(AssetLoader.Instance.SavedSettings.Keys[i])) continue;
+            currentKey.text = AssetLoader.Instance.SavedSettings.Keys[i].ToString();
             CurrentKey = i;
         }
     }

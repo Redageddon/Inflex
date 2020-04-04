@@ -1,4 +1,4 @@
-﻿public struct ScreenEvent
+﻿public class ScreenEvent
 {
     public ScreenEvent(int rotationSpeed, int zoom, float spawnTime)
     {
