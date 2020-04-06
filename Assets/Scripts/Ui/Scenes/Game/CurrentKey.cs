@@ -22,7 +22,7 @@ public class CurrentKey : VisibleElement
 
     private void SetImage(int current)
     {
-        image.texture = Assets.Instance.Skin.CurrentKeys is null ? sprites[current].texture : Assets.Instance.Skin.CurrentKeys[current];
+        image.texture = Assets.Instance.Skin.CurrentKeys[current] is null ? sprites[current].texture : Assets.Instance.Skin.CurrentKeys[current];
         rectTransform.offsetMin = new Vector2(-sprites[current].rect.xMax, -sprites[current].rect.yMax);
     }
 }

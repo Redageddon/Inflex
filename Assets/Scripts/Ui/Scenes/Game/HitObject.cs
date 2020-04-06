@@ -13,7 +13,7 @@ public class HitObject : VisibleElement
         _locationManager = new HitObjectLocationManager(enemyEvent);
         gameObject.name = $"KillKey: {enemyEvent.KillKey}";
         KillKey = enemyEvent.KillKey;
-        image.texture = Assets.Instance.Skin.HitObjects is null ? sprites[enemyEvent.KillKey].texture : Assets.Instance.Skin.HitObjects[enemyEvent.KillKey];
+        image.texture = Assets.Instance.Skin.HitObjects[enemyEvent.KillKey] is null ? sprites[enemyEvent.KillKey].texture : Assets.Instance.Skin.HitObjects[enemyEvent.KillKey];
 
         circleCollider2D.radius = Assets.Instance.SavedSettings.ElementsSize;
         rectTransform.sizeDelta = new Vector2(Assets.Instance.SavedSettings.ElementsSize * 2, Assets.Instance.SavedSettings.ElementsSize * 2);
