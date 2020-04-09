@@ -318,7 +318,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 88026a3918fefdd40bd579f54740a65f, type: 3}
   - {fileID: 21300000, guid: 9981e564ad1ae2b4998c5c4b7b6373d9, type: 3}
   - {fileID: 21300000, guid: c4fcbfe9d0e62504680fa7a543e2129c, type: 3}
-  KillKey: 0
+  killKey: 0
 --- !u!58 &348507049
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -815,8 +815,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 724442711}
-  - component: {fileID: 724442710}
   - component: {fileID: 724442712}
+  - component: {fileID: 724442710}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -837,7 +837,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 724442712}
-  blank: {fileID: 8300000, guid: 62b161a29602fb84b8f1609f3cbed385, type: 3}
 --- !u!4 &724442711
 Transform:
   m_ObjectHideFlags: 0
@@ -864,7 +863,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0

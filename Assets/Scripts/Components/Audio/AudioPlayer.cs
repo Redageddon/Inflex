@@ -2,40 +2,39 @@
 using System.IO;
 using UnityEngine;
 
-public class AudioPlayer : Singleton<AudioPlayer>
+public class AudioPlayer : MonoBehaviour
 {
+    public static AudioPlayer Instance { get; private set; }
     public AudioSource audioSource;
-    public AudioClip blank;
+    public float TrueAudioTime => audioSource.time + difference;
+    private float difference = CalculateFirstHitObject();
 
     private void Start()
     {
-        StartCoroutine(LoadAudio());
+        //difference = CalculateFirstHitObject();
+        LoadAudio();
+        Instance = this;
     }
 
-    public float GetTrueAudioTime()
+    private void LoadAudio()
     {
-        return audioSource.time + difference;
-    }
-
-    private float difference;
-
-    private IEnumerator LoadAudio()
-    {
-        difference = CalculateFirstHitObject();
         var url = Path.Combine(Assets.Instance.Level.Path, Assets.Instance.Level.SongFile);
-        var clip = AudioClipLoader.Instance.Load(url);
-        audioSource.volume = Assets.Instance.SavedSettings.Volume;
+        audioSource.clip = AudioClipLoader.Instance.Load(url);
+        StartCoroutine(PlayAudio());
+    }
 
-        audioSource.clip = blank;
+    private IEnumerator PlayAudio()
+    {
         audioSource.Play();
         yield return new WaitUntil(() => audioSource.time >= -difference);
         difference = 0;
-        audioSource.clip = clip;
+        audioSource.volume = Assets.Instance.SavedSettings.Volume;
         audioSource.Play();
     }
 
-    private float CalculateFirstHitObject()
+    private static float CalculateFirstHitObject()
     {
-        return -1 * ((960 - 3.591f * Assets.Instance.SavedSettings.ElementsSize) / GameState.GetSpeed(0) - Assets.Instance.Level.Enemies[0].SpawnTime);
+        return -1 * ((960 - 3.591f * Assets.Instance.SavedSettings.ElementsSize) / GameState.GetSpeed(0) -
+                     Assets.Instance.Level.Enemies[0].SpawnTime);
     }
 }

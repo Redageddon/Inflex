@@ -2,21 +2,21 @@
 using System.IO;
 using System.Linq;
 
-public class DataLoader : Singleton<DataLoader>, ILoader<List<Data>>
+public class DataLoader : Singleton<DataLoader>, ILoader<List<LevelData>>
 {
-    public List<Data> Load(string path)
+    public List<LevelData> Load(string path)
     {
         using (var stream = File.Open(path, FileMode.Open))
         {
             var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            return (List<Data>)binaryFormatter.Deserialize(stream);
+            return (List<LevelData>)binaryFormatter.Deserialize(stream);
         }
     }
 
     public void Save(string path)
     {
         var levelPaths = Directory.GetDirectories(GenericPaths.LevelsPath);
-        var levels = levelPaths.Select(LevelLoader.Instance.Load).Select(x => new Data(x.Title, x.Path, x.Icon, 0, x.SongFile)).ToList();
+        List<LevelData> levels = levelPaths.Select(levelPath => new LevelData(LevelLoader.Instance.Load(levelPath))).ToList();
 
         using (var stream = File.Create(path))
         {

@@ -10,9 +10,7 @@ public class AudioClipLoader : Singleton<AudioClipLoader>, ILoader<AudioClip>
         {
             request.SendWebRequest();
             System.Threading.SpinWait.SpinUntil(() => request.isDone);
-            return Path.GetExtension(path) == ".mp3"
-                ? new AudioClipFromMp3(request.downloadHandler.data).AudioClip
-                : DownloadHandlerAudioClip.GetContent(request);
+            return Path.GetExtension(path) == ".mp3" ? AudioClipFromMp3.FromBytes(request.downloadHandler.data) : DownloadHandlerAudioClip.GetContent(request);
         }
     }
 

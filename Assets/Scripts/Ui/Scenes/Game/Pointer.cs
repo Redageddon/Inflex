@@ -21,7 +21,7 @@ public class Pointer : VisibleElement
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.GetComponent<HitObject>().KillKey != CurrentKey.Key)
+        if (other.GetComponent<HitObject>().killKey != CurrentKey.Key)
         {
             Lives.Health -= 1;
         }

@@ -27,7 +27,7 @@ public class ButtonCreator : MonoBehaviour
         SceneManager.LoadScene("LevelSelection", LoadSceneMode.Single);
     }
 
-    private void CreateLevelButton(Data level)
+    private void CreateLevelButton(LevelData level)
     {
         GameObject button = Instantiate(levelButtonTemp, levelButtonTemp.transform.parent, false);
         button.SetActive(true);

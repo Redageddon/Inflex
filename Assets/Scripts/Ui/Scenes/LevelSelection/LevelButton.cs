@@ -6,20 +6,20 @@ public class LevelButton : Button
 {
     [SerializeField] private Text levelNameText;
     [SerializeField] private Text difficulty;
-    private Data _data;
+    private LevelData levelData;
 
-    public void SetButtonData(Data data)
+    public void SetButtonData(LevelData levelData)
     {
         image.texture = Assets.Instance.Skin.LevelButton ? Assets.Instance.Skin.LevelButton : image.texture;
         image.SetNativeSize();
-        _data = data;
-        levelNameText.text = data.Title;
-        difficulty.text = data.Difficulty.ToString();
+        this.levelData = levelData;
+        levelNameText.text = levelData.Title;
+        difficulty.text = levelData.Difficulty.ToString();
     }
 
     public override void OnClicked(string navigation)
     {
-        Assets.Instance.Level = LevelLoader.Instance.Load(_data.Path);
+        Assets.Instance.Level = LevelLoader.Instance.Load(levelData.Path);
         SceneManager.LoadScene(navigation, LoadSceneMode.Single);
     }
 }
