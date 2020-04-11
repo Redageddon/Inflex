@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class SavedSettings
-{
+{ 
     public float Volume { get; set; }
     public List<KeyCode> Keys { get; set; }
     public Resolution Resolution { get; set; }

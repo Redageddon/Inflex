@@ -7,7 +7,11 @@ public class ButtonCreator : MonoBehaviour
 
     public void Start()
     {
-        var levelNames = DataLoader.Instance.Load(GenericPaths.LevelsDataPath);
+        Database db = new Database();
+        // just to start it
+        
+        
+        var levelNames = DataLoader.Load(GenericPaths.LevelsDataPath);
         if(levelNames == null) return;
         foreach (var level in levelNames)
         {
@@ -23,7 +27,7 @@ public class ButtonCreator : MonoBehaviour
     private void CheckForLevelsRefreshMacro()
     {
         if (!Input.GetKey(KeyCode.LeftControl) || !Input.GetKeyDown(KeyCode.R)) return;
-        DataLoader.Instance.Save(GenericPaths.LevelsDataPath);
+        DataLoader.Save(GenericPaths.LevelsDataPath);
         SceneManager.LoadScene("LevelSelection", LoadSceneMode.Single);
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static bool _shuttingDown;
-    private static object _lock = new object();
+    private static readonly object Lock = new object();
     private static T _mInstance;
     
     public static T Instance
@@ -17,7 +17,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 return null;
             }
  
-            lock (_lock)
+            lock (Lock)
             {
                 if (_mInstance == null)
                 {

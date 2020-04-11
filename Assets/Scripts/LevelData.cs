@@ -9,7 +9,7 @@ public class LevelData
         Difficulty = 0;
         SongFile = level.SongFile;
     }
-
+    
     public string Title { get; }
     public string Path { get; }
     public string Icon { get; }

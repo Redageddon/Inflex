@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class AudioClipLoader : Singleton<AudioClipLoader>, ILoader<AudioClip>
+public class AudioClipLoader
 {
-    public AudioClip Load(string path)
+    public static AudioClip Load(string path)
     {
         using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.UNKNOWN))
         {
@@ -12,11 +12,5 @@ public class AudioClipLoader : Singleton<AudioClipLoader>, ILoader<AudioClip>
             System.Threading.SpinWait.SpinUntil(() => request.isDone);
             return Path.GetExtension(path) == ".mp3" ? AudioClipFromMp3.FromBytes(request.downloadHandler.data) : DownloadHandlerAudioClip.GetContent(request);
         }
-    }
-
-    public void Save(string path)
-    {
-        Debug.LogWarning("This has not been Implemented");
-        throw new System.NotImplementedException();
     }
 }

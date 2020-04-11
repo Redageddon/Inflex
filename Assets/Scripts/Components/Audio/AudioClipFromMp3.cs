@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using UnityEngine;
 using System.IO;
 using System.Threading.Tasks;
 using NAudio.Wave;
-using Debug = UnityEngine.Debug;
 
 public class AudioClipFromMp3
 {

@@ -10,16 +10,16 @@ public class LevelButton : Button
 
     public void SetButtonData(LevelData levelData)
     {
+        this.levelData = levelData;
         image.texture = Assets.Instance.Skin.LevelButton ? Assets.Instance.Skin.LevelButton : image.texture;
         image.SetNativeSize();
-        this.levelData = levelData;
         levelNameText.text = levelData.Title;
         difficulty.text = levelData.Difficulty.ToString();
     }
 
     public override void OnClicked(string navigation)
     {
-        Assets.Instance.Level = LevelLoader.Instance.Load(levelData.Path);
+        Assets.Instance.Level = LevelLoader.Load(levelData.Path);
         SceneManager.LoadScene(navigation, LoadSceneMode.Single);
     }
 }

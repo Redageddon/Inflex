@@ -1,18 +1,18 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 
-public class SavedSettingsLoader : Singleton<SavedSettingsLoader>, ILoader<SavedSettings>
+public class SavedSettingsLoader
 {
-    public SavedSettings Load(string path)
+    public static SavedSettings Load(string path)
     {
         var json = File.ReadAllText(path);
         var settings = JsonConvert.DeserializeObject<SavedSettings>(json);
         return settings;
     }
 
-    public void Save(string path)
+    public static void Save(string path)
     {
-        var json = JsonConvert.SerializeObject(Assets.Instance.SavedSettings, (Formatting) 1);
+        var json = JsonConvert.SerializeObject(Assets.Instance.SavedSettings, Formatting.Indented);
         File.WriteAllText(GenericPaths.SettingsPath, json);
     }
 }

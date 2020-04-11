@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -131,6 +130,6 @@ public class Settings : MonoBehaviour
     public void SaveSettings()
     {
         Assets.Instance.SavedSettings = _savedSettings;
-        SavedSettingsLoader.Instance.Save(GenericPaths.SettingsPath);
+        SavedSettingsLoader.Save(GenericPaths.SettingsPath);
     }
 }

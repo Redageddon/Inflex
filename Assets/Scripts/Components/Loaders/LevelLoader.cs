@@ -3,9 +3,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-public class LevelLoader : Singleton<LevelLoader>, ILoader<Level>
+public class LevelLoader
  {
-     public Level Load(string path)
+     public static Level Load(string path)
      {
          var json = Directory.GetFiles(path, @"*.json").First();
          var data = File.ReadAllText(json);
@@ -14,7 +14,7 @@ public class LevelLoader : Singleton<LevelLoader>, ILoader<Level>
          return prePath.ToObject<Level>();
      }
  
-     public void Save(string path)
+     public static void Save(string path)
      {
          var json = JsonConvert.SerializeObject(Assets.Instance.Level, (Formatting) 1);
          File.WriteAllText(path, json);

@@ -2,9 +2,9 @@
 using System.IO;
 using System.Linq;
 
-public class DataLoader : Singleton<DataLoader>, ILoader<List<LevelData>>
+public class DataLoader
 {
-    public List<LevelData> Load(string path)
+    public static List<LevelData> Load(string path)
     {
         using (var stream = File.Open(path, FileMode.Open))
         {
@@ -13,10 +13,11 @@ public class DataLoader : Singleton<DataLoader>, ILoader<List<LevelData>>
         }
     }
 
-    public void Save(string path)
+    public static void Save(string path)
     {
         var levelPaths = Directory.GetDirectories(GenericPaths.LevelsPath);
-        List<LevelData> levels = levelPaths.Select(levelPath => new LevelData(LevelLoader.Instance.Load(levelPath))).ToList();
+        
+        List<LevelData> levels = levelPaths.Select(levelPath => new LevelData(LevelLoader.Load(levelPath))).ToList();
 
         using (var stream = File.Create(path))
         {
