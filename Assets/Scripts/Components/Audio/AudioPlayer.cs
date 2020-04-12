@@ -6,13 +6,18 @@ public class AudioPlayer : MonoBehaviour
 {
     public static AudioPlayer Instance { get; private set; }
     public AudioSource audioSource;
-    public float TrueAudioTime => audioSource.time + difference;
-    private float difference = CalculateFirstHitObject();
-
+    private float difference;
+    
     private void Start()
     {
+        difference = CalculateFirstHitObject();
         LoadAudio();
         Instance = this;
+    }
+
+    public float TrueAudioTime()
+    {
+        return audioSource.time + difference;
     }
 
     private void LoadAudio()

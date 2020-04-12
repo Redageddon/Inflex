@@ -19,7 +19,7 @@ public class HitObject : VisibleElement
         rectTransform.sizeDelta = new Vector2(Assets.Instance.SavedSettings.ElementsSize * 2, Assets.Instance.SavedSettings.ElementsSize * 2);
 
         _speed = speed;
-        gameObject.transform.localPosition = _locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime, _speed);
+        gameObject.transform.localPosition = _locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime(), _speed);
         gameObject.SetActive(true);
     }
 
@@ -37,7 +37,7 @@ public class HitObject : VisibleElement
             Hit();
         }
 
-        gameObject.transform.localPosition = _locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime, _speed);
+        gameObject.transform.localPosition = _locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime(), _speed);
     }
 
     public void Update()

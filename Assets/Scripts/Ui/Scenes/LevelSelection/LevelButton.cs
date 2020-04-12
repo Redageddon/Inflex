@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,9 +9,9 @@ public class LevelButton : Button
     [SerializeField] private Text difficulty;
     private LevelData levelData;
 
-    public void SetButtonData(LevelData levelData)
+    public void SetButtonData(LevelData data)
     {
-        this.levelData = levelData;
+        levelData = data;
         image.texture = Assets.Instance.Skin.LevelButton ? Assets.Instance.Skin.LevelButton : image.texture;
         image.SetNativeSize();
         levelNameText.text = levelData.Title;

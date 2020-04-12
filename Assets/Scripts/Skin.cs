@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Skin
 {
     public Skin(string skinPath, string skinName)
     {
-        if (skinName != "Default")
+        if (!string.Equals(skinName, "Default", StringComparison.OrdinalIgnoreCase))
         {
             CurrentKeys = new List<Texture2D>();
             HitObjects = new List<Texture2D>();

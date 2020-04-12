@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ButtonCreator : MonoBehaviour
@@ -7,10 +8,6 @@ public class ButtonCreator : MonoBehaviour
 
     public void Start()
     {
-        Database db = new Database();
-        // just to start it
-        
-        
         var levelNames = DataLoader.Load(GenericPaths.LevelsDataPath);
         if(levelNames == null) return;
         foreach (var level in levelNames)
@@ -28,6 +25,7 @@ public class ButtonCreator : MonoBehaviour
     {
         if (!Input.GetKey(KeyCode.LeftControl) || !Input.GetKeyDown(KeyCode.R)) return;
         DataLoader.Save(GenericPaths.LevelsDataPath);
+        DataLoader.DbTest();
         SceneManager.LoadScene("LevelSelection", LoadSceneMode.Single);
     }
 

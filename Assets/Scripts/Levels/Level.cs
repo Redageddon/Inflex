@@ -2,7 +2,8 @@
 
 public class Level
 {
-    public Level(string path, int lives, string songFile, string background, string title, string artist, string creator, string icon, List<EnemyEvent> enemies, List<SpeedEvent> speeds, List<ScreenEvent> screenEvents)
+    public Level(string path, int lives, string songFile, string background, string title, string artist, string creator, string icon,
+        List<EnemyEvent> enemies, List<SpeedEvent> speeds, List<ScreenEvent> screenEvents)
     {
         Path = path;
         Lives = lives;
@@ -13,9 +14,9 @@ public class Level
         Creator = creator;
         Icon = icon;
         Enemies = enemies;
-        
-        if(speeds[0].Speed != 0) speeds.Insert(0, new SpeedEvent(100, 0));
-        
+
+        if (speeds[0].Speed != 0) speeds.Insert(0, new SpeedEvent(100, 0));
+
         Speeds = speeds;
         ScreenEvents = screenEvents;
     }
@@ -31,4 +32,10 @@ public class Level
     public List<EnemyEvent> Enemies { get; }
     public List<SpeedEvent> Speeds { get; }
     public List<ScreenEvent> ScreenEvents { get; }
+
+    public override string ToString()
+    {
+        return
+            $"Path:{Path}, Lives:{Lives}, SongFile:{SongFile}, Background:{Background}, Title:{Title}, Artist:{Artist}, Creator:{Creator}, Icon:{Icon}, Enemies:{Enemies.Count}, Speeds:{Speeds.Count}, ScreenEvents:{ScreenEvents}";
+    }
 }

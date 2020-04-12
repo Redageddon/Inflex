@@ -1,6 +1,10 @@
 ﻿[System.Serializable]
 public class LevelData
 {
+    public LevelData()
+    {
+    }
+
     public LevelData(Level level)
     {
         Title = level.Title;
@@ -10,9 +14,14 @@ public class LevelData
         SongFile = level.SongFile;
     }
     
-    public string Title { get; }
-    public string Path { get; }
-    public string Icon { get; }
-    public float Difficulty { get; }
-    public string SongFile { get; }
+    public string Title { get; set; }
+    public string Path { get; set; }
+    public string Icon { get; set; }
+    public float Difficulty { get; set; }
+    public string SongFile { get; set; }
+
+    public override string ToString()
+    {
+        return $"Title:{Title}, Path:{Path}, Icon:{Icon}, Difficulty:{Difficulty}, SongFile:{SongFile}";
+    }
 }
