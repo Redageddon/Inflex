@@ -1,5 +1,4 @@
-﻿using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -7,6 +6,7 @@ public class LevelButton : Button
 {
     [SerializeField] private Text levelNameText;
     [SerializeField] private Text difficulty;
+    [SerializeField] private GameObject levelButtonControl;
     private LevelData levelData;
 
     public void SetButtonData(LevelData data)
@@ -18,9 +18,16 @@ public class LevelButton : Button
         difficulty.text = levelData.Difficulty.ToString();
     }
 
-    public override void OnClicked(string navigation)
+    protected override void Left()
     {
         Assets.Instance.Level = LevelLoader.Load(levelData.Path);
-        SceneManager.LoadScene(navigation, LoadSceneMode.Single);
+        SceneManager.LoadScene("Game", LoadSceneMode.Single);
+    }
+
+    protected override void Right()
+    {
+        levelButtonControl.SetActive(true);
+        levelButtonControl.transform.Find("DeleteMap").GetComponent<DeleteMapButton>().DeletionIndex = levelData.Id;
+        levelButtonControl.transform.Find("DeleteMap").GetComponent<DeleteMapButton>().DeletionButton = gameObject;
     }
 }

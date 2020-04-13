@@ -386,18 +386,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 568930851}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OpenScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!222 &568930853
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -417,8 +406,8 @@ GameObject:
   - component: {fileID: 756732514}
   - component: {fileID: 756732517}
   - component: {fileID: 756732516}
-  - component: {fileID: 756732515}
   - component: {fileID: 756732518}
+  - component: {fileID: 756732515}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -455,7 +444,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 756732513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3ed3714c69b4911bb9e9fa7ee4bda5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e950e522baa4b239e8c419872440fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 756732518}
@@ -503,7 +492,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 756732515}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClicked
         m_Mode: 5
         m_Arguments:
@@ -730,18 +719,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 884022595}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OpenScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!222 &884022597
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1142,18 +1120,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1459660627}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OpenScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!222 &1459660629
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1174,7 +1141,6 @@ GameObject:
   - component: {fileID: 1693175077}
   - component: {fileID: 1693175076}
   - component: {fileID: 1693175075}
-  - component: {fileID: 1693175074}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -1202,20 +1168,6 @@ RectTransform:
   m_AnchoredPosition: {x: 285.317, y: -92.705}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1693175074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1693175072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3ed3714c69b4911bb9e9fa7ee4bda5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 1693175075}
-  rectTransform: {fileID: 1693175073}
 --- !u!114 &1693175075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1283,18 +1235,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1693175075}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1693175074}
-        m_MethodName: OnClicked
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Settings
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!222 &1693175077
 CanvasRenderer:
   m_ObjectHideFlags: 0

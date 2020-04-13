@@ -1,9 +1,29 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System;
+using UnityEngine.EventSystems;
 
-public class Button : VisibleElement
+public abstract class Button : VisibleElement, IPointerClickHandler
 {
-    public virtual void OnClicked(string navigation)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        SceneManager.LoadScene(navigation, LoadSceneMode.Single);
+        switch (eventData.button)
+        {
+            case PointerEventData.InputButton.Left:
+                Left();
+                break;
+            case PointerEventData.InputButton.Right:
+                Right();
+                break;
+            case PointerEventData.InputButton.Middle:
+                Middle();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
+
+    protected abstract void Left();
+    
+    protected virtual void Middle() => Left();
+    
+    protected virtual void Right() => Left();
 }

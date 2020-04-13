@@ -1,4 +1,6 @@
-﻿[System.Serializable]
+﻿using System.ComponentModel.DataAnnotations;
+
+[System.Serializable]
 public class LevelData
 {
     public LevelData()
@@ -13,7 +15,8 @@ public class LevelData
         Difficulty = 0;
         SongFile = level.SongFile;
     }
-    
+
+    [Key] public int Id { get; set; }
     public string Title { get; set; }
     public string Path { get; set; }
     public string Icon { get; set; }
