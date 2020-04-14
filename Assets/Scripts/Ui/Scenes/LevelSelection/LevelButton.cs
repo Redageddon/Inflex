@@ -20,14 +20,14 @@ public class LevelButton : Button
 
     protected override void Left()
     {
-        Assets.Instance.Level = LevelLoader.Load(levelData.Path);
+        Assets.Instance.Level = JsonLoader.LoadLevel(levelData.Path);
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
     protected override void Right()
     {
         levelButtonControl.SetActive(true);
-        levelButtonControl.transform.Find("DeleteMap").GetComponent<DeleteMapButton>().DeletionIndex = levelData.Id;
-        levelButtonControl.transform.Find("DeleteMap").GetComponent<DeleteMapButton>().DeletionButton = gameObject;
+        levelButtonControl.transform.Find("DeleteMap").GetComponent<DeleteMapButton>().deletionIndex = levelData.Id;
+        levelButtonControl.transform.Find("DeleteMap").GetComponent<DeleteMapButton>().deletionButton = gameObject;
     }
 }

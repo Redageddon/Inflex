@@ -3,6 +3,7 @@
 public class HitObjectCreator : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
+    [SerializeField] private AudioPlayer audioPlayer;
     private int _offset;
     
     private void Update() 
@@ -14,7 +15,7 @@ public class HitObjectCreator : MonoBehaviour
     {
         for (var i = _offset; i < Assets.Instance.Level.Enemies.Count; i++)
         {
-            if (GameState.GetSpeed(_offset) * (-AudioPlayer.Instance.TrueAudioTime() + Assets.Instance.Level.Enemies[i].SpawnTime) + 5.6 * Assets.Instance.SavedSettings.ElementsSize > 1100) return;
+            if (GameState.GetSpeed(_offset) * (-audioPlayer.TrueAudioTime + Assets.Instance.Level.Enemies[i].SpawnTime) + 5.6 * Assets.Instance.SavedSettings.ElementsSize > 1100) return;
             CreateEnemy(Assets.Instance.Level.Enemies[i], GameState.GetSpeed(_offset));
             _offset ++;
         }

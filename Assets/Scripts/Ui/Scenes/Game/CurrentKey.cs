@@ -5,10 +5,7 @@ public class CurrentKey : VisibleElement
     public static int Key;
     [SerializeField] private Sprite[] sprites;
 
-    private void Awake()
-    {
-        SetImage(0);
-    }
+    private void Awake() => SetImage(0);
 
     private void Update()
     {

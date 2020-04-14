@@ -130,6 +130,6 @@ public class Settings : MonoBehaviour
     public void SaveSettings()
     {
         Assets.Instance.SavedSettings = _savedSettings;
-        SavedSettingsLoader.Save(GenericPaths.SettingsPath);
+        JsonLoader.Save(Assets.Instance.SavedSettings, GenericPaths.SettingsPath);
     }
 }

@@ -8,7 +8,6 @@ public class Pointer : VisibleElement
     private void Awake()
     {
         var centerSize = Assets.Instance.SavedSettings.ElementsSize;
-        if(image == null) return;
         image.texture = Assets.Instance.Skin.Pointer ? Assets.Instance.Skin.Pointer: image.texture;
         rectTransform.sizeDelta = new Vector2(centerSize * 5.6f, centerSize * 5.6f);
         edgeCollider2D.points = new[]
@@ -36,13 +35,8 @@ public class Pointer : VisibleElement
         return Math.Atan2(x, -y) * Mathf.Rad2Deg + 180;
     }
 
-    private void Update()
-    {
-        SetZRotation();
-    }
+    private void Update() => SetZRotation();
 
-    private void SetZRotation()
-    {
-        transform.localRotation = Quaternion.Euler(0, 0, (float) (GetZRotation() - 180));
-    }
+    private void SetZRotation() => transform.localRotation = Quaternion.Euler(0, 0, (float) (GetZRotation() - 180));
+    
 }

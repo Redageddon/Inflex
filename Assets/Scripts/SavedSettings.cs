@@ -9,4 +9,6 @@ public class SavedSettings
     public FullScreenMode ScreenMode { get; set; }
     public float ElementsSize { get; set; }
     public string SkinName { get; set; }
+    
+    public override string ToString() => $"Volume:{Volume}, Keys:{Keys.Count}, Resolution:{Resolution}, ScreenMode:{ScreenMode}, ElementsSize:{ElementsSize}, SkinName:{SkinName}";
 }

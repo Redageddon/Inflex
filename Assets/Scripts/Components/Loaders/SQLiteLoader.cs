@@ -4,12 +4,12 @@ using System.Linq;
 
 public static class LevelDataLoader
 {
-    public static void SaveTest(string path)
+    public static void Save()
     {
         var levelPaths = Directory.GetDirectories(GenericPaths.LevelsPath);
-        var levels = levelPaths.Select(levelPath => new LevelData(LevelLoader.Load(levelPath)));
+        var levels = levelPaths.Select(levelPath => new LevelData(JsonLoader.LoadLevel(levelPath)));
 
-        using (var test = new Database<LevelData>("Levels", path))
+        using (var test = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
         {
             test.Database.EnsureDeleted();
             if (test.Database.EnsureCreated())
@@ -19,11 +19,6 @@ public static class LevelDataLoader
             }
         }
     }
-    public static List<LevelData> LoadTest(string path)
-    {
-        using (var test = new Database<LevelData>("Levels", path))
-        {
-            return test.Levels.ToList();
-        }
-    }
+    
+    public static IEnumerable<LevelData> Load() => new Database<LevelData>("Levels", GenericPaths.LevelsDataPath).Levels;
 }

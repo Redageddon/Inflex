@@ -38,13 +38,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
-    {
-        _shuttingDown = true;
-    }
+    private void OnApplicationQuit() => _shuttingDown = true;
 
-    private void OnDestroy()
-    {
-        _shuttingDown = true;
-    }
+    private void OnDestroy() => _shuttingDown = true;
 }

@@ -7,24 +7,19 @@ public class ButtonCreator : MonoBehaviour
 
     public void Start()
     {
-        var levelNames = LevelDataLoader.LoadTest(Application.streamingAssetsPath + "/Levels.db");
-        if(levelNames == null) return;
-        foreach (var level in levelNames)
+        foreach (var level in LevelDataLoader.Load())
         {
             CreateLevelButton(level);
         }
     }
     
-    private void Update()
-    {
-        CheckForLevelsRefreshMacro();
-    }
+    private void Update() => CheckForLevelsRefreshMacro();
 
-    private void CheckForLevelsRefreshMacro()
+    private static void CheckForLevelsRefreshMacro()
     {
         if (!Input.GetKey(KeyCode.LeftControl) || !Input.GetKeyDown(KeyCode.R)) return;
         
-        LevelDataLoader.SaveTest(GenericPaths.LevelsDataPath);
+        LevelDataLoader.Save();
         
         SceneManager.LoadScene("LevelSelection", LoadSceneMode.Single);
     }

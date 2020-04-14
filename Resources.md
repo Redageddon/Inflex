@@ -7,3 +7,4 @@ https://www.manning.com/books/c-sharp-in-depth-fourth-edition
 https://docs.microsoft.com/en-us/dotnet/csharp/
 https://answers.unity.com/questions/743400/database-sqlite-setup-for-unity.html
 https://cdn.discordapp.com/attachments/663097236187643915/698193720016764988/Untitled-1.png 
+https://stackoverflow.com/questions/9808035/how-do-i-make-the-return-type-of-a-method-generic

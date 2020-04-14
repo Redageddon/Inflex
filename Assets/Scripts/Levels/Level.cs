@@ -3,10 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 public class Level
 {
-    public Level()
-    {
-    }
-
     public Level(string path, int lives, string songFile, string background, string title, string artist, string creator, string icon,
         List<EnemyEvent> enemies, List<SpeedEvent> speeds, List<ScreenEvent> screenEvents)
     {
@@ -27,21 +23,18 @@ public class Level
     }
 
     [Key] public int Id { get; set; }
-    public string Path { get; set; }
-    public int Lives { get; set; }
-    public string SongFile { get; set; }
-    public string Background { get; set; }
-    public string Title { get; set; }
-    public string Artist { get; set; }
-    public string Creator { get; set; }
-    public string Icon { get; set; }
-    public List<EnemyEvent> Enemies { get; set; }
-    public List<SpeedEvent> Speeds { get; set; }
-    public List<ScreenEvent> ScreenEvents { get; set; }
+    public string Path { get; }
+    public int Lives { get; }
+    public string SongFile { get; }
+    public string Background { get; }
+    public string Title { get; }
+    public string Artist { get; }
+    public string Creator { get; }
+    public string Icon { get; }
+    public List<EnemyEvent> Enemies { get; }
+    public List<SpeedEvent> Speeds { get; }
+    public List<ScreenEvent> ScreenEvents { get; }
 
-    public override string ToString()
-    {
-        return
-            $"Path:{Path}, Lives:{Lives}, SongFile:{SongFile}, Background:{Background}, Title:{Title}, Artist:{Artist}, Creator:{Creator}, Icon:{Icon}, Enemies:{Enemies.Count}, Speeds:{Speeds.Count}, ScreenEvents:{ScreenEvents}";
-    }
+    public override string ToString() =>
+        $"Path:{Path}, Lives:{Lives}, SongFile:{SongFile}, Background:{Background}, Title:{Title}, Artist:{Artist}, Creator:{Creator}, Icon:{Icon}, Enemies:{Enemies.Count}, Speeds:{Speeds.Count}, ScreenEvents:{ScreenEvents}";
 }

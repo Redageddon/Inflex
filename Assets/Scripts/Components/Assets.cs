@@ -2,13 +2,12 @@
 
 public class Assets : Singleton<Assets>
 {
-    public Skin Skin { get; private set; }
     public Level Level { get; set; }
-    public SavedSettings SavedSettings { get; set; }
+    public Skin Skin { get; private set; }
+    public SavedSettings SavedSettings { get; set; } = JsonLoader.Load<SavedSettings>(GenericPaths.SettingsPath);
 
     private void Awake()
     {
-        SavedSettings = SavedSettingsLoader.Load(GenericPaths.SettingsPath); 
         Skin = new Skin(streamingAssetsPath + "/Skins/", Instance.SavedSettings.SkinName);
     }
 }

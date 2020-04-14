@@ -3,32 +3,27 @@
 public class GameState : MonoBehaviour
 {
     [SerializeField] private GameObject pauseScreen;
-    public static bool GamePaused;
+    [SerializeField] private AudioSource audioSource;
+    private static bool _gamePaused;
 
-    public void OnGUI()
-    {
-        UpdatePause();
-    }
+    public void OnGUI() => UpdatePause();
 
-    private void Update()
-    {
-        UpdatePause();
-    }
+    private void Update() => UpdatePause();
 
     private void UpdatePause()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GamePaused = !GamePaused;
-            pauseScreen.SetActive(GamePaused);
+            _gamePaused = !_gamePaused;
+            pauseScreen.SetActive(_gamePaused);
         }
-        if (!GamePaused)
+        if (!_gamePaused)
         {
-            AudioPlayer.Instance.audioSource.UnPause();
+            audioSource.UnPause();
         }
         else
         {
-            AudioPlayer.Instance.audioSource.Pause();
+            audioSource.Pause();
         }
     }
     

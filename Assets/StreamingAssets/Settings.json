@@ -9,9 +9,9 @@
   "Resolution": {
     "width": 1920,
     "height": 1080,
-    "refreshRate": 59
+    "refreshRate": 60
   },
   "ScreenMode": 3,
-  "ElementsSize": 70,
+  "ElementsSize": 70.0,
   "SkinName": "Default"
 }

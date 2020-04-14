@@ -1,11 +1,5 @@
-using System.ComponentModel.DataAnnotations;
-
 public class EnemyEvent
 {
-    public EnemyEvent()
-    {
-    }
-
     public EnemyEvent(int killKey, float spawnDegrees, float rotationSpeed, float spawnTime)
     {
         KillKey = killKey;
@@ -13,10 +7,11 @@ public class EnemyEvent
         RotationSpeed = rotationSpeed;
         SpawnTime = spawnTime;
     }
+    
+    public int KillKey { get; }
+    public float SpawnDegrees { get; }
+    public float RotationSpeed { get; }
+    public float SpawnTime { get; }
 
-    [Key] public int Id { get; set; }
-    public int KillKey { get; set; }
-    public float SpawnDegrees { get; set; }
-    public float RotationSpeed { get; set; }
-    public float SpawnTime { get; set; }
+    public override string ToString() => $"KillKey:{KillKey}, SpawnDegrees:{SpawnDegrees}, RotationSpeed:{RotationSpeed}, SpawnTime:{SpawnTime}";
 }
