@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 
-public class DeleteMapButtonBase : ButtonBase
+public class DeleteMapButton : ButtonBase
 {
-    [SerializeField] private GameObject levelButtonControl;
+    [SerializeField] private GameObject levelButtonOptions;
     public int deletionIndex;
     public GameObject deletionButton;
 
     private void DeleteMap()
     {
         Destroy(deletionButton);
-        using (var test = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
+        using (var db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
         {
-            test.Levels.Remove(test.Levels.Find(deletionIndex));
-            test.SaveChanges();
+            db.Levels.Remove(db.Levels.Find(deletionIndex));
+            db.SaveChanges();
         }
-        levelButtonControl.SetActive(false);
+        levelButtonOptions.SetActive(false);
     }
 
     protected override void Left() => DeleteMap();

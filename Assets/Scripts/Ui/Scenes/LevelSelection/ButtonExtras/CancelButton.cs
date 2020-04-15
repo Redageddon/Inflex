@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class CancelButtonBase : ButtonBase
+public class CancelButton : ButtonBase
 {
-    [SerializeField] private GameObject levelButtonControl;
-    protected override void Left() => levelButtonControl.SetActive(false);
+    [SerializeField] private GameObject levelButtonOptions;
+    protected override void Left() => levelButtonOptions.SetActive(false);
 }

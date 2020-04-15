@@ -9,8 +9,8 @@ public class Assets : Singleton<Assets>
 
     private static SavedSettings LoadSettings()
     {
-        return File.Exists(GenericPaths.SettingsPath + "Test")
-            ? JsonLoader.Load<SavedSettings>(GenericPaths.SettingsPath + "Test")
+        return File.Exists(GenericPaths.SettingsPath)
+            ? JsonLoader.Load<SavedSettings>(GenericPaths.SettingsPath)
             : new SavedSettings();
     }
     

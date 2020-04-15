@@ -9,13 +9,13 @@ public static class LevelDataLoader
         var levelPaths = Directory.GetDirectories(GenericPaths.LevelsPath);
         var levels = levelPaths.Select(levelPath => new LevelData(JsonLoader.LoadLevel(levelPath)));
 
-        using (var test = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
+        using (var db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
         {
-            test.Database.EnsureDeleted();
-            if (test.Database.EnsureCreated())
+            db.Database.EnsureDeleted();
+            if (db.Database.EnsureCreated())
             {
-                test.Levels.AddRange(levels);
-                test.SaveChanges();
+                db.Levels.AddRange(levels);
+                db.SaveChanges();
             }
         }
     }

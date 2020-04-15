@@ -11,8 +11,8 @@ public static class JsonLoader
 {
     public static T Load<T>(string path)
     {
-        var jsonTest = File.ReadAllText(path);
-        var obj = JsonConvert.DeserializeObject<T>(jsonTest);
+        var json = File.ReadAllText(path);
+        var obj = JsonConvert.DeserializeObject<T>(json);
         return (T) Convert.ChangeType(obj, typeof(T));
     }
 

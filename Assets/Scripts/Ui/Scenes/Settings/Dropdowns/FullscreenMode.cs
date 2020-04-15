@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class FullscreenMode : DropdownBase
 {
-    protected override void OnOptionChange(int index)
+    protected override int Index 
     {
-        Assets.Instance.Settings.FullscreenModeIndex = index;
-        SetScreenValues();
+        get => Assets.Instance.Settings.FullscreenModeIndex;
+        set => Assets.Instance.Settings.FullscreenModeIndex = value;
     }
-
-    protected override int GetValue() => Assets.Instance.Settings.FullscreenModeIndex;
 
     protected override void FillDropdown() => dropdown.options.AddRange(Enum.GetNames(typeof(FullScreenMode)).Select(mode => new Dropdown.OptionData($"{mode}")));
 }

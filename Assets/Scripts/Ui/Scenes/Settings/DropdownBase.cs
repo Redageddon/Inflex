@@ -1,29 +1,25 @@
-﻿using System.Linq;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 
-public abstract class DropdownBase : MonoBehaviour
+public abstract class DropdownBase : SettingsBase
 {
     public Dropdown dropdown;
+    protected abstract int Index { get; set; }
+
     private void Start()
     {
         dropdown.onValueChanged.AddListener(OnOptionChange);
         dropdown.ClearOptions();
         FillDropdown();
-        dropdown.value = GetValue();
+        if (Index == 0) OnOptionChange(0);
+        dropdown.value = Index;
         dropdown.RefreshShownValue();
     }
-
-    protected abstract void OnOptionChange(int index);
-
-    protected abstract int GetValue();
-
+    
     protected abstract void FillDropdown();
 
-    protected static void SetScreenValues()
+    protected virtual void OnOptionChange(int index)
     {
-        Screen.SetResolution(Screen.resolutions.ElementAt(Assets.Instance.Settings.ResolutionIndex).width,
-            Screen.resolutions.ElementAt(Assets.Instance.Settings.ResolutionIndex).height,
-            (FullScreenMode) Assets.Instance.Settings.FullscreenModeIndex, Assets.Instance.Settings.PreferredFps);
+        Index = index;
+        SetScreenValues();
     }
 }

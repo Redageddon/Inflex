@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 89522366}
   - component: {fileID: 89522365}
   m_Layer: 5
-  m_Name: LevelButtonControl
+  m_Name: LevelButtonOptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,7 +534,7 @@ MonoBehaviour:
   rectTransform: {fileID: 171813063}
   levelNameText: {fileID: 1285500142}
   difficulty: {fileID: 1404767787}
-  levelButtonControl: {fileID: 89522364}
+  levelButtonOptions: {fileID: 89522364}
 --- !u!114 &171813060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,7 +1360,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1342297617}
   rectTransform: {fileID: 1342297616}
-  levelButtonControl: {fileID: 89522364}
+  levelButtonOptions: {fileID: 89522364}
+  deletionIndex: 0
+  deletionButton: {fileID: 0}
 --- !u!1 &1345977855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1826,4 +1828,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1898320928}
   rectTransform: {fileID: 1898320927}
-  levelButtonControl: {fileID: 89522364}
+  levelButtonOptions: {fileID: 89522364}

@@ -1,17 +1,15 @@
 {
+  "SkinName": "Default",
+  "PreferredFps": 60,
+  "ResolutionIndex": 19,
+  "FullscreenModeIndex": 1,
+  "VSyncIndex": 0,
   "Volume": 1.0,
+  "ElementsSize": 100.0,
   "Keys": [
     119,
     97,
     115,
     100
-  ],
-  "Resolution": {
-    "width": 1920,
-    "height": 1080,
-    "refreshRate": 60
-  },
-  "ScreenMode": 3,
-  "ElementsSize": 70.0,
-  "SkinName": "Default"
+  ]
 }
