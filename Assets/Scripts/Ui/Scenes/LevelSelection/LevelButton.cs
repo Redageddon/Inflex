@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelButton : Button
+public class LevelButtonBase : ButtonBase
 {
     [SerializeField] private Text levelNameText;
     [SerializeField] private Text difficulty;
@@ -27,7 +27,7 @@ public class LevelButton : Button
     protected override void Right()
     {
         levelButtonControl.SetActive(true);
-        levelButtonControl.transform.Find("DeleteMap").GetComponent<DeleteMapButton>().deletionIndex = levelData.Id;
-        levelButtonControl.transform.Find("DeleteMap").GetComponent<DeleteMapButton>().deletionButton = gameObject;
+        levelButtonControl.transform.Find("DeleteMap").GetComponent<DeleteMapButtonBase>().deletionIndex = levelData.Id;
+        levelButtonControl.transform.Find("DeleteMap").GetComponent<DeleteMapButtonBase>().deletionButton = gameObject;
     }
 }

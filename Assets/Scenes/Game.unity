@@ -1460,7 +1460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 0}
   rectTransform: {fileID: 1265145616}
-  lives: {fileID: 0}
+  lives: {fileID: 1265145617}
 --- !u!1 &1285181656
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,8 +16,8 @@ public class HitObject : VisibleElement
         
         _locationManager = new HitObjectLocationManager(enemyEvent);
         killKey = enemyEvent.KillKey;
-        circleCollider2D.radius = Assets.Instance.SavedSettings.ElementsSize;
-        rectTransform.sizeDelta = new Vector2(Assets.Instance.SavedSettings.ElementsSize * 2, Assets.Instance.SavedSettings.ElementsSize * 2);
+        circleCollider2D.radius = Assets.Instance.Settings.ElementsSize;
+        rectTransform.sizeDelta = new Vector2(Assets.Instance.Settings.ElementsSize * 2, Assets.Instance.Settings.ElementsSize * 2);
         
         gameObject.transform.localPosition = _locationManager.GetLocation(audioPlayer.TrueAudioTime, _speed);
         gameObject.SetActive(true);
@@ -31,7 +31,7 @@ public class HitObject : VisibleElement
 
     private void UpdateLocation()
     {
-        if (_locationManager.Distance <= 2.71 * Assets.Instance.SavedSettings.ElementsSize)
+        if (_locationManager.Distance <= 2.71 * Assets.Instance.Settings.ElementsSize)
         {
             Lives.Health -= 1;
             Hit();

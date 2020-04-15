@@ -28,6 +28,6 @@ public class ButtonCreator : MonoBehaviour
     {
         GameObject button = Instantiate(levelButtonTemp, levelButtonTemp.transform.parent, false);
         button.SetActive(true);
-        button.GetComponent<LevelButton>().SetButtonData(level);
+        button.GetComponent<LevelButtonBase>().SetButtonData(level);
     }
 }

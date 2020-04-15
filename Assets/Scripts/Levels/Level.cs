@@ -34,7 +34,7 @@ public class Level
     public List<EnemyEvent> Enemies { get; }
     public List<SpeedEvent> Speeds { get; }
     public List<ScreenEvent> ScreenEvents { get; }
+    
+    public override string ToString() => $"{nameof(Path)}: {Path}, {nameof(Lives)}: {Lives}, {nameof(SongFile)}: {SongFile}, {nameof(Background)}: {Background}, {nameof(Title)}: {Title}, {nameof(Artist)}: {Artist}, {nameof(Creator)}: {Creator}, {nameof(Icon)}: {Icon}, {nameof(Enemies)}: {Enemies}, {nameof(Speeds)}: {Speeds}, {nameof(ScreenEvents)}: {ScreenEvents}";
 
-    public override string ToString() =>
-        $"Path:{Path}, Lives:{Lives}, SongFile:{SongFile}, Background:{Background}, Title:{Title}, Artist:{Artist}, Creator:{Creator}, Icon:{Icon}, Enemies:{Enemies.Count}, Speeds:{Speeds.Count}, ScreenEvents:{ScreenEvents}";
 }

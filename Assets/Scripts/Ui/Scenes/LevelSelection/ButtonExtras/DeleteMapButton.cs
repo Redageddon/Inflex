@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DeleteMapButton : Button
+public class DeleteMapButtonBase : ButtonBase
 {
     [SerializeField] private GameObject levelButtonControl;
     public int deletionIndex;

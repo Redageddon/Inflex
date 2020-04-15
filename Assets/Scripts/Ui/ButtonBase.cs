@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine.EventSystems;
 
-public abstract class Button : VisibleElement, IPointerClickHandler
+public abstract class ButtonBase : VisibleElement, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {

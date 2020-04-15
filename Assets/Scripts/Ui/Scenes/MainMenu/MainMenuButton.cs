@@ -1,6 +1,8 @@
-﻿using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MainMenuButton : Button
+public class MainMenuButtonBase : ButtonBase
 {
-    protected override void Left() => SceneManager.LoadScene("LevelSelection", LoadSceneMode.Single);
+    [SerializeField] private string navigation;
+    protected override void Left() => SceneManager.LoadScene(navigation, LoadSceneMode.Single);
 }

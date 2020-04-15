@@ -9,5 +9,5 @@
     public float Speed { get; }
     public float SpawnTime { get; }
     
-    public override string ToString() => $"Speed:{Speed}, SpawnTime:{SpawnTime}";
+    public override string ToString() => $"{nameof(Speed)}: {Speed}, {nameof(SpawnTime)}: {SpawnTime}";
 }

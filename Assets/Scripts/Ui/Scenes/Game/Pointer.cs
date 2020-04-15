@@ -7,7 +7,7 @@ public class Pointer : VisibleElement
 
     private void Awake()
     {
-        var centerSize = Assets.Instance.SavedSettings.ElementsSize;
+        var centerSize = Assets.Instance.Settings.ElementsSize;
         image.texture = Assets.Instance.Skin.Pointer ? Assets.Instance.Skin.Pointer: image.texture;
         rectTransform.sizeDelta = new Vector2(centerSize * 5.6f, centerSize * 5.6f);
         edgeCollider2D.points = new[]

@@ -13,5 +13,5 @@ public class EnemyEvent
     public float RotationSpeed { get; }
     public float SpawnTime { get; }
 
-    public override string ToString() => $"KillKey:{KillKey}, SpawnDegrees:{SpawnDegrees}, RotationSpeed:{RotationSpeed}, SpawnTime:{SpawnTime}";
+    public override string ToString() => $"{nameof(KillKey)}: {KillKey}, {nameof(SpawnDegrees)}: {SpawnDegrees}, {nameof(RotationSpeed)}: {RotationSpeed}, {nameof(SpawnTime)}: {SpawnTime}";
 }

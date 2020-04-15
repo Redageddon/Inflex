@@ -25,12 +25,12 @@ public class AudioPlayer : MonoBehaviour
         audioSource.Play();
         yield return new WaitUntil(() => audioSource.time >= -offset);
         offset = 0;
-        audioSource.volume = Assets.Instance.SavedSettings.Volume;
+        audioSource.volume = Assets.Instance.Settings.Volume;
         audioSource.Play();
     }
 
     public float TrueAudioTime => audioSource.time + offset; 
     
-    private static float CalculateFirstHitObject() => -1 * ((960 - 3.591f * Assets.Instance.SavedSettings.ElementsSize) / GameState.GetSpeed(0) - Assets.Instance.Level.Enemies[0].SpawnTime);
+    private static float CalculateFirstHitObject() => -1 * ((960 - 3.591f * Assets.Instance.Settings.ElementsSize) / GameState.GetSpeed(0) - Assets.Instance.Level.Enemies[0].SpawnTime);
     
 }

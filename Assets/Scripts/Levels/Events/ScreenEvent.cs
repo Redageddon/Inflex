@@ -11,5 +11,5 @@
     public int Zoom { get; }
     public float SpawnTime { get; }
     
-    public override string ToString() => $"RotationSpeed:{RotationSpeed}, Zoom:{Zoom}, SpawnTime:{SpawnTime}";
+    public override string ToString() => $"{nameof(RotationSpeed)}: {RotationSpeed}, {nameof(Zoom)}: {Zoom}, {nameof(SpawnTime)}: {SpawnTime}";
 }
