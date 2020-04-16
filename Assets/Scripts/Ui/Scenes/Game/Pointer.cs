@@ -7,7 +7,7 @@ public class Pointer : VisibleElement
 
     private void Awake()
     {
-        var centerSize = Assets.Instance.Settings.ElementsSize;
+        float centerSize = Assets.Instance.Settings.ElementsSize;
         image.texture = Assets.Instance.Skin.Pointer ? Assets.Instance.Skin.Pointer: image.texture;
         rectTransform.sizeDelta = new Vector2(centerSize * 5.6f, centerSize * 5.6f);
         edgeCollider2D.points = new[]
@@ -30,8 +30,8 @@ public class Pointer : VisibleElement
 
     public static double GetZRotation()
     {
-        var x = Screen.width / 2d - Input.mousePosition.x;
-        var y = Screen.height / 2d - Input.mousePosition.y;
+        double x = Screen.width / 2d - Input.mousePosition.x;
+        double y = Screen.height / 2d - Input.mousePosition.y;
         return Math.Atan2(x, -y) * Mathf.Rad2Deg + 180;
     }
 

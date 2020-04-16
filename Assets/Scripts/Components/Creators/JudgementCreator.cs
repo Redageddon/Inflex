@@ -6,11 +6,11 @@ public class JudgementCreator : MonoBehaviour
 {
     public static void Create(double hitObjectRotation)
     {
-        var accuracy = Grade(hitObjectRotation);
+        double accuracy = Grade(hitObjectRotation);
 
-        var judgement = GameObject.Find("Canvas").transform.Find("Judgement").gameObject;
+        GameObject judgement = GameObject.Find("Canvas").transform.Find("Judgement").gameObject;
         
-        var newJudgement = Instantiate(judgement, judgement.transform.parent, false);
+        GameObject newJudgement = Instantiate(judgement, judgement.transform.parent, false);
         newJudgement.GetComponent<Text>().color = Color.HSVToRGB((float)accuracy/100,1,1, true);
         newJudgement.GetComponent<Text>().text = accuracy.ToString();
         newJudgement.SetActive(true);
@@ -21,7 +21,7 @@ public class JudgementCreator : MonoBehaviour
     {
         const int grader = 15;
         
-        var truePointerRotation = FixPointerRotation(Pointer.GetZRotation(), hitObjectRotation);
+        double truePointerRotation = FixPointerRotation(Pointer.GetZRotation(), hitObjectRotation);
         
         if (Math.Abs(truePointerRotation - hitObjectRotation) < grader)
         {

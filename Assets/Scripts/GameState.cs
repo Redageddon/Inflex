@@ -29,7 +29,7 @@ public class GameState : MonoBehaviour
     
     public static float GetSpeed(int currentEnemy)
     {
-        for (var s = Assets.Instance.Level.Speeds.Count - 1; s >= 0; s--)
+        for (int s = Assets.Instance.Level.Speeds.Count - 1; s >= 0; s--)
         {
             if (Assets.Instance.Level.Enemies[currentEnemy].SpawnTime > Assets.Instance.Level.Speeds[s].SpawnTime)
             {

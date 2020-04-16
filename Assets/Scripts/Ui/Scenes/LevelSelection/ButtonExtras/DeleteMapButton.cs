@@ -9,7 +9,7 @@ public class DeleteMapButton : ButtonBase
     private void DeleteMap()
     {
         Destroy(deletionButton);
-        using (var db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
+        using (Database<LevelData> db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
         {
             db.Levels.Remove(db.Levels.Find(deletionIndex));
             db.SaveChanges();

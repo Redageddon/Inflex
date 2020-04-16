@@ -9,7 +9,7 @@ public class CurrentKey : VisibleElement
 
     private void Update()
     {
-        for (var i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (!Input.GetKeyDown(Assets.Instance.Settings.Keys[i])) continue;
             SetImage(i);

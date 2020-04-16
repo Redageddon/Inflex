@@ -11,8 +11,5 @@ public abstract class SliderBase : SettingsBase
         slider.value = Value;
     }
 
-    protected virtual void OnInputChange(float value)
-    {
-        Value = value;
-    }
+    protected virtual void OnInputChange(float value) => Value = value;
 }

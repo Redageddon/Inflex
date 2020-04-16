@@ -11,23 +11,23 @@ public static class JsonLoader
 {
     public static T Load<T>(string path)
     {
-        var json = File.ReadAllText(path);
-        var obj = JsonConvert.DeserializeObject<T>(json);
+        string json = File.ReadAllText(path);
+        T obj = JsonConvert.DeserializeObject<T>(json);
         return (T) Convert.ChangeType(obj, typeof(T));
     }
 
     public static Texture2D LoadTexture2D(string path)
     {
         if (!File.Exists(path)) return null;
-        var fileData = File.ReadAllBytes(path);
-        var tex2D = new Texture2D(0, 0);
+        byte[] fileData = File.ReadAllBytes(path);
+        Texture2D tex2D = new Texture2D(0, 0);
         return tex2D.LoadImage(fileData) ? tex2D : null;
     }
 
     public static Level LoadLevel(string path)
     {
-        var json = Directory.GetFiles(path, @"*.json").First();
-        var data = File.ReadAllText(json);
+        string json = Directory.GetFiles(path, @"*.json").First();
+        string data = File.ReadAllText(json);
         JObject prePath = JObject.Parse(data);
         prePath.Add("Path", path);
         return prePath.ToObject<Level>();
@@ -47,7 +47,7 @@ public static class JsonLoader
 
     public static void Save(object toSave, string path)
     {
-        var json = JsonConvert.SerializeObject(toSave, Formatting.Indented);
+        string json = JsonConvert.SerializeObject(toSave, Formatting.Indented);
         File.WriteAllText(path, json);
     }
 }

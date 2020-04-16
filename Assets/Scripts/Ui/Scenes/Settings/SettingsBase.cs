@@ -6,10 +6,7 @@ public class SettingsBase : MonoBehaviour
 {
     protected IEnumerable<UnityEngine.Resolution> Resolutions;
 
-    private void OnEnable()
-    {
-       Resolutions = Screen.resolutions.Select(resolution => new UnityEngine.Resolution { width = resolution.width, height = resolution.height }).Distinct();
-    }
+    private void OnEnable() => Resolutions = Screen.resolutions.Select(resolution => new UnityEngine.Resolution { width = resolution.width, height = resolution.height }).Distinct();
 
     protected void SetScreenValues()
     {

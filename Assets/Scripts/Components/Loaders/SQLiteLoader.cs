@@ -6,10 +6,10 @@ public static class LevelDataLoader
 {
     public static void Save()
     {
-        var levelPaths = Directory.GetDirectories(GenericPaths.LevelsPath);
-        var levels = levelPaths.Select(levelPath => new LevelData(JsonLoader.LoadLevel(levelPath)));
+        string[] levelPaths = Directory.GetDirectories(GenericPaths.LevelsPath);
+        IEnumerable<LevelData> levels = levelPaths.Select(levelPath => new LevelData(JsonLoader.LoadLevel(levelPath)));
 
-        using (var db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
+        using (Database<LevelData> db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
         {
             db.Database.EnsureDeleted();
             if (db.Database.EnsureCreated())

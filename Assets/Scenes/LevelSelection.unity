@@ -487,7 +487,7 @@ GameObject:
   - component: {fileID: 171813059}
   - component: {fileID: 171813058}
   m_Layer: 5
-  m_Name: LevelButtonBase
+  m_Name: LevelButtonTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
