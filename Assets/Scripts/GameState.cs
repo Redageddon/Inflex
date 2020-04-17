@@ -3,7 +3,6 @@
 public class GameState : MonoBehaviour
 {
     [SerializeField] private GameObject pauseScreen;
-    [SerializeField] private AudioSource audioSource;
     private static bool _gamePaused;
 
     public void OnGUI() => UpdatePause();
@@ -17,14 +16,7 @@ public class GameState : MonoBehaviour
             _gamePaused = !_gamePaused;
             pauseScreen.SetActive(_gamePaused);
         }
-        if (!_gamePaused)
-        {
-            audioSource.UnPause();
-        }
-        else
-        {
-            audioSource.Pause();
-        }
+        AudioPlayer.Instance.SetAudioPaused(_gamePaused);
     }
     
     public static float GetSpeed(int currentEnemy)

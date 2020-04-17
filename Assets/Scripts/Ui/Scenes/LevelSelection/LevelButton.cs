@@ -22,6 +22,9 @@ public class LevelButton : ButtonBase
     {
         Assets.Instance.Level = JsonLoader.LoadLevel(levelData.Path);
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        AudioPlayer.Instance.LoadAudio($"{Assets.Instance.Level.Path}/{Assets.Instance.Level.SongFile}");
+        AudioHelper.SetOffset();
+        AudioPlayer.Instance.PlayGameSong();
     }
 
     protected override void Right()

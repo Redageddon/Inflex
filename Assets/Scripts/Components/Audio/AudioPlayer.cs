@@ -1,36 +1,18 @@
-﻿using System.Collections;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AudioPlayer : MonoBehaviour
+public class AudioPlayer : Singleton<AudioPlayer>
 {
-    [SerializeField] private AudioSource audioSource;
-    private float offset;
-    
-    private void Start()
-    {
-        offset = CalculateFirstHitObject();
-        LoadAudio();
-    }
+    private AudioSource audioSource;
 
-    private void LoadAudio()
-    {
-        string path = Path.Combine(Assets.Instance.Level.Path, Assets.Instance.Level.SongFile);
-        audioSource.clip = JsonLoader.LoadAudioClip(path);
-        StartCoroutine(PlayAudio());
-    }
+    public void PlayAudio() => audioSource.Play();
+    private void Awake() => audioSource = gameObject.AddComponent<AudioSource>();
+    public float TrueAudioTime => AudioHelper.CalculateTrueAudioTime(audioSource);
+    public void LoadAudio(string path) => audioSource.clip = JsonLoader.LoadAudioClip(path);
+    public void PlayGameSong() => StartCoroutine(AudioHelper.PlayGameSong(audioSource));
 
-    private IEnumerator PlayAudio()
+    public void SetAudioPaused(bool isPaused)
     {
-        audioSource.Play();
-        yield return new WaitUntil(() => audioSource.time >= -offset);
-        offset = 0;
-        audioSource.volume = Assets.Instance.Settings.Volume;
-        audioSource.Play();
+        if (isPaused) audioSource.Pause();
+        else audioSource.UnPause();
     }
-
-    public float TrueAudioTime => audioSource.time + offset; 
-    
-    private static float CalculateFirstHitObject() => -1 * ((960 - 3.591f * Assets.Instance.Settings.ElementsSize) / GameState.GetSpeed(0) - Assets.Instance.Level.Enemies[0].SpawnTime);
-    
 }

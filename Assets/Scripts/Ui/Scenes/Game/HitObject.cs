@@ -4,7 +4,6 @@ public class HitObject : VisibleElement
 {
     [SerializeField] private CircleCollider2D circleCollider2D;
     [SerializeField] private Sprite[] sprites;
-    [SerializeField] private AudioPlayer audioPlayer;
     private HitObjectLocationManager _locationManager;
     private float _speed;
     public int killKey;
@@ -19,7 +18,7 @@ public class HitObject : VisibleElement
         circleCollider2D.radius = Assets.Instance.Settings.ElementsSize;
         rectTransform.sizeDelta = new Vector2(Assets.Instance.Settings.ElementsSize * 2, Assets.Instance.Settings.ElementsSize * 2);
         
-        gameObject.transform.localPosition = _locationManager.GetLocation(audioPlayer.TrueAudioTime, _speed);
+        gameObject.transform.localPosition = _locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime, _speed);
         gameObject.SetActive(true);
     }
 
@@ -37,7 +36,7 @@ public class HitObject : VisibleElement
             Hit();
         }
 
-        gameObject.transform.localPosition = _locationManager.GetLocation(audioPlayer.TrueAudioTime, _speed);
+        gameObject.transform.localPosition = _locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime, _speed);
     }
 
     public void Update() => UpdateLocation();
