@@ -9,18 +9,20 @@ public class ButtonCreator : MonoBehaviour
 
     public void Start() => CreateAllButtons();
 
-    private void Update() => CheckForLevelsRefreshMacro();
+    private void Update()
+    {
+        if (InputManager.MacroDown("RefreshMaps")) RefreshLevels();
+    }
 
     private void DeleteAllButtons() => levels.ForEach(Destroy);
 
     private void CreateAllButtons() => LevelDataLoader.Load().ToList().ForEach(CreateSingleButton);
-    
-    private void CheckForLevelsRefreshMacro()
+
+    private void RefreshLevels()
     {
-        if (!Input.GetKey(KeyCode.LeftControl) || !Input.GetKeyDown(KeyCode.R)) return;
-        LevelDataLoader.Save();
         DeleteAllButtons();
         levels.Clear();
+        LevelDataLoader.Save();
         CreateAllButtons();
     }
 

@@ -39,8 +39,9 @@ public static class JsonLoader
         {
             request.SendWebRequest();
             SpinUntil(() => request.isDone);
+            
             return Path.GetExtension(path) == ".mp3"
-                ? AudioClipFromMp3.FromBytes(request.downloadHandler.data)
+                ? Mp3ToAudioClip.FromMp3Bytes(request.downloadHandler.data)
                 : DownloadHandlerAudioClip.GetContent(request);
         }
     }

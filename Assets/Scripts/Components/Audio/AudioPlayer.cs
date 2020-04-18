@@ -6,7 +6,7 @@ public class AudioPlayer : Singleton<AudioPlayer>
 
     public void PlayAudio() => audioSource.Play();
     private void Awake() => audioSource = gameObject.AddComponent<AudioSource>();
-    public float TrueAudioTime => AudioHelper.CalculateTrueAudioTime(audioSource);
+    public float TrueAudioTime => audioSource.time + AudioHelper.Offset;
     public void LoadAudio(string path) => audioSource.clip = JsonLoader.LoadAudioClip(path);
     public void PlayGameSong() => StartCoroutine(AudioHelper.PlayGameSong(audioSource));
 
