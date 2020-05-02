@@ -12,7 +12,9 @@ public class LevelButton : ButtonBase
     public void SetButtonData(LevelData data)
     {
         levelData = data;
-        image.texture = Assets.Instance.Skin.LevelButton ? Assets.Instance.Skin.LevelButton : image.texture;
+        image.texture = Assets.Instance.Skin.LevelButton 
+            ? Assets.Instance.Skin.LevelButton 
+            : image.texture;
         image.SetNativeSize();
         levelNameText.text = levelData.Title;
         difficulty.text = levelData.Difficulty.ToString();
@@ -20,11 +22,8 @@ public class LevelButton : ButtonBase
 
     protected override void Left()
     {
-        Assets.Instance.Level = JsonLoader.LoadLevel(levelData.Path);
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
-        AudioPlayer.Instance.LoadAudio($"{Assets.Instance.Level.Path}/{Assets.Instance.Level.SongFile}");
-        AudioHelper.SetOffset();
-        AudioPlayer.Instance.PlayGameSong();
+        Assets.Instance.Level = Loader.LoadLevel(levelData.Path);
     }
 
     protected override void Right()

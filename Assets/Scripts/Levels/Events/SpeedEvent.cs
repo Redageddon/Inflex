@@ -5,9 +5,11 @@
         Speed = speed;
         SpawnTime = spawnTime;
     }
-    
-    public float Speed { get; }
-    public float SpawnTime { get; }
+
+    public SpeedEvent() { }
+
+    public float Speed { get; set; }
+    public float SpawnTime { get; set; }
     
     public override string ToString() => $"{nameof(Speed)}: {Speed}, {nameof(SpawnTime)}: {SpawnTime}";
 }

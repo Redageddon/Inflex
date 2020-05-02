@@ -12,12 +12,12 @@ public class KeySetter : ButtonBase
     private void OnGUI()
     {
         if(!waitingForInput || !Event.current.isKey) return;
-        Assets.Instance.Settings.Keys[keyIndex] = Event.current.keyCode;
+        Assets.Instance.Settings.Keys[keyIndex] = (int)Event.current.keyCode;
         waitingForInput = false;
         SetText();
     }
 
-    private void SetText() => text.text = $" Input{keyIndex}: {Assets.Instance.Settings.Keys[keyIndex]}";
+    private void SetText() => text.text = $" Input{keyIndex}: {(KeyCode)Assets.Instance.Settings.Keys[keyIndex]}";
 
     protected override void Left() => waitingForInput = true;
 }

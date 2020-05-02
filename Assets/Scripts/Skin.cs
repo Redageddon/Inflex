@@ -14,26 +14,26 @@ public class Skin
         }
 
         skinPath += skinName;
-            BackButton = JsonLoader.LoadTexture2D($"{skinPath}/BackButton.png");
-            Background = JsonLoader.LoadTexture2D($"{skinPath}/Background.png");
-            Center = JsonLoader.LoadTexture2D($"{skinPath}/Center.png");
+            BackButton = Loader.LoadTexture2D($"{skinPath}/BackButton.png");
+            Background = Loader.LoadTexture2D($"{skinPath}/Background.png");
+            Center = Loader.LoadTexture2D($"{skinPath}/Center.png");
             CurrentKeys = new List<Texture2D>
             {
-                JsonLoader.LoadTexture2D($"{skinPath}/CurrentKey1.png"),
-                JsonLoader.LoadTexture2D($"{skinPath}/CurrentKey2.png"),
-                JsonLoader.LoadTexture2D($"{skinPath}/CurrentKey3.png"),
-                JsonLoader.LoadTexture2D($"{skinPath}/CurrentKey4.png")
+                Loader.LoadTexture2D($"{skinPath}/CurrentKey1.png"),
+                Loader.LoadTexture2D($"{skinPath}/CurrentKey2.png"),
+                Loader.LoadTexture2D($"{skinPath}/CurrentKey3.png"),
+                Loader.LoadTexture2D($"{skinPath}/CurrentKey4.png")
             };
             HitObjects = new List<Texture2D>
             {
-                JsonLoader.LoadTexture2D($"{skinPath}/HitObject1.png"),
-                JsonLoader.LoadTexture2D($"{skinPath}/HitObject2.png"),
-                JsonLoader.LoadTexture2D($"{skinPath}/HitObject3.png"),
-                JsonLoader.LoadTexture2D($"{skinPath}/HitObject4.png")
+                Loader.LoadTexture2D($"{skinPath}/HitObject1.png"),
+                Loader.LoadTexture2D($"{skinPath}/HitObject2.png"),
+                Loader.LoadTexture2D($"{skinPath}/HitObject3.png"),
+                Loader.LoadTexture2D($"{skinPath}/HitObject4.png")
             };
-            Pointer = JsonLoader.LoadTexture2D($"{skinPath}/Pointer.png");
-            LevelButton = JsonLoader.LoadTexture2D($"{skinPath}/LevelButton.png");
-            PauseButton = JsonLoader.LoadTexture2D($"{skinPath}/PauseButton.png");
+            Pointer = Loader.LoadTexture2D($"{skinPath}/Pointer.png");
+            LevelButton = Loader.LoadTexture2D($"{skinPath}/LevelButton.png");
+            PauseButton = Loader.LoadTexture2D($"{skinPath}/PauseButton.png");
     }
 
     public Texture2D Background { get; }

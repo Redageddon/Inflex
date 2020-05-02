@@ -5,6 +5,13 @@ public class GameState : MonoBehaviour
     [SerializeField] private GameObject pauseScreen;
     private static bool _gamePaused;
 
+    public void OnEnable()
+    {
+        AudioPlayer.Instance.LoadAudio($"{Assets.Instance.Level.Path}/{Assets.Instance.Level.SongFile}");
+        AudioHelper.SetOffset();
+        AudioPlayer.Instance.PlayGameSong();
+    }
+
     public void OnGUI() => UpdatePause();
 
     private void Update() => UpdatePause();

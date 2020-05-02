@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEngine;
 
 public static class LevelDataLoader
 {
     public static void Save()
     {
         string[] levelPaths = Directory.GetDirectories(GenericPaths.LevelsPath);
-        IEnumerable<LevelData> levels = levelPaths.Select(levelPath => new LevelData(JsonLoader.LoadLevel(levelPath)));
+        List<LevelData> levels = levelPaths.Select(path => new LevelData(Loader.LoadLevel(path))).ToList();
 
         using (Database<LevelData> db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
         {

@@ -1,21 +1,12 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Inflex.Rron;
 using UnityEngine;
 using UnityEngine.Networking;
 using static System.Threading.SpinWait;
 
-public static class JsonLoader
+public static class Loader
 {
-    public static T Load<T>(string path)
-    {
-        string json = File.ReadAllText(path);
-        T obj = JsonConvert.DeserializeObject<T>(json);
-        return (T) Convert.ChangeType(obj, typeof(T));
-    }
-
     public static Texture2D LoadTexture2D(string path)
     {
         if (!File.Exists(path)) return null;
@@ -26,11 +17,10 @@ public static class JsonLoader
 
     public static Level LoadLevel(string path)
     {
-        string json = Directory.GetFiles(path, @"*.json").First();
-        string data = File.ReadAllText(json);
-        JObject prePath = JObject.Parse(data);
-        prePath.Add("Path", path);
-        return prePath.ToObject<Level>();
+        string filePath = Directory.GetFiles(path, @"*.rron").First();
+        Level prePath = RronConvert.DeserializeObjectFromFile<Level>(filePath, new []{nameof(Level.Id), nameof(Level.Path)});
+        prePath.Path = path;
+        return prePath;
     }
 
     public static AudioClip LoadAudioClip(string path)
@@ -44,11 +34,5 @@ public static class JsonLoader
                 ? Mp3ToAudioClip.FromMp3Bytes(request.downloadHandler.data)
                 : DownloadHandlerAudioClip.GetContent(request);
         }
-    }
-
-    public static void Save(object toSave, string path)
-    {
-        string json = JsonConvert.SerializeObject(toSave, Formatting.Indented);
-        File.WriteAllText(path, json);
     }
 }

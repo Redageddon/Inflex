@@ -11,7 +11,7 @@ public class CurrentKey : VisibleElement
     {
         for (int i = 0; i < 4; i++)
         {
-            if (!Input.GetKeyDown(Assets.Instance.Settings.Keys[i])) continue;
+            if (!Input.GetKeyDown((KeyCode)Assets.Instance.Settings.Keys[i])) continue;
             SetImage(i);
             Key = i;
         }
