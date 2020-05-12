@@ -26,7 +26,7 @@ public class SavedSettings
     public int VSyncIndex { get; set; }
     public float Volume { get; set; }
     public float ElementsSize { get; set; }
-    public List<int> Keys { get; set; }
+    public List<int> Keys { get; set; } = new List<int>();
 
     public override string ToString() => $"{nameof(SkinName)}: {SkinName}, {nameof(FullscreenModeIndex)}: {FullscreenModeIndex}, {nameof(ResolutionIndex)}: {ResolutionIndex}, {nameof(PreferredFps)}: {PreferredFps}, {nameof(VSyncIndex)}: {VSyncIndex}, {nameof(Volume)}: {Volume}, {nameof(ElementsSize)}: {ElementsSize}, {nameof(Keys)}: {Keys}";
 }

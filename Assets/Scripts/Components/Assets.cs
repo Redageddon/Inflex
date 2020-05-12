@@ -17,7 +17,6 @@ public class Assets : Singleton<Assets>
         SavedSettings settings = new SavedSettings("Default");
         RronConvert.SerializeObjectToFile(settings, GenericPaths.SettingsPath);
         return settings;
-
     }
 
     private void Awake()

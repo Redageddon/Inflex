@@ -18,7 +18,7 @@ public static class Loader
     public static Level LoadLevel(string path)
     {
         string filePath = Directory.GetFiles(path, @"*.rron").First();
-        Level prePath = RronConvert.DeserializeObjectFromFile<Level>(filePath, new []{nameof(Level.Id), nameof(Level.Path)});
+        Level prePath = RronConvert.DeserializeObjectFromFile<Level>(filePath);
         prePath.Path = path;
         return prePath;
     }

@@ -3,8 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 public class Level
 {
-    public Level(string path, int lives, string songFile, string background, string title, string artist, string creator, string icon,
-        List<EnemyEvent> enemies, List<SpeedEvent> speeds)
+    public Level(string path, int lives, string songFile, string background, string title, string artist, string creator, string icon, List<EnemyEvent> enemies, List<SpeedEvent> speeds)
     {
         Path = path;
         Lives = lives;
@@ -15,9 +14,6 @@ public class Level
         Creator = creator;
         Icon = icon;
         Enemies = enemies;
-
-        if (speeds[0].Speed != 0) speeds.Insert(0, new SpeedEvent(100, 0));
-
         Speeds = speeds;
     }
 
@@ -32,9 +28,8 @@ public class Level
     public string Artist { get; set; }
     public string Creator { get; set; }
     public string Icon { get; set; }
-    public List<EnemyEvent> Enemies { get; set; }
-    public List<SpeedEvent> Speeds { get; set; }
+    public List<EnemyEvent> Enemies { get; set; } = new List<EnemyEvent>();
+    public List<SpeedEvent> Speeds { get; set; } = new List<SpeedEvent>{new SpeedEvent(100, 0)};
     
     public override string ToString() => $"{nameof(Path)}: {Path}, {nameof(Lives)}: {Lives}, {nameof(SongFile)}: {SongFile}, {nameof(Background)}: {Background}, {nameof(Title)}: {Title}, {nameof(Artist)}: {Artist}, {nameof(Creator)}: {Creator}, {nameof(Icon)}: {Icon}, {nameof(Enemies)}: {Enemies}, {nameof(Speeds)}: {Speeds}";
-
 }

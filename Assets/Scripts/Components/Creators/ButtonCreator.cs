@@ -29,8 +29,8 @@ public class ButtonCreator : MonoBehaviour
     private void CreateSingleButton(LevelData level)
     {
         GameObject button = Instantiate(levelButtonTemp, levelButtonTemp.transform.parent, false);
-        levels.Add(button);
         button.SetActive(true);
         button.GetComponent<LevelButton>().SetButtonData(level);
+        levels.Add(button);
     }
 }
