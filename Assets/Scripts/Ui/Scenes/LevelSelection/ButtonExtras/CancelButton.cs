@@ -3,5 +3,6 @@
 public class CancelButton : ButtonBase
 {
     [SerializeField] private GameObject levelButtonOptions;
-    protected override void Left() => levelButtonOptions.SetActive(false);
+
+    protected override void Left() => this.levelButtonOptions.SetActive(false);
 }

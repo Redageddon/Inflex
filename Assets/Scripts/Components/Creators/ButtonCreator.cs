@@ -4,33 +4,36 @@ using UnityEngine;
 
 public class ButtonCreator : MonoBehaviour
 {
-    [SerializeField] private GameObject levelButtonTemp;
     private readonly List<GameObject> levels = new List<GameObject>();
+    [SerializeField] private GameObject levelButtonTemp;
 
-    public void Start() => CreateAllButtons();
+    public void Start() => this.CreateAllButtons();
 
     private void Update()
     {
-        if (InputManager.MacroDown("RefreshMaps")) RefreshLevels();
+        if (InputManager.MacroDown("RefreshMaps"))
+        {
+            this.RefreshLevels();
+        }
     }
 
-    private void DeleteAllButtons() => levels.ForEach(Destroy);
+    private void DeleteAllButtons() => this.levels.ForEach(Destroy);
 
-    private void CreateAllButtons() => LevelDataLoader.Load().ToList().ForEach(CreateSingleButton);
+    private void CreateAllButtons() => LevelDataLoader.Load().ToList().ForEach(this.CreateSingleButton);
 
     private void RefreshLevels()
     {
-        DeleteAllButtons();
-        levels.Clear();
+        this.DeleteAllButtons();
+        this.levels.Clear();
         LevelDataLoader.Save();
-        CreateAllButtons();
+        this.CreateAllButtons();
     }
 
     private void CreateSingleButton(LevelData level)
     {
-        GameObject button = Instantiate(levelButtonTemp, levelButtonTemp.transform.parent, false);
+        GameObject button = Instantiate(this.levelButtonTemp, this.levelButtonTemp.transform.parent, false);
         button.SetActive(true);
         button.GetComponent<LevelButton>().SetButtonData(level);
-        levels.Add(button);
+        this.levels.Add(button);
     }
 }

@@ -3,23 +3,27 @@
 public class HitObjectCreator : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
-    private int _offset;
-    
-    private void Update() => WaitToSpawnEnemy();
+    private int offset;
+
+    private void Update() => this.WaitToSpawnEnemy();
 
     private void WaitToSpawnEnemy()
     {
-        for (int i = _offset; i < Assets.Instance.Level.Enemies.Count; i++)
+        for (int i = this.offset; i < Assets.Instance.Level.Enemies.Count; i++)
         {
-            if (GameState.GetSpeed(_offset) * (-AudioPlayer.Instance.TrueAudioTime + Assets.Instance.Level.Enemies[i].SpawnTime) + 5.6 * Assets.Instance.Settings.ElementsSize > 1100) return;
-            CreateEnemy(Assets.Instance.Level.Enemies[i], GameState.GetSpeed(_offset));
-            _offset ++;
+            if ((GameState.GetSpeed(this.offset) * (-AudioPlayer.Instance.TrueAudioTime + Assets.Instance.Level.Enemies[i].SpawnTime)) + (5.6 * Assets.Instance.Settings.ElementsSize) > 1100)
+            {
+                return;
+            }
+
+            this.CreateEnemy(Assets.Instance.Level.Enemies[i], GameState.GetSpeed(this.offset));
+            this.offset++;
         }
     }
 
     private void CreateEnemy(EnemyEvent self, float speed)
     {
-        GameObject enemyInstance = Instantiate(enemy, enemy.transform.parent, false);
+        GameObject enemyInstance = Instantiate(this.enemy, this.enemy.transform.parent, false);
         enemyInstance.GetComponent<HitObject>().SetVariables(self, speed);
     }
 }

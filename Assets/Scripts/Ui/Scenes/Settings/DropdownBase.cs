@@ -3,23 +3,28 @@
 public abstract class DropdownBase : SettingsBase
 {
     public Dropdown dropdown;
+
     protected abstract int Index { get; set; }
 
-    private void Start()
-    {
-        dropdown.onValueChanged.AddListener(OnOptionChange);
-        dropdown.ClearOptions();
-        FillDropdown();
-        if (Index == 0) OnOptionChange(0);
-        dropdown.value = Index;
-        dropdown.RefreshShownValue();
-    }
-    
     protected abstract void FillDropdown();
 
     protected virtual void OnOptionChange(int index)
     {
-        Index = index;
-        SetScreenValues();
+        this.Index = index;
+        this.SetScreenValues();
+    }
+
+    private void Start()
+    {
+        this.dropdown.onValueChanged.AddListener(this.OnOptionChange);
+        this.dropdown.ClearOptions();
+        this.FillDropdown();
+        if (this.Index == 0)
+        {
+            this.OnOptionChange(0);
+        }
+
+        this.dropdown.value = this.Index;
+        this.dropdown.RefreshShownValue();
     }
 }

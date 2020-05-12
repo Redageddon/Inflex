@@ -9,7 +9,11 @@ public static class Loader
 {
     public static Texture2D LoadTexture2D(string path)
     {
-        if (!File.Exists(path)) return null;
+        if (!File.Exists(path))
+        {
+            return null;
+        }
+
         byte[] fileData = File.ReadAllBytes(path);
         Texture2D tex2D = new Texture2D(0, 0);
         return tex2D.LoadImage(fileData) ? tex2D : null;
@@ -29,7 +33,7 @@ public static class Loader
         {
             request.SendWebRequest();
             SpinUntil(() => request.isDone);
-            
+
             return Path.GetExtension(path) == ".mp3"
                 ? Mp3ToAudioClip.FromMp3Bytes(request.downloadHandler.data)
                 : DownloadHandlerAudioClip.GetContent(request);

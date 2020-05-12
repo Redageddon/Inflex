@@ -9,5 +9,5 @@ public class Resolution : DropdownBase
         set => Assets.Instance.Settings.ResolutionIndex = value;
     }
 
-    protected override void FillDropdown() => dropdown.options.AddRange(Resolutions.Select(resolution => new Dropdown.OptionData($"{resolution.width} X {resolution.height}")).Distinct());
+    protected override void FillDropdown() => this.dropdown.options.AddRange(this.Resolutions.Select(resolution => new Dropdown.OptionData($"{resolution.width} X {resolution.height}")).Distinct());
 }

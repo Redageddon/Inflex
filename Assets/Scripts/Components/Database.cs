@@ -1,23 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-public class Database<T> : DbContext where T : class
+public class Database<T> : DbContext
+    where T : class
 {
-    public DbSet<LevelData> Levels { get; set; }
-    private readonly string tableName;
     private readonly string dbPath;
+    private readonly string tableName;
 
     public Database(string tableName, string dbPath)
     {
         this.tableName = tableName;
         this.dbPath = dbPath;
     }
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlite($"Data Source={dbPath}");
-    
+
+    public DbSet<LevelData> Levels { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlite($"Data Source={this.dbPath}");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<T>().ToTable(tableName);
+        modelBuilder.Entity<T>().ToTable(this.tableName);
         base.OnModelCreating(modelBuilder);
     }
-    
 }

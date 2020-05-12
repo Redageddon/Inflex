@@ -2,30 +2,9 @@
 
 public class GameState : MonoBehaviour
 {
+    private static bool gamePaused;
     [SerializeField] private GameObject pauseScreen;
-    private static bool _gamePaused;
 
-    public void OnEnable()
-    {
-        AudioPlayer.Instance.LoadAudio($"{Assets.Instance.Level.Path}/{Assets.Instance.Level.SongFile}");
-        AudioHelper.SetOffset();
-        AudioPlayer.Instance.PlayGameSong();
-    }
-
-    public void OnGUI() => UpdatePause();
-
-    private void Update() => UpdatePause();
-
-    private void UpdatePause()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            _gamePaused = !_gamePaused;
-            pauseScreen.SetActive(_gamePaused);
-        }
-        AudioPlayer.Instance.SetAudioPaused(_gamePaused);
-    }
-    
     public static float GetSpeed(int currentEnemy)
     {
         for (int s = Assets.Instance.Level.Speeds.Count - 1; s >= 0; s--)
@@ -35,6 +14,27 @@ public class GameState : MonoBehaviour
                 return Assets.Instance.Level.Speeds[s].Speed;
             }
         }
+
         return 100;
+    }
+
+    public void OnEnable()
+    {
+        AudioPlayer.Instance.LoadAudio($"{Assets.Instance.Level.Path}/{Assets.Instance.Level.SongFile}");
+        AudioHelper.SetOffset();
+        AudioPlayer.Instance.PlayGameSong();
+    }
+
+    private void Update() => this.UpdatePause();
+
+    private void UpdatePause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gamePaused = !gamePaused;
+            this.pauseScreen.SetActive(gamePaused);
+        }
+
+        AudioPlayer.Instance.SetAudioPaused(gamePaused);
     }
 }

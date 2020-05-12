@@ -3,21 +3,24 @@ using UnityEngine.UI;
 
 public class Lives : VisibleElement
 {
+    private static int health;
     [SerializeField] private Text lives;
-
-    private static int _health;
 
     public static int Health
     {
-        get => _health;
+        get => health;
         set
         {
-            if (value <= 0) EndpointConditions.GameLose();
-            _health = value;
+            if (value <= 0)
+            {
+                EndpointConditions.GameLose();
+            }
+
+            health = value;
         }
     }
 
-    private void Awake()  => _health = Assets.Instance.Level.Lives;
+    private void Awake() => health = Assets.Instance.Level.Lives;
 
-    private void Update() => lives.text = $"Lives: {_health}";
+    private void Update() => this.lives.text = $"Lives: {health}";
 }

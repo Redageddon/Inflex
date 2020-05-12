@@ -8,13 +8,13 @@ public abstract class ButtonBase : VisibleElement, IPointerClickHandler
         switch (eventData.button)
         {
             case PointerEventData.InputButton.Left:
-                Left();
+                this.Left();
                 break;
             case PointerEventData.InputButton.Right:
-                Right();
+                this.Right();
                 break;
             case PointerEventData.InputButton.Middle:
-                Middle();
+                this.Middle();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -22,8 +22,8 @@ public abstract class ButtonBase : VisibleElement, IPointerClickHandler
     }
 
     protected abstract void Left();
-    
-    protected virtual void Middle() => Left();
-    
-    protected virtual void Right() => Left();
+
+    protected virtual void Middle() => this.Left();
+
+    protected virtual void Right() => this.Left();
 }

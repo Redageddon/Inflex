@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEngine;
 
 public static class LevelDataLoader
 {
@@ -20,6 +19,6 @@ public static class LevelDataLoader
             }
         }
     }
-    
+
     public static IEnumerable<LevelData> Load() => new Database<LevelData>("Levels", GenericPaths.LevelsDataPath).Levels;
 }

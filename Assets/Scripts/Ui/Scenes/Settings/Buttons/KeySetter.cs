@@ -7,17 +7,21 @@ public class KeySetter : ButtonBase
     [SerializeField] private Text text;
     private bool waitingForInput;
 
-    private void Start() => SetText();
+    protected override void Left() => this.waitingForInput = true;
+
+    private void Start() => this.SetText();
 
     private void OnGUI()
     {
-        if(!waitingForInput || !Event.current.isKey) return;
-        Assets.Instance.Settings.Keys[keyIndex] = (int)Event.current.keyCode;
-        waitingForInput = false;
-        SetText();
+        if (!this.waitingForInput || !Event.current.isKey)
+        {
+            return;
+        }
+
+        Assets.Instance.Settings.Keys[this.keyIndex] = (int)Event.current.keyCode;
+        this.waitingForInput = false;
+        this.SetText();
     }
 
-    private void SetText() => text.text = $" Input{keyIndex}: {(KeyCode)Assets.Instance.Settings.Keys[keyIndex]}";
-
-    protected override void Left() => waitingForInput = true;
+    private void SetText() => this.text.text = $" Input{this.keyIndex}: {(KeyCode)Assets.Instance.Settings.Keys[this.keyIndex]}";
 }
