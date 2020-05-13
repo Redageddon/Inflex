@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5fa23148468774c92aa9cd9026a06e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelButtonTemp: {fileID: 171813057}
+  beatMapButtonTemp: {fileID: 171813057}
 --- !u!114 &57654842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,7 +487,7 @@ GameObject:
   - component: {fileID: 171813059}
   - component: {fileID: 171813058}
   m_Layer: 5
-  m_Name: LevelButtonTemplate
+  m_Name: BeatMapButtonTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,9 +532,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 171813058}
   rectTransform: {fileID: 171813063}
-  levelNameText: {fileID: 1285500142}
   difficulty: {fileID: 1404767787}
-  levelButtonOptions: {fileID: 89522364}
+  beatMapButtonOptions: {fileID: 89522364}
+  beatMapNameText: {fileID: 1285500142}
 --- !u!114 &171813060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 894904110}
   m_HandleRect: {fileID: 1869301539}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1373,9 +1373,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1342297617}
   rectTransform: {fileID: 1342297616}
-  levelButtonOptions: {fileID: 89522364}
-  deletionIndex: 0
   deletionButton: {fileID: 0}
+  levelButtonOptions: {fileID: 89522364}
 --- !u!1 &1345977855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,4 +1840,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1898320928}
   rectTransform: {fileID: 1898320927}
-  levelButtonOptions: {fileID: 89522364}
+  beatMapButtonOptions: {fileID: 89522364}

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Levels;
+using BeatMaps;
 
 [Serializable]
-public class LevelData
+public class BeatMapData
 {
-    public LevelData()
+    public BeatMapData()
     {
     }
 
-    public LevelData(Level level)
+    public BeatMapData(BeatMap level)
     {
         if (level == null)
         {

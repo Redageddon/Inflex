@@ -1,5 +1,5 @@
 ﻿using Components.Audio;
-using Levels.Events;
+using BeatMaps.Events;
 using Ui.Scenes.Game;
 using UnityEngine;
 
@@ -14,15 +14,15 @@ namespace Components.Creators
 
         private void WaitToSpawnEnemy()
         {
-            for (int i = this.offset; i < Assets.Instance.Level.Enemies.Count; i++)
+            for (int i = this.offset; i < Assets.Instance.BeatMap.Enemies.Count; i++)
             {
-                if (GameState.GetSpeed(this.offset) * (-AudioPlayer.Instance.TrueAudioTime + Assets.Instance.Level.Enemies[i].SpawnTime) +
+                if (GameState.GetSpeed(this.offset) * (-AudioPlayer.Instance.TrueAudioTime + Assets.Instance.BeatMap.Enemies[i].SpawnTime) +
                     5.6 * Assets.Instance.Settings.ElementsSize > 1100)
                 {
                     return;
                 }
 
-                this.CreateEnemy(Assets.Instance.Level.Enemies[i], GameState.GetSpeed(this.offset));
+                this.CreateEnemy(Assets.Instance.BeatMap.Enemies[i], GameState.GetSpeed(this.offset));
                 this.offset++;
             }
         }

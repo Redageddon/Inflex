@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using Inflex.Rron;
-using Levels;
+using BeatMaps;
 using UnityEngine;
 
 namespace Components
@@ -9,7 +9,7 @@ namespace Components
 
     public class Assets : Singleton<Assets>
     {
-        public Level Level { get; set; }
+        public BeatMap BeatMap { get; set; }
 
         public Skin Skin { get; private set; }
 

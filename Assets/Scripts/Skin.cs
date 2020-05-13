@@ -33,7 +33,7 @@ public class Skin
             Loader.LoadTexture2D($"{skinPath}/HitObject4.png")
         };
         this.Pointer     = Loader.LoadTexture2D($"{skinPath}/Pointer.png");
-        this.LevelButton = Loader.LoadTexture2D($"{skinPath}/LevelButton.png");
+        this.BeatMapButton = Loader.LoadTexture2D($"{skinPath}/LevelButton.png");
         this.PauseButton = Loader.LoadTexture2D($"{skinPath}/PauseButton.png");
     }
 
@@ -49,7 +49,7 @@ public class Skin
 
     public Texture2D PauseButton { get; }
 
-    public Texture2D LevelButton { get; }
+    public Texture2D BeatMapButton { get; }
 
     public Texture2D BackButton { get; }
 }

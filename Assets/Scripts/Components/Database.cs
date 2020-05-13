@@ -15,7 +15,7 @@ namespace Components
             this.dbPath    = dbPath;
         }
 
-        public DbSet<LevelData> Levels { get; set; }
+        public DbSet<BeatMapData> BeatMaps { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseSqlite($"Data Source={this.dbPath}");

@@ -9,8 +9,8 @@ namespace Components.Creators
 {
     public class ButtonCreator : MonoBehaviour
     {
-        private readonly List<GameObject> levels = new List<GameObject>();
-        [SerializeField] private GameObject levelButtonTemp;
+        private readonly List<GameObject> beatMaps = new List<GameObject>();
+        [SerializeField] private GameObject beatMapButtonTemp;
 
         public void Start() => this.CreateAllButtons();
 
@@ -18,28 +18,28 @@ namespace Components.Creators
         {
             if (InputManager.MacroDown("RefreshMaps"))
             {
-                this.RefreshLevels();
+                this.RefreshBeatMaps();
             }
         }
 
-        private void DeleteAllButtons() => this.levels.ForEach(Destroy);
+        private void DeleteAllButtons() => this.beatMaps.ForEach(Destroy);
 
-        private void CreateAllButtons() => LevelDataLoader.Load().ToList().ForEach(this.CreateSingleButton);
+        private void CreateAllButtons() => BeatMapDataLoader.Load().ToList().ForEach(this.CreateSingleButton);
 
-        private void RefreshLevels()
+        private void RefreshBeatMaps()
         {
             this.DeleteAllButtons();
-            this.levels.Clear();
-            LevelDataLoader.Save();
+            this.beatMaps.Clear();
+            BeatMapDataLoader.Save();
             this.CreateAllButtons();
         }
 
-        private void CreateSingleButton(LevelData level)
+        private void CreateSingleButton(BeatMapData beatMap)
         {
-            GameObject button = Instantiate(this.levelButtonTemp, this.levelButtonTemp.transform.parent, false);
+            GameObject button = Instantiate(this.beatMapButtonTemp, this.beatMapButtonTemp.transform.parent, false);
             button.SetActive(true);
-            button.GetComponent<LevelButton>().SetButtonData(level);
-            this.levels.Add(button);
+            button.GetComponent<BeatMapButton>().SetButtonData(beatMap);
+            this.beatMaps.Add(button);
         }
     }
 }

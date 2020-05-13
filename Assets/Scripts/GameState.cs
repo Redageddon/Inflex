@@ -9,11 +9,11 @@ public class GameState : MonoBehaviour
 
     public static float GetSpeed(int currentEnemy)
     {
-        for (int s = Assets.Instance.Level.Speeds.Count - 1; s >= 0; s--)
+        for (int s = Assets.Instance.BeatMap.Speeds.Count - 1; s >= 0; s--)
         {
-            if (Assets.Instance.Level.Enemies[currentEnemy].SpawnTime > Assets.Instance.Level.Speeds[s].SpawnTime)
+            if (Assets.Instance.BeatMap.Enemies[currentEnemy].SpawnTime > Assets.Instance.BeatMap.Speeds[s].SpawnTime)
             {
-                return Assets.Instance.Level.Speeds[s].Speed;
+                return Assets.Instance.BeatMap.Speeds[s].Speed;
             }
         }
 
@@ -22,7 +22,7 @@ public class GameState : MonoBehaviour
 
     public void OnEnable()
     {
-        AudioPlayer.Instance.LoadAudio($"{Assets.Instance.Level.Path}/{Assets.Instance.Level.SongFile}");
+        AudioPlayer.Instance.LoadAudio($"{Assets.Instance.BeatMap.Path}/{Assets.Instance.BeatMap.SongFile}");
         AudioHelper.SetOffset();
         AudioPlayer.Instance.PlayGameSong();
     }

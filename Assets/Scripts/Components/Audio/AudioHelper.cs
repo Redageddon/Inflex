@@ -26,6 +26,6 @@ namespace Components.Audio
         }
 
         private static float CalculateFirstHitObject() => -1 * ((960 - 3.591f * Assets.Instance.Settings.ElementsSize) /
-                                                                GameState.GetSpeed(0) - Assets.Instance.Level.Enemies[0].SpawnTime);
+                                                                GameState.GetSpeed(0) - Assets.Instance.BeatMap.Enemies[0].SpawnTime);
     }
 }

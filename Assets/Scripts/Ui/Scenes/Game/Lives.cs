@@ -23,7 +23,7 @@ namespace Ui.Scenes.Game
             }
         }
 
-        private void Awake() => health = Assets.Instance.Level.Lives;
+        private void Awake() => health = Assets.Instance.BeatMap.Lives;
 
         private void Update() => this.lives.text = $"Lives: {health}";
     }

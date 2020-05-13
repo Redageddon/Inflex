@@ -21,9 +21,9 @@ namespace Ui.Scenes.LevelSelection.ButtonExtras
         private void DeleteMap()
         {
             Destroy(this.DeletionButton);
-            using (Database<LevelData> db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
+            using (Database<BeatMapData> db = new Database<BeatMapData>("BeatMaps", GenericPaths.BeatMapsDataPath))
             {
-                db.Levels.Remove(db.Levels.Find(this.DeletionIndex));
+                db.BeatMaps.Remove(db.BeatMaps.Find(this.DeletionIndex));
                 db.SaveChanges();
             }
 

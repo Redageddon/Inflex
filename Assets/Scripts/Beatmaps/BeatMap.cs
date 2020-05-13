@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Levels.Events;
+using BeatMaps.Events;
 
-namespace Levels
+namespace BeatMaps
 {
-    public class Level
+    public class BeatMap
     {
-        public Level()
+        public BeatMap()
         {
         }
 
-        public Level(string path, int lives, string songFile, string background, string title, string artist, string creator, string icon,
+        public BeatMap(string path, int lives, string songFile, string background, string title, string artist, string creator, string icon,
                      List<EnemyEvent> enemies, List<SpeedEvent> speeds)
         {
             this.Path       = path;

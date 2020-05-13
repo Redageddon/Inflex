@@ -4,8 +4,8 @@ namespace Ui.Scenes.LevelSelection.ButtonExtras
 {
     public class CancelButton : ButtonBase
     {
-        [SerializeField] private GameObject levelButtonOptions;
+        [SerializeField] private GameObject beatMapButtonOptions;
 
-        protected override void Left() => this.levelButtonOptions.SetActive(false);
+        protected override void Left() => this.beatMapButtonOptions.SetActive(false);
     }
 }

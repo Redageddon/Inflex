@@ -1,4 +1,4 @@
-﻿namespace Levels.Events
+﻿namespace BeatMaps.Events
 {
     public class ScreenEvent
     {

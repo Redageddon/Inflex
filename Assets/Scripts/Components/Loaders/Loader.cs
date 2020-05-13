@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Components.Audio;
 using Inflex.Rron;
-using Levels;
+using BeatMaps;
 using UnityEngine;
 using UnityEngine.Networking;
 using static System.Threading.SpinWait;
@@ -25,10 +25,10 @@ namespace Components.Loaders
             return tex2D.LoadImage(fileData) ? tex2D : null;
         }
 
-        public static Level LoadLevel(string path)
+        public static BeatMap LoadBeatMap(string path)
         {
             string filePath = Directory.GetFiles(path, @"*.rron").First();
-            Level  prePath  = RronConvert.DeserializeObjectFromFile<Level>(filePath);
+            BeatMap  prePath  = RronConvert.DeserializeObjectFromFile<BeatMap>(filePath);
             prePath.Path = path;
             return prePath;
         }

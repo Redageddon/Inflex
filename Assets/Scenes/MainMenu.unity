@@ -857,7 +857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 756732518}
   rectTransform: {fileID: 756732514}
-  navigation: LevelSelection
+  navigation: BeatMapSelection
 --- !u!114 &756732516
 MonoBehaviour:
   m_ObjectHideFlags: 0

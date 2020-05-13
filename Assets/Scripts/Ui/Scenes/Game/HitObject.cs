@@ -1,8 +1,8 @@
 ﻿using Components;
 using Components.Audio;
 using Components.Creators;
-using Levels;
-using Levels.Events;
+using BeatMaps;
+using BeatMaps.Events;
 using UnityEngine;
 
 namespace Ui.Scenes.Game

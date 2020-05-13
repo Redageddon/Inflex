@@ -3,7 +3,7 @@
 public static class GenericPaths
 {
     public static readonly string SkinsPath = streamingAssetsPath + "/Skins/";
-    public static readonly string LevelsPath = streamingAssetsPath + "/Levels/";
-    public static readonly string LevelsDataPath = streamingAssetsPath + "/Levels.db";
+    public static readonly string BeatMapsPath = streamingAssetsPath + "/BeatMaps/";
+    public static readonly string BeatMapsDataPath = streamingAssetsPath + "/BeatMaps.db";
     public static readonly string SettingsPath = streamingAssetsPath + "/Settings.rron";
 }
