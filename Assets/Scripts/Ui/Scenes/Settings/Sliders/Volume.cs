@@ -1,8 +1,13 @@
-﻿public class Volume : SliderBase
+﻿using Components;
+
+namespace Ui.Scenes.Settings.Sliders
 {
-    protected override float Value
+    public class Volume : SliderBase
     {
-        get => Assets.Instance.Settings.Volume;
-        set => Assets.Instance.Settings.Volume = value;
+        protected override float Value
+        {
+            get => Assets.Instance.Settings.Volume;
+            set => Assets.Instance.Settings.Volume = value;
+        }
     }
 }

@@ -1,16 +1,21 @@
-﻿public class SpeedEvent
+﻿namespace Levels.Events
 {
-    public SpeedEvent(float speed, float spawnTime)
+    public class SpeedEvent
     {
-        this.Speed = speed;
-        this.SpawnTime = spawnTime;
+        public SpeedEvent(float speed, float spawnTime)
+        {
+            this.Speed     = speed;
+            this.SpawnTime = spawnTime;
+        }
+
+        public SpeedEvent()
+        {
+        }
+
+        public float Speed { get; set; }
+
+        public float SpawnTime { get; set; }
+
+        public override string ToString() => $"{nameof(this.Speed)}: {this.Speed}, {nameof(this.SpawnTime)}: {this.SpawnTime}";
     }
-
-    public SpeedEvent() { }
-
-    public float Speed { get; set; }
-
-    public float SpawnTime { get; set; }
-
-    public override string ToString() => $"{nameof(this.Speed)}: {this.Speed}, {nameof(this.SpawnTime)}: {this.SpawnTime}";
 }

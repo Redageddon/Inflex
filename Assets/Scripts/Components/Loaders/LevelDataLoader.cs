@@ -2,23 +2,32 @@
 using System.IO;
 using System.Linq;
 
-public static class LevelDataLoader
+namespace Components.Loaders
 {
-    public static void Save()
+    public static class LevelDataLoader
     {
-        string[] levelPaths = Directory.GetDirectories(GenericPaths.LevelsPath);
-        List<LevelData> levels = levelPaths.Select(path => new LevelData(Loader.LoadLevel(path))).ToList();
-
-        using (Database<LevelData> db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
+        public static void Save()
         {
-            db.Database.EnsureDeleted();
-            if (db.Database.EnsureCreated())
+            string[] levelPaths = Directory.GetDirectories(GenericPaths.LevelsPath);
+            List<LevelData> levels = levelPaths.Select(path => new LevelData(Loader.LoadLevel(path))).ToList();
+
+            using (Database<LevelData> db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
             {
-                db.Levels.AddRange(levels);
-                db.SaveChanges();
+                db.Database.EnsureDeleted();
+                if (db.Database.EnsureCreated())
+                {
+                    db.Levels.AddRange(levels);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public static IEnumerable<LevelData> Load()
+        {
+            using (Database<LevelData> data = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
+            {
+                return data.Levels;
             }
         }
     }
-
-    public static IEnumerable<LevelData> Load() => new Database<LevelData>("Levels", GenericPaths.LevelsDataPath).Levels;
 }

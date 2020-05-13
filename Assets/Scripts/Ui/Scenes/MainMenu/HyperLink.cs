@@ -1,4 +1,9 @@
-﻿public class HyperLink : ButtonBase
+﻿using System.Diagnostics;
+
+namespace Ui.Scenes.MainMenu
 {
-    protected override void Left() => System.Diagnostics.Process.Start("https://github.com/rubiksmaster02/Inflex");
+    public class HyperLink : ButtonBase
+    {
+        protected override void Left() => Process.Start("https://github.com/rubiksmaster02/Inflex");
+    }
 }

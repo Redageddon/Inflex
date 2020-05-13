@@ -1,12 +1,17 @@
-﻿public class PreferredFps : InputFieldBase
+﻿using Components;
+
+namespace Ui.Scenes.Settings.InputFields
 {
-    protected override string Input
+    public class PreferredFps : InputFieldBase
     {
-        get => Assets.Instance.Settings.PreferredFps.ToString();
-        set
+        protected override string Input
         {
-            int.TryParse(value, out int val);
-            Assets.Instance.Settings.PreferredFps = val;
+            get => Assets.Instance.Settings.PreferredFps.ToString();
+            set
+            {
+                int.TryParse(value, out int val);
+                Assets.Instance.Settings.PreferredFps = val;
+            }
         }
     }
 }

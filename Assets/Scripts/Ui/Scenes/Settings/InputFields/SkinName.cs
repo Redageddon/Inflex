@@ -1,8 +1,13 @@
-﻿public class SkinName : InputFieldBase
+﻿using Components;
+
+namespace Ui.Scenes.Settings.InputFields
 {
-    protected override string Input
+    public class SkinName : InputFieldBase
     {
-        get => Assets.Instance.Settings.SkinName;
-        set => Assets.Instance.Settings.SkinName = value;
+        protected override string Input
+        {
+            get => Assets.Instance.Settings.SkinName;
+            set => Assets.Instance.Settings.SkinName = value;
+        }
     }
 }

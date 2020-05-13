@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Linq;
+using Components;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FullscreenMode : DropdownBase
+namespace Ui.Scenes.Settings.Dropdowns
 {
-    protected override int Index
+    public class FullscreenMode : DropdownBase
     {
-        get => Assets.Instance.Settings.FullscreenModeIndex;
-        set => Assets.Instance.Settings.FullscreenModeIndex = value;
-    }
+        protected override int Index
+        {
+            get => Assets.Instance.Settings.FullscreenModeIndex;
+            set => Assets.Instance.Settings.FullscreenModeIndex = value;
+        }
 
-    protected override void FillDropdown() => this.dropdown.options.AddRange(Enum.GetNames(typeof(FullScreenMode)).Select(mode => new Dropdown.OptionData($"{mode}")));
+        protected override void FillDropdown() =>
+            this.Dropdown.options.AddRange(Enum.GetNames(typeof(FullScreenMode)).Select(mode => new Dropdown.OptionData($"{mode}")));
+    }
 }

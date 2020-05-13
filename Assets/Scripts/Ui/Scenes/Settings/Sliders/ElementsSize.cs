@@ -1,8 +1,13 @@
-﻿public class ElementsSize : SliderBase
+﻿using Components;
+
+namespace Ui.Scenes.Settings.Sliders
 {
-    protected override float Value
+    public class ElementsSize : SliderBase
     {
-        get => Assets.Instance.Settings.ElementsSize;
-        set => Assets.Instance.Settings.ElementsSize = value;
+        protected override float Value
+        {
+            get => Assets.Instance.Settings.ElementsSize;
+            set => Assets.Instance.Settings.ElementsSize = value;
+        }
     }
 }

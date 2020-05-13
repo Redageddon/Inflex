@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Levels;
 
-[System.Serializable]
+[Serializable]
 public class LevelData
 {
     public LevelData()
@@ -9,6 +11,11 @@ public class LevelData
 
     public LevelData(Level level)
     {
+        if (level == null)
+        {
+            throw new NullReferenceException();
+        }
+
         this.Title = level.Title;
         this.Path = level.Path;
         this.Icon = level.Icon;

@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class InputFieldBase : SettingsBase
+namespace Ui.Scenes.Settings
 {
-    [SerializeField] public InputField inputField;
-
-    protected abstract string Input { get; set; }
-
-    protected virtual void OnInputChange(string input)
+    public abstract class InputFieldBase : SettingsBase
     {
-        this.Input = input;
-        this.SetScreenValues();
-    }
+        [SerializeField] private InputField inputField;
 
-    private void Start()
-    {
-        this.inputField.onValueChanged.AddListener(this.OnInputChange);
-        this.inputField.text = this.Input;
+        protected abstract string Input { get; set; }
+
+        protected virtual void OnInputChange(string input)
+        {
+            this.Input = input;
+            this.SetScreenValues();
+        }
+
+        private void Start()
+        {
+            this.inputField.onValueChanged.AddListener(this.OnInputChange);
+            this.inputField.text = this.Input;
+        }
     }
 }

@@ -1,27 +1,31 @@
-﻿using UnityEngine;
+﻿using Components;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class KeySetter : ButtonBase
+namespace Ui.Scenes.Settings.Buttons
 {
-    [SerializeField] private int keyIndex;
-    [SerializeField] private Text text;
-    private bool waitingForInput;
-
-    protected override void Left() => this.waitingForInput = true;
-
-    private void Start() => this.SetText();
-
-    private void OnGUI()
+    public class KeySetter : ButtonBase
     {
-        if (!this.waitingForInput || !Event.current.isKey)
+        [SerializeField] private int keyIndex;
+        [SerializeField] private Text text;
+        private bool waitingForInput;
+
+        protected override void Left() => this.waitingForInput = true;
+
+        private void Start() => this.SetText();
+
+        private void OnGUI()
         {
-            return;
+            if (!this.waitingForInput || !Event.current.isKey)
+            {
+                return;
+            }
+
+            Assets.Instance.Settings.Keys[this.keyIndex] = (int) Event.current.keyCode;
+            this.waitingForInput                         = false;
+            this.SetText();
         }
 
-        Assets.Instance.Settings.Keys[this.keyIndex] = (int)Event.current.keyCode;
-        this.waitingForInput = false;
-        this.SetText();
+        private void SetText() => this.text.text = $" Input{this.keyIndex}: {(KeyCode) Assets.Instance.Settings.Keys[this.keyIndex]}";
     }
-
-    private void SetText() => this.text.text = $" Input{this.keyIndex}: {(KeyCode)Assets.Instance.Settings.Keys[this.keyIndex]}";
 }

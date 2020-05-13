@@ -1,29 +1,34 @@
-﻿using UnityEngine;
+﻿using Components;
+using UnityEngine;
 
-public class CurrentKey : VisibleElement
+namespace Ui.Scenes.Game
 {
-    public static int Key;
-    [SerializeField] private Sprite[] sprites;
-
-    private void Awake() => this.SetImage(0);
-
-    private void Update()
+    public class CurrentKey : VisibleElement
     {
-        for (int i = 0; i < 4; i++)
+        public static int Key { get; set; }
+        [SerializeField] private Sprite[] sprites;
+
+        private void Awake() => this.SetImage(0);
+
+        private void Update()
         {
-            if (!Input.GetKeyDown((KeyCode)Assets.Instance.Settings.Keys[i]))
+            for (int i = 0; i < 4; i++)
             {
-                continue;
+                if (!Input.GetKeyDown((KeyCode) Assets.Instance.Settings.Keys[i]))
+                {
+                    continue;
+                }
+
+                this.SetImage(i);
+                Key = i;
             }
-
-            this.SetImage(i);
-            Key = i;
         }
-    }
 
-    private void SetImage(int current)
-    {
-        this.Image.texture = Assets.Instance.Skin.CurrentKeys[current] is null ? this.sprites[current].texture : Assets.Instance.Skin.CurrentKeys[current];
-        this.RectTransform.offsetMin = new Vector2(-this.sprites[current].rect.xMax, -this.sprites[current].rect.yMax);
+        private void SetImage(int current)
+        {
+            this.Image.texture =
+                Assets.Instance.Skin.CurrentKeys[current] is null ? this.sprites[current].texture : Assets.Instance.Skin.CurrentKeys[current];
+            this.RectTransform.offsetMin = new Vector2(-this.sprites[current].rect.xMax, -this.sprites[current].rect.yMax);
+        }
     }
 }

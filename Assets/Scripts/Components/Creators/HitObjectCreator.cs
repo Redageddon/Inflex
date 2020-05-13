@@ -1,29 +1,36 @@
-﻿using UnityEngine;
+﻿using Components.Audio;
+using Levels.Events;
+using Ui.Scenes.Game;
+using UnityEngine;
 
-public class HitObjectCreator : MonoBehaviour
+namespace Components.Creators
 {
-    [SerializeField] private GameObject enemy;
-    private int offset;
-
-    private void Update() => this.WaitToSpawnEnemy();
-
-    private void WaitToSpawnEnemy()
+    public class HitObjectCreator : MonoBehaviour
     {
-        for (int i = this.offset; i < Assets.Instance.Level.Enemies.Count; i++)
+        [SerializeField] private GameObject enemy;
+        private int offset;
+
+        private void Update() => this.WaitToSpawnEnemy();
+
+        private void WaitToSpawnEnemy()
         {
-            if ((GameState.GetSpeed(this.offset) * (-AudioPlayer.Instance.TrueAudioTime + Assets.Instance.Level.Enemies[i].SpawnTime)) + (5.6 * Assets.Instance.Settings.ElementsSize) > 1100)
+            for (int i = this.offset; i < Assets.Instance.Level.Enemies.Count; i++)
             {
-                return;
+                if (GameState.GetSpeed(this.offset) * (-AudioPlayer.Instance.TrueAudioTime + Assets.Instance.Level.Enemies[i].SpawnTime) +
+                    5.6 * Assets.Instance.Settings.ElementsSize > 1100)
+                {
+                    return;
+                }
+
+                this.CreateEnemy(Assets.Instance.Level.Enemies[i], GameState.GetSpeed(this.offset));
+                this.offset++;
             }
-
-            this.CreateEnemy(Assets.Instance.Level.Enemies[i], GameState.GetSpeed(this.offset));
-            this.offset++;
         }
-    }
 
-    private void CreateEnemy(EnemyEvent self, float speed)
-    {
-        GameObject enemyInstance = Instantiate(this.enemy, this.enemy.transform.parent, false);
-        enemyInstance.GetComponent<HitObject>().SetVariables(self, speed);
+        private void CreateEnemy(EnemyEvent self, float speed)
+        {
+            GameObject enemyInstance = Instantiate(this.enemy, this.enemy.transform.parent, false);
+            enemyInstance.GetComponent<HitObject>().SetVariables(self, speed);
+        }
     }
 }

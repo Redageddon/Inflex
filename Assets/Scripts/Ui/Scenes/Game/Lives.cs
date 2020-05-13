@@ -1,26 +1,30 @@
-﻿using UnityEngine;
+﻿using Components;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class Lives : VisibleElement
+namespace Ui.Scenes.Game
 {
-    private static int health;
-    [SerializeField] private Text lives;
-
-    public static int Health
+    public class Lives : VisibleElement
     {
-        get => health;
-        set
+        private static int health;
+        [SerializeField] private Text lives;
+
+        public static int Health
         {
-            if (value <= 0)
+            get => health;
+            set
             {
-                EndpointConditions.GameLose();
+                if (value <= 0)
+                {
+                    EndpointConditions.GameLose();
+                }
+
+                health = value;
             }
-
-            health = value;
         }
+
+        private void Awake() => health = Assets.Instance.Level.Lives;
+
+        private void Update() => this.lives.text = $"Lives: {health}";
     }
-
-    private void Awake() => health = Assets.Instance.Level.Lives;
-
-    private void Update() => this.lives.text = $"Lives: {health}";
 }

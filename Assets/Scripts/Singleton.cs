@@ -1,5 +1,4 @@
-﻿// code from http://wiki.unity3d.com/index.php/Singleton
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour
     where T : MonoBehaviour
@@ -20,19 +19,23 @@ public class Singleton<T> : MonoBehaviour
 
             lock (Lock)
             {
-                if (instance == null)
+                if (instance != null)
                 {
-                    instance = (T)FindObjectOfType(typeof(T));
-
-                    if (instance == null)
-                    {
-                        GameObject singletonObject = new GameObject();
-                        instance = singletonObject.AddComponent<T>();
-                        singletonObject.name = typeof(T) + " (Singleton)";
-
-                        DontDestroyOnLoad(singletonObject);
-                    }
+                    return instance;
                 }
+
+                instance = (T) FindObjectOfType(typeof(T));
+
+                if (instance != null)
+                {
+                    return instance;
+                }
+
+                GameObject singletonObject = new GameObject();
+                instance             = singletonObject.AddComponent<T>();
+                singletonObject.name = typeof(T) + " (Singleton)";
+
+                DontDestroyOnLoad(singletonObject);
 
                 return instance;
             }

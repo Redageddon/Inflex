@@ -3,82 +3,88 @@ using System.IO;
 using NAudio.Wave;
 using UnityEngine;
 
-public static class Mp3ToAudioClip
+namespace Components.Audio
 {
-    private static int position;
-    private static byte[] wavFile;
-    private static int dataIndex;
-    private static int sampleSize;
-
-    public static AudioClip FromMp3Bytes(byte[] bytes)
+    public static class Mp3ToAudioClip
     {
-        MemoryStream mp3Stream = new MemoryStream(bytes);
-        Mp3FileReader mp3Audio = new Mp3FileReader(mp3Stream);
-        WaveStream waveStream = WaveFormatConversionStream.CreatePcmStream(mp3Audio);
+        private static int position;
+        private static byte[] wavFile;
+        private static int dataIndex;
+        private static int sampleSize;
 
-        return ByteArrayToAudioClip(WaveToMemoryStream(waveStream).ToArray());
-    }
-
-    private static void OnAudioSetPosition(int newPosition) => position = newPosition;
-
-    private static MemoryStream WaveToMemoryStream(WaveStream waveStream)
-    {
-        MemoryStream outputStream = new MemoryStream();
-        using (WaveFileWriter waveFileWriter = new WaveFileWriter(outputStream, waveStream.WaveFormat))
+        public static AudioClip FromMp3Bytes(byte[] bytes)
         {
-            byte[] bytes = new byte[waveStream.Length];
-            waveStream.Read(bytes, 0, (int) waveStream.Length);
-            waveFileWriter.Write(bytes, 0, bytes.Length);
-            waveFileWriter.Flush();
-        }
-
-        return outputStream;
-    }
-
-    private static AudioClip ByteArrayToAudioClip(byte[] array)
-    {
-        if (BitConverter.ToInt16(array, 20) != 1)
-        {
-            throw new Exception("Byte at index 20 is not 1");
-        }
-
-        wavFile = array;
-        int numChannels = BitConverter.ToInt16(array, 22);
-        int bitsPerSample = BitConverter.ToInt16(array, 34);
-        int sampleRate = BitConverter.ToInt32(array, 24);
-        dataIndex = BitConverter.ToInt32(array, 16) + 20;
-
-        FindDataIndex();
-
-        int subChunk2Size = BitConverter.ToInt32(array, dataIndex);
-        sampleSize = bitsPerSample / 8;
-        int sampleCount = subChunk2Size / sampleSize;
-
-        AudioClip audioClip = AudioClip.Create("Default", sampleCount, numChannels, sampleRate, true, OnAudioRead, OnAudioSetPosition);
-
-        return audioClip;
-    }
-
-    private static void OnAudioRead(float[] data)
-    {
-        for (int i = 0; i < data.Length; i++)
-        {
-            data[i] = BitConverter.ToInt16(wavFile, dataIndex + 4 + (position * sampleSize)) / 32768.0f;
-            position++;
-        }
-    }
-
-    private static void FindDataIndex()
-    {
-        for (int i = dataIndex; i < wavFile.Length; i++)
-        {
-            if (wavFile[i - 4] == 'd' && wavFile[i - 3] == 'a' && wavFile[i - 2] == 't' && wavFile[i - 1] == 'a')
+            MemoryStream mp3Stream = new MemoryStream(bytes);
+            using (Mp3FileReader mp3Audio = new Mp3FileReader(mp3Stream))
             {
-                dataIndex = i;
-                return;
+                using (WaveStream waveStream = WaveFormatConversionStream.CreatePcmStream(mp3Audio))
+                {
+                    return ByteArrayToAudioClip(WaveToMemoryStream(waveStream).ToArray());
+                }
             }
         }
 
-        throw new Exception("Data Index not found");
+        private static void OnAudioSetPosition(int newPosition) => position = newPosition;
+
+        private static MemoryStream WaveToMemoryStream(WaveStream waveStream)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            using (WaveFileWriter waveFileWriter = new WaveFileWriter(outputStream, waveStream.WaveFormat))
+            {
+                byte[] bytes = new byte[waveStream.Length];
+                waveStream.Read(bytes, 0, (int) waveStream.Length);
+                waveFileWriter.Write(bytes, 0, bytes.Length);
+                waveFileWriter.Flush();
+            }
+
+            return outputStream;
+        }
+
+        private static AudioClip ByteArrayToAudioClip(byte[] array)
+        {
+            if (BitConverter.ToInt16(array, 20) != 1)
+            {
+                throw new InvalidDataException();
+            }
+
+            wavFile = array;
+            int numChannels = BitConverter.ToInt16(array, 22);
+            int bitsPerSample = BitConverter.ToInt16(array, 34);
+            int sampleRate = BitConverter.ToInt32(array, 24);
+            dataIndex = BitConverter.ToInt32(array, 16) + 20;
+
+            FindDataIndex();
+
+            int subChunk2Size = BitConverter.ToInt32(array, dataIndex);
+            sampleSize = bitsPerSample / 8;
+            int sampleCount = subChunk2Size / sampleSize;
+
+            AudioClip audioClip = AudioClip.Create("Default", sampleCount, numChannels, sampleRate, true, OnAudioRead, OnAudioSetPosition);
+
+            return audioClip;
+        }
+
+        private static void OnAudioRead(float[] data)
+        {
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] = BitConverter.ToInt16(wavFile, dataIndex + 4 + position * sampleSize) / 32768.0f;
+                position++;
+            }
+        }
+
+        private static void FindDataIndex()
+        {
+            for (int i = dataIndex; i < wavFile.Length; i++)
+            {
+                if (wavFile[i - 4] == 'd' && wavFile[i - 3] == 'a' && wavFile[i - 2] == 't' && wavFile[i - 1] == 'a')
+                {
+                    dataIndex = i;
+                    return;
+                }
+            }
+
+            throw new InvalidDataException();
+        }
     }
 }

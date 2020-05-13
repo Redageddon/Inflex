@@ -1,10 +1,10 @@
-﻿using Inflex.Rron;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using Components;
+using Inflex.Rron;
 
-public class SaveButton : ButtonBase
+namespace Ui.Scenes.Settings.Buttons
 {
-    [SerializeField] private Button saveButton;
-
-    protected override void Left() => RronConvert.SerializeObjectToFile(Assets.Instance.Settings, GenericPaths.SettingsPath);
+    public class SaveButton : ButtonBase
+    {
+        protected override void Left() => RronConvert.SerializeObjectToFile(Assets.Instance.Settings, GenericPaths.SettingsPath);
+    }
 }

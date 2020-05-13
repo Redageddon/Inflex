@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Version : MonoBehaviour
+namespace Ui.Scenes.MainMenu
 {
-    [SerializeField] private Text version;
+    public class Version : MonoBehaviour
+    {
+        [SerializeField] private Text version;
 
-    private void Start() => this.version.text = Application.version;
+        private void Start() => this.version.text = Application.version;
+    }
 }

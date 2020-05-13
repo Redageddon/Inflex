@@ -1,21 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class SavedSettings
 {
-    public SavedSettings() { }
+    public SavedSettings()
+    {
+    }
 
     public SavedSettings(string name)
     {
-        if (name.Equals("Default"))
+        if (name != null && name.Equals("Default", StringComparison.OrdinalIgnoreCase))
         {
-            this.SkinName = name;
-            this.PreferredFps = 60;
-            this.ResolutionIndex = default;
+            this.SkinName            = name;
+            this.PreferredFps        = 60;
+            this.ResolutionIndex     = default;
             this.FullscreenModeIndex = default;
-            this.VSyncIndex = default;
-            this.Volume = 100;
-            this.ElementsSize = 100;
-            this.Keys = new List<int> {119, 97, 115, 100};
+            this.VSyncIndex          = default;
+            this.Volume              = 100;
+            this.ElementsSize        = 100;
+            this.Keys                = new List<int> {119, 97, 115, 100};
         }
     }
 

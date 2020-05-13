@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Components;
+using Components.Audio;
+using UnityEngine;
 
 public class GameState : MonoBehaviour
 {

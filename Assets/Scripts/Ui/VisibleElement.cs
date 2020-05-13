@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class VisibleElement : MonoBehaviour
+namespace Ui
 {
-    [SerializeField] private RawImage image;
-    [SerializeField] private RectTransform rectTransform;
-
-    protected RawImage Image
+    public class VisibleElement : MonoBehaviour
     {
-        get => this.image;
-        set => this.image = value;
-    }
+        [SerializeField] private RawImage image;
+        [SerializeField] private RectTransform rectTransform;
 
-    protected RectTransform RectTransform
-    {
-        get => this.rectTransform;
-        set => this.rectTransform = value;
+        protected RawImage Image
+        {
+            get => this.image;
+            set => this.image = value;
+        }
+
+        protected RectTransform RectTransform
+        {
+            get => this.rectTransform;
+            set => this.rectTransform = value;
+        }
     }
 }

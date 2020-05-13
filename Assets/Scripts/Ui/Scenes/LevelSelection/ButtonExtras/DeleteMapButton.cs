@@ -1,29 +1,33 @@
-﻿using UnityEngine;
+﻿using Components;
+using UnityEngine;
 
-public class DeleteMapButton : ButtonBase
+namespace Ui.Scenes.LevelSelection.ButtonExtras
 {
-    [SerializeField] private GameObject deletionButton;
-    [SerializeField] private GameObject levelButtonOptions;
-
-    public GameObject DeletionButton
+    public class DeleteMapButton : ButtonBase
     {
-        get => this.deletionButton;
-        set => this.deletionButton = value;
-    }
+        [SerializeField] private GameObject deletionButton;
+        [SerializeField] private GameObject levelButtonOptions;
 
-    public int DeletionIndex { get; set; }
-
-    protected override void Left() => this.DeleteMap();
-
-    private void DeleteMap()
-    {
-        Destroy(this.DeletionButton);
-        using (Database<LevelData> db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
+        public GameObject DeletionButton
         {
-            db.Levels.Remove(db.Levels.Find(this.DeletionIndex));
-            db.SaveChanges();
+            get => this.deletionButton;
+            set => this.deletionButton = value;
         }
 
-        this.levelButtonOptions.SetActive(false);
+        public int DeletionIndex { get; set; }
+
+        protected override void Left() => this.DeleteMap();
+
+        private void DeleteMap()
+        {
+            Destroy(this.DeletionButton);
+            using (Database<LevelData> db = new Database<LevelData>("Levels", GenericPaths.LevelsDataPath))
+            {
+                db.Levels.Remove(db.Levels.Find(this.DeletionIndex));
+                db.SaveChanges();
+            }
+
+            this.levelButtonOptions.SetActive(false);
+        }
     }
 }

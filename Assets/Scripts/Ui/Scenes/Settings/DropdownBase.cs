@@ -1,30 +1,36 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public abstract class DropdownBase : SettingsBase
+namespace Ui.Scenes.Settings
 {
-    public Dropdown dropdown;
-
-    protected abstract int Index { get; set; }
-
-    protected abstract void FillDropdown();
-
-    protected virtual void OnOptionChange(int index)
+    public abstract class DropdownBase : SettingsBase
     {
-        this.Index = index;
-        this.SetScreenValues();
-    }
+        [SerializeField] private Dropdown dropdown;
 
-    private void Start()
-    {
-        this.dropdown.onValueChanged.AddListener(this.OnOptionChange);
-        this.dropdown.ClearOptions();
-        this.FillDropdown();
-        if (this.Index == 0)
+        protected Dropdown Dropdown => this.dropdown;
+
+        protected abstract int Index { get; set; }
+
+        protected abstract void FillDropdown();
+
+        protected virtual void OnOptionChange(int index)
         {
-            this.OnOptionChange(0);
+            this.Index = index;
+            this.SetScreenValues();
         }
 
-        this.dropdown.value = this.Index;
-        this.dropdown.RefreshShownValue();
+        private void Start()
+        {
+            this.dropdown.onValueChanged.AddListener(this.OnOptionChange);
+            this.dropdown.ClearOptions();
+            this.FillDropdown();
+            if (this.Index == 0)
+            {
+                this.OnOptionChange(0);
+            }
+
+            this.dropdown.value = this.Index;
+            this.dropdown.RefreshShownValue();
+        }
     }
 }

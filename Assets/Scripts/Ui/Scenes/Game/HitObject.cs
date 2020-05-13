@@ -1,44 +1,54 @@
-﻿using UnityEngine;
+﻿using Components;
+using Components.Audio;
+using Components.Creators;
+using Levels;
+using Levels.Events;
+using UnityEngine;
 
-public class HitObject : VisibleElement
+namespace Ui.Scenes.Game
 {
-    [SerializeField] private CircleCollider2D circleCollider2D;
-    [SerializeField] private Sprite[] sprites;
-    private HitObjectLocationManager locationManager;
-    private float speed;
-
-    public int KillKey { get; private set; }
-
-    public void SetVariables(EnemyEvent enemyEvent, float speed)
+    public class HitObject : VisibleElement
     {
-        this.Image.texture = Assets.Instance.Skin.HitObjects[enemyEvent.KillKey] is null ? this.sprites[enemyEvent.KillKey].texture : Assets.Instance.Skin.HitObjects[enemyEvent.KillKey];
-        this.speed = speed;
+        [SerializeField] private CircleCollider2D circleCollider2D;
+        private HitObjectLocationManager locationManager;
+        private float speed;
+        [SerializeField] private Sprite[] sprites;
 
-        this.locationManager = new HitObjectLocationManager(enemyEvent);
-        this.KillKey = enemyEvent.KillKey;
-        this.circleCollider2D.radius = Assets.Instance.Settings.ElementsSize;
-        this.RectTransform.sizeDelta = new Vector2(Assets.Instance.Settings.ElementsSize * 2, Assets.Instance.Settings.ElementsSize * 2);
+        public int KillKey { get; private set; }
 
-        this.gameObject.transform.localPosition = this.locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime, this.speed);
-        this.gameObject.SetActive(true);
-    }
-
-    public void Hit()
-    {
-        JudgementCreator.Create(this.locationManager.Rotation);
-        this.gameObject.SetActive(false);
-    }
-
-    public void Update() => this.UpdateLocation();
-
-    private void UpdateLocation()
-    {
-        if (this.locationManager.Distance <= 2.71 * Assets.Instance.Settings.ElementsSize)
+        public void SetVariables(EnemyEvent enemyEvent, float speed)
         {
-            Lives.Health -= 1;
-            this.Hit();
+            this.Image.texture = Assets.Instance.Skin.HitObjects[enemyEvent.KillKey] is null
+                                     ? this.sprites[enemyEvent.KillKey].texture
+                                     : Assets.Instance.Skin.HitObjects[enemyEvent.KillKey];
+            this.speed = speed;
+
+            this.locationManager         = new HitObjectLocationManager(enemyEvent);
+            this.KillKey                 = enemyEvent.KillKey;
+            this.circleCollider2D.radius = Assets.Instance.Settings.ElementsSize;
+            this.RectTransform.sizeDelta = new Vector2(Assets.Instance.Settings.ElementsSize * 2, Assets.Instance.Settings.ElementsSize * 2);
+
+            this.gameObject.transform.localPosition = this.locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime, this.speed);
+            this.gameObject.SetActive(true);
         }
 
-        this.gameObject.transform.localPosition = this.locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime, this.speed);
+        public void Hit()
+        {
+            JudgementCreator.Create(this.locationManager.Rotation);
+            this.gameObject.SetActive(false);
+        }
+
+        public void Update() => this.UpdateLocation();
+
+        private void UpdateLocation()
+        {
+            if (this.locationManager.Distance <= 2.71 * Assets.Instance.Settings.ElementsSize)
+            {
+                Lives.Health -= 1;
+                this.Hit();
+            }
+
+            this.gameObject.transform.localPosition = this.locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime, this.speed);
+        }
     }
 }

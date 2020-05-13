@@ -1,24 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 
-public class Database<T> : DbContext
-    where T : class
+namespace Components
 {
-    private readonly string dbPath;
-    private readonly string tableName;
-
-    public Database(string tableName, string dbPath)
+    public class Database<T> : DbContext
+        where T : class
     {
-        this.tableName = tableName;
-        this.dbPath = dbPath;
-    }
+        private readonly string dbPath;
+        private readonly string tableName;
 
-    public DbSet<LevelData> Levels { get; set; }
+        public Database(string tableName, string dbPath)
+        {
+            this.tableName = tableName;
+            this.dbPath    = dbPath;
+        }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlite($"Data Source={this.dbPath}");
+        public DbSet<LevelData> Levels { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<T>().ToTable(this.tableName);
-        base.OnModelCreating(modelBuilder);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseSqlite($"Data Source={this.dbPath}");
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            if (modelBuilder == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            modelBuilder.Entity<T>().ToTable(this.tableName);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

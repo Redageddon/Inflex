@@ -1,13 +1,19 @@
 ﻿using System.Linq;
+using Components;
 using UnityEngine.UI;
 
-public class Resolution : DropdownBase
+namespace Ui.Scenes.Settings.Dropdowns
 {
-    protected override int Index
+    public class Resolution : DropdownBase
     {
-        get => Assets.Instance.Settings.ResolutionIndex;
-        set => Assets.Instance.Settings.ResolutionIndex = value;
-    }
+        protected override int Index
+        {
+            get => Assets.Instance.Settings.ResolutionIndex;
+            set => Assets.Instance.Settings.ResolutionIndex = value;
+        }
 
-    protected override void FillDropdown() => this.dropdown.options.AddRange(this.Resolutions.Select(resolution => new Dropdown.OptionData($"{resolution.width} X {resolution.height}")).Distinct());
+        protected override void FillDropdown() =>
+            this.Dropdown.options.AddRange(this.Resolutions.Select(resolution =>
+                                                                       new Dropdown.OptionData($"{resolution.width} X {resolution.height}")).Distinct());
+    }
 }

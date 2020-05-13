@@ -2,19 +2,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuButton : ButtonBase
+namespace Ui.Scenes.MainMenu
 {
-    [SerializeField] private string navigation;
-
-    protected override void Left()
+    public class MainMenuButton : ButtonBase
     {
-        if (string.Equals(this.navigation, "Exit", StringComparison.OrdinalIgnoreCase))
+        [SerializeField] private string navigation;
+
+        protected override void Left()
         {
-            Application.Quit();
-        }
-        else
-        {
-            SceneManager.LoadScene(this.navigation, LoadSceneMode.Single);
+            if (string.Equals(this.navigation, "Exit", StringComparison.OrdinalIgnoreCase))
+            {
+                Application.Quit();
+            }
+            else
+            {
+                SceneManager.LoadScene(this.navigation, LoadSceneMode.Single);
+            }
         }
     }
 }
