@@ -6,8 +6,8 @@ namespace Ui.Scenes.InGameEditor.InputFields
     {
         protected override string Input
         {
-            get => EditorConstructor.BeatMap.Artist;
-            set => EditorConstructor.BeatMap.Artist = value;
+            get => EditorInitializer.BeatMap.Artist;
+            set => EditorInitializer.BeatMap.Artist = value;
         }
 
         protected override void OnInputChange(string input) => this.Input = input;

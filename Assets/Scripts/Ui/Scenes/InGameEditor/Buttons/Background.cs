@@ -19,7 +19,7 @@ namespace Ui.Scenes.InGameEditor.Buttons
             }
 
             this.text.text = Path.GetFileName(bgPath);
-            EditorConstructor.BeatMap.Background = bgPath;
+            EditorInitializer.BeatMap.Background = bgPath;
         }
     }
 }

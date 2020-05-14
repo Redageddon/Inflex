@@ -43,10 +43,9 @@ namespace BeatMaps
 
         public string Mapper { get; set; }
 
-        public List<EnemyEvent> Enemies { get; set; } = new List<EnemyEvent>();
+        public List<EnemyEvent> Enemies { get; set; } = new List<EnemyEvent> {new EnemyEvent(0, 0, 0, 0)};
 
-        public List<SpeedEvent> Speeds { get; set; } =
-            new List<SpeedEvent> {new SpeedEvent(100, 0)};
+        public List<SpeedEvent> Speeds { get; set; } = new List<SpeedEvent> {new SpeedEvent(100, 0)};
 
         public override string ToString() =>
             $"{nameof(this.Path)}: {this.Path}, {nameof(this.Lives)}: {this.Lives}, {nameof(this.SongFile)}: {this.SongFile}, {nameof(this.Background)}: {this.Background}, {nameof(this.Title)}: {this.Title}, {nameof(this.Artist)}: {this.Artist}, {nameof(this.Mapper)}: {this.Mapper}, {nameof(this.Icon)}: {this.Icon}, {nameof(this.Enemies)}: {this.Enemies}, {nameof(this.Speeds)}: {this.Speeds}";

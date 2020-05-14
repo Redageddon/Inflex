@@ -7,25 +7,18 @@ namespace Ui.Scenes.MainMenu
 {
     public class EditorSelectionButton : ButtonBase
     {
-        [SerializeField] private bool isNewBeatMap;
         [SerializeField] private string navigation;
 
         protected override void Left()
         {
             string path = EditorUtility.OpenFilePanel(null, null, "rron");
 
-            if (string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(path))
             {
-                return;
+                EditorInitializer.Path = path;
+                EditorInitializer.IsExistingBeatMap = true;
+                SceneManager.LoadScene(this.navigation, LoadSceneMode.Single);
             }
-
-            if (!this.isNewBeatMap)
-            {
-                EditorConstructor.Path = path;
-            }
-
-            EditorConstructor.IsNewBeatMap = this.isNewBeatMap;
-            SceneManager.LoadScene(this.navigation, LoadSceneMode.Single);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Ui.Scenes.InGameEditor.Buttons
             }
 
             this.text.text = Path.GetFileName(songPath);
-            EditorConstructor.BeatMap.SongFile = songPath;
+            EditorInitializer.BeatMap.SongFile = songPath;
         }
     }
 }

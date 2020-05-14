@@ -6,8 +6,8 @@ namespace Ui.Scenes.InGameEditor.InputFields
     {
         protected override string Input
         {
-            get => EditorConstructor.BeatMap.Mapper;
-            set => EditorConstructor.BeatMap.Mapper = value;
+            get => EditorInitializer.BeatMap.Mapper;
+            set => EditorInitializer.BeatMap.Mapper = value;
         }
 
         protected override void OnInputChange(string input) => this.Input = input;

@@ -753,9 +753,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 568930851}
   rectTransform: {fileID: 568930849}
-  text: {fileID: 869147063}
   newBeatMap: {fileID: 703910612}
   openExisting: {fileID: 1740871285}
+  text: {fileID: 869147063}
 --- !u!114 &568930855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2241,7 +2241,6 @@ MonoBehaviour:
   image: {fileID: 1740871288}
   rectTransform: {fileID: 1740871286}
   navigation: Editor
-  isNewBeatMap: 0
 --- !u!1 &1863223648
 GameObject:
   m_ObjectHideFlags: 0

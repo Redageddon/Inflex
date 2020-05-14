@@ -1,28 +1,19 @@
+using System.IO;
 using BeatMaps;
-using BeatMaps.Events;
-using Components.Loaders;
+using Components.Audio;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Components.InGameEditor
 {
     public class EditorConstructor : MonoBehaviour
     {
-        [SerializeField] private GameObject editorHolder;
-        public static string Path { get; set; }
-        public static bool IsNewBeatMap { get; set; } = true;
-        public static BeatMap BeatMap { get; set; } = new BeatMap();
-
-        private void Awake()
+        [SerializeField] private Slider slider;
+        public void Fill(BeatMap beatMap)
         {
-            if (IsNewBeatMap)
-            {
-                this.editorHolder.SetActive(true);
-                BeatMap.Enemies.Add(new EnemyEvent(0, 0, 0, 0));
-            }
-            else
-            {
-                BeatMap = Loader.LoadBeatMap(Path);
-            }
+            string folderPath = Path.GetDirectoryName(beatMap.Path);
+            AudioPlayer.Instance.LoadAudio(Path.Combine(folderPath, beatMap.SongFile));
+            this.slider.maxValue = AudioPlayer.Instance.GetClipLength;
         }
     }
 }
