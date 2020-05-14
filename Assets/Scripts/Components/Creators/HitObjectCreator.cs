@@ -1,5 +1,5 @@
-﻿using Components.Audio;
-using BeatMaps.Events;
+﻿using BeatMaps.Events;
+using Components.Audio;
 using Ui.Scenes.Game;
 using UnityEngine;
 

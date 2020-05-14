@@ -22,7 +22,7 @@ namespace Ui.Scenes.Settings.Buttons
             }
 
             Assets.Instance.Settings.Keys[this.keyIndex] = (int) Event.current.keyCode;
-            this.waitingForInput                         = false;
+            this.waitingForInput = false;
             this.SetText();
         }
 

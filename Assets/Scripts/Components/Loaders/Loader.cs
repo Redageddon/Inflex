@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using BeatMaps;
 using Components.Audio;
 using Inflex.Rron;
-using BeatMaps;
 using UnityEngine;
 using UnityEngine.Networking;
 using static System.Threading.SpinWait;
@@ -20,15 +20,18 @@ namespace Components.Loaders
                 return null;
             }
 
-            byte[]    fileData = File.ReadAllBytes(path);
-            Texture2D tex2D    = new Texture2D(0, 0);
+            byte[] fileData = File.ReadAllBytes(path);
+            Texture2D tex2D = new Texture2D(0, 0);
             return tex2D.LoadImage(fileData) ? tex2D : null;
         }
 
         public static BeatMap LoadBeatMap(string path)
         {
-            string filePath = Directory.GetFiles(path, @"*.rron").First();
-            BeatMap  prePath  = RronConvert.DeserializeObjectFromFile<BeatMap>(filePath);
+            string filePath = string.Equals(Path.GetExtension(path), ".rron")
+                ? path
+                : Directory.GetFiles(path, @"*.rron").First();
+
+            BeatMap prePath = RronConvert.DeserializeObjectFromFile<BeatMap>(filePath);
             prePath.Path = path;
             return prePath;
         }
@@ -42,8 +45,8 @@ namespace Components.Loaders
                 SpinUntil(() => request.isDone);
 
                 return Path.GetExtension(path) == ".mp3"
-                           ? Mp3ToAudioClip.FromMp3Bytes(request.downloadHandler.data)
-                           : DownloadHandlerAudioClip.GetContent(request);
+                    ? Mp3ToAudioClip.FromMp3Bytes(request.downloadHandler.data)
+                    : DownloadHandlerAudioClip.GetContent(request);
             }
         }
     }

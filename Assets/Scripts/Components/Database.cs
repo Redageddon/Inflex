@@ -12,7 +12,7 @@ namespace Components
         public Database(string tableName, string dbPath)
         {
             this.tableName = tableName;
-            this.dbPath    = dbPath;
+            this.dbPath = dbPath;
         }
 
         public DbSet<BeatMapData> BeatMaps { get; set; }

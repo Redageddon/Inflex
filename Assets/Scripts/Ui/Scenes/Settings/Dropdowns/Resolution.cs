@@ -14,6 +14,7 @@ namespace Ui.Scenes.Settings.Dropdowns
 
         protected override void FillDropdown() =>
             this.Dropdown.options.AddRange(this.Resolutions.Select(resolution =>
-                                                                       new Dropdown.OptionData($"{resolution.width} X {resolution.height}")).Distinct());
+                                                                       new Dropdown.OptionData($"{resolution.width} X {resolution.height}"))
+                                               .Distinct());
     }
 }

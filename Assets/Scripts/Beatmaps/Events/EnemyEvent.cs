@@ -4,10 +4,10 @@ namespace BeatMaps.Events
     {
         public EnemyEvent(int killKey, float spawnDegrees, float rotationSpeed, float spawnTime)
         {
-            this.KillKey       = killKey;
-            this.SpawnDegrees  = spawnDegrees;
+            this.KillKey = killKey;
+            this.SpawnDegrees = spawnDegrees;
             this.RotationSpeed = rotationSpeed;
-            this.SpawnTime     = spawnTime;
+            this.SpawnTime = spawnTime;
         }
 
         public EnemyEvent()

@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Ui.Scenes.Settings;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ui.Scenes.Settings
+namespace Ui
 {
     public abstract class InputFieldBase : SettingsBase
     {

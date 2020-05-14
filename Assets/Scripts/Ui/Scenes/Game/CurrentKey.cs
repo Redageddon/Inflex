@@ -5,8 +5,8 @@ namespace Ui.Scenes.Game
 {
     public class CurrentKey : VisibleElement
     {
-        public static int Key { get; set; }
         [SerializeField] private Sprite[] sprites;
+        public static int Key { get; set; }
 
         private void Awake() => this.SetImage(0);
 

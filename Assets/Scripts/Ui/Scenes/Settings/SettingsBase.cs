@@ -20,6 +20,6 @@ namespace Ui.Scenes.Settings
         }
 
         private void OnEnable() => this.Resolutions =
-                                       Screen.resolutions.Select(resolution => new Resolution {width = resolution.width, height = resolution.height}).Distinct();
+            Screen.resolutions.Select(resolution => new Resolution {width = resolution.width, height = resolution.height}).Distinct();
     }
 }

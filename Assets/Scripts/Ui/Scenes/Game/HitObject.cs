@@ -1,8 +1,8 @@
-﻿using Components;
+﻿using BeatMaps;
+using BeatMaps.Events;
+using Components;
 using Components.Audio;
 using Components.Creators;
-using BeatMaps;
-using BeatMaps.Events;
 using UnityEngine;
 
 namespace Ui.Scenes.Game
@@ -19,12 +19,12 @@ namespace Ui.Scenes.Game
         public void SetVariables(EnemyEvent enemyEvent, float speed)
         {
             this.Image.texture = Assets.Instance.Skin.HitObjects[enemyEvent.KillKey] is null
-                                     ? this.sprites[enemyEvent.KillKey].texture
-                                     : Assets.Instance.Skin.HitObjects[enemyEvent.KillKey];
+                ? this.sprites[enemyEvent.KillKey].texture
+                : Assets.Instance.Skin.HitObjects[enemyEvent.KillKey];
             this.speed = speed;
 
-            this.locationManager         = new HitObjectLocationManager(enemyEvent);
-            this.KillKey                 = enemyEvent.KillKey;
+            this.locationManager = new HitObjectLocationManager(enemyEvent);
+            this.KillKey = enemyEvent.KillKey;
             this.circleCollider2D.radius = Assets.Instance.Settings.ElementsSize;
             this.RectTransform.sizeDelta = new Vector2(Assets.Instance.Settings.ElementsSize * 2, Assets.Instance.Settings.ElementsSize * 2);
 

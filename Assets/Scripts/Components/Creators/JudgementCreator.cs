@@ -16,7 +16,7 @@ namespace Components.Creators
 
             GameObject newJudgement = Instantiate(judgement, judgement.transform.parent, false);
             newJudgement.GetComponent<Text>().color = Color.HSVToRGB((float) accuracy / 100, 1, 1, true);
-            newJudgement.GetComponent<Text>().text  = accuracy.ToString(CultureInfo.CurrentCulture);
+            newJudgement.GetComponent<Text>().text = accuracy.ToString(CultureInfo.CurrentCulture);
             newJudgement.SetActive(true);
             Destroy(newJudgement, 0.15f);
         }
@@ -28,8 +28,8 @@ namespace Components.Creators
             double truePointerRotation = FixPointerRotation(Pointer.GetZRotation(), hitObjectRotation);
 
             return Math.Abs(truePointerRotation - hitObjectRotation) < grader
-                       ? Math.Round(100 * (Math.Abs(truePointerRotation - hitObjectRotation) - grader) / -grader)
-                       : 0d;
+                ? Math.Round(100 * (Math.Abs(truePointerRotation - hitObjectRotation) - grader) / -grader)
+                : 0d;
         }
 
         private static double FixPointerRotation(double pointerRotation, double hitObjectRotation)

@@ -18,7 +18,7 @@ namespace Ui.Scenes.Game
         private void Awake()
         {
             float centerSize = Assets.Instance.Settings.ElementsSize;
-            this.Image.texture           = Assets.Instance.Skin.Pointer ? Assets.Instance.Skin.Pointer : this.Image.texture;
+            this.Image.texture = Assets.Instance.Skin.Pointer ? Assets.Instance.Skin.Pointer : this.Image.texture;
             this.RectTransform.sizeDelta = new Vector2(centerSize * 5.6f, centerSize * 5.6f);
             this.edgeCollider2D.points = new[]
             {

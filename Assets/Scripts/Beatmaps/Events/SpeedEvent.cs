@@ -4,7 +4,7 @@
     {
         public SpeedEvent(float speed, float spawnTime)
         {
-            this.Speed     = speed;
+            this.Speed = speed;
             this.SpawnTime = spawnTime;
         }
 
