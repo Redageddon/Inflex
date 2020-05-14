@@ -11,7 +11,7 @@ namespace Ui.Scenes.InGameEditor
         private bool wasPlaying;
 
         private void Update() => this.slider.value = AudioPlayer.Instance.GetAudioTime;
-        
+
         private void Start() => this.slider.onValueChanged.AddListener(this.OnInputChange);
 
         private void OnMouseDown()
