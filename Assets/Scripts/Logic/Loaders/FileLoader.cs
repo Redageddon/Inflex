@@ -9,9 +9,9 @@ using UnityEngine.Networking;
 using static System.Threading.SpinWait;
 
 
-namespace Components.Loaders
+namespace Logic.Loaders
 {
-    public static class Loader
+    public static class FileLoader
     {
         public static Texture2D LoadTexture2D(string path)
         {

@@ -1,8 +1,8 @@
 using BeatMaps;
-using Components.Loaders;
+using Logic.Loaders;
 using UnityEngine;
 
-namespace Components.InGameEditor
+namespace Logic.InGameEditor
 {
     public class EditorInitializer : MonoBehaviour
     {
@@ -15,7 +15,7 @@ namespace Components.InGameEditor
         {
             if (IsExistingBeatMap)
             {
-                BeatMap = Loader.LoadBeatMap(Path);
+                BeatMap = FileLoader.LoadBeatMap(Path);
                 this.gameObject.GetComponent<EditorConstructor>().Fill(BeatMap);
             }
             else

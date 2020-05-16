@@ -1,5 +1,5 @@
 using System.IO;
-using Components.InGameEditor;
+using Logic.InGameEditor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;

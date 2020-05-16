@@ -1,4 +1,4 @@
-using Components.InGameEditor;
+using Logic.InGameEditor;
 
 namespace Ui.Scenes.InGameEditor.InputFields
 {

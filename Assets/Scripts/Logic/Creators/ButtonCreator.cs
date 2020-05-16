@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Components.Input;
-using Components.Loaders;
+using Logic;
+using Logic.Loaders;
 using Ui.Scenes.LevelSelection;
 using UnityEngine;
 
@@ -24,13 +24,13 @@ namespace Components.Creators
 
         private void DeleteAllButtons() => this.beatMaps.ForEach(Destroy);
 
-        private void CreateAllButtons() => BeatMapDataLoader.Load().ToList().ForEach(this.CreateSingleButton);
+        private void CreateAllButtons() => DatabaseLoader.Load().ToList().ForEach(this.CreateSingleButton);
 
         private void RefreshBeatMaps()
         {
             this.DeleteAllButtons();
             this.beatMaps.Clear();
-            BeatMapDataLoader.Save();
+            DatabaseLoader.Save();
             this.CreateAllButtons();
         }
 

@@ -1,7 +1,7 @@
 using System.IO;
 using BeatMaps;
-using Components.InGameEditor;
 using Inflex.Rron;
+using Logic.InGameEditor;
 using UnityEngine;
 
 namespace Ui.Scenes.InGameEditor

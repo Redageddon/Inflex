@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Components.Loaders;
+using Logic.Loaders;
 using UnityEngine;
 
 public class Skin
@@ -9,32 +9,28 @@ public class Skin
     {
         if (!string.Equals(skinName, "Default", StringComparison.OrdinalIgnoreCase))
         {
-            this.CurrentKeys = new List<Texture2D>();
-            this.HitObjects = new List<Texture2D>();
-            return;
+            skinPath += skinName;
+            this.BackButton = FileLoader.LoadTexture2D($"{skinPath}/BackButton.png");
+            this.Background = FileLoader.LoadTexture2D($"{skinPath}/Background.png");
+            this.Center = FileLoader.LoadTexture2D($"{skinPath}/Center.png");
+            this.CurrentKeys = new List<Texture2D>
+            {
+                FileLoader.LoadTexture2D($"{skinPath}/CurrentKey1.png"),
+                FileLoader.LoadTexture2D($"{skinPath}/CurrentKey2.png"),
+                FileLoader.LoadTexture2D($"{skinPath}/CurrentKey3.png"),
+                FileLoader.LoadTexture2D($"{skinPath}/CurrentKey4.png")
+            };
+            this.HitObjects = new List<Texture2D>
+            {
+                FileLoader.LoadTexture2D($"{skinPath}/HitObject1.png"),
+                FileLoader.LoadTexture2D($"{skinPath}/HitObject2.png"),
+                FileLoader.LoadTexture2D($"{skinPath}/HitObject3.png"),
+                FileLoader.LoadTexture2D($"{skinPath}/HitObject4.png")
+            };
+            this.Pointer = FileLoader.LoadTexture2D($"{skinPath}/Pointer.png");
+            this.BeatMapButton = FileLoader.LoadTexture2D($"{skinPath}/LevelButton.png");
+            this.PauseButton = FileLoader.LoadTexture2D($"{skinPath}/PauseButton.png");
         }
-
-        skinPath += skinName;
-        this.BackButton = Loader.LoadTexture2D($"{skinPath}/BackButton.png");
-        this.Background = Loader.LoadTexture2D($"{skinPath}/Background.png");
-        this.Center = Loader.LoadTexture2D($"{skinPath}/Center.png");
-        this.CurrentKeys = new List<Texture2D>
-        {
-            Loader.LoadTexture2D($"{skinPath}/CurrentKey1.png"),
-            Loader.LoadTexture2D($"{skinPath}/CurrentKey2.png"),
-            Loader.LoadTexture2D($"{skinPath}/CurrentKey3.png"),
-            Loader.LoadTexture2D($"{skinPath}/CurrentKey4.png")
-        };
-        this.HitObjects = new List<Texture2D>
-        {
-            Loader.LoadTexture2D($"{skinPath}/HitObject1.png"),
-            Loader.LoadTexture2D($"{skinPath}/HitObject2.png"),
-            Loader.LoadTexture2D($"{skinPath}/HitObject3.png"),
-            Loader.LoadTexture2D($"{skinPath}/HitObject4.png")
-        };
-        this.Pointer = Loader.LoadTexture2D($"{skinPath}/Pointer.png");
-        this.BeatMapButton = Loader.LoadTexture2D($"{skinPath}/LevelButton.png");
-        this.PauseButton = Loader.LoadTexture2D($"{skinPath}/PauseButton.png");
     }
 
     public Texture2D Background { get; }
@@ -43,9 +39,9 @@ public class Skin
 
     public Texture2D Pointer { get; }
 
-    public List<Texture2D> HitObjects { get; }
+    public List<Texture2D> HitObjects { get; } = new List<Texture2D>{null, null, null, null};
 
-    public List<Texture2D> CurrentKeys { get; }
+    public List<Texture2D> CurrentKeys { get; } = new List<Texture2D>{null, null, null, null};
 
     public Texture2D PauseButton { get; }
 

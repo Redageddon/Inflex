@@ -26,8 +26,9 @@ namespace Ui.Scenes.Game
 
         private void SetImage(int current)
         {
-            this.Image.texture =
-                Assets.Instance.Skin.CurrentKeys[current] is null ? this.sprites[current].texture : Assets.Instance.Skin.CurrentKeys[current];
+            this.Image.texture = Assets.Instance.Skin.CurrentKeys[current] is null 
+                ? this.sprites[current].texture 
+                : Assets.Instance.Skin.CurrentKeys[current];
             this.RectTransform.offsetMin = new Vector2(-this.sprites[current].rect.xMax, -this.sprites[current].rect.yMax);
         }
     }

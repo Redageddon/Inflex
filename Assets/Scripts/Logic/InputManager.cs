@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Components.Input
+namespace Logic
 {
     public class InputManager : MonoBehaviour
     {

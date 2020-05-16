@@ -4,7 +4,7 @@ using Components.Audio;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Components.InGameEditor
+namespace Logic.InGameEditor
 {
     public class EditorConstructor : MonoBehaviour
     {

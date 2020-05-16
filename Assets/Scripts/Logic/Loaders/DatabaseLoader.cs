@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Components;
 
-namespace Components.Loaders
+namespace Logic.Loaders
 {
-    public static class BeatMapDataLoader
+    public static class DatabaseLoader
     {
         public static void Save()
         {
             string[] beatMapPaths = Directory.GetDirectories(GenericPaths.BeatMapsPath);
-            List<BeatMapData> beatMaps = beatMapPaths.Select(path => new BeatMapData(Loader.LoadBeatMap(path))).ToList();
+            List<BeatMapData> beatMaps = beatMapPaths.Select(path => new BeatMapData(FileLoader.LoadBeatMap(path))).ToList();
 
             using (Database<BeatMapData> db = new Database<BeatMapData>("BeatMaps", GenericPaths.BeatMapsDataPath))
             {

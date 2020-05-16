@@ -1,4 +1,4 @@
-﻿using Components.Loaders;
+﻿using Logic.Loaders;
 using UnityEngine;
 
 namespace Components.Audio
@@ -19,7 +19,7 @@ namespace Components.Audio
 
         public void SetAudioTime(float time) => this.audioSource.time = time;
         
-        public void LoadAudio(string path) => this.audioSource.clip = Loader.LoadAudioClip(path);
+        public void LoadAudio(string path) => this.audioSource.clip = FileLoader.LoadAudioClip(path);
 
         public void PlayGameSong() => this.StartCoroutine(AudioHelper.PlayGameSong(this.audioSource));
 

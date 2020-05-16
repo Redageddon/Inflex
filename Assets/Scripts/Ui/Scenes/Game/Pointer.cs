@@ -1,5 +1,6 @@
 ﻿using System;
 using Components;
+using Logic;
 using UnityEngine;
 
 namespace Ui.Scenes.Game
@@ -32,7 +33,7 @@ namespace Ui.Scenes.Game
         {
             if (other.GetComponent<HitObject>().KillKey != CurrentKey.Key)
             {
-                Lives.Health -= 1;
+                ScoreBar.Score -= 1;
             }
 
             other.GetComponent<HitObject>().Hit();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Components;
-using Components.Loaders;
+using Logic.Loaders;
 using Ui.Scenes.LevelSelection.ButtonExtras;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,7 +30,7 @@ namespace Ui.Scenes.LevelSelection
         protected override void Left()
         {
             SceneManager.LoadScene("Game", LoadSceneMode.Single);
-            Assets.Instance.BeatMap = Loader.LoadBeatMap(this.beatMapData.Path);
+            Assets.Instance.BeatMap = FileLoader.LoadBeatMap(this.beatMapData.Path);
         }
 
         protected override void Right()
