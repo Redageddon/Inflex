@@ -19,5 +19,8 @@ namespace Ui
             get => this.rectTransform;
             set => this.rectTransform = value;
         }
+
+        public virtual void SetNewTexture(Texture2D texture) => this.Image.texture = texture;
+        public virtual void SetSize(Vector2 vector2) => this.RectTransform.sizeDelta = vector2;
     }
 }

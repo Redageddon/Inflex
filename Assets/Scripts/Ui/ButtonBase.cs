@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine.EventSystems;
+﻿using UnityEngine.EventSystems;
 
 namespace Ui
 {
@@ -7,11 +6,6 @@ namespace Ui
     {
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (eventData == null)
-            {
-                throw new NullReferenceException();
-            }
-
             switch (eventData.button)
             {
                 case PointerEventData.InputButton.Left:

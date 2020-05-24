@@ -4,7 +4,7 @@ using Ui.Scenes.Game;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Components.Creators
+namespace Logic.Creators
 {
     public class JudgementCreator : MonoBehaviour
     {
@@ -25,11 +25,11 @@ namespace Components.Creators
         {
             const int grader = 15;
 
-            double truePointerRotation = FixPointerRotation(Pointer.GetZRotation(), hitObjectRotation);
+            double truePointerRotation = FixPointerRotation(Pointer.GetPointerRotation(), hitObjectRotation);
 
             return Math.Abs(truePointerRotation - hitObjectRotation) < grader
                 ? Math.Round(100 * (Math.Abs(truePointerRotation - hitObjectRotation) - grader) / -grader)
-                : 0d;
+                : 0;
         }
 
         private static double FixPointerRotation(double pointerRotation, double hitObjectRotation)

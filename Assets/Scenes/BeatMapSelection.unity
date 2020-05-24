@@ -398,8 +398,8 @@ GameObject:
   m_Component:
   - component: {fileID: 106900704}
   - component: {fileID: 106900706}
-  - component: {fileID: 106900707}
   - component: {fileID: 106900705}
+  - component: {fileID: 106900707}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -532,9 +532,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 171813058}
   rectTransform: {fileID: 171813063}
-  difficulty: {fileID: 1404767787}
   beatMapButtonOptions: {fileID: 89522364}
   beatMapNameText: {fileID: 1285500142}
+  difficulty: {fileID: 1404767787}
 --- !u!114 &171813060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 894904110}
   m_HandleRect: {fileID: 1869301539}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
