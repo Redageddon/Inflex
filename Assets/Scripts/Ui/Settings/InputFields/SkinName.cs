@@ -1,6 +1,6 @@
-﻿using Components;
+﻿using Logic;
 
-namespace Ui.Scenes.Settings.InputFields
+namespace Ui.Settings.InputFields
 {
     public class SkinName : InputFieldBase
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Components;
+using Logic;
 using UnityEngine;
 
-namespace Ui.Scenes.Settings
+namespace Ui.Settings
 {
     public class SettingsBase : MonoBehaviour
     {

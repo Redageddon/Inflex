@@ -8,19 +8,18 @@ namespace Ui
         [SerializeField] private RawImage image;
         [SerializeField] private RectTransform rectTransform;
 
-        protected RawImage Image
+        public RawImage Image
         {
             get => this.image;
             set => this.image = value;
         }
 
-        protected RectTransform RectTransform
+        public RectTransform RectTransform
         {
             get => this.rectTransform;
             set => this.rectTransform = value;
         }
-
-        public virtual void SetNewTexture(Texture2D texture) => this.Image.texture = texture;
+        
         public virtual void SetSize(Vector2 vector2) => this.RectTransform.sizeDelta = vector2;
     }
 }

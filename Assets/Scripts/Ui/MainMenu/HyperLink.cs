@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 
-namespace Ui.Scenes.MainMenu
+namespace Ui.MainMenu
 {
-    public class HyperLink : ButtonBase
+    public class HyperLink : MouseNavigationControl
     {
-        protected override void Left() => Process.Start("https://github.com/rubiksmaster02/Inflex");
+        protected override void LeftClick() => Process.Start("https://github.com/rubiksmaster02/Inflex");
     }
 }

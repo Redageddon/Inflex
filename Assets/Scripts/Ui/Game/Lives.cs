@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ui.Scenes.Game
+namespace Ui.Game
 {
     public class Lives : VisibleElement
     {

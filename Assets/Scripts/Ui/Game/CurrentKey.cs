@@ -1,4 +1,4 @@
-﻿using Components;
+﻿using Logic;
 using UnityEngine;
 
 namespace Ui.Game
@@ -20,7 +20,7 @@ namespace Ui.Game
                 }
                 
                 this.SetSize(new Vector2(-this.sprites[i].rect.xMax, -this.sprites[i].rect.yMax));
-                this.SetNewTexture(this.sprites[i].texture);
+                this.Image.texture = this.sprites[i].texture;
                 Key = i;
             }
         }

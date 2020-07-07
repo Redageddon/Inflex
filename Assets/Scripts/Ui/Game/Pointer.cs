@@ -1,10 +1,9 @@
 ﻿using System;
 using Logic;
-using Ui.Game;
 using UnityEngine;
 using X10D;
 
-namespace Ui.Scenes.Game
+namespace Ui.Game
 {
     public class Pointer : VisibleElement
     {

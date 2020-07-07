@@ -1,16 +1,16 @@
-﻿using Components;
+﻿using Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ui.Scenes.Settings.Buttons
+namespace Ui.Settings.Buttons
 {
-    public class KeySetter : ButtonBase
+    public class KeySetter : MouseNavigationControl
     {
         [SerializeField] private int keyIndex;
         [SerializeField] private Text text;
         private bool waitingForInput;
 
-        protected override void Left() => this.waitingForInput = true;
+        protected override void LeftClick() => this.waitingForInput = true;
 
         private void Start() => this.SetText();
 

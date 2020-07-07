@@ -1,11 +1,7 @@
-﻿using UnityEngine;
-
-namespace Ui.Scenes.LevelSelection.ButtonExtras
+﻿namespace Ui.LevelSelection.ButtonExtras
 {
-    public class CancelButton : ButtonBase
+    public class CancelButton : MouseNavigationControl
     {
-        [SerializeField] private GameObject beatMapButtonOptions;
-
-        protected override void Left() => this.beatMapButtonOptions.SetActive(false);
+        protected override void LeftClick() => this.transform.parent.gameObject.SetActive(false);
     }
 }

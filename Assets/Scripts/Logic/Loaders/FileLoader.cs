@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using BeatMaps;
-using Components.Audio;
+using Audio;
+using Beatmaps;
 using Inflex.Rron;
 using UnityEngine;
 using UnityEngine.Networking;

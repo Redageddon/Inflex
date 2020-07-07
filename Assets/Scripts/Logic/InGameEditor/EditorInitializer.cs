@@ -1,4 +1,4 @@
-using BeatMaps;
+using Beatmaps;
 using Logic.Loaders;
 using UnityEngine;
 

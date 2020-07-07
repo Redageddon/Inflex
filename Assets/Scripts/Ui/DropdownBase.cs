@@ -1,4 +1,4 @@
-﻿using Ui.Scenes.Settings;
+﻿using Ui.Settings;
 using UnityEngine;
 using UnityEngine.UI;
 

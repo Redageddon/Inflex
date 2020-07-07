@@ -4,12 +4,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ui.Scenes.InGameEditor.Buttons
+namespace Ui.InGameEditor.Buttons
 {
-    public class Song : ButtonBase
+    public class Song : MouseNavigationControl
     {
         [SerializeField] private Text text;
-        protected override void Left()
+        protected override void LeftClick()
         {
             string songPath = EditorUtility.OpenFilePanel(null, null, "mp3,ogg,wav");
 

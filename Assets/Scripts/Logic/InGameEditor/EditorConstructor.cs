@@ -1,6 +1,6 @@
 using System.IO;
-using BeatMaps;
-using Components.Audio;
+using Audio;
+using Beatmaps;
 using UnityEngine;
 using UnityEngine.UI;
 

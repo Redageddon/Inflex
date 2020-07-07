@@ -1,33 +1,25 @@
 using System.IO;
-using BeatMaps;
+using Beatmaps;
 using Inflex.Rron;
 using Logic.InGameEditor;
 using UnityEngine;
 
-namespace Ui.Scenes.InGameEditor
+namespace Ui.InGameEditor
 {
-    public class SaveButton : ButtonBase
+    public class SaveButton : MouseNavigationControl
     {
         private readonly BeatMap beatMap = EditorInitializer.BeatMap;
         [SerializeField] private GameObject editorHolder;
 
-        protected override void Left()
+        protected override void LeftClick()
         {
             string path = Path.Combine(GenericPaths.BeatMapsPath, this.beatMap.Title);
-            CreateDirectory(path);
+            Directory.CreateDirectory(path);
             this.CopyFiles(path);
             this.RenamePaths(path);
             this.SaveNewBeatMap();
             this.editorHolder.SetActive(false);
             this.gameObject.GetComponent<EditorConstructor>().Fill(this.beatMap);
-        }
-
-        private static void CreateDirectory(string path)
-        {
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
         }
 
         private void CopyFiles(string path)

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Components;
+using Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ui.Scenes.Settings.Dropdowns
+namespace Ui.Settings.Dropdowns
 {
     public class FullscreenMode : DropdownBase
     {

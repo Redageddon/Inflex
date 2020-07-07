@@ -1,14 +1,14 @@
 using UnityEngine;
 
-namespace Ui.Scenes.MainMenu
+namespace Ui.MainMenu
 {
-    public class EditorButton : ButtonBase
+    public class EditorButton : MouseNavigationControl
     {
         [SerializeField] private GameObject newBeatMap;
         [SerializeField] private GameObject openExisting;
         [SerializeField] private GameObject text;
 
-        protected override void Left()
+        protected override void LeftClick()
         {
             this.Image.enabled = false;
             this.text.SetActive(false);

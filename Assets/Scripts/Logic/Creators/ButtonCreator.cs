@@ -1,19 +1,38 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Logic;
+using Beatmaps;
 using Logic.Loaders;
-using Ui.Scenes.LevelSelection;
+using Ui.LevelSelection;
+using Ui.LevelSelection.ButtonExtras;
 using UnityEngine;
 
-namespace Components.Creators
+namespace Logic.Creators
 {
     public class ButtonCreator : MonoBehaviour
     {
-        private readonly List<GameObject> beatMaps = new List<GameObject>();
         [SerializeField] private GameObject beatMapButtonTemp;
-
+        [SerializeField] private GameObject options;
+        private readonly List<GameObject> beatMaps = new List<GameObject>();
+        
         public void Start() => this.CreateAllButtons();
+        
+        private void CreateAllButtons()
+        {
+            foreach (BeatMapData beatMapData in DatabaseLoader.Load())
+            {
+                this.CreateSingleButton(beatMapData);
+            }
 
+            BeatMapButton.Options = this.options;
+        }
+
+        private void CreateSingleButton(BeatMapData beatMap)
+        {
+            GameObject button = Instantiate(this.beatMapButtonTemp, this.gameObject.transform, false);
+            button.GetComponent<BeatMapButton>().SetData(beatMap);
+            this.beatMaps.Add(button);
+        }
+        
         private void Update()
         {
             if (InputManager.MacroDown("RefreshMaps"))
@@ -21,11 +40,7 @@ namespace Components.Creators
                 this.RefreshBeatMaps();
             }
         }
-
-        private void DeleteAllButtons() => this.beatMaps.ForEach(Destroy);
-
-        private void CreateAllButtons() => DatabaseLoader.Load().ToList().ForEach(this.CreateSingleButton);
-
+        
         private void RefreshBeatMaps()
         {
             this.DeleteAllButtons();
@@ -34,12 +49,6 @@ namespace Components.Creators
             this.CreateAllButtons();
         }
 
-        private void CreateSingleButton(BeatMapData beatMap)
-        {
-            GameObject button = Instantiate(this.beatMapButtonTemp, this.beatMapButtonTemp.transform.parent, false);
-            button.SetActive(true);
-            button.GetComponent<BeatMapButton>().SetButtonData(beatMap);
-            this.beatMaps.Add(button);
-        }
+        private void DeleteAllButtons() => this.beatMaps.ForEach(Destroy);
     }
 }

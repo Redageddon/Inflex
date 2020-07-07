@@ -1,9 +1,9 @@
 ﻿using System.IO;
-using BeatMaps;
+using Beatmaps;
 using Inflex.Rron;
 using UnityEngine;
 
-namespace Components
+namespace Logic
 {
     using static Application;
 

@@ -1,10 +1,10 @@
-using Components.Audio;
+using Audio;
 
-namespace Ui.Scenes.InGameEditor.Buttons
+namespace Ui.InGameEditor.Buttons
 {
-    public class Stop : ButtonBase
+    public class Stop : MouseNavigationControl
     {
-        protected override void Left()
+        protected override void LeftClick()
         {
             AudioPlayer.Instance.SetAudioPaused(true);
             AudioPlayer.Instance.SetAudioTime(0);

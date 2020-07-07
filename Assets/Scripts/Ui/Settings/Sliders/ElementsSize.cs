@@ -1,6 +1,6 @@
-﻿using Components;
+﻿using Logic;
 
-namespace Ui.Scenes.Settings.Sliders
+namespace Ui.Settings.Sliders
 {
     public class ElementsSize : SliderBase
     {

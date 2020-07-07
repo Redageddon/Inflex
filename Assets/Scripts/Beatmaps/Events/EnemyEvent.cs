@@ -1,4 +1,4 @@
-namespace BeatMaps.Events
+namespace Beatmaps.Events
 {
     public class EnemyEvent
     {

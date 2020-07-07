@@ -1,34 +1,28 @@
-﻿using Components;
+﻿using Beatmaps;
 using Database;
+using Logic.Loaders;
 using UnityEngine;
 
-namespace Ui.Scenes.LevelSelection.ButtonExtras
+namespace Ui.LevelSelection.ButtonExtras
 {
-    public class DeleteMapButton : ButtonBase
+    public class DeleteMapButton : MouseNavigationControl
     {
-        [SerializeField] private GameObject deletionButton;
-        [SerializeField] private GameObject levelButtonOptions;
+        private static GameObject button;
+        private static BeatMapData data;
 
-        public GameObject DeletionButton
-        {
-            get => this.deletionButton;
-            set => this.deletionButton = value;
+        public static void SetDeleter(GameObject button, BeatMapData data)
+        { 
+            DeleteMapButton.button = button;
+            DeleteMapButton.data = data;
         }
 
-        public int DeletionIndex { get; set; }
-
-        protected override void Left() => this.DeleteMap();
+        protected override void LeftClick() => this.DeleteMap();
 
         private void DeleteMap()
         {
-            Destroy(this.DeletionButton);
-            using (Database<BeatMapData> db = new Database<BeatMapData>("BeatMaps", GenericPaths.BeatMapsDataPath))
-            {
-                db.BeatMaps.Remove(db.BeatMaps.Find(this.DeletionIndex));
-                db.SaveChanges();
-            }
-
-            this.levelButtonOptions.SetActive(false);
+            Destroy(button);
+            DatabaseLoader.Remove(data);
+            this.transform.parent.gameObject.SetActive(false);
         }
     }
 }

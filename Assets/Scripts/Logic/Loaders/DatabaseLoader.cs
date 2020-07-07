@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Components;
+using Beatmaps;
 using Database;
 
 namespace Logic.Loaders
@@ -10,10 +10,10 @@ namespace Logic.Loaders
     {
         public static void Save()
         {
-            string[] beatMapPaths = Directory.GetDirectories(GenericPaths.BeatMapsPath);
-            List<BeatMapData> beatMaps = beatMapPaths.Select(path => new BeatMapData(FileLoader.LoadBeatMap(path))).ToList();
+            string[]          beatMapPaths = Directory.GetDirectories(GenericPaths.BeatMapsPath);
+            IEnumerable<BeatMapData> beatMaps     = beatMapPaths.Select(path => new BeatMapData(FileLoader.LoadBeatMap(path)));
 
-            using (Database<BeatMapData> db = new Database<BeatMapData>("BeatMaps", GenericPaths.BeatMapsDataPath))
+            using (InflexDatabase db = new InflexDatabase("BeatMaps", GenericPaths.BeatMapsDataPath))
             {
                 db.Database.EnsureDeleted();
                 if (db.Database.EnsureCreated())
@@ -24,6 +24,15 @@ namespace Logic.Loaders
             }
         }
 
-        public static IEnumerable<BeatMapData> Load() => new Database<BeatMapData>("BeatMaps", GenericPaths.BeatMapsDataPath).BeatMaps;
+        public static IEnumerable<BeatMapData> Load() => new InflexDatabase("BeatMaps", GenericPaths.BeatMapsDataPath).BeatMaps;
+
+        public static void Remove(BeatMapData data)
+        {
+            using (InflexDatabase db = new InflexDatabase("BeatMaps", GenericPaths.BeatMapsDataPath))
+            {
+                db.BeatMaps.Remove(data);
+                db.SaveChanges();
+            }
+        }
     }
 }

@@ -1,7 +1,6 @@
-﻿using BeatMaps.Events;
-using Components;
-using Components.Audio;
-using Ui.Scenes.Game;
+﻿using Audio;
+using Beatmaps.Events;
+using Ui.Game;
 using UnityEngine;
 
 namespace Logic.Creators

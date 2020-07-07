@@ -1,6 +1,6 @@
 using Logic.InGameEditor;
 
-namespace Ui.Scenes.InGameEditor.InputFields
+namespace Ui.InGameEditor.InputFields
 {
     public class Lives : InputFieldBase
     {

@@ -1,43 +1,37 @@
 ﻿using System;
-using System.Globalization;
-using Components;
+using Beatmaps;
+using Logic;
 using Logic.Loaders;
-using Ui.Scenes.LevelSelection.ButtonExtras;
+using Ui.LevelSelection.ButtonExtras;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Ui.Scenes.LevelSelection
+namespace Ui.LevelSelection
 {
-    public class BeatMapButton : ButtonBase
+    public class BeatMapButton : NavigationButton
     {
-        [SerializeField] private GameObject beatMapButtonOptions;
-        private BeatMapData beatMapData;
-        [SerializeField] private Text beatMapNameText;
-        [SerializeField] private Text difficulty;
+        [SerializeField] private Text            beatMapNameText;
+        [SerializeField] private Text            difficulty;
+        private                  BeatMapData     beatMapData;
+        public static            GameObject      Options;
 
-        public void SetButtonData(BeatMapData data)
+        public void SetData(BeatMapData data)
         {
-            this.beatMapData = data ?? throw new NullReferenceException();
-            this.Image.texture = Assets.Instance.Skin.BeatMapButton
-                ? Assets.Instance.Skin.BeatMapButton
-                : this.Image.texture;
-            this.Image.SetNativeSize();
+            this.beatMapData          = data ?? throw new NullReferenceException();
             this.beatMapNameText.text = this.beatMapData.Title;
-            this.difficulty.text = this.beatMapData.Difficulty.ToString(CultureInfo.CurrentCulture);
+            this.difficulty.text      = this.beatMapData.Difficulty.ToString();
         }
 
-        protected override void Left()
+        protected override void LeftClick()
         {
-            SceneManager.LoadScene("Game", LoadSceneMode.Single);
+            base.LeftClick();
             Assets.Instance.BeatMap = FileLoader.LoadBeatMap(this.beatMapData.Path);
         }
 
-        protected override void Right()
+        protected override void RightClick()
         {
-            this.beatMapButtonOptions.SetActive(true);
-            this.beatMapButtonOptions.transform.Find("DeleteMap").GetComponent<DeleteMapButton>().DeletionIndex = this.beatMapData.Id;
-            this.beatMapButtonOptions.transform.Find("DeleteMap").GetComponent<DeleteMapButton>().DeletionButton = this.gameObject;
+            Options.SetActive(true);
+            DeleteMapButton.SetDeleter(this.gameObject, this.beatMapData);
         }
     }
 }

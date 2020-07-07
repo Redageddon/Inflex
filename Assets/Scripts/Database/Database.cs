@@ -1,16 +1,20 @@
 ﻿using System;
+using System.IO;
+using Beatmaps;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database
 {
-    public class Database<T> : DbContext
-        where T : class
+    public class InflexDatabase : DbContext
     {
         private readonly string dbPath;
         private readonly string tableName;
 
-        public Database(string tableName, string dbPath)
+        public InflexDatabase(string tableName, string dbPath)
         {
+            Directory.CreateDirectory(Path.GetDirectoryName(dbPath));
+
             this.tableName = tableName;
             this.dbPath = dbPath;
         }
@@ -22,12 +26,7 @@ namespace Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            if (modelBuilder == null)
-            {
-                throw new NullReferenceException();
-            }
-
-            modelBuilder.Entity<T>().ToTable(this.tableName);
+            modelBuilder.Entity<BeatMapData>().ToTable(this.tableName);
             base.OnModelCreating(modelBuilder);
         }
     }

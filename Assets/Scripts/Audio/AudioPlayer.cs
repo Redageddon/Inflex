@@ -1,7 +1,7 @@
 ﻿using Logic.Loaders;
 using UnityEngine;
 
-namespace Components.Audio
+namespace Audio
 {
     public class AudioPlayer : Singleton<AudioPlayer>
     {

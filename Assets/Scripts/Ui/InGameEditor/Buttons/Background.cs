@@ -4,12 +4,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ui.Scenes.InGameEditor.Buttons
+namespace Ui.InGameEditor.Buttons
 {
-    public class Background : ButtonBase
+    public class Background : MouseNavigationControl
     {
         [SerializeField] private Text text;
-        protected override void Left()
+        protected override void LeftClick()
         {
             string bgPath = EditorUtility.OpenFilePanel(null, null, "png,jpg");
 

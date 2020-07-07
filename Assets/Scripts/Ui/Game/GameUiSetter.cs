@@ -1,9 +1,8 @@
-using Components;
+using Logic;
 using Logic.Loaders;
-using Ui.Game;
 using UnityEngine;
 
-namespace Ui.Scenes.Game
+namespace Ui.Game
 {
     public class GameUiSetter : MonoBehaviour
     {
@@ -23,7 +22,7 @@ namespace Ui.Scenes.Game
         }
 
         private void SetBackground() =>
-            this.background.SetNewTexture(FileLoader.LoadTexture2D($"{Assets.Instance.BeatMap.Path}/{Assets.Instance.BeatMap.Background}"));
+            this.background.Image.texture = (FileLoader.LoadTexture2D($"{Assets.Instance.BeatMap.Path}/{Assets.Instance.BeatMap.Background}"));
 
         private void SetCenter() =>
             this.center.SetSize(new Vector2(Assets.Instance.Settings.ElementsSize * 4.2f, Assets.Instance.Settings.ElementsSize * 4.2f));

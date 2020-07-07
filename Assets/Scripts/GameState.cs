@@ -1,5 +1,5 @@
-﻿using Components;
-using Components.Audio;
+﻿using Audio;
+using Logic;
 using UnityEngine;
 
 public class GameState : MonoBehaviour

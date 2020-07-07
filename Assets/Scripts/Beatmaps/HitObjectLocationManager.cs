@@ -1,9 +1,9 @@
 ﻿using System;
-using BeatMaps.Events;
-using Components;
+using Beatmaps.Events;
+using Logic;
 using UnityEngine;
 
-namespace BeatMaps
+namespace Beatmaps
 {
     public class HitObjectLocationManager
     {

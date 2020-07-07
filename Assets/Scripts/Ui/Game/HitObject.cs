@@ -1,12 +1,11 @@
-﻿using BeatMaps;
-using BeatMaps.Events;
-using Components;
-using Components.Audio;
+﻿using Audio;
+using Beatmaps;
+using Beatmaps.Events;
 using Logic;
 using Logic.Creators;
 using UnityEngine;
 
-namespace Ui.Scenes.Game
+namespace Ui.Game
 {
     public class HitObject : VisibleElement
     {

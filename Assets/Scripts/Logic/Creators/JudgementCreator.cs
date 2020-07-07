@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Ui.Scenes.Game;
+using Ui.Game;
 using UnityEngine;
 using UnityEngine.UI;
 

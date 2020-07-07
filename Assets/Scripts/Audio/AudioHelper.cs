@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
+using Logic;
 using UnityEngine;
 
-namespace Components.Audio
+namespace Audio
 {
     public class AudioHelper : MonoBehaviour
     {

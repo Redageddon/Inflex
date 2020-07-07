@@ -1,23 +1,19 @@
 using Logic.InGameEditor;
 using UnityEditor;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
-namespace Ui.Scenes.MainMenu
+namespace Ui.MainMenu
 {
-    public class EditorSelectionButton : ButtonBase
+    public class EditorSelectionButton : NavigationButton
     {
-        [SerializeField] private string navigation;
-
-        protected override void Left()
+        protected override void LeftClick()
         {
-            string path = EditorUtility.OpenFilePanel(null, null, "rron");
+            string path = EditorUtility.OpenFilePanel("Beatmap", GenericPaths.BeatMapsPath, "rron");
 
             if (!string.IsNullOrEmpty(path))
             {
                 EditorInitializer.Path = path;
                 EditorInitializer.IsExistingBeatMap = true;
-                SceneManager.LoadScene(this.navigation, LoadSceneMode.Single);
+                base.LeftClick();
             }
         }
     }

@@ -3,7 +3,7 @@ using System.IO;
 using NAudio.Wave;
 using UnityEngine;
 
-namespace Components.Audio
+namespace Audio
 {
     public static class Mp3ToAudioClip
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using BeatMaps.Events;
+using Beatmaps.Events;
 
-namespace BeatMaps
+namespace Beatmaps
 {
     public class BeatMap
     {

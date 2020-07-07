@@ -1,10 +1,10 @@
-﻿using Components;
-using Inflex.Rron;
+﻿using Inflex.Rron;
+using Logic;
 
-namespace Ui.Scenes.Settings.Buttons
+namespace Ui.Settings.Buttons
 {
-    public class SaveButton : ButtonBase
+    public class SaveButton : MouseNavigationControl
     {
-        protected override void Left() => RronConvert.SerializeObjectToFile(Assets.Instance.Settings, GenericPaths.SettingsPath);
+        protected override void LeftClick() => RronConvert.SerializeObjectToFile(Assets.Instance.Settings, GenericPaths.SettingsPath);
     }
 }

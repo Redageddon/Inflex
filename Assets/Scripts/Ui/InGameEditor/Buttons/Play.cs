@@ -1,9 +1,9 @@
-using Components.Audio;
+using Audio;
 
-namespace Ui.Scenes.InGameEditor.Buttons
+namespace Ui.InGameEditor.Buttons
 {
-    public class Play : ButtonBase
+    public class Play : MouseNavigationControl
     {
-        protected override void Left() => AudioPlayer.Instance.Play();
+        protected override void LeftClick() => AudioPlayer.Instance.Play();
     }
 }

@@ -1,9 +1,9 @@
 using System;
-using Components.Audio;
+using Audio;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ui.Scenes.InGameEditor
+namespace Ui.InGameEditor
 {
     public class Time : MonoBehaviour
     {
