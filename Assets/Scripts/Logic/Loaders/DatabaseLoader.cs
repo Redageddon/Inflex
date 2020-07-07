@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Beatmaps;
 using Database;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Logic.Loaders
 {
@@ -10,25 +11,25 @@ namespace Logic.Loaders
     {
         public static void Save()
         {
-            string[]          beatMapPaths = Directory.GetDirectories(GenericPaths.BeatMapsPath);
+            string[]                 beatMapPaths = Directory.GetDirectories(GenericPaths.BeatMapsPath);
             IEnumerable<BeatMapData> beatMaps     = beatMapPaths.Select(path => new BeatMapData(FileLoader.LoadBeatMap(path)));
 
-            using (InflexDatabase db = new InflexDatabase("BeatMaps", GenericPaths.BeatMapsDataPath))
+            using (InflexDatabase database = new InflexDatabase())
             {
-                db.Database.EnsureDeleted();
-                if (db.Database.EnsureCreated())
+                database.Database.EnsureDeleted();
+                if (database.Database.EnsureCreated())
                 {
-                    db.BeatMaps.AddRange(beatMaps);
-                    db.SaveChanges();
+                    database.BeatMaps.AddRange(beatMaps);
+                    database.SaveChanges();
                 }
             }
         }
 
-        public static IEnumerable<BeatMapData> Load() => new InflexDatabase("BeatMaps", GenericPaths.BeatMapsDataPath).BeatMaps;
+        public static IEnumerable<BeatMapData> Load() => new InflexDatabase().BeatMaps;
 
         public static void Remove(BeatMapData data)
         {
-            using (InflexDatabase db = new InflexDatabase("BeatMaps", GenericPaths.BeatMapsDataPath))
+            using (InflexDatabase db = new InflexDatabase())
             {
                 db.BeatMaps.Remove(data);
                 db.SaveChanges();
