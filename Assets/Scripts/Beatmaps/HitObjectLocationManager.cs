@@ -11,7 +11,7 @@ namespace Beatmaps
 
         public HitObjectLocationManager(EnemyEvent self)
         {
-            if (self == null)
+            if (self is null)
             {
                 throw new NullReferenceException();
             }

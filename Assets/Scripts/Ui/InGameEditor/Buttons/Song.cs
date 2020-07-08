@@ -11,15 +11,13 @@ namespace Ui.InGameEditor.Buttons
         [SerializeField] private Text text;
         protected override void LeftClick()
         {
-            string songPath = EditorUtility.OpenFilePanel(null, null, "mp3,ogg,wav");
+            string songPath = EditorUtility.OpenFilePanel("song", null, "mp3,ogg,wav");
 
-            if (string.IsNullOrEmpty(songPath))
+            if (!string.IsNullOrEmpty(songPath))
             {
-                return;
+                this.text.text                     = Path.GetFileName(songPath);
+                EditorInitializer.BeatMap.SongFile = songPath;
             }
-
-            this.text.text = Path.GetFileName(songPath);
-            EditorInitializer.BeatMap.SongFile = songPath;
         }
     }
 }

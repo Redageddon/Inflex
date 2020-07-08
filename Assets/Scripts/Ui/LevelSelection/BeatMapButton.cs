@@ -10,10 +10,10 @@ namespace Ui.LevelSelection
 {
     public class BeatMapButton : NavigationButton
     {
-        [SerializeField] private Text            beatMapNameText;
-        [SerializeField] private Text            difficulty;
-        private                  BeatMapData     beatMapData;
-        public static            GameObject      Options;
+        [SerializeField] private Text        beatMapNameText;
+        [SerializeField] private Text        difficulty;
+        private                  BeatMapData beatMapData;
+        public static            GameObject  Options;
 
         public void SetData(BeatMapData data)
         {
@@ -31,7 +31,8 @@ namespace Ui.LevelSelection
         protected override void RightClick()
         {
             Options.SetActive(true);
-            DeleteMapButton.SetDeleter(this.gameObject, this.beatMapData);
+            DeleteMapButton.Button = this.gameObject;
+            DeleteMapButton.Data   = this.beatMapData;
         }
     }
 }

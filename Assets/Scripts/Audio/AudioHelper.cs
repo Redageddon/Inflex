@@ -13,7 +13,7 @@ namespace Audio
 
         public static IEnumerator PlayGameSong(AudioSource audioSource)
         {
-            if (audioSource == null)
+            if (audioSource is null)
             {
                 throw new NullReferenceException();
             }

@@ -5,14 +5,14 @@ namespace Beatmaps
 {
     [Serializable]
     public class BeatMapData
-    {
+    { 
         public BeatMapData()
         {
         }
 
         public BeatMapData(BeatMap level)
         {
-            if (level == null)
+            if (level is null)
             {
                 throw new NullReferenceException();
             }

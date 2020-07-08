@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Beatmaps;
+using Database;
 using Logic.Loaders;
 using Ui.LevelSelection;
 using Ui.LevelSelection.ButtonExtras;
@@ -18,7 +19,7 @@ namespace Logic.Creators
         
         private void CreateAllButtons()
         {
-            foreach (BeatMapData beatMapData in DatabaseLoader.Load())
+            foreach (BeatMapData beatMapData in InflexContext.Load())
             {
                 this.CreateSingleButton(beatMapData);
             }
@@ -45,7 +46,7 @@ namespace Logic.Creators
         {
             this.DeleteAllButtons();
             this.beatMaps.Clear();
-            DatabaseLoader.Save();
+            InflexContext.Save();
             this.CreateAllButtons();
         }
 
