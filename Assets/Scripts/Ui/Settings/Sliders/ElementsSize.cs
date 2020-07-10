@@ -1,4 +1,5 @@
 ﻿using Logic;
+using Ui.Settings.Bases;
 
 namespace Ui.Settings.Sliders
 {

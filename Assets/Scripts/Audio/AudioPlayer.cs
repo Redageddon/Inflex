@@ -1,27 +1,42 @@
-﻿using Logic.Loaders;
+﻿using System.Collections;
+using Logic;
+using Logic.Loaders;
 using UnityEngine;
 
 namespace Audio
 {
     public class AudioPlayer : Singleton<AudioPlayer>
     {
-        private AudioSource audioSource;
+        public AudioSource audioSource;
+        private float offset;
 
-        public float GetClipLength => this.audioSource.clip.length;
-        
-        public float GetAudioTime => this.audioSource.time;
-        
-        public float TrueAudioTime => this.audioSource.time + AudioHelper.Offset;
-        
-        public bool IsPlaying() => this.audioSource.isPlaying;
+        public float AudioTime
+        {
+            get => this.audioSource.time;
+            set => this.audioSource.time = value;
+        }
 
-        public void Play() => this.audioSource.Play();
-
-        public void SetAudioTime(float time) => this.audioSource.time = time;
+        public float TrueAudioTime => this.AudioTime + this.offset;
         
-        public void LoadAudio(string path) => this.audioSource.clip = FileLoader.LoadAudioClip(path);
+        private void Awake() => this.audioSource = this.gameObject.AddComponent<AudioSource>();
 
-        public void PlayGameSong() => this.StartCoroutine(AudioHelper.PlayGameSong(this.audioSource));
+        public void LoadAudio(string path)
+        {
+            this.audioSource.clip = FileLoader.LoadAudioClip(path);
+            this.offset = CalculateFirstHitObject();
+        }
+
+        public void PlayGameSong() => this.StartCoroutine(this.PlayGameSong(this.audioSource));
+
+        private IEnumerator PlayGameSong(AudioSource audioSource)
+        {
+            audioSource.volume = 0;
+            audioSource.Play();
+            yield return new WaitUntil(() => audioSource.time >= -this.offset);
+            this.offset        = 0;
+            audioSource.volume = Assets.Instance.Settings.Volume;
+            audioSource.Play();
+        }
 
         public void SetAudioPaused(bool isPaused)
         {
@@ -35,6 +50,7 @@ namespace Audio
             }
         }
 
-        private void Awake() => this.audioSource = this.gameObject.AddComponent<AudioSource>();
+        private static float CalculateFirstHitObject() => -1 * ((960 - 3.591f * Assets.Instance.Settings.ElementsSize) /
+                                                                GameState.GetSpeed(0) - Assets.Instance.BeatMap.Enemies[0].SpawnTime);
     }
 }

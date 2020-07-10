@@ -14,7 +14,7 @@ namespace Ui.Game
         {
             for (int i = 0; i < 4; i++)
             {
-                if (!Input.GetKeyDown((KeyCode) Assets.Instance.Settings.Keys[i]))
+                if (!Input.GetKeyDown(Assets.Instance.Settings.Keys[i]))
                 {
                     continue;
                 }

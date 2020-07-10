@@ -11,7 +11,13 @@ namespace Ui.InGameEditor.Buttons
         [SerializeField] private Text text;
         protected override void LeftClick()
         {
-            string bgPath = EditorUtility.OpenFilePanel(null, null, "png,jpg");
+            string bgPath;
+            #if UNITY_EDITOR
+            bgPath = EditorUtility.OpenFilePanel(null, null, "png,jpg");
+            #else
+            bgPath = OtherUtility.OpenFilePanel(null, null, "png,jpg");
+            #endif
+            
 
             if (string.IsNullOrEmpty(bgPath))
             {

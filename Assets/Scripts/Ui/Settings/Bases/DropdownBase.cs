@@ -1,10 +1,9 @@
-﻿using Ui.Settings;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ui
+namespace Ui.Settings.Bases
 {
-    public abstract class DropdownBase : SettingsBase
+    public abstract class DropdownBase : MonoBehaviour//SettingsBase
     {
         [SerializeField] private Dropdown dropdown;
 
@@ -17,7 +16,7 @@ namespace Ui
         protected virtual void OnOptionChange(int index)
         {
             this.Index = index;
-            this.SetScreenValues();
+            ScreenResolution.Refresh();
         }
 
         private void Start()

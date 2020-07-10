@@ -1,10 +1,9 @@
-﻿using Ui.Settings;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ui
+namespace Ui.Settings.Bases
 {
-    public abstract class InputFieldBase : SettingsBase
+    public abstract class InputFieldBase : MonoBehaviour//SettingsBase
     {
         [SerializeField] private InputField inputField;
 
@@ -13,7 +12,7 @@ namespace Ui
         protected virtual void OnInputChange(string input)
         {
             this.Input = input;
-            this.SetScreenValues();
+            ScreenResolution.Refresh();
         }
 
         private void Start()

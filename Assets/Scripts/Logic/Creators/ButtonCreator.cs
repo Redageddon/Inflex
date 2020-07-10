@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Beatmaps;
 using Database;
-using Logic.Loaders;
 using Ui.LevelSelection;
-using Ui.LevelSelection.ButtonExtras;
 using UnityEngine;
 
 namespace Logic.Creators

@@ -1,10 +1,9 @@
-﻿using Ui.Settings;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ui
+namespace Ui.Settings.Bases
 {
-    public abstract class SliderBase : SettingsBase
+    public abstract class SliderBase : MonoBehaviour
     {
         [SerializeField] private Slider slider;
 

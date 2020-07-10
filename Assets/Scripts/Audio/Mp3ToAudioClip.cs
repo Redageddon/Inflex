@@ -24,20 +24,18 @@ namespace Audio
             }
         }
 
-        private static void OnAudioSetPosition(int newPosition) => position = newPosition;
-
         private static MemoryStream WaveToMemoryStream(WaveStream waveStream)
         {
             MemoryStream outputStream = new MemoryStream();
             using (WaveFileWriter waveFileWriter = new WaveFileWriter(outputStream, waveStream.WaveFormat))
             {
                 byte[] bytes = new byte[waveStream.Length];
-                waveStream.Read(bytes, 0, (int) waveStream.Length);
+                waveStream.Read(bytes, 0, (int)waveStream.Length);
                 waveFileWriter.Write(bytes, 0, bytes.Length);
                 waveFileWriter.Flush();
-            }
 
-            return outputStream;
+                return outputStream;
+            }
         }
 
         private static AudioClip ByteArrayToAudioClip(byte[] array)
@@ -59,8 +57,8 @@ namespace Audio
             sampleSize = bitsPerSample / 8;
             int sampleCount = subChunk2Size / sampleSize;
 
-            AudioClip audioClip = AudioClip.Create("Default", sampleCount, numChannels, sampleRate, true, OnAudioRead, OnAudioSetPosition);
-
+            AudioClip audioClip = AudioClip.Create("Default", sampleCount, numChannels, sampleRate, true, OnAudioRead,i=> position = i );
+            
             return audioClip;
         }
 

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Logic;
+using Ui.Settings.Bases;
 using UnityEngine.UI;
 
 namespace Ui.Settings.Dropdowns
@@ -14,7 +15,7 @@ namespace Ui.Settings.Dropdowns
 
         protected override void FillDropdown() =>
             this.Dropdown.options.AddRange(
-                this.Resolutions.Select(
+                UnityEngine.Screen.resolutions.Select(
                     resolution => new Dropdown.OptionData($"{resolution.width} X {resolution.height}")).Distinct());
     }
 }

@@ -10,7 +10,7 @@ namespace Ui.InGameEditor
         [SerializeField] private Text text;
         private void Update()
         {
-            TimeSpan timeSpan = TimeSpan.FromSeconds(AudioPlayer.Instance.GetAudioTime);
+            TimeSpan timeSpan = TimeSpan.FromSeconds(AudioPlayer.Instance.AudioTime);
             this.text.text = $"{timeSpan.Minutes}:{timeSpan.Seconds}:{timeSpan.Milliseconds}";
         }
     }

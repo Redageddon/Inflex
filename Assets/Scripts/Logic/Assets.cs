@@ -17,11 +17,11 @@ namespace Logic
 
         private static SavedSettings LoadSettings()
         {
-            if (File.Exists(GenericPaths.SettingsPath))
+            if (File.Exists(GenericPaths.SettingsPath) && !string.IsNullOrEmpty(File.ReadAllText(GenericPaths.SettingsPath)))
             {
                 return RronConvert.DeserializeObjectFromFile<SavedSettings>(GenericPaths.SettingsPath);
             }
-
+            
             SavedSettings settings = new SavedSettings("Default");
             RronConvert.SerializeObjectToFile(settings, GenericPaths.SettingsPath);
             return settings;

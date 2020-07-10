@@ -10,14 +10,14 @@ namespace Ui.InGameEditor
         private bool mouseDown;
         private bool wasPlaying;
 
-        private void Update() => this.slider.value = AudioPlayer.Instance.GetAudioTime;
+        private void Update() => this.slider.value = AudioPlayer.Instance.AudioTime;
 
         private void Start() => this.slider.onValueChanged.AddListener(this.OnInputChange);
 
         private void OnMouseDown()
         {
             this.mouseDown = true;
-            this.wasPlaying = AudioPlayer.Instance.IsPlaying();
+            this.wasPlaying = AudioPlayer.Instance.audioSource.isPlaying;
         }
 
         private void OnMouseUp()
@@ -31,7 +31,7 @@ namespace Ui.InGameEditor
             if (this.mouseDown)
             {
                 AudioPlayer.Instance.SetAudioPaused(true);
-                AudioPlayer.Instance.SetAudioTime(value);
+                AudioPlayer.Instance.AudioTime = value;
             }
         }
     }

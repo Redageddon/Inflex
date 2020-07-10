@@ -11,11 +11,6 @@ namespace Beatmaps
 
         public HitObjectLocationManager(EnemyEvent self)
         {
-            if (self is null)
-            {
-                throw new NullReferenceException();
-            }
-
             this.Rotation = self.SpawnDegrees;
             this.deathTime = self.SpawnTime;
         }

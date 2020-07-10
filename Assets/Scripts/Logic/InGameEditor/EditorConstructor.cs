@@ -13,7 +13,7 @@ namespace Logic.InGameEditor
         {
             string folderPath = Path.GetDirectoryName(beatMap.Path);
             AudioPlayer.Instance.LoadAudio(Path.Combine(folderPath, beatMap.SongFile));
-            this.slider.maxValue = AudioPlayer.Instance.GetClipLength;
+            this.slider.maxValue = AudioPlayer.Instance.audioSource.clip.length;
         }
     }
 }

@@ -23,7 +23,6 @@ public class GameState : MonoBehaviour
     public void OnEnable()
     {
         AudioPlayer.Instance.LoadAudio($"{Assets.Instance.BeatMap.Path}/{Assets.Instance.BeatMap.SongFile}");
-        AudioHelper.SetOffset();
         AudioPlayer.Instance.PlayGameSong();
     }
 

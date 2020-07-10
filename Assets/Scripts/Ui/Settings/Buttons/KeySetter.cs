@@ -6,9 +6,9 @@ namespace Ui.Settings.Buttons
 {
     public class KeySetter : MouseNavigationControl
     {
-        [SerializeField] private int keyIndex;
+        public int  keyIndex;
         [SerializeField] private Text text;
-        private bool waitingForInput;
+        private                  bool waitingForInput;
 
         protected override void LeftClick() => this.waitingForInput = true;
 
@@ -16,16 +16,14 @@ namespace Ui.Settings.Buttons
 
         private void OnGUI()
         {
-            if (!this.waitingForInput || !Event.current.isKey)
+            if (this.waitingForInput && Event.current.isKey)
             {
-                return;
+                Assets.Instance.Settings.Keys[this.keyIndex] = Event.current.keyCode;
+                this.waitingForInput                         = false;
+                this.SetText();
             }
-
-            Assets.Instance.Settings.Keys[this.keyIndex] = (int) Event.current.keyCode;
-            this.waitingForInput = false;
-            this.SetText();
         }
 
-        private void SetText() => this.text.text = $" Input{this.keyIndex}: {(KeyCode) Assets.Instance.Settings.Keys[this.keyIndex]}";
+        private void SetText() => this.text.text = $" Input{this.keyIndex}: {Assets.Instance.Settings.Keys[this.keyIndex]}";
     }
 }
