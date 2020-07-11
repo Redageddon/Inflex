@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-
 namespace Beatmaps
 {
     [Serializable]
@@ -24,7 +22,7 @@ namespace Beatmaps
             this.SongFile   = level.SongFile;
         }
 
-        [Key] public int Id { get; set; }
+        public int Id { get; set; }
 
         public string Title { get; set; }
 

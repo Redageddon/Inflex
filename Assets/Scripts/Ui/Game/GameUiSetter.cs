@@ -9,7 +9,7 @@ namespace Ui.Game
         [SerializeField] private Background background;
         [SerializeField] private Center center;
         [SerializeField] private CurrentKey currentKey;
-        [SerializeField] private HitObject hitObject;
+        //[SerializeField] private HitObject hitObject;
         [SerializeField] private Pointer pointer;
 
         private void Awake()
@@ -17,7 +17,7 @@ namespace Ui.Game
             this.SetBackground();
             this.SetCenter();
             this.SetCurrentKey();
-            this.SetHitObject();
+            //this.SetHitObject();
             this.SetPointer();
         }
 
@@ -30,8 +30,8 @@ namespace Ui.Game
         private void SetCurrentKey() =>
             this.currentKey.SetSize(new Vector2(-this.currentKey.Sprites[0].rect.xMax, -this.currentKey.Sprites[0].rect.yMax));
 
-        private void SetHitObject() =>
-            this.hitObject.SetSize(new Vector2(Assets.Instance.Settings.ElementsSize * 2, Assets.Instance.Settings.ElementsSize * 2));
+        /*private void SetHitObject() =>
+            this.hitObject.SetSize(new Vector2(Assets.Instance.Settings.ElementsSize * 2, Assets.Instance.Settings.ElementsSize * 2));*/
 
         private void SetPointer()
         {

@@ -11,8 +11,8 @@ namespace Ui.Settings.Dropdowns
     {
         protected override int Index
         {
-            get => Assets.Instance.Settings.FullscreenModeIndex;
-            set => Assets.Instance.Settings.FullscreenModeIndex = value;
+            get => (int)Assets.Instance.Settings.FullscreenMode;
+            set => Assets.Instance.Settings.FullscreenMode = (FullScreenMode)value;
         }
 
         protected override void FillDropdown() =>

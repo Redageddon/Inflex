@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Beatmaps.Events;
 
 namespace Beatmaps
@@ -25,7 +24,7 @@ namespace Beatmaps
             this.Speeds = speeds;
         }
 
-        [Key] public int Id { get; set; }
+        public int Id { get; set; }
 
         public string Path { get; set; }
 

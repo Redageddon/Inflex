@@ -1,6 +1,6 @@
 using System.IO;
 using Logic.InGameEditor;
-using UnityEditor;
+using SFB;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,21 +11,13 @@ namespace Ui.InGameEditor.Buttons
         [SerializeField] private Text text;
         protected override void LeftClick()
         {
-            string bgPath;
-            #if UNITY_EDITOR
-            bgPath = EditorUtility.OpenFilePanel(null, null, "png,jpg");
-            #else
-            bgPath = OtherUtility.OpenFilePanel(null, null, "png,jpg");
-            #endif
-            
+            string[] path = StandaloneFileBrowser.OpenFilePanel("Open File", "", "png,jpg", false);
 
-            if (string.IsNullOrEmpty(bgPath))
+            if (path.Length == 1 && !string.IsNullOrEmpty(path[0]))
             {
-                return;
+                this.text.text                       = Path.GetFileName(path[0]);
+                EditorInitializer.BeatMap.Background = path[0];
             }
-
-            this.text.text = Path.GetFileName(bgPath);
-            EditorInitializer.BeatMap.Background = bgPath;
         }
     }
 }

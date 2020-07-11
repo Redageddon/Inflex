@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Logic;
 using Ui.Settings.Bases;
 using UnityEngine;
@@ -10,12 +11,11 @@ namespace Ui.Settings.Dropdowns
     {
         protected override int Index
         {
-            get => Assets.Instance.Settings.VSyncIndex;
-            set => Assets.Instance.Settings.VSyncIndex = value;
+            get => (int)Assets.Instance.Settings.VSyncIndex;
+            set => Assets.Instance.Settings.VSyncIndex = (VSyncMode)value;
         }
 
-        protected override void FillDropdown() =>
-            this.Dropdown.options.AddRange(new[] {"Off", "On", "Every Second V Blank"}.Select(option => new Dropdown.OptionData(option)));
+        protected override void FillDropdown() => this.Dropdown.options.AddRange(Enum.GetNames(typeof(VSyncMode)).Select(option => new Dropdown.OptionData(option)));
 
         protected override void OnOptionChange(int index)
         {

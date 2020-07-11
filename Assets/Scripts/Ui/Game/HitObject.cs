@@ -11,6 +11,7 @@ namespace Ui.Game
     {
         [SerializeField] private CircleCollider2D circleCollider2D;
         [SerializeField] private Sprite[] sprites;
+        [SerializeField] private GameObject judgementGameObject;
         private HitObjectLocationManager locationManager;
         private float speed;
         
@@ -26,12 +27,12 @@ namespace Ui.Game
             this.KillKey = enemyEvent.KillKey;
 
             this.SetLocation(this.locationManager.GetLocation(AudioPlayer.Instance.TrueAudioTime, this.speed));
-            this.gameObject.SetActive(true);
         }
 
         public void Hit()
-        {
-            JudgementCreator.Create(this.locationManager.Rotation);
+        { 
+            Judgement judgement = Instantiate(this.judgementGameObject, this.transform.parent.parent).GetComponent<Judgement>();
+            judgement.AssignValue(this.locationManager.Rotation);
             this.gameObject.SetActive(false);
         }
 

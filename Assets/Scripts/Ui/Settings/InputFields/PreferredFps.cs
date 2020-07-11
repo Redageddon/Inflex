@@ -7,11 +7,11 @@ namespace Ui.Settings.InputFields
     {
         protected override string Input
         {
-            get => Assets.Instance.Settings.PreferredFps.ToString();
+            get => Assets.Instance.Settings.Resolution.RefreshRate.ToString();
             set
             {
                 int.TryParse(value, out int val);
-                Assets.Instance.Settings.PreferredFps = val;
+                Assets.Instance.Settings.Resolution.RefreshRate = val;
             }
         }
     }

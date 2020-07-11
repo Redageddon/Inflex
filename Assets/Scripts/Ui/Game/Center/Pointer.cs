@@ -34,8 +34,6 @@ namespace Ui.Game
             other.GetComponent<HitObject>().Hit();
         }
 
-        private void Update() => this.SetZRotation();
-
-        private void SetZRotation() => this.transform.localRotation = Quaternion.Euler(0, 0, (float) (GetPointerRotation() - 180));
+        private void Update() => this.transform.localRotation = Quaternion.Euler(0, 0, (float) (GetPointerRotation() - 180));
     }
 }

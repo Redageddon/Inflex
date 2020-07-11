@@ -29,7 +29,8 @@ namespace Logic.Creators
 
         private void CreateEnemy(EnemyEvent self, float speed)
         {
-            GameObject enemyInstance = Instantiate(this.enemy, this.enemy.transform.parent, false);
+            print(speed);
+            GameObject enemyInstance = Instantiate(this.enemy, this.transform, false);
             enemyInstance.GetComponent<HitObject>().Construct(self, speed);
         }
     }

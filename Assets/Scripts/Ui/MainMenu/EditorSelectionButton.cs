@@ -1,5 +1,5 @@
 using Logic.InGameEditor;
-using UnityEditor;
+using SFB;
 
 namespace Ui.MainMenu
 {
@@ -7,16 +7,11 @@ namespace Ui.MainMenu
     {
         protected override void LeftClick()
         {
-            string path;
-            #if UNITY_EDITOR
-            path = EditorUtility.OpenFilePanel("Beatmap", GenericPaths.BeatMapsPath, "rron");
-            #else
-            path = OtherUtility.OpenFilePanel("Beatmap", GenericPaths.BeatMapsPath, "rron");
-            #endif
+            string[] path = StandaloneFileBrowser.OpenFilePanel("Open File", GenericPaths.BeatMapsPath, "rron", false);
             
-            if (!string.IsNullOrEmpty(path))
+            if (path.Length == 1 && !string.IsNullOrEmpty(path[0]))
             {
-                EditorInitializer.Path = path;
+                EditorInitializer.Path              = path[0];
                 EditorInitializer.IsExistingBeatMap = true;
                 base.LeftClick();
             }

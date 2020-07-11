@@ -1,6 +1,6 @@
 using System.IO;
 using Logic.InGameEditor;
-using UnityEditor;
+using SFB;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,17 +11,12 @@ namespace Ui.InGameEditor.Buttons
         [SerializeField] private Text text;
         protected override void LeftClick()
         {
-            string songPath;
-            #if UNITY_EDITOR
-            songPath = EditorUtility.OpenFilePanel("song", null, "mp3,ogg,wav");
-            #else
-            songPath = OtherUtility.OpenFilePanel("song", null, "mp3,ogg,wav");
-            #endif
+            string[] path = StandaloneFileBrowser.OpenFilePanel("Open File", "", "mp3,ogg,wav", false);
 
-            if (!string.IsNullOrEmpty(songPath))
+            if (path.Length == 1 && !string.IsNullOrEmpty(path[0]))
             {
-                this.text.text                     = Path.GetFileName(songPath);
-                EditorInitializer.BeatMap.SongFile = songPath;
+                this.text.text                     = Path.GetFileName(path[0]);
+                EditorInitializer.BeatMap.SongFile = path[0];
             }
         }
     }
