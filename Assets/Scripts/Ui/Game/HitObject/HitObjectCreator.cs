@@ -1,9 +1,9 @@
 ﻿using Audio;
 using Beatmaps.Events;
-using Ui.Game;
+using Logic;
 using UnityEngine;
 
-namespace Logic.Creators
+namespace Ui.Game.HitObject
 {
     public class HitObjectCreator : MonoBehaviour
     {
@@ -29,9 +29,8 @@ namespace Logic.Creators
 
         private void CreateEnemy(EnemyEvent self, float speed)
         {
-            print(speed);
             GameObject enemyInstance = Instantiate(this.enemy, this.transform, false);
-            enemyInstance.GetComponent<HitObject>().Construct(self, speed);
+            enemyInstance.GetComponent<HitObject>().Construct(self.KillKey, self.SpawnDegrees, self.SpawnTime, speed);
         }
     }
 }

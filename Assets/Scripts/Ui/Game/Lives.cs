@@ -1,13 +1,9 @@
 ﻿using Logic;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace Ui.Game
 {
-    public class Lives : VisibleElement
+    public class Lives : WrittenElement
     {
-        [SerializeField] private Text lives;
-        
-        private void Update() => this.lives.text = $"Lives: {ScoreBar.Score}";
+        private void Update() => this.Text.text = $"Lives: {ScoreBar.Score}";
     }
 }

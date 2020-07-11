@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Ui.Game.Hitter;
 using UnityEngine;
 
 namespace Ui.Game

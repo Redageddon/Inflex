@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Audio;
 using Beatmaps;
+using Beatmaps.Events;
 using Inflex.Rron;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -30,7 +31,6 @@ namespace Logic.Loaders
             string filePath = string.Equals(Path.GetExtension(path), ".rron")
                 ? path
                 : Directory.GetFiles(path, @"*.rron").First();
-
             BeatMap prePath = RronConvert.DeserializeObjectFromFile<BeatMap>(filePath);
             prePath.Path = path;
             return prePath;
@@ -39,15 +39,13 @@ namespace Logic.Loaders
         public static AudioClip LoadAudioClip(string path)
         {
             Uri uriPath = new Uri(path);
-            using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(uriPath, AudioType.UNKNOWN))
-            {
-                request.SendWebRequest();
-                SpinUntil(() => request.isDone);
+            using UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(uriPath, AudioType.UNKNOWN);
+            request.SendWebRequest();
+            SpinUntil(() => request.isDone);
 
-                return Path.GetExtension(path) == ".mp3"
-                    ? Mp3ToAudioClip.FromMp3Bytes(request.downloadHandler.data)
-                    : DownloadHandlerAudioClip.GetContent(request);
-            }
+            return Path.GetExtension(path) == ".mp3"
+                ? Mp3ToAudioClip.FromMp3Bytes(request.downloadHandler.data)
+                : DownloadHandlerAudioClip.GetContent(request);
         }
     }
 }

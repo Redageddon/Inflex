@@ -4,25 +4,19 @@ namespace Beatmaps.Events
     {
         public EnemyEvent(int killKey, float spawnDegrees, float rotationSpeed, float spawnTime)
         {
-            this.KillKey = killKey;
-            this.SpawnDegrees = spawnDegrees;
+            this.KillKey       = killKey;
+            this.SpawnDegrees  = spawnDegrees;
             this.RotationSpeed = rotationSpeed;
-            this.SpawnTime = spawnTime;
+            this.SpawnTime     = spawnTime;
         }
 
-        public EnemyEvent()
-        {
-        }
+        public EnemyEvent() { }
 
-        public int KillKey { get; set; }
-
-        public float SpawnDegrees { get; set; }
-
+        public int   KillKey       { get; set; }
+        public float SpawnDegrees  { get; set; }
         public float RotationSpeed { get; set; }
+        public float SpawnTime     { get; set; }
 
-        public float SpawnTime { get; set; }
-
-        public override string ToString() =>
-            $"{nameof(this.KillKey)}: {this.KillKey}, {nameof(this.SpawnDegrees)}: {this.SpawnDegrees}, {nameof(this.RotationSpeed)}: {this.RotationSpeed}, {nameof(this.SpawnTime)}: {this.SpawnTime}";
+        public override string ToString() => $"{nameof(KillKey)}: {KillKey}, {nameof(SpawnDegrees)}: {SpawnDegrees}, {nameof(RotationSpeed)}: {RotationSpeed}, {nameof(SpawnTime)}: {SpawnTime}";
     }
 }
