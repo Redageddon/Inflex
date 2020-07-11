@@ -2,7 +2,7 @@
 using UnityEngine;
 using X10D;
 
-namespace Ui.Game.Hitter
+namespace Ui.Game.Stabber
 {
     public class Pointer : VisibleElement
     {

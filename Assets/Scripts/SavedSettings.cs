@@ -31,7 +31,9 @@ public class SavedSettings
     public float Volume { get; set; }
 
     public float ElementsSize { get; set; }
-    
+
+    public float IncomingSpeed { get; set; }
+
     public Resolution Resolution { get; set; }
 
     public List<KeyCode> Keys { get; set; } = new List<KeyCode>();

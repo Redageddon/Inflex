@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Ui.Game.Hitter;
+using Ui.Game.Stabber;
 using UnityEngine;
 
 namespace Ui.Game

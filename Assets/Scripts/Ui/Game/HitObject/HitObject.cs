@@ -1,5 +1,6 @@
 ﻿using System;
 using Audio;
+using Beatmaps.Events;
 using Logic;
 using UnityEngine;
 
@@ -17,28 +18,25 @@ namespace Ui.Game.HitObject
         private double distance;
         private int killKey;
 
-        public void Construct(int killKey, float rotation, float spawnTime, float speed)
+        public void Construct(EnemyEvent self, float speed)
         {
-            this.Image.texture = this.sprites[killKey].texture;
+            this.Image.texture = this.sprites[self.KillKey].texture;
             
             this.circleCollider2D.radius = Assets.Instance.Settings.ElementsSize;
             
             this.speed = speed;
-            this.killKey = killKey;
-            this.rotation = rotation;
-            this.spawnTime = spawnTime;
-
-            this.gameObject.transform.localPosition = (this.GetLocation(AudioPlayer.Instance.TrueAudioTime));
+            this.killKey = self.KillKey;
+            this.rotation = self.Rotation;
+            this.spawnTime = self.SpawnTime;
         }
 
         private void Update()
         {
+            this.gameObject.transform.localPosition = this.GetLocation(AudioPlayer.Instance.TrueAudioTime);
             if (this.distance <= 2.71 * Assets.Instance.Settings.ElementsSize)
             {
                 Destroy(this.gameObject);
             }
-
-            this.gameObject.transform.localPosition = (this.GetLocation(AudioPlayer.Instance.TrueAudioTime));
         }
 
         private Vector3 GetLocation(float audioSourceTime)

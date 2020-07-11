@@ -4,6 +4,7 @@ using System.Linq;
 using Beatmaps;
 using Logic.Loaders;
 using Microsoft.EntityFrameworkCore;
+using UnityEngine;
 
 namespace Database
 {
@@ -21,9 +22,9 @@ namespace Database
             Directory.CreateDirectory(GenericPaths.BeatMapsPath);
             string[]                 beatMapPaths = Directory.GetDirectories(GenericPaths.BeatMapsPath);
             IEnumerable<BeatMapData> beatMaps     = beatMapPaths.Select(path => new BeatMapData(FileLoader.LoadBeatMap(path)));
-            
             Context.Database.EnsureCreated();
             Context.Database.ExecuteSqlRaw("delete from BeatMaps");
+
             Context.AddRange(beatMaps);
             Context.SaveChanges();
         }

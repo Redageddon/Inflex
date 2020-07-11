@@ -10,7 +10,7 @@ namespace Beatmaps
         }
 
         public BeatMap(string path, int lives, string songFile, string background, string title, string artist, string mapper, string icon,
-                       List<EnemyEvent> enemies, List<SpeedEvent> speeds)
+                       List<EnemyEvent> enemies)
         {
             this.Path = path;
             this.Lives = lives;
@@ -21,7 +21,6 @@ namespace Beatmaps
             this.Mapper = mapper;
             this.Icon = icon;
             this.Enemies = enemies;
-            this.Speeds = speeds;
         }
 
         public int Id { get; set; }
@@ -42,11 +41,8 @@ namespace Beatmaps
 
         public string Mapper { get; set; }
 
-        public List<EnemyEvent> Enemies { get; set; } = new List<EnemyEvent>();
-
-        public List<SpeedEvent> Speeds { get; set; } = new List<SpeedEvent>();
-
-        public override string ToString() =>
-            $"{nameof(this.Path)}: {this.Path}, {nameof(this.Lives)}: {this.Lives}, {nameof(this.SongFile)}: {this.SongFile}, {nameof(this.Background)}: {this.Background}, {nameof(this.Title)}: {this.Title}, {nameof(this.Artist)}: {this.Artist}, {nameof(this.Mapper)}: {this.Mapper}, {nameof(this.Icon)}: {this.Icon}, {nameof(this.Enemies)}: {this.Enemies}, {nameof(this.Speeds)}: {this.Speeds}";
+        public List<EnemyEvent> Enemies { get; set; } = new List<EnemyEvent>(); 
+        
+        public override string ToString() => $"{nameof(this.Id)}: {this.Id}, {nameof(this.Path)}: {this.Path}, {nameof(this.Lives)}: {this.Lives}, {nameof(this.SongFile)}: {this.SongFile}, {nameof(this.Background)}: {this.Background}, {nameof(this.Icon)}: {this.Icon}, {nameof(this.Title)}: {this.Title}, {nameof(this.Artist)}: {this.Artist}, {nameof(this.Mapper)}: {this.Mapper}, {nameof(this.Enemies)}: {this.Enemies}";
     }
 }

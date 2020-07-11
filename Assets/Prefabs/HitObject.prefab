@@ -130,7 +130,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: c3e8ec370c5a96846b4fcf31127de3f0, type: 3}
   - {fileID: 21300000, guid: 88026a3918fefdd40bd579f54740a65f, type: 3}
+  - {fileID: 21300000, guid: 9981e564ad1ae2b4998c5c4b7b6373d9, type: 3}
   - {fileID: 21300000, guid: c4fcbfe9d0e62504680fa7a543e2129c, type: 3}
-  - {fileID: 0}
   judgementGameObject: {fileID: 8745343286229143414, guid: 1cf2f8d3170857948b16a326f31572a6,
     type: 3}
