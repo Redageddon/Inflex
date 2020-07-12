@@ -1,4 +1,6 @@
-﻿public class Resolution
+﻿using System;
+
+public class Resolution
 {
     public Resolution()
     {
@@ -10,6 +12,8 @@
         this.Width = width;
         this.RefreshRate = refreshRate;
     }
+
+    public double Corner => (Math.Sqrt(this.Width * this.Width + this.Height * this.Height) / 2);
 
     public int Width { get; set; }
     public int Height { get; set; }

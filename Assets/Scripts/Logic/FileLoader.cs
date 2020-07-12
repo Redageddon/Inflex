@@ -3,14 +3,13 @@ using System.IO;
 using System.Linq;
 using Audio;
 using Beatmaps;
-using Beatmaps.Events;
 using Inflex.Rron;
 using UnityEngine;
 using UnityEngine.Networking;
 using static System.Threading.SpinWait;
 
 
-namespace Logic.Loaders
+namespace Logic
 {
     public static class FileLoader
     {

@@ -2,7 +2,7 @@
 
 namespace Logic
 {
-    public class ScoreBar : MonoBehaviour
+    public class StaminaBar : MonoBehaviour
     {
         private void Awake() => Score = Assets.Instance.BeatMap.Lives;
 

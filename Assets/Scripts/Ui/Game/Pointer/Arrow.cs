@@ -1,10 +1,11 @@
 ﻿using System;
+using Logic;
 using UnityEngine;
 using X10D;
 
-namespace Ui.Game.Stabber
+namespace Ui.Game.Pointer
 {
-    public class Pointer : VisibleElement
+    public class Arrow : VisibleElement
     {
         public static double GetPointerRotation()
         {
@@ -13,6 +14,12 @@ namespace Ui.Game.Stabber
             Vector2 screenMousePosition = screenCenter - mousePosition;
 
             return Math.Atan2(screenMousePosition.x, - screenMousePosition.y).RadiansToDegrees() + 180;
+        }
+
+        public void OnTriggerEnter2D(Collider2D other)
+        {
+            HitObject hitObject = other.GetComponent<HitObject>();
+            HitObjectHandler.OnHit(hitObject);
         }
 
         private void Update() => this.transform.localRotation = Quaternion.Euler(0, 0, (float) (GetPointerRotation() - 180));

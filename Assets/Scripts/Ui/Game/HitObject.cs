@@ -4,26 +4,25 @@ using Beatmaps.Events;
 using Logic;
 using UnityEngine;
 
-namespace Ui.Game.HitObject
+namespace Ui.Game
 {
     public class HitObject : VisibleElement
     {
+        
+        [HideInInspector] public double rotation;
+        [HideInInspector] public int    killKey;
+        [HideInInspector] public double distance;
+        
         [SerializeField] private CircleCollider2D circleCollider2D;
         [SerializeField] private Sprite[] sprites;
-        [SerializeField] private GameObject judgementGameObject;
-
+        
         private float speed;
         private float spawnTime;
-        private double rotation;
-        private double distance;
-        private int killKey;
-
+        
         public void Construct(EnemyEvent self, float speed)
         {
             this.Image.texture = this.sprites[self.KillKey].texture;
-            
-            this.circleCollider2D.radius = Assets.Instance.Settings.ElementsSize;
-            
+
             this.speed = speed;
             this.killKey = self.KillKey;
             this.rotation = self.Rotation;
@@ -35,7 +34,7 @@ namespace Ui.Game.HitObject
             this.gameObject.transform.localPosition = this.GetLocation(AudioPlayer.Instance.TrueAudioTime);
             if (this.distance <= 2.71 * Assets.Instance.Settings.ElementsSize)
             {
-                Destroy(this.gameObject);
+                HitObjectHandler.OnHit(this);
             }
         }
 

@@ -1,26 +1,30 @@
 ﻿using System;
 using System.Globalization;
-using Ui.Game.Stabber;
 using UnityEngine;
 
 namespace Ui.Game
 {
     public class Judgement : WrittenElement
     {
-        public void AssignValue(double rotation)
+        public static void CreateNewJudgement(double hitObjectRotation, double arrowRotation)
         {
-            double accuracy = Grade(rotation);
+            
+        }
+
+        private void Judge(double hitObjectRotation, double arrowRotation)
+        {
+            double accuracy = Grade(hitObjectRotation, arrowRotation);
 
             this.Text.color = Color.HSVToRGB((float) accuracy / 100, 1, 1, true);
             this.Text.text = accuracy.ToString(CultureInfo.CurrentCulture);
             Destroy(this.gameObject, 0.15f);
         }
 
-        private static double Grade(double hitObjectRotation)
+        private static double Grade(double hitObjectRotation, double arrowRotation)
         {
             const int grader = 15;
 
-            double truePointerRotation = FixPointerRotation(Pointer.GetPointerRotation(), hitObjectRotation);
+            double truePointerRotation = FixPointerRotation(arrowRotation, hitObjectRotation);
 
             return Math.Abs(truePointerRotation - hitObjectRotation) < grader
                 ? Math.Round(100 * (Math.Abs(truePointerRotation - hitObjectRotation) - grader) / -grader)

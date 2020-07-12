@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 1157047961}
   - component: {fileID: 1157047963}
   m_Layer: 0
-  m_Name: Pointer
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,6 +399,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1157047963}
   rectTransform: {fileID: 1157047959}
+  judgement: {fileID: 8745343286229143414, guid: 1cf2f8d3170857948b16a326f31572a6,
+    type: 3}
 --- !u!68 &1157047962
 EdgeCollider2D:
   m_ObjectHideFlags: 0

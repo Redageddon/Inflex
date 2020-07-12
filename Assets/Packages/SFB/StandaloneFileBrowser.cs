@@ -1,6 +1,6 @@
 using System;
 
-namespace SFB
+namespace Packages.SFB
 {
     public readonly struct ExtensionFilter
     {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace SFB
+namespace Packages.SFB
 {
     public class StandaloneFileBrowserEditor : IStandaloneFileBrowser
     {

@@ -6,6 +6,7 @@ namespace Ui.Game
     public class CurrentKey : VisibleElement
     {
         [SerializeField] private Sprite[] sprites;
+        public static int Key;
 
         private void Update()
         {
@@ -15,6 +16,7 @@ namespace Ui.Game
                 {
                     this.SetSize(new Vector2(-this.sprites[i].rect.xMax, -this.sprites[i].rect.yMax));
                     this.Image.texture = this.sprites[i].texture;
+                    Key = i;
                 }
             }
         }

@@ -4,6 +4,6 @@ namespace Ui.Game
 {
     public class Lives : WrittenElement
     {
-        private void Update() => this.Text.text = $"Lives: {ScoreBar.Score}";
+        private void Update() => this.Text.text = $"Lives: {StaminaBar.Score}";
     }
 }

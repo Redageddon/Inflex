@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Logic.Loaders;
+using Logic;
 using UnityEngine;
 
 public class Skin

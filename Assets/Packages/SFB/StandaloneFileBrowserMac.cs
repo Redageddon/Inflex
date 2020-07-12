@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using AOT;
 
-namespace SFB
+namespace Packages.SFB
 {
     public class StandaloneFileBrowserMac : IStandaloneFileBrowser
     {

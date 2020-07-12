@@ -1,29 +1,25 @@
 ﻿using Audio;
 using Beatmaps.Events;
-using Logic;
+using Ui.Game;
 using UnityEngine;
 
-namespace Ui.Game.HitObject
+namespace Logic.Creators
 {
     public class HitObjectCreator : MonoBehaviour
     {
         [SerializeField] private GameObject enemy;
         private int offset;
 
-        private void Update() => this.WaitToSpawnEnemy();
-
-        private void WaitToSpawnEnemy()
+        private void Update()
         {
             for (int i = this.offset; i < Assets.Instance.BeatMap.Enemies.Count; i++)
             {
                 if (Assets.Instance.Settings.IncomingSpeed * (-AudioPlayer.Instance.TrueAudioTime + Assets.Instance.BeatMap.Enemies[i].SpawnTime) +
-                    5.6 * Assets.Instance.Settings.ElementsSize > 1100)
+                    5.6 * Assets.Instance.Settings.ElementsSize <= Assets.Instance.Settings.Resolution.Corner)
                 {
-                    return;
+                    this.CreateEnemy(Assets.Instance.BeatMap.Enemies[i]);
+                    this.offset++;
                 }
-
-                this.CreateEnemy(Assets.Instance.BeatMap.Enemies[i]);
-                this.offset++;
             }
         }
 

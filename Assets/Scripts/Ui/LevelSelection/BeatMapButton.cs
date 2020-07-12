@@ -1,7 +1,6 @@
 ﻿using System;
 using Beatmaps;
 using Logic;
-using Logic.Loaders;
 using Ui.LevelSelection.ButtonExtras;
 using UnityEngine;
 using UnityEngine.UI;

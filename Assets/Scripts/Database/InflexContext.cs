@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using Beatmaps;
-using Logic.Loaders;
+using Logic;
 using Microsoft.EntityFrameworkCore;
 using UnityEngine;
 
