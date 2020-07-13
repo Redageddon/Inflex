@@ -17,13 +17,8 @@ namespace Ui.Game
 
             this.Text.color = Color.HSVToRGB((float) accuracy / 100, 1, 1, true);
             this.Text.text = accuracy.ToString(CultureInfo.CurrentCulture);
-
-            Action a = async () =>
-            {
-                await Task.Delay(150);
-                this.gameObject.SetActive(false);
-            };
-            a.Invoke();
+            
+            Task.Delay(150).ContinueWith(t => this.gameObject.SetActive(false)).Start();
         }
 
 
