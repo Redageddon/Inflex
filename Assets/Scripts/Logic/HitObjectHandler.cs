@@ -4,8 +4,13 @@ using UnityEngine;
 
 namespace Logic
 {
-    public static class HitObjectHandler
+    public class HitObjectHandler : MonoBehaviour
     {
+        [SerializeField] private Judgement Judgement;
+        private static Judgement sJudgement;
+
+        private void Awake() => sJudgement = this.Judgement;
+
         public static void OnHit(HitObject hitObject)
         {
             if (hitObject.killKey != CurrentKey.Key || hitObject.distance <= 2.71 * Assets.Instance.Settings.ElementsSize)
@@ -13,9 +18,9 @@ namespace Logic
                 StaminaBar.Score--;
             }
             
-            Judgement.CreateNewJudgement(hitObject.rotation, Arrow.GetPointerRotation());
+            sJudgement.Judge(hitObject.rotation, Arrow.GetPointerRotation());
 
-            Object.Destroy(hitObject.gameObject);
+            Destroy(hitObject.gameObject);
         }
     }
 }

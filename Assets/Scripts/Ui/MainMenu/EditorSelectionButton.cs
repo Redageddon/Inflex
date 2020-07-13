@@ -1,5 +1,5 @@
 using Logic.InGameEditor;
-using Packages.SFB;
+using SFB;
 
 namespace Ui.MainMenu
 {

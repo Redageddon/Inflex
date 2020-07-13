@@ -1,6 +1,6 @@
 using System.IO;
 using Logic.InGameEditor;
-using Packages.SFB;
+using SFB;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,24 +1,31 @@
 ﻿using System;
+using System.Collections;
 using System.Globalization;
+using System.Threading.Tasks;
+using System.Timers;
 using UnityEngine;
+using Object = System.Object;
 
 namespace Ui.Game
 {
     public class Judgement : WrittenElement
     {
-        public static void CreateNewJudgement(double hitObjectRotation, double arrowRotation)
+        public void Judge(double hitObjectRotation, double arrowRotation)
         {
-            
-        }
-
-        private void Judge(double hitObjectRotation, double arrowRotation)
-        {
+            this.gameObject.SetActive(true);
             double accuracy = Grade(hitObjectRotation, arrowRotation);
 
             this.Text.color = Color.HSVToRGB((float) accuracy / 100, 1, 1, true);
             this.Text.text = accuracy.ToString(CultureInfo.CurrentCulture);
-            Destroy(this.gameObject, 0.15f);
+
+            Action a = async () =>
+            {
+                await Task.Delay(150);
+                this.gameObject.SetActive(false);
+            };
+            a.Invoke();
         }
+
 
         private static double Grade(double hitObjectRotation, double arrowRotation)
         {
