@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using NAudio.Wave;
+using SearchAlgorithms;
 using UnityEngine;
+using SearchAlgorithms.Algorithms;
+using Debug = UnityEngine.Debug;
 
 namespace Audio
 {
@@ -50,8 +54,8 @@ namespace Audio
             int bitsPerSample = BitConverter.ToInt16(array, 34);
             int sampleRate = BitConverter.ToInt32(array, 24);
             dataIndex = BitConverter.ToInt32(array, 16) + 20;
-
-            FindDataIndex();
+            
+            dataIndex = wavFile.SingleSearch(new[] {(byte)'d', (byte)'a', (byte)'t',(byte)'a'}, new Rubikmaster02());
 
             int subChunk2Size = BitConverter.ToInt32(array, dataIndex);
             sampleSize = bitsPerSample / 8;
@@ -69,20 +73,6 @@ namespace Audio
                 data[i] = BitConverter.ToInt16(wavFile, dataIndex + 4 + position * sampleSize) / 32768.0f;
                 position++;
             }
-        }
-
-        private static void FindDataIndex()
-        {
-            for (int i = dataIndex; i < wavFile.Length; i++)
-            {
-                if (wavFile[i - 4] == 'd' && wavFile[i - 3] == 'a' && wavFile[i - 2] == 't' && wavFile[i - 1] == 'a')
-                {
-                    dataIndex = i;
-                    return;
-                }
-            }
-
-            throw new InvalidDataException();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Audio;
 using Beatmaps;
 using Logic;
 using Ui.LevelSelection.ButtonExtras;
@@ -18,13 +19,15 @@ namespace Ui.LevelSelection
         {
             this.beatMapData          = data ?? throw new NullReferenceException();
             this.beatMapNameText.text = this.beatMapData.Title;
-            this.difficulty.text      = this.beatMapData.Difficulty.ToString();
+            this.difficulty.text      = this.beatMapData.Difficulty.ToString(); 
         }
 
         protected override void LeftClick()
         {
             base.LeftClick();
-            Assets.Instance.BeatMap = FileLoader.LoadBeatMap(this.beatMapData.Path);
+            Assets.Instance.BeatMap = FileLoader.LoadBeatMap(this.beatMapData.Path); 
+            AudioPlayer.Instance.LoadAudio($"{Assets.Instance.BeatMap.Path}/{Assets.Instance.BeatMap.SongFile}");
+            AudioPlayer.Instance.PlayGameSong();
         }
 
         protected override void RightClick()

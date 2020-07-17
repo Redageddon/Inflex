@@ -22,6 +22,11 @@ namespace Logic
                 return RronConvert.DeserializeObjectFromFile<SavedSettings>(GenericPaths.SettingsPath);
             }
             
+            return CreateNewSettingsFile();
+        }
+
+        private static SavedSettings CreateNewSettingsFile()
+        {
             SavedSettings settings = new SavedSettings("Default");
             RronConvert.SerializeObjectToFile(settings, GenericPaths.SettingsPath);
             return settings;

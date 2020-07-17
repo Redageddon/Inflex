@@ -1,5 +1,5 @@
 ﻿using System;
-using Logic;
+using Logic.Creators;
 using UnityEngine;
 using X10D;
 
@@ -7,6 +7,7 @@ namespace Ui.Game.Pointer
 {
     public class Arrow : VisibleElement
     {
+        [SerializeField] private HitObjectHandler hitObjectHandler;
         public static double GetPointerRotation()
         {
             Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
@@ -19,7 +20,7 @@ namespace Ui.Game.Pointer
         public void OnTriggerEnter2D(Collider2D other)
         {
             HitObject hitObject = other.GetComponent<HitObject>();
-            HitObjectHandler.OnHit(hitObject);
+            this.hitObjectHandler.OnHit(hitObject);
         }
 
         private void Update() => this.transform.localRotation = Quaternion.Euler(0, 0, (float) (GetPointerRotation() - 180));

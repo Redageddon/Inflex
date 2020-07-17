@@ -10,7 +10,7 @@ namespace Ui.Game
 {
     public class Judgement : WrittenElement
     {
-        public void Judge(double hitObjectRotation, double arrowRotation)
+        public async void Judge(double hitObjectRotation, double arrowRotation)
         {
             this.gameObject.SetActive(true);
             double accuracy = Grade(hitObjectRotation, arrowRotation);
@@ -18,9 +18,9 @@ namespace Ui.Game
             this.Text.color = Color.HSVToRGB((float) accuracy / 100, 1, 1, true);
             this.Text.text = accuracy.ToString(CultureInfo.CurrentCulture);
             
-            Task.Delay(150).ContinueWith(t => this.gameObject.SetActive(false)).Start();
+            await Task.Delay(150);
+            this.gameObject.SetActive(false);
         }
-
 
         private static double Grade(double hitObjectRotation, double arrowRotation)
         {

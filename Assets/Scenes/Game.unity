@@ -315,9 +315,8 @@ GameObject:
   m_Component:
   - component: {fileID: 313336673}
   - component: {fileID: 313336674}
-  - component: {fileID: 313336675}
   m_Layer: 0
-  m_Name: HitObjectCreator
+  m_Name: HitObjectHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,19 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1838834498104861327, guid: a9aa1a11bb1cd7b429826367345656e6, type: 3}
---- !u!114 &313336675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 313336672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c48acd3feb21405fafb6e7c6dfa0688e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Judgement: {fileID: 109338639}
+  judgement: {fileID: 109338639}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1157047963}
   rectTransform: {fileID: 1157047959}
+  hitObjectHandler: {fileID: 313336674}
 --- !u!68 &1157047962
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -1126,4 +1114,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ad3cffbd7544b0902ccd4a42be0457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseScreen: {fileID: 0}

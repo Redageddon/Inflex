@@ -13,7 +13,7 @@ namespace Logic.Creators
         private readonly List<GameObject> beatMaps = new List<GameObject>();
         
         public void Start() => this.CreateAllButtons();
-        
+
         private void CreateAllButtons()
         {
             foreach (BeatMapData beatMapData in InflexContext.Load())
