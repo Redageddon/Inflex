@@ -4,9 +4,8 @@ namespace Logic
 {
     public class StaminaBar : MonoBehaviour
     {
-        private void Awake() => Score = Assets.Instance.BeatMap.Lives;
-
         private static int score;
+
         public static int Score
         {
             get => score;
@@ -16,8 +15,11 @@ namespace Logic
                 {
                     EndpointConditions.GameLose();
                 }
+
                 score = value;
             }
         }
+
+        private void Awake() => Score = Assets.Instance.BeatMapMeta.Lives;
     }
 }

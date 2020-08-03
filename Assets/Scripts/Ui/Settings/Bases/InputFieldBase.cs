@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Ui.Settings.Bases
 {
-    public abstract class InputFieldBase : MonoBehaviour//SettingsBase
+    public abstract class InputFieldBase : MonoBehaviour //SettingsBase
     {
         [SerializeField] private InputField inputField;
 

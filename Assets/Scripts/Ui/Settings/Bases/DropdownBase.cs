@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Ui.Settings.Bases
 {
-    public abstract class DropdownBase : MonoBehaviour//SettingsBase
+    public abstract class DropdownBase : MonoBehaviour //SettingsBase
     {
         [SerializeField] private Dropdown dropdown;
 

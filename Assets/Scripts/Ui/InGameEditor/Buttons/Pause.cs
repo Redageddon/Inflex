@@ -4,6 +4,6 @@ namespace Ui.InGameEditor.Buttons
 {
     public class Pause : MouseNavigationControl
     {
-        protected override void LeftClick() => AudioPlayer.Instance.SetAudioPaused(true);
+        protected override void LeftClick() => AudioPlayer.Instance.AudioPaused = true;
     }
 }

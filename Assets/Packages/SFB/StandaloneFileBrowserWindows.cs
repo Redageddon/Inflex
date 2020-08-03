@@ -22,9 +22,6 @@ namespace SFB
 
     public class StandaloneFileBrowserWindows : IStandaloneFileBrowser
     {
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetActiveWindow();
-
         public string[] OpenFilePanel(string title, string directory, ExtensionFilter[] extensions, bool multiSelect)
         {
             VistaOpenFileDialog fd = new VistaOpenFileDialog {Title = title};
@@ -45,7 +42,7 @@ namespace SFB
             }
 
             DialogResult res       = fd.ShowDialog(new WindowWrapper(GetActiveWindow()));
-            string[]     filenames = res == DialogResult.OK ? fd.FileNames : new string[0];
+            var          filenames = res == DialogResult.OK ? fd.FileNames : new string[0];
             fd.Dispose();
             return filenames;
         }
@@ -62,7 +59,7 @@ namespace SFB
             }
 
             DialogResult res       = fd.ShowDialog(new WindowWrapper(GetActiveWindow()));
-            string[]     filenames = res == DialogResult.OK ? new[] {fd.SelectedPath} : new string[0];
+            var          filenames = res == DialogResult.OK ? new[] {fd.SelectedPath} : new string[0];
             fd.Dispose();
             return filenames;
         }
@@ -110,6 +107,9 @@ namespace SFB
         public void SaveFilePanelAsync(string title, string directory, string defaultName, ExtensionFilter[] extensions, Action<string> cb) =>
             cb.Invoke(this.SaveFilePanel(title, directory, defaultName, extensions));
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetActiveWindow();
+
         // .NET Framework FileDialog Filter format
         // https://msdn.microsoft.com/en-us/library/microsoft.win32.filedialog.filter
         private static string GetFilterFromFileExtensionList(IEnumerable<ExtensionFilter> extensions)
@@ -119,12 +119,12 @@ namespace SFB
             {
                 filterString += filter.Name + "(";
 
-                filterString = filter.Extensions.Aggregate(filterString, (current, ext) => current + ("*." + ext + ","));
+                filterString = filter.Extensions.Aggregate(filterString, (current, ext) => current + "*." + ext + ",");
 
                 filterString =  filterString.Remove(filterString.Length - 1);
                 filterString += ") |";
 
-                filterString = filter.Extensions.Aggregate(filterString, (current, ext) => current + ("*." + ext + "; "));
+                filterString = filter.Extensions.Aggregate(filterString, (current, ext) => current + "*." + ext + "; ");
 
                 filterString += "|";
             }

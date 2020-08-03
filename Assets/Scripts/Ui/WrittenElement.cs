@@ -5,8 +5,8 @@ namespace Ui
 {
     public class WrittenElement : MonoBehaviour
     {
-        [SerializeField] private Text          text;
         [SerializeField] private RectTransform rectTransform;
+        [SerializeField] private Text          text;
 
         public Text Text
         {

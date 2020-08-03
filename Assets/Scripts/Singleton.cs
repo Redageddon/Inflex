@@ -4,8 +4,8 @@ public class Singleton<T> : MonoBehaviour
     where T : MonoBehaviour
 {
     private static readonly object Lock = new object();
-    private static bool shuttingDown;
-    private static T instance;
+    private static          bool   shuttingDown;
+    private static          T      instance;
 
     public static T Instance
     {
@@ -16,7 +16,7 @@ public class Singleton<T> : MonoBehaviour
                 Debug.LogWarning("[Singleton] Instance '" + typeof(T) + "' already destroyed. Returning null.");
                 return null;
             }
-            
+
             lock (Lock)
             {
                 if (instance != null)
@@ -24,7 +24,7 @@ public class Singleton<T> : MonoBehaviour
                     return instance;
                 }
 
-                instance = (T) FindObjectOfType(typeof(T));
+                instance = (T)FindObjectOfType(typeof(T));
 
                 if (instance != null)
                 {
@@ -32,7 +32,7 @@ public class Singleton<T> : MonoBehaviour
                 }
 
                 GameObject singletonObject = new GameObject();
-                instance = singletonObject.AddComponent<T>();
+                instance             = singletonObject.AddComponent<T>();
                 singletonObject.name = typeof(T) + " (Singleton)";
 
                 DontDestroyOnLoad(singletonObject);

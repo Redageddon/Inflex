@@ -10,31 +10,33 @@ namespace Ui.LevelSelection
 {
     public class BeatMapButton : NavigationButton
     {
-        [SerializeField] private Text        beatMapNameText;
-        [SerializeField] private Text        difficulty;
-        private                  BeatMapData beatMapData;
-        public static            GameObject  Options;
+        public static            GameObject      Options;
+        private                  BeatMapMetadata beatMapMetadata;
+        [SerializeField] private Text            beatMapNameText;
+        [SerializeField] private Text            difficulty;
 
-        public void SetData(BeatMapData data)
+        public void SetData(BeatMapMetadata metadata)
         {
-            this.beatMapData          = data ?? throw new NullReferenceException();
-            this.beatMapNameText.text = this.beatMapData.Title;
-            this.difficulty.text      = this.beatMapData.Difficulty.ToString(); 
+            this.beatMapMetadata      = metadata ?? throw new NullReferenceException();
+            this.beatMapNameText.text = this.beatMapMetadata.Title;
+
+            //Todo: implement difficulty calculation
+            this.difficulty.text = "0";
         }
 
         protected override void LeftClick()
         {
             base.LeftClick();
-            Assets.Instance.BeatMap = FileLoader.LoadBeatMap(this.beatMapData.Path); 
-            AudioPlayer.Instance.LoadAudio($"{Assets.Instance.BeatMap.Path}/{Assets.Instance.BeatMap.SongFile}");
-            AudioPlayer.Instance.PlayGameSong();
+            Assets.Instance.BeatMapMeta = FileLoader.LoadBeatMap(this.beatMapMetadata.Path);
+            AudioPlayer.Instance.LoadAudio($"{Assets.Instance.BeatMapMeta.Path}/{Assets.Instance.BeatMapMeta.SongFile}");
+            AudioPlayer.Instance.PlayGameAudio();
         }
 
         protected override void RightClick()
         {
             Options.SetActive(true);
-            DeleteMapButton.Button = this.gameObject;
-            DeleteMapButton.Data   = this.beatMapData;
+            DeleteMapButton.Button   = this.gameObject;
+            DeleteMapButton.Metadata = this.beatMapMetadata;
         }
     }
 }

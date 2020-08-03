@@ -4,7 +4,6 @@ using System.Linq;
 using Beatmaps;
 using Logic;
 using Microsoft.EntityFrameworkCore;
-using UnityEngine;
 
 namespace Database
 {
@@ -12,16 +11,16 @@ namespace Database
     {
         private static readonly InflexContext Context = new InflexContext();
 
-        private DbSet<BeatMapData> BeatMaps { get; set; }
+        private DbSet<BeatMapMetadata> BeatMaps { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseSqlite($"Data Source={GenericPaths.BeatMapsDataPath}");
-        
+
         public static void Save()
         {
             Directory.CreateDirectory(GenericPaths.BeatMapsPath);
-            string[]                 beatMapPaths = Directory.GetDirectories(GenericPaths.BeatMapsPath);
-            IEnumerable<BeatMapData> beatMaps     = beatMapPaths.Select(path => new BeatMapData(FileLoader.LoadBeatMap(path)));
+            var beatMapPaths = Directory.GetDirectories(GenericPaths.BeatMapsPath);
+            var beatMaps     = beatMapPaths.Select(FileLoader.LoadBeatMap);
             Context.Database.EnsureCreated();
             Context.Database.ExecuteSqlRaw("delete from BeatMaps");
 
@@ -29,7 +28,7 @@ namespace Database
             Context.SaveChanges();
         }
 
-        public static IEnumerable<BeatMapData> Load()
+        public static IEnumerable<BeatMapMetadata> Load()
         {
             if (!File.Exists(GenericPaths.BeatMapsDataPath))
             {
@@ -39,9 +38,9 @@ namespace Database
             return Context.BeatMaps;
         }
 
-        public static void RemoveMap(BeatMapData data)
+        public static void RemoveMap(BeatMapMetadata metadata)
         {
-            Context.Remove(data);
+            Context.Remove(metadata);
             Context.SaveChanges();
         }
     }

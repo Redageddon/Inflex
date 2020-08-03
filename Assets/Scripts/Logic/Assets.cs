@@ -9,7 +9,7 @@ namespace Logic
 
     public class Assets : Singleton<Assets>
     {
-        public BeatMap BeatMap { get; set; }
+        public BeatMapMeta BeatMapMeta { get; set; }
 
         public Skin Skin { get; private set; }
 
@@ -21,7 +21,7 @@ namespace Logic
             {
                 return RronConvert.DeserializeObjectFromFile<SavedSettings>(GenericPaths.SettingsPath);
             }
-            
+
             return CreateNewSettingsFile();
         }
 

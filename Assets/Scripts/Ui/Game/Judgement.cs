@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Globalization;
 using System.Threading.Tasks;
-using System.Timers;
 using UnityEngine;
-using Object = System.Object;
 
 namespace Ui.Game
 {
@@ -15,9 +12,9 @@ namespace Ui.Game
             this.gameObject.SetActive(true);
             double accuracy = Grade(hitObjectRotation, arrowRotation);
 
-            this.Text.color = Color.HSVToRGB((float) accuracy / 100, 1, 1, true);
-            this.Text.text = accuracy.ToString(CultureInfo.CurrentCulture);
-            
+            this.Text.color = Color.HSVToRGB((float)accuracy / 100, 1, 1, true);
+            this.Text.text  = accuracy.ToString(CultureInfo.CurrentCulture);
+
             await Task.Delay(150);
             this.gameObject.SetActive(false);
         }
@@ -33,7 +30,7 @@ namespace Ui.Game
                 : 0;
         }
 
-        private static double FixPointerRotation(double pointerRotation, double hitObjectRotation) => 
+        private static double FixPointerRotation(double pointerRotation, double hitObjectRotation) =>
             pointerRotation - hitObjectRotation > 100 ? pointerRotation -= 360 : pointerRotation;
     }
 }

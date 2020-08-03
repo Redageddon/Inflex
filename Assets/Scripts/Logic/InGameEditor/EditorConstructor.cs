@@ -9,11 +9,12 @@ namespace Logic.InGameEditor
     public class EditorConstructor : MonoBehaviour
     {
         [SerializeField] private Slider slider;
-        public void Fill(BeatMap beatMap)
+
+        public void Fill(BeatMapMeta beatMapMeta)
         {
-            string folderPath = Path.GetDirectoryName(beatMap.Path);
-            AudioPlayer.Instance.LoadAudio(Path.Combine(folderPath, beatMap.SongFile));
-            this.slider.maxValue = AudioPlayer.Instance.audioSource.clip.length;
+            string folderPath = Path.GetDirectoryName(beatMapMeta.Path);
+            AudioPlayer.Instance.LoadAudio(Path.Combine(folderPath, beatMapMeta.SongFile));
+            this.slider.maxValue = AudioPlayer.Instance.ClipLengthInSeconds;
         }
     }
 }

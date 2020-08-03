@@ -7,11 +7,11 @@ namespace Ui.InGameEditor.InputFields
     {
         protected override string Input
         {
-            get => EditorInitializer.BeatMap.Lives == 0 ? null : EditorInitializer.BeatMap.Lives.ToString();
+            get => EditorInitializer.BeatMapMeta.Lives == 0 ? null : EditorInitializer.BeatMapMeta.Lives.ToString();
             set
             {
                 int.TryParse(value, out int val);
-                EditorInitializer.BeatMap.Lives = val;
+                EditorInitializer.BeatMapMeta.Lives = val;
             }
         }
 

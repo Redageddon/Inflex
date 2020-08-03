@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Logic;
 using UnityEngine;
 
@@ -7,8 +6,11 @@ namespace Audio
 {
     public class AudioPlayer : Singleton<AudioPlayer>
     {
-        public AudioSource audioSource;
-        private float offset;
+        private AudioSource audioSource;
+        private float       offset;
+        private float       elementsSize;
+        private float       incomingSpeed;
+        private float       firstHitObjectSpawnTime;
 
         public float AudioTime
         {
@@ -16,41 +18,66 @@ namespace Audio
             set => this.audioSource.time = value;
         }
 
+        public bool AudioPaused
+        {
+            get => !this.audioSource.isPlaying;
+            set
+            {
+                if (value)
+                {
+                    this.audioSource.Pause();
+                    Debug.Log("pause");
+                }
+                else
+                {
+                    this.audioSource.UnPause();
+                    Debug.Log("unpause");
+                }
+            }
+        }
+
+        public float ClipLengthInSeconds => this.audioSource.clip.samples / this.audioSource.clip.frequency;
+
         public float TrueAudioTime => this.AudioTime + this.offset;
-        
-        private void Awake() => this.audioSource = this.gameObject.AddComponent<AudioSource>();
+
+        public void AudioStart() => this.audioSource.Play();
 
         public void LoadAudio(string path)
         {
             this.audioSource.clip = FileLoader.LoadAudioClip(path);
-            this.offset = CalculateFirstHitObject();
+            this.offset           = CalculateOffset(this.elementsSize, this.incomingSpeed, this.firstHitObjectSpawnTime);
         }
 
-        public void PlayGameSong() => this.StartCoroutine(this.PlayGameSong(this.audioSource));
-
-        private IEnumerator PlayGameSong(AudioSource audioSource)
+        public async void PlayGameAudio()
         {
-            audioSource.volume = 0;
-            audioSource.Play();
-            yield return new WaitUntil(() => audioSource.time >= -this.offset);
-            this.offset        = 0;
-            audioSource.volume = Assets.Instance.Settings.Volume;
-            audioSource.Play();
+            this.audioSource.volume = 0;
+            this.audioSource.Play();
+            await new Task(() =>
+            {
+                while (this.audioSource.time >= -CalculateOffset(this.elementsSize, this.incomingSpeed, this.firstHitObjectSpawnTime))
+                {
+                }
+            });
+            this.offset             = 0;
+            this.audioSource.volume = Assets.Instance.Settings.Volume;
+            this.audioSource.Play();
         }
 
-        public void SetAudioPaused(bool isPaused)
+        private void Awake()
         {
-            if (isPaused)
-            {
-                this.audioSource.Pause();
-            }
-            else
-            {
-                this.audioSource.UnPause();
-            }
+            this.audioSource = this.gameObject.AddComponent<AudioSource>();
+            //Todo: make this execute on game start only
+            this.OnGameStart();
         }
 
-        private static float CalculateFirstHitObject() => -1 * ((960 - 3.591f * Assets.Instance.Settings.ElementsSize) /
-            Assets.Instance.Settings.IncomingSpeed - Assets.Instance.BeatMap.Enemies[0].SpawnTime);
+        private void OnGameStart()
+        {
+            this.elementsSize            = Assets.Instance.Settings.ElementsSize;
+            this.incomingSpeed           = Assets.Instance.Settings.IncomingSpeed;
+            this.firstHitObjectSpawnTime = Assets.Instance.BeatMapMeta.Enemies[0].SpawnTime;
+        }
+
+        private static float CalculateOffset(float elementsSize, float speed, float startObjectTime) =>
+            -((960 - 3.591f * elementsSize) / speed - startObjectTime);
     }
 }

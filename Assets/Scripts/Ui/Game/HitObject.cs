@@ -8,18 +8,18 @@ namespace Ui.Game
 {
     public class HitObject : VisibleElement
     {
-        [SerializeField] private Sprite[] sprites;
+        [SerializeField] private Sprite[]          sprites;
+        private                  Action<HitObject> test;
 
         public LocationManager LocationManager { get; private set; }
         public int             KillKey         { get; private set; }
-        private Action<HitObject> test;
 
         public void Constructor(EnemyEvent self, float speed, Action<HitObject> myMethodName)
         {
             this.Image.texture   = this.sprites[self.KillKey].texture;
             this.LocationManager = new LocationManager(speed, self.SpawnTime, self.Rotation);
-            this.KillKey = self.KillKey;
-            this.test = myMethodName;
+            this.KillKey         = self.KillKey;
+            this.test            = myMethodName;
         }
 
         private void Update()

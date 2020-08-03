@@ -9,17 +9,18 @@ namespace Logic.Creators
     public class HitObjectHandler : MonoBehaviour
     {
         [SerializeField] private GameObject enemy;
-        [SerializeField] private Judgement judgement;
-        private int offset;
-        
+        [SerializeField] private Judgement  judgement;
+        private                  int        offset;
+
         private void Update()
         {
-            for (int i = this.offset; i < Assets.Instance.BeatMap.Enemies.Count; i++)
+            for (int i = this.offset; i < Assets.Instance.BeatMapMeta.Enemies.Count; i++)
             {
-                if (Assets.Instance.Settings.IncomingSpeed * (-AudioPlayer.Instance.TrueAudioTime + Assets.Instance.BeatMap.Enemies[i].SpawnTime) +
+                if (Assets.Instance.Settings.IncomingSpeed *
+                    (-AudioPlayer.Instance.TrueAudioTime + Assets.Instance.BeatMapMeta.Enemies[i].SpawnTime) +
                     5.6 * Assets.Instance.Settings.ElementsSize <= Assets.Instance.Settings.Resolution.Corner)
                 {
-                    this.CreateEnemy(Assets.Instance.BeatMap.Enemies[i]);
+                    this.CreateEnemy(Assets.Instance.BeatMapMeta.Enemies[i]);
                     this.offset++;
                 }
             }
@@ -36,7 +37,7 @@ namespace Logic.Creators
             if (hitObject.KillKey != CurrentKey.Key || hitObject.LocationManager.Distance <= 2.71 * Assets.Instance.Settings.ElementsSize)
             {
                 this.judgement.Judge(0, 180);
-                StaminaBar.Score--; 
+                StaminaBar.Score--;
             }
             else
             {

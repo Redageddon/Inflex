@@ -10,7 +10,9 @@ namespace SFB
     {
         public string[] OpenFilePanel(string title, string directory, ExtensionFilter[] extensions, bool multiSelect)
         {
-            string path = extensions == null ? EditorUtility.OpenFilePanel(title, directory, "") : EditorUtility.OpenFilePanelWithFilters(title, directory, GetFilterFromFileExtensionList(extensions));
+            string path = extensions == null
+                ? EditorUtility.OpenFilePanel(title, directory, "")
+                : EditorUtility.OpenFilePanelWithFilters(title, directory, GetFilterFromFileExtensionList(extensions));
 
             return string.IsNullOrEmpty(path) ? new string[0] : new[] {path};
         }
@@ -40,7 +42,7 @@ namespace SFB
         // EditorUtility.OpenFilePanelWithFilters extension filter format
         private static string[] GetFilterFromFileExtensionList(IList<ExtensionFilter> extensions)
         {
-            string[] filters = new string[extensions.Count * 2];
+            var filters = new string[extensions.Count * 2];
             for (int i = 0; i < extensions.Count; i++)
             {
                 filters[i * 2]     = extensions[i].Name;

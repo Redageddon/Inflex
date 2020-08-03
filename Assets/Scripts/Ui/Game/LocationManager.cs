@@ -6,24 +6,24 @@ namespace Ui.Game
 {
     public class LocationManager
     {
-        private readonly float speed;
-        private readonly float spawnTime;
         private readonly float size;
-
-        public double Rotation { get; }
-        public double Distance { get; private set; }
+        private readonly float spawnTime;
+        private readonly float speed;
 
         public LocationManager(float speed, float spawnTime, double rotation)
         {
             this.speed     = speed;
             this.spawnTime = spawnTime;
             this.Rotation  = rotation;
-            this.size = Assets.Instance.Settings.ElementsSize;
+            this.size      = Assets.Instance.Settings.ElementsSize;
         }
+
+        public double Rotation { get; }
+        public double Distance { get; private set; }
 
         public Vector3 GetLocation(float audioSourceTime)
         {
-            this.Distance = this.speed * (-audioSourceTime + this.spawnTime) + 5.6 * size;
+            this.Distance = this.speed * (-audioSourceTime + this.spawnTime) + 5.6 * this.size;
             double radians = this.Rotation * Mathf.Deg2Rad;
 
             float x = (float)(this.Distance * Math.Sin(radians));

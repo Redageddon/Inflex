@@ -41,7 +41,7 @@ namespace SFB
         /// <returns>Returns array of chosen paths. Zero length array when cancelled</returns>
         public static string[] OpenFilePanel(string title, string directory, string extension, bool multiSelect)
         {
-            ExtensionFilter[] extensions = string.IsNullOrEmpty(extension) ? null : new[] {new ExtensionFilter("", extension)};
+            var extensions = string.IsNullOrEmpty(extension) ? null : new[] {new ExtensionFilter("", extension)};
             return OpenFilePanel(title, directory, extensions, multiSelect);
         }
 
@@ -66,7 +66,7 @@ namespace SFB
         /// <param name="cb">Callback")</param>
         public static void OpenFilePanelAsync(string title, string directory, string extension, bool multiSelect, Action<string[]> cb)
         {
-            ExtensionFilter[] extensions = string.IsNullOrEmpty(extension) ? null : new[] {new ExtensionFilter("", extension)};
+            var extensions = string.IsNullOrEmpty(extension) ? null : new[] {new ExtensionFilter("", extension)};
             OpenFilePanelAsync(title, directory, extensions, multiSelect, cb);
         }
 
@@ -113,7 +113,7 @@ namespace SFB
         /// <returns>Returns chosen path. Empty string when cancelled</returns>
         public static string SaveFilePanel(string title, string directory, string defaultName, string extension)
         {
-            ExtensionFilter[] extensions = string.IsNullOrEmpty(extension) ? null : new[] {new ExtensionFilter("", extension)};
+            var extensions = string.IsNullOrEmpty(extension) ? null : new[] {new ExtensionFilter("", extension)};
             return SaveFilePanel(title, directory, defaultName, extensions);
         }
 
@@ -138,7 +138,7 @@ namespace SFB
         /// <param name="cb">Callback")</param>
         public static void SaveFilePanelAsync(string title, string directory, string defaultName, string extension, Action<string> cb)
         {
-            ExtensionFilter[] extensions = string.IsNullOrEmpty(extension) ? null : new[] {new ExtensionFilter("", extension)};
+            var extensions = string.IsNullOrEmpty(extension) ? null : new[] {new ExtensionFilter("", extension)};
             SaveFilePanelAsync(title, directory, defaultName, extensions, cb);
         }
 

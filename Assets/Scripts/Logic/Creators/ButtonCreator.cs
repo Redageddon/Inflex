@@ -8,15 +8,15 @@ namespace Logic.Creators
 {
     public class ButtonCreator : MonoBehaviour
     {
-        [SerializeField] private GameObject beatMapButtonTemp;
-        [SerializeField] private GameObject options;
-        private readonly List<GameObject> beatMaps = new List<GameObject>();
-        
+        private readonly         List<GameObject> beatMaps = new List<GameObject>();
+        [SerializeField] private GameObject       beatMapButtonTemp;
+        [SerializeField] private GameObject       options;
+
         public void Start() => this.CreateAllButtons();
 
         private void CreateAllButtons()
         {
-            foreach (BeatMapData beatMapData in InflexContext.Load())
+            foreach (BeatMapMetadata beatMapData in InflexContext.Load())
             {
                 this.CreateSingleButton(beatMapData);
             }
@@ -24,13 +24,13 @@ namespace Logic.Creators
             BeatMapButton.Options = this.options;
         }
 
-        private void CreateSingleButton(BeatMapData beatMap)
+        private void CreateSingleButton(BeatMapMetadata beatMapMeta)
         {
             GameObject button = Instantiate(this.beatMapButtonTemp, this.gameObject.transform, false);
-            button.GetComponent<BeatMapButton>().SetData(beatMap);
+            button.GetComponent<BeatMapButton>().SetData(beatMapMeta);
             this.beatMaps.Add(button);
         }
-        
+
         private void Update()
         {
             if (InputManager.MacroDown("RefreshMaps"))
@@ -38,7 +38,7 @@ namespace Logic.Creators
                 this.RefreshBeatMaps();
             }
         }
-        
+
         private void RefreshBeatMaps()
         {
             this.DeleteAllButtons();

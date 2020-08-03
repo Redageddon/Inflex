@@ -12,7 +12,7 @@ namespace Logic
         };
 
         public static bool MacroDown(string input) =>
-            CustomInput[input].Take(CustomInput[input].Length - 1).All(UnityEngine.Input.GetKey) &&
-            UnityEngine.Input.GetKeyDown(CustomInput[input][CustomInput.Count]);
+            CustomInput[input].Take(CustomInput[input].Length - 1).All(Input.GetKey) &&
+            Input.GetKeyDown(CustomInput[input][CustomInput.Count]);
     }
 }

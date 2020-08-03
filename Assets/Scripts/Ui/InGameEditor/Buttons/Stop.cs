@@ -6,7 +6,7 @@ namespace Ui.InGameEditor.Buttons
     {
         protected override void LeftClick()
         {
-            AudioPlayer.Instance.SetAudioPaused(true);
+            AudioPlayer.Instance.AudioPaused = true;
             AudioPlayer.Instance.AudioTime = 0;
         }
     }

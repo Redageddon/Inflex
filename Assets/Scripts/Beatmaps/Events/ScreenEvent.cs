@@ -5,8 +5,8 @@
         public ScreenEvent(int rotationSpeed, int zoom, float spawnTime)
         {
             this.RotationSpeed = rotationSpeed;
-            this.Zoom = zoom;
-            this.SpawnTime = spawnTime;
+            this.Zoom          = zoom;
+            this.SpawnTime     = spawnTime;
         }
 
         public int RotationSpeed { get; }

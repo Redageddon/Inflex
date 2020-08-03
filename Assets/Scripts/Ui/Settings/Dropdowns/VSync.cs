@@ -15,7 +15,8 @@ namespace Ui.Settings.Dropdowns
             set => Assets.Instance.Settings.VSyncIndex = (VSyncMode)value;
         }
 
-        protected override void FillDropdown() => this.Dropdown.options.AddRange(Enum.GetNames(typeof(VSyncMode)).Select(option => new Dropdown.OptionData(option)));
+        protected override void FillDropdown() =>
+            this.Dropdown.options.AddRange(Enum.GetNames(typeof(VSyncMode)).Select(option => new Dropdown.OptionData(option)));
 
         protected override void OnOptionChange(int index)
         {

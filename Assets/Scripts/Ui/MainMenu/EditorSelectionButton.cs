@@ -7,8 +7,8 @@ namespace Ui.MainMenu
     {
         protected override void LeftClick()
         {
-            string[] path = StandaloneFileBrowser.OpenFilePanel("Open File", GenericPaths.BeatMapsPath, "rron", false);
-            
+            var path = StandaloneFileBrowser.OpenFilePanel("Open File", GenericPaths.BeatMapsPath, "rron", false);
+
             if (path.Length == 1 && !string.IsNullOrEmpty(path[0]))
             {
                 EditorInitializer.Path              = path[0];

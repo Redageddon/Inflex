@@ -6,7 +6,7 @@ namespace Ui.Settings.Buttons
 {
     public class KeySetter : MouseNavigationControl
     {
-        public int  keyIndex;
+        public                   int  keyIndex;
         [SerializeField] private Text text;
         private                  bool waitingForInput;
 

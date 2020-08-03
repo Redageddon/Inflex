@@ -1,5 +1,4 @@
 #if UNITY_STANDALONE_OSX
-
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -123,7 +122,7 @@ namespace SFB
 
                 filterString = filter.Extensions.Aggregate(filterString, (current, ext) => current + (ext + ","));
 
-                filterString =  filterString.Remove(filterString.Length - 1);
+                filterString = filterString.Remove(filterString.Length - 1);
                 filterString += "|";
             }
 
