@@ -14,25 +14,31 @@ namespace Audio
 
         public static AudioClip FromMp3Bytes(byte[] bytes)
         {
-            MemoryStream        mp3Stream  = new MemoryStream(bytes);
+            return WavToAudioClip(Mp3ToWav(bytes));
+        }
+
+        private static byte[] Mp3ToWav(byte[] mp3Data)
+        {
+            MemoryStream        mp3Stream  = new MemoryStream(mp3Data);
             using Mp3FileReader mp3Audio   = new Mp3FileReader(mp3Stream);
             using WaveStream    waveStream = WaveFormatConversionStream.CreatePcmStream(mp3Audio);
-            return ByteArrayToAudioClip(WaveToMemoryStream(waveStream).ToArray());
+
+            return WaveToMemoryStream(waveStream).ToArray();
         }
 
         private static MemoryStream WaveToMemoryStream(WaveStream waveStream)
         {
             MemoryStream         outputStream   = new MemoryStream();
             using WaveFileWriter waveFileWriter = new WaveFileWriter(outputStream, waveStream.WaveFormat);
-            var                  bytes          = new byte[waveStream.Length];
-            waveStream.Read(bytes, 0, (int)waveStream.Length);
-            waveFileWriter.Write(bytes, 0, bytes.Length);
+            var                  buffer          = new byte[waveStream.Length];
+            waveStream.Read(buffer, 0, (int)waveStream.Length);
+            waveFileWriter.Write(buffer, 0, buffer.Length);
             waveFileWriter.Flush();
 
             return outputStream;
         }
 
-        private static AudioClip ByteArrayToAudioClip(byte[] array)
+        private static AudioClip WavToAudioClip(byte[] array)
         {
             if (BitConverter.ToInt16(array, 20) != 1)
             {
@@ -47,9 +53,8 @@ namespace Audio
             
             int dataSize = BitConverter.ToInt32(array, dataStartIndex);
             sampleSize = bitsPerSample / 8;
-            int sampleCount = dataSize / sampleSize / 2;
 
-            AudioClip audioClip = AudioClip.Create("Default", sampleCount, channels, frequency, true, OnAudioRead, i => position = i);
+            AudioClip audioClip = AudioClip.Create("Default", dataSize / sampleSize / 2, channels, frequency, true, OnAudioRead, i => position = i * sampleSize);
             return audioClip;
         }
 

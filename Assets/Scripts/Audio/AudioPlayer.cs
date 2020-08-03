@@ -26,17 +26,15 @@ namespace Audio
                 if (value)
                 {
                     this.audioSource.Pause();
-                    Debug.Log("pause");
                 }
                 else
                 {
                     this.audioSource.UnPause();
-                    Debug.Log("unpause");
                 }
             }
         }
 
-        public float ClipLengthInSeconds => this.audioSource.clip.samples / this.audioSource.clip.frequency;
+        public float ClipLengthInSeconds => this.audioSource.clip.length;
 
         public float TrueAudioTime => this.AudioTime + this.offset;
 
