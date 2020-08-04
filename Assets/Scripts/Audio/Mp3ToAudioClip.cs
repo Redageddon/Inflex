@@ -30,7 +30,7 @@ namespace Audio
         {
             MemoryStream         outputStream   = new MemoryStream();
             using WaveFileWriter waveFileWriter = new WaveFileWriter(outputStream, waveStream.WaveFormat);
-            var                  buffer          = new byte[waveStream.Length];
+            var                  buffer         = new byte[waveStream.Length];
             waveStream.Read(buffer, 0, (int)waveStream.Length);
             waveFileWriter.Write(buffer, 0, buffer.Length);
             waveFileWriter.Flush();

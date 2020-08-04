@@ -13,27 +13,27 @@ public class Singleton<T> : MonoBehaviour
         {
             if (shuttingDown)
             {
-                Debug.LogWarning("[Singleton] Instance '" + typeof(T) + "' already destroyed. Returning null.");
+                Debug.LogWarning($"[Singleton] Instance '{typeof(T)}' already destroyed. Returning null.");
                 return null;
             }
 
             lock (Lock)
             {
-                if (instance != null)
+                if (!(instance is null))
                 {
                     return instance;
                 }
 
                 instance = (T)FindObjectOfType(typeof(T));
 
-                if (instance != null)
+                if (!(instance is null))
                 {
                     return instance;
                 }
 
                 GameObject singletonObject = new GameObject();
                 instance             = singletonObject.AddComponent<T>();
-                singletonObject.name = typeof(T) + " (Singleton)";
+                singletonObject.name = $"{typeof(T)} (Singleton)";
 
                 DontDestroyOnLoad(singletonObject);
 

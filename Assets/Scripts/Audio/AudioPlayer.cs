@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
 using Logic;
 using UnityEngine;
 
@@ -29,16 +29,20 @@ namespace Audio
                 }
                 else
                 {
-                    this.audioSource.UnPause();
+                    this.audioSource.Play();
                 }
             }
+        }
+
+        public void Stop()
+        {
+            this.audioSource.Stop();
+            this.audioSource.time = 0;
         }
 
         public float ClipLengthInSeconds => this.audioSource.clip.length;
 
         public float TrueAudioTime => this.AudioTime + this.offset;
-
-        public void AudioStart() => this.audioSource.Play();
 
         public void LoadAudio(string path)
         {
@@ -46,21 +50,20 @@ namespace Audio
             this.offset           = CalculateOffset(this.elementsSize, this.incomingSpeed, this.firstHitObjectSpawnTime);
         }
 
-        public async void PlayGameAudio()
+        public void PlayGameAudio()
         {
-            this.audioSource.volume = 0;
-            this.audioSource.Play();
-            await new Task(() =>
+            this.StartCoroutine(PlayGameAudioRoutine());
+            IEnumerator PlayGameAudioRoutine()
             {
-                while (this.audioSource.time >= -CalculateOffset(this.elementsSize, this.incomingSpeed, this.firstHitObjectSpawnTime))
-                {
-                }
-            });
-            this.offset             = 0;
-            this.audioSource.volume = Assets.Instance.Settings.Volume;
-            this.audioSource.Play();
+                this.audioSource.volume = 0;
+                this.audioSource.Play();
+                yield return new WaitUntil(() => this.audioSource.time >= -this.offset);
+                this.offset             = 0;
+                this.audioSource.volume = Assets.Instance.Settings.Volume;
+                this.audioSource.Play();
+            }
         }
-
+        
         private void Awake()
         {
             this.audioSource = this.gameObject.AddComponent<AudioSource>();
