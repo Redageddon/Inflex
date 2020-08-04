@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Logic;
+using SceneLessLogic;
 using UnityEngine;
 
 namespace Audio

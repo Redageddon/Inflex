@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Ookii.Dialogs;
 
-namespace SFB
+namespace Packages.SFB
 {
     // For fullscreen support
     // - WindowWrapper class and GetActiveWindow() are required for modal file dialog.
